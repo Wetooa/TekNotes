@@ -56,10 +56,6 @@ Follow these instructions to set up and run the application on your local machin
    .\env\Scripts\activate
    ```
 
-   ```
-
-   ```
-
 ### For Both
 
 2. Install required dependencies:
@@ -73,10 +69,6 @@ Follow these instructions to set up and run the application on your local machin
    ```bash
    python3 manage.py runserver
    ```
-
-```
-
-```
 
 ---
 
