@@ -70,6 +70,17 @@ Follow these instructions to set up and run the application on your local machin
    python3 manage.py runserver
    ```
 
+## How to Contribute
+
+### Branch Naming Convention
+
+- For feature branches, use the format: `feature/<feature-name>`
+- For bug fixes, use the format: `fix/<issue-description>`
+- For hotfixes, use the format: `hotfix/<issue-description>`
+- For documentation updates, use the format: `docs/<update-description>`
+
+Please ensure that your branch name is descriptive and follows this structure to maintain consistency.
+
 ---
 
 ## License
