@@ -4,8 +4,14 @@ from django.shortcuts import render
 
 
 def login(request):
-    pass
+    if request.method == "POST":
+        pass
+    else:
+        pass
 
 
 def register(request):
-    pass
+    if request.method == "POST":
+        pass
+    else:
+        pass
