@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,25 +6,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>{% block title %}My Site{% endblock %}</title>
+  <title>Teknotes | {% block title %}{% endblock %}</title>
 </head>
 
 <body>
 
-  <header>
-    Header Section
+  <header class="flex">
+
+    <button>
+      <img class="w-48 h-10" src="{% static 'teknotes/images/Sort.svg' %}" alt="Sidebar Icon" />
+    </button>
+
+    <button>
+      <img class="w-48 h-10" src="{% static 'teknotes/images/Logo.svg' %}" alt="Main Icon" />
+    </button>
+
+    <input type="text">
+
+    <button class="rounded-lg text-white bg-red-400 px-3 py-1 flex items-center">
+      <img class="" src="{% static 'teknotes/images/Edit.svg' %}" alt="New Note Icon" />
+      Tek a Note
+    </button>
+
+    <button class="">
+      <img class="" src="{% static 'teknotes/images/ID_Picture1.svg' %}" alt="Profile Icon" />
+    </button>
+
   </header>
 
-  <nav class="flex flex-col">
-    <a href="">Home</a>
-    <a href="your-notes.html">Your Notes</a>
-    <a href="likes.html">Likes</a>
+  <div class="flex">
+    <nav class="flex flex-col">
+      <a class="px-2 py-1 border border-red-300 rounded-lg w-fit flex items-center gap-2 transition-all hover:bg-red-200"
+        href="">
+        <img class="w-4 h-4" src="{% static 'teknotes/images/Home.svg' %}" alt="Home Icon" />
+        Home
+      </a>
 
-    <button>Courses (dropdown)</button>
-  </nav>
+      <button>Courses (dropdown)</button>
+    </nav>
 
-  <div id="content">
-    {% block content %}{% endblock %}
+    <main class="flex-1" id="content">
+      {% block content %}{% endblock %}
+    </main>
   </div>
 
   <footer>
@@ -31,5 +55,9 @@
   </footer>
 
 </body>
+
+<script>
+// Add script for interactivity on sidebar
+</script>
 
 </html>
