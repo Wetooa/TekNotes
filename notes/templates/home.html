@@ -6,12 +6,12 @@
 {% block content %}
 
 
-<div class="p-1">
+<div class="p-4">
 
-  <div class="flex gap-2 text-white">
+  <div class="flex gap-1 p-2 text-white">
     {% for tag in tags %}
 
-    <button class="rounded-lg bg-green-600 px-3 py-1">
+    <button class="rounded-3xl bg-green-600 px-3 py-1">
       {{tag}}
     </button>
 
@@ -21,7 +21,7 @@
   <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
     {% for note in notes %}
     <div class="rounded-lg border border-gray-200 pb-4">
-      <div class="bg-green-600 rounded-t-lg -z-1 p-1  text-white">
+      <div class="bg-green-500 rounded-t-lg p-2 font-bold text-sm text-white">
         CSIT 101 - Application Development
       </div>
 
@@ -36,16 +36,16 @@
         <p>
           2d ago
         </p>
-        <div class="mr-auto flex flex-1">
-          <div class="flex gap-1">
+        <div class="flex flex-1 gap-2 justify-end">
+          <div class="flex">
             <img class="" src="{% static 'teknotes/images/thumb_up.svg' %}" alt="Like Icon" />
             97
           </div>
-          <div class="flex gap-1">
+          <div class="flex">
             <img class="" src="{% static 'teknotes/images/thumb_down.svg' %}" alt="Dislike Icon" />
             24
           </div>
-          <div class="flex gap-1">
+          <div class="flex">
             <img class="" src="{% static 'teknotes/images/comment.svg' %}" alt="Comment Icon" />
             3
           </div>
