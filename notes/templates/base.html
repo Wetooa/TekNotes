@@ -21,10 +21,10 @@
 
     <input class="flex-1" type="text">
 
-    <button class="ml-auto rounded-xl font-bold text-white bg-red-700 px-3 py-1 flex items-center">
+    <a class="ml-auto rounded-xl font-bold text-white bg-red-700 px-3 py-1 flex items-center" href="tek-a-note" >
       <img class="mr-2" src="{% static 'teknotes/images/Edit.svg' %}" alt="New Note Icon" />
       Tek a Note
-    </button>
+    </a>
 
     <button class="ml-auto">
       <img class="" src="{% static 'teknotes/images/ID_Picture1.svg' %}" alt="Profile Icon" />
@@ -33,24 +33,22 @@
   </header>
 
   <div class="flex">
-    <nav class="flex flex-col gap-2 p-2">
-      <a class="px-2 py-1 bg-white border-l-4 border-red-700 rounded-lg flex items-center gap-2 transition-all hover:bg-red-200 w-full"
-        href="">
+    <nav class="flex flex-col gap-2 p-2 w-1/5">
+      <a class="px-2 py-1 bg-white border-l-4 border-red-700 rounded-lg flex items-center gap-2 transition-all hover:bg-red-200 w-full" href="">
         <img class="w-4 h-4" src="{% static 'teknotes/images/Home.svg' %}" alt="Home Icon" />
         Home
       </a>
-      <a class="px-2 py-1 rounded-lg flex items-center gap-2 transition-all hover:bg-red-200 w-full"
-        href="your-notes">
+      <a class="px-2 py-1 rounded-lg flex items-center gap-2 transition-all hover:bg-red-200 w-full" href="your-notes">
         <img class="w-4 h-4" src="{% static 'teknotes/images/User.svg' %}" alt="Home Icon" />
         Your Notes
       </a>
-      <a class="px-2 py-1 rounded-lg flex items-center gap-2 transition-all hover:bg-red-200 w-full"
-        href="">
+      <a class="px-2 py-1 rounded-lg flex items-center gap-2 transition-all hover:bg-red-200 w-full" href="">
         <img class="w-4 h-4" src="{% static 'teknotes/images/thumb_up.svg' %}" alt="Home Icon" />
         Likes
       </a>
 
-      <button>Courses (dropdown)</button>
+      <button class="px-2 py-1 bg-white border-l-4 border-red-700 rounded-lg flex items-center gap-2 transition-all hover:bg-red-200 w-full" >Courses</button>
+
     </nav>
 
     <main class="flex-1" id="content">
@@ -58,14 +56,16 @@
     </main>
   </div>
 
-  <footer>
-    <p>Footer Section</p>
-  </footer>
+
+  <!--FIX: Commented Out Footer Section-->
+  <!--<footer>-->
+  <!--  <p>Footer Section</p>-->
+  <!--</footer>-->
 
 </body>
 
 <script>
-// Add script for interactivity on sidebar
+// NOTE: Add script for interactivity on sidebar
 </script>
 
 </html>
