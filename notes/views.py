@@ -22,6 +22,7 @@ def index(request):
                     "creator": "Simon Escano",
                     "content": "Robots are becoming integral in various industries, from manufacturing to healthcare.",
                 },
-            ]
+            ],
+            "tags": ["Robotics", "AI", "Machine Learning"],
         },
     )

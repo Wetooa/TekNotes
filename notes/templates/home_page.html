@@ -6,58 +6,61 @@
 {% block content %}
 
 
-<div>
-  Tags here
-</div>
+<div class="p-1">
 
-<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-  {% for note in notes %}
-  <div class="rounded-lg border border-gray-200 pb-4">
-    <div class="bg-green-500 rounded-t-lg -z-1 p-1">
-      CSIT 101 - Application Development
-    </div>
+  <div class="flex gap-2 text-white">
+    {% for tag in tags %}
 
-    <div class="py-1 px-3">
-      <h4 class="text-bold text-3xl">The Future of Robotics</h4>
-      <h6 class="to-stone-500 text-sm">by Simon Escano</h6>
+    <button class="rounded-lg bg-green-600 px-3 py-1">
+      {{tag}}
+    </button>
 
-      <p class="mt-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet quae enim omnis magnam nam!
-        Dolore,
-        voluptatem aliquid delectus maiores corporis tempora blanditiis rem, a nobis similique libero provident
-        minima.
-        consectetur
-      </p>
-    </div>
-
-    <div class="border-b border-t border-stone-300 flex m-3 p-1">
-      <p>
-        2d ago
-      </p>
-      <div class="mr-auto flex flex-1">
-        <div class="flex gap-1">
-          <img class="" src="{% static 'teknotes/images/thumb_up.svg' %}" alt="Like Icon" />
-          97
-        </div>
-        <div class="flex gap-1">
-          <img class="" src="{% static 'teknotes/images/thumb_down.svg' %}" alt="Dislike Icon" />
-          24
-        </div>
-        <div class="flex gap-1">
-          <img class="" src="{% static 'teknotes/images/comment.svg' %}" alt="Comment Icon" />
-          3
-        </div>
-      </div>
-    </div>
-
-
-    <div>
-
-    </div>
-
+    {% endfor %}
   </div>
 
-  {% endfor %}
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    {% for note in notes %}
+    <div class="rounded-lg border border-gray-200 pb-4">
+      <div class="bg-green-600 rounded-t-lg -z-1 p-1  text-white">
+        CSIT 101 - Application Development
+      </div>
 
+      <div class="py-1 px-3">
+        <h4 class="text-bold text-3xl">{{note.title}}</h4>
+        <h6 class="to-stone-500 text-sm">by {{note.creator}}</h6>
+
+        <p class="mt-4">{{note.content}}</p>
+      </div>
+
+      <div class="border-b border-t border-stone-300 flex m-3 p-1">
+        <p>
+          2d ago
+        </p>
+        <div class="mr-auto flex flex-1">
+          <div class="flex gap-1">
+            <img class="" src="{% static 'teknotes/images/thumb_up.svg' %}" alt="Like Icon" />
+            97
+          </div>
+          <div class="flex gap-1">
+            <img class="" src="{% static 'teknotes/images/thumb_down.svg' %}" alt="Dislike Icon" />
+            24
+          </div>
+          <div class="flex gap-1">
+            <img class="" src="{% static 'teknotes/images/comment.svg' %}" alt="Comment Icon" />
+            3
+          </div>
+        </div>
+      </div>
+
+
+      <div>
+
+      </div>
+
+    </div>
+
+    {% endfor %}
+  </div>
 
 </div>
 
