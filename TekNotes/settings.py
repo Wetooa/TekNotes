@@ -119,12 +119,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "static"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 
 # Ckeditor settings
 CKEDITOR_BASEPATH = "static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+
+# Tailwind settings
+# TAILWIND_APP_NAME = "teknotes"
+# INTERNAL_IPS = [
+#     "127.0.0.1",
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
