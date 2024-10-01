@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>{% block title %}My Site{% endblock %}</title>
+</head>
+
+<body>
+
+  <header>
+    Header Section
+  </header>
+
+  <nav class="flex flex-col">
+    <a href="">Home</a>
+    <a href="your-notes.html">Your Notes</a>
+    <a href="likes.html">Likes</a>
+
+    <button>Courses (dropdown)</button>
+  </nav>
+
+  <div id="content">
+    {% block content %}{% endblock %}
+  </div>
+
+  <footer>
+    <p>Footer Section</p>
+  </footer>
+
+</body>
+
+</html>
