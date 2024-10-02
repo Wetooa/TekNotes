@@ -32,12 +32,19 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "django.contrib.admin",
+    'django.contrib.sites',
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "notes",
+    "authentication",
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',  
+    # 'allauth.socialaccount.providers.microsoft',
 ]
 
 MIDDLEWARE = [
@@ -50,7 +57,22 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+
+
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',  
+#     'allauth.account.auth_backends.AuthenticationBackend',  
+# ]
+
 ROOT_URLCONF = "TekNotes.urls"
+AUTH_USER_MODEL = 'authentication.Users'
+
+# # Required for django-allauth
+# SITE_ID = 1
+
+# # URL configuration
+# LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/'
 
 TEMPLATES = [
     {

@@ -22,4 +22,5 @@ urlpatterns = [
     path("notes/", include("notes.urls")),
     path("auth/", include("authentication.urls")),
     path("admin/", admin.site.urls),
+    path('', include('authentication.urls')),
 ]
