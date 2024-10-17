@@ -34,3 +34,14 @@ def search(request):
         'courses': courses,
         'users': users,
     })
+
+def search_by_course(request, course_id):
+    course = Course.objects.get(id=course_id)
+    notes = Note.objects.filter(course=course)
+    tags = Tag.objects.filter(notes__in=notes).distinct()
+    return render(request, 'advanced_search/search_results.html', {
+        'notes': notes,
+        'tags': tags,
+        'title': course.code,
+        'course': course,
+    })
