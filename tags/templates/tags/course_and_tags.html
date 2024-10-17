@@ -1,0 +1,9 @@
+<div class="flex {% if wrap %} flex-wrap {% else %} overflow-x-auto {% endif %} gap-3 ">
+    {% for course in courses %}
+        <a href="{% url 'advanced_search:search_by_course' course.id %}" class="px-3 py-1 bg-{{ course.color }} rounded-md shadow-lg font-medium text-gray-50 whitespace-nowrap">{{ course.code }}</a>
+    {% endfor %}
+
+    {% for tag in tags %}
+        <a href="/search/?query={{ tag.name }}" class="px-3 py-1 bg-gray-50 text-gray-700 rounded-md shadow-lg whitespace-nowrap">{{ tag.name }}</a>
+    {% endfor %}
+</div>
