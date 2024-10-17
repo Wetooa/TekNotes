@@ -28,3 +28,15 @@ def notebook(request):
         'courses': courses,
         'tags': tags
     })
+
+@login_required
+def archive(request):
+    archived = Note.objects.filter(created_by=request.user, is_archived=True).order_by('-modified_at')
+    courses = Course.objects.filter(note__in=archived).distinct()
+    tags = Tag.objects.filter(notes__in=archived).distinct()
+
+    return render(request, 'core/archive.html', {
+        'notes': archived,
+        'courses': courses,
+        'tags': tags
+    })
