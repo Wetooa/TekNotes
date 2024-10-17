@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "notes",
-    "ckeditor",
-    "ckeditor_uploader",
+    # "ckeditor",
+    # "ckeditor_uploader",
 ]
 
 MIDDLEWARE = [
