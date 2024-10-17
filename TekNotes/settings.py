@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "notes",
+    "course",
+    "tags",
     # "ckeditor",
     # "ckeditor_uploader",
 ]
