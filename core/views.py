@@ -17,3 +17,14 @@ def index(request):
         'tags': tags
     })
 
+@login_required
+def notebook(request):
+    notebook = Note.objects.filter(created_by=request.user, is_archived=False).order_by('-modified_at')
+    courses = Course.objects.filter(note__in=notebook).distinct()
+    tags = Tag.objects.filter(notes__in=notebook).distinct()
+
+    return render(request, 'core/notebook.html', {
+        'notes': notebook,
+        'courses': courses,
+        'tags': tags
+    })
