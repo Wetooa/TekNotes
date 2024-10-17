@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "core",
     "notes",
     "course",
+    "tags",
     "ckeditor",
     "ckeditor_uploader",
 ]
