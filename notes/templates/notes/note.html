@@ -1,0 +1,104 @@
+{% load static %}
+{% load custom_filters %}
+
+<div
+  class="rounded-xl hover:bg-gray-100 transition-all {% if note.is_private %} border-2 border-dashed border-gray-500 {% else %} bg-gray-50 shadow-lg hover:shadow-xl {% endif %}">
+  <a href="{% url 'notes:note_detail' note.id %}"
+    class="flex flex-col {% if note.is_archived %} opacity-70 {% endif %}">
+    {% if note.course %}
+    <div
+      class="flex {% if note.is_private %} border-b-2 border-dashed border-gray-500 {% else %} bg-{{ note.course.color }} {% endif %} px-3 py-1.5 rounded-t-xl">
+      <p
+        class="{% if note.is_private %} text-{{ note.course.color }} {% else %} text-gray-50 {% endif %} font-semibold">
+        {{ note.course }}</p>
+    </div>
+    {% endif %}
+
+    <div class="flex flex-col p-4 gap-3 max-h-80 overflow-hidden">
+      <div class="flex flex-col gap-2">
+        <div class="flex gap-2 items-center">
+          <img src="{{ note.created_by.profile.avatar.url }}" alt="Profile Image"
+            class="h-4 w-4 aspect-square rounded-full">
+          <p class="text-gray-500 font-medium text-sm">{{ note.created_by.first_name }} {{ note.created_by.last_name }}
+          </p>
+        </div>
+        <h1 class="text-xl text-gray-700 font-semibold">{{ note.title }}</h1>
+      </div>
+
+      <div class="">
+        <p class="text-gray-700">
+          {{ note.content }}
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="flex justify-between px-4 py-2 border-t-2 {% if note.is_private %} border-gray-500 border-dashed {% else %} border-gray-200 {% endif %}">
+      <p class="text-gray-500 text-sm">{{ note.modified_at|timesince }} ago</p>
+
+      <div class="flex gap-3">
+        <div class="flex gap-0.5 items-center">
+          <img
+            src="{% if request.user.is_authenticated and note|is_liked:request.user %}{% static 'teknotes/images/thumbed_up.svg' %}{% else %}{% static 'teknotes/images/thumb_up.svg' %}{% endif %}"
+            alt="thumb_up">
+          <p
+            class="text-sm {% if request.user.is_authenticated and note|is_liked:request.user %}text-yellow-500 font-medium{% else %}text-gray-500{% endif %}">
+            {{ note.likes.count }}</p>
+        </div>
+
+        <div class="flex gap-0.5 items-center">
+          <img
+            src="{% if request.user.is_authenticated and note|is_disliked:request.user %}{% static 'teknotes/images/thumbed_down.svg' %}{% else %}{% static 'teknotes/images/thumb_down.svg' %}{% endif %}"
+            alt="thumb_down">
+          <p
+            class="text-sm {% if request.user.is_authenticated and note|is_disliked:request.user %}text-yellow-500 font-medium{% else %}text-gray-500{% endif %}">
+            {{ note.dislikes.count }}</p>
+        </div>
+
+        <div class="flex gap-0.5 items-center">
+          <img src="{% static 'teknotes/images/comment.svg' %}" alt="comment">
+          <p class="text-sm text-gray-500">{{ note.comments.count }}</p>
+        </div>
+      </div>
+    </div>
+
+    {% if note.tags.count > 0 %}
+    <div
+      class="flex flex-wrap p-4 gap-3 border-t-2 {% if note.is_private %} border-gray-500 border-dashed {% else %} border-gray-200 {% endif %}">
+      {% for tag in note.tags.all|slice:":3" %}
+      <p
+        class="text-sm text-gray-700 shadow px-3 py-1 rounded-md inline-block {% if note.is_private %} bg-gray-50 {% else %} bg-gray-200 {% endif %}">
+        {{ tag }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </a>
+
+  {% if request.user == note.created_by %}
+  <div class="flex rounded-b-xl overflow-hidden p-2 gap-2">
+    <form action="{% url 'notes:delete_note' note.id %}" method="POST" class="flex">
+      {% csrf_token %}
+      <button type="submit"
+        class="flex items-center justify-center text-sm bg-rose-200 text-rose-700 rounded-md p-1 w-full">
+        <img src="{% static 'teknotes/images/Trash.svg' %}" alt="Trash">
+      </button>
+    </form>
+    <form action="{% url 'notes:hide_note' note.id %}" method="POST" class="flex">
+      {% csrf_token %}
+      <button type="submit"
+        class="flex items-center justify-center text-sm {% if note.is_private %} bg-gray-50 shadow {% else %} bg-gray-200 {% endif %} text-gray-500 rounded-md p-1 w-full">
+        <img
+          src="{% if note.is_private %}{% static 'teknotes/images/Eye.svg' %}{% else %}{% static 'teknotes/images/Eye_hidden.svg' %}{% endif %}"
+          alt="Eye">
+      </button>
+    </form>
+    <form action="{% url 'notes:archive_note' note.id %}" method="POST" class="flex flex-1">
+      {% csrf_token %}
+      <button type="submit"
+        class="flex items-center justify-center text-sm  {% if note.is_private %} bg-gray-50 shadow {% else %} bg-gray-200 {% endif %} text-gray-500 rounded-md py-1 w-full">
+        <p>{% if note.is_archived %}Unarchive{% else %}Archive{% endif %}</p>
+      </button>
+    </form>
+  </div>
+  {% endif %}
+</div>
