@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Likes {% endblock %}
+
+{% block content %}
+    {% if notes %}
+        {% include 'tags/course_and_tags.html' %}
+        {% include 'notes/notes.html' %}
+    {% else %}
+        {% include 'core/no_results.html' with message="Notes you like will be shown here."%}
+    {% endif %}
+{% endblock %}
