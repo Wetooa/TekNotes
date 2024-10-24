@@ -1,0 +1,143 @@
+{% extends 'core/core.html' %}
+
+{% load static %}
+
+{% load custom_filters %}
+
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="flex flex-col h-full overflow-hidden">
+        <header class="flex items-center w-full p-3 gap-3 shadow-lg z-10 bg-gray-50">
+            <div class="flex flex-1 items-center gap-4">
+                <img class="cursor-pointer" id="menu-icon" src="{% static 'teknotes/images/Menu.svg' %}" alt="Menu">
+                <a href="/" class="flex items-center gap-2">
+                    <img src="{% static 'teknotes/images/TekNotes-Logo.svg' %}" alt="Logo">
+                    <p id="logo-text" class="font-semibold text-rose-700 text-4xl">TekNotes</p>
+                </a>
+                <form action="{% url 'advanced_search:search' %}" method="get" class="flex flex-1 max-w-[600px] px-4 py-2 rounded-xl bg-gray-200 transition-all hover:bg-gray-300 gap-3 cursor-text min-w-[0px]" onclick="this.querySelector('input[name=\'query\']').focus();">
+                    <img src="{% static 'teknotes/images/Search.svg' %}" alt="Search">
+    
+                    <!-- Search input -->
+                    <input name="query" class="placeholder-gray-500 w-full text-gray-700 bg-transparent border-none focus:outline-none min-w-[0px]" 
+                           type="text" value="{{ query }}" placeholder="Search" 
+                           onclick="event.stopPropagation();">
+                    
+                </form>
+            </div>
+
+            <div class="flex items-center gap-4 h-full">
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'notes:tek_a_note' %}" class="flex bg-rose-700 rounded-xl gap-4 px-4 py-2 transition-all hover:shadow-lg">
+                        <img src="{% static 'teknotes/images/Edit.svg' %}" alt="Edit">
+                        <p class="new-note-text text-gray-50 font-medium text-lg">Tek a Note</p>
+                    </a>
+
+                    <div class="flex h-full">
+                        <a href="{% url 'authentication:logout' %}" class="transition-all flex gap-4 px-4 py-2 rounded-l-xl bg-gray-200 hover:shadow-lg">
+                            <p class="text-gray-700 text-lg">Log out</p>
+                        </a>
+                        <a href="{% url 'authentication:profile' request.user.id %}" class="transition-all flex h-full aspect-square rounded-r-xl bg-[url('{{ request.user.profile.avatar.url }}')] bg-cover border-2 border-gray-200 hover:shadow-lg"></a>
+                    </div>
+                {% else %}
+                    <a href="{% url 'authentication:login' %}" class="flex bg-rose-700 rounded-xl gap-4 px-6 py-2 transition-all hover:shadow-lg">
+                        <p class="text-gray-50 font-medium text-lg">Sign In</p>
+                    </a>
+                {% endif %}
+            </div>
+        </header>
+        <main class="flex bg-gray-200 h-full overflow-hidden">
+            <nav class="flex flex-col w-full max-w-72 h-full p-3 gap-3 overflow-y-auto">
+                <a href="/" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
+                    <img src="{% static 'teknotes/images/Home.svg' %}" alt="Home">
+                    <p class="nav-text text-lg text-gray-700 font-medium">Home</p>
+                </a>
+
+                <a href="/notebook/" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/notebook/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
+                    <img src="{% static 'teknotes/images/notebook.svg' %}" alt="Notebook">
+                    <p class="nav-text text-lg text-gray-700 font-medium">Notebook</p>
+                </a>
+
+                <a href="/archive/" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/archive/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
+                    <img src="{% static 'teknotes/images/Archive.svg' %}" alt="Archive">
+                    <p class="nav-text text-lg text-gray-700 font-medium">Archive</p>
+                </a>
+
+                <a href="/likes/" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/likes/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
+                    <img src="{% static 'teknotes/images/Likes.svg' %}" alt="Likes">
+                    <p class="nav-text text-lg text-gray-700 font-medium">Likes</p>
+                </a>
+
+                <div class="nav-elem flex rounded-xl px-4 py-3 gap-4">
+                    <img src="{% static 'teknotes/images/Course.svg' %}" alt="Courses">
+                    <p class="nav-text text-lg text-gray-700 font-medium">Courses</p>
+                </div>
+
+                <div id="courses" class="flex flex-col pl-6 gap-3">
+                    {% for course in your_courses %}
+                        <a href="{% url 'advanced_search:search_by_course' course.id %}" class="group transition-all course-elem nav-elem flex rounded-xl px-4 py-3 justify-between bg-gray-50 hover:bg-{{ course.color }}">
+                            <p class="course-text text-lg text-gray-700 group-hover:text-gray-50">{{ course.code }}</p>
+                            <div class="rounded-full bg-{{ course.color }} group-hover:bg-gray-50 h-full min-h-7 aspect-square course-color"></div>
+                        </a>
+                    {% endfor %}
+                    <a id="add-course" href="{% url 'course:add_a_course' %}" class="transition-all course-elem nav-elem flex rounded-xl px-4 py-3 justify-between border-2 border-rose-700 hover:bg-rose-700 text-rose-700 hover:text-gray-50 hover:font-regular">
+                        <p class="course-text text-lg font-medium">Add a course</p>
+                        <img src="{% static 'teknotes/images/Add.svg' %}" alt="Courses">
+                    </a>
+                </div>
+            </nav>
+
+            <div class="flex flex-col flex-1 h-full p-3 gap-3 overflow-hidden">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            function toggleVisibility() {
+                if ($(window).width() <= 845) {
+                    $('#logo-text, .nav-text, .new-note-text, .course-text').hide(150);
+                    $('nav').removeClass('w-full');
+                    $('.active-nav').removeClass('px-6').addClass('px-4')
+                    $('#courses').removeClass('pl-6')
+                    $('.course-elem').removeClass('justify-between');
+                    $(".nav-elem").addClass('justify-center');
+                } else {
+                    $('#logo-text, .nav-text, .new-note-text, .course-text').show(150);
+                    $('nav').addClass('w-full');
+                    $('.active-nav').removeClass('p-3')
+                    $('#courses').addClass('pl-6')
+                    $(".nav-elem").removeClass('justify-center');
+                    $('.course-elem').addClass('justify-between');
+                }
+            }
+
+            toggleVisibility(); 
+            $(window).resize(toggleVisibility);
+
+            $('#add-course').hover(
+                function() {
+                    $(this).find('img').attr('src', '{% static "teknotes/images/Add_white.svg" %}');
+                    
+                },
+                function() {
+                    $(this).find('img').attr('src', '{% static "teknotes/images/Add.svg" %}');
+                }
+            );
+
+            $('#menu-icon').click(function() {
+                var nav = $('nav');
+                if (nav.is(':visible')) {
+                    nav.hide(150);
+                } else {
+                    nav.show(150);
+                }
+            });
+
+            
+        });
+    </script>
+{% endblock %}
