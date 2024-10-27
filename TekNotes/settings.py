@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     "notes",
     "comments",
     "advanced_search",
+    "chat",
+    "channels",
     "django.contrib.sites",
     "allauth",
     "allauth.account",
@@ -180,5 +182,5 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
 
-LOGIN_REDIRECT_URL = "index"
-LOGOUT_REDIRECT_URL="index"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL="login.html"

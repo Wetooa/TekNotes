@@ -31,7 +31,7 @@ def register(request):
 
 def logout(request):
     log_out(request)
-    return redirect('/')
+    return redirect('../login/')
 
 def profile(request, user_id):
     profile = Profile.objects.get(user__id=user_id)
