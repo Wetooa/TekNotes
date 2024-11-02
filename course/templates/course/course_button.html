@@ -1,0 +1,28 @@
+{% load static %}
+
+{% if unclickable %}
+    <div class="flex flex-wrap bg-{{ course.color }} rounded-xl px-6 py-4 gap-2 shadow-lg items-center justify-between">
+        <p class="text-gray-50 text-2xl">From <span class="font-semibold">{{ course }}</span></p>
+        <div class="flex gap-3 text-gray-50 font-light items-center">
+            <p>course created by</p>
+            <a href="{% url 'auth:profile' course.created_by.id %}" class="flex gap-2">
+                <img src="{{ course.created_by.profile.avatar.url }}" alt="Profile Image" class="h-6 w-6 aspect-square rounded-full">
+                <p class="font-medium">{{ course.created_by.first_name }} {{ course.created_by.last_name }}</p>
+            </a>
+            {% if course.created_by == request.user %}
+                <form action="{% url 'course:delete_course' course.id %}" method="POST" class="flex">
+                    {% csrf_token %}
+                    <button type="submit" class="transition-all flex gap-1 items-center justify-center text-sm bg-rose-200 text-rose-700 rounded-md px-3 py-2 w-full border-2 border-rose-700 ml-4 hover:bg-rose-100 hover:shadow-lg">
+                        <img src="{% static 'teknotes/images/Trash.svg' %}" alt="Trash">
+                        <p class="font-medium text-lg">Delete</p>
+                    </button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% else %}
+    <a href="{% url 'advanced_search:search_by_course' course.id %}" class="group transition-all flex rounded-xl justify-between bg-gray-50 hover:bg-{{ course.color }} gap-4 {% if big %} px-6 py-4 shadow-lg {% else %} px-4 py-3 course-elem nav-elem {% endif %}">
+        <p class="text-gray-700 group-hover:text-gray-50 whitespace-nowrap {% if big %} text-2xl font-medium {% else %} course-text text-lg {% endif %}">{% if big %} {{ course }} {% else %} {{ course.code }} {% endif %}</p>
+        <div class="rounded-full bg-{{ course.color }} group-hover:bg-gray-50 h-full min-h-7 aspect-square {% if big %} course-color {% endif %}"></div>
+    </a>
+{% endif %}
