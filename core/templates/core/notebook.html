@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Notebook {% endblock %}
+
+{% block content %}
+    {% if notes %}
+        {% include 'tags/course_and_tags.html' %}
+        {% include 'notes/notes.html' %}
+    {% else %}
+        {% include 'core/no_results.html' with message="Notes you Tek will be shown here."%}
+    {% endif %}
+{% endblock %}
