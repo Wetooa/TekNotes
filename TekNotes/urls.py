@@ -22,7 +22,10 @@ from django.urls import include, path
 
 urlpatterns = [
     path("", include("core.urls")),
-    path("auth/", include("authentication.urls")),
+    path(
+        "authentication/",
+        include(("authentication.urls", "authentication"), namespace="authentication"),
+    ),
     path("notes/", include("notes.urls")),
     path("course/", include("course.urls")),
     path("search/", include("advanced_search.urls")),

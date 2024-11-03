@@ -9,4 +9,3 @@ urlpatterns = [
     path("likes/", views.likes, name="likes"),
     path("archive/", views.archive, name="archive"),
 ]
-
