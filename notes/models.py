@@ -4,10 +4,12 @@ from django.contrib.auth.models import User
 from course.models import Course
 from tags.models import Tag
 
+from ckeditor.fields import RichTextField
+
 
 class Note(models.Model):
     title = models.CharField(max_length=255)
-    content = models.TextField(max_length=255, blank=True)
+    content = RichTextField
     course = models.ForeignKey(Course, null=True, blank=True, on_delete=models.SET_NULL)
     created_by = models.ForeignKey(User, related_name="notes", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
