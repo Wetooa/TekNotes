@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .models import Note
+from notes.models import Note
 
 # Create your models here.
 
