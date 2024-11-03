@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout as log_out
 from django.db.models import OuterRef, Subquery
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 
 from course.models import Course
 from authentication.forms import RegisterForm
@@ -73,3 +76,21 @@ def profile_courses(request, user_id):
             "courses": courses,
         },
     )
+
+@login_required
+def edit_profile(request):
+    profile = Profile.objects.get(user=request.user)
+    if request.method == "POST":
+        if 'avatar' in request.FILES:
+            profile.avatar = request.FILES['avatar']
+        profile.user.first_name = request.POST.get('first_name', profile.user.first_name)
+        profile.user.last_name = request.POST.get('last_name', profile.user.last_name)
+        profile.bio = request.POST.get('bio', profile.bio)
+        profile.location = request.POST.get('location', profile.location)
+
+        profile.user.save()
+        profile.save()
+
+        return redirect('auth:profile', user_id=request.user.id)
+    else:
+        return render(request, "authentication/edit_profile.html", {"profile": profile})

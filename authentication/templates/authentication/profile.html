@@ -17,11 +17,19 @@
                             <p class="text-xl text-gray-500"> {{ profile.user.email }} </p>
                         </div>
                         {% if request.user == profile.user %}
-                            <a href="#" class="flex bg-rose-700 rounded-xl gap-4 px-4 py-2">
+                            <a href="{% url 'auth:edit_profile' %}" class="flex bg-rose-700 rounded-xl gap-4 px-4 py-2">
                                 <p class="new-note-text text-gray-50 font-medium text-lg">Edit profile</p>
                             </a>
                         {% endif %}
-                        <p class="text-xl">{{ profile.bio }}</p>
+                        <div class="flex gap-3">
+                            <p class="text-xl">{{ profile.bio }}</p>
+                            {% if profile.location %}
+                                <div class="flex gap-1 items-center">
+                                    <img src="{% static 'teknotes/images/Pin.svg' %}" alt="Pin">
+                                    <p class="text-yellow-500">{{ profile.location }}</p>
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
 
                 </div>

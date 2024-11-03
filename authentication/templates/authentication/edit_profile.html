@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %} Edit profile {% endblock %}
+
+{% block content %}
+    <div class="flex flex-col max-w-[600px] w-full rounded-xl bg-gray-50 self-center shadow-lg">
+        <div class="flex px-4 py-2 bg-rose-700 w-full justify-between items-center rounded-t-xl">
+            <p class="font-medium text-gray-50 text-lg">Edit profile</p>
+            <a href="javascript:history.back()"><img src="{% static 'teknotes/images/Close.svg' %}" alt="x"></a>
+        </div>
+
+        <div class="flex flex-col items-center justify-center">
+            <form action="." method="post" class="flex flex-col w-full" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="flex flex-col p-6 gap-3">
+                    <div class="flex gap-3 w-full">
+                        <div id="avatar" class="cursor-pointer flex aspect-square h-full rounded-xl bg-[url('{{ profile.avatar.url }}')] bg-cover border-2 border-yellow-500 relative" onclick="document.getElementById('profileImageInput').click();">
+                        </div>
+    
+                        <div class="flex flex-col gap-3 w-full overflow-hidden">
+                            <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl w-full">
+                                <img src="{% static 'teknotes/images/Image.svg' %}" alt="Image">
+                                <input type="file" accept="image/*" id="profileImageInput" name="avatar" class="w-full text-gray-700">
+                            </div>
+                            
+                            <script>
+                                $('#profileImageInput').change(function() {
+                                    var input = this;
+                                    if (input.files && input.files[0]) {
+                                        var reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            $('#avatar').css('background-image', 'url(' + e.target.result + ')');
+                                        }
+                                        reader.readAsDataURL(input.files[0]);
+                                    }
+                                });
+                            </script>
+        
+                            <div class="flex gap-3 w-full">
+                                <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl flex-1">
+                                    <img src="{% static 'teknotes/images/User_yellow.svg' %}" alt="User">
+                                    <input type="text" id="firstName" name="first_name" class="placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 w-full" placeholder="First Name" value="{{ profile.user.first_name }}">
+                                </div>
+                                <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl flex-1">
+                                    <img src="{% static 'teknotes/images/User_yellow.svg' %}" alt="User">
+                                    <input type="text" id="lastName" name="last_name" class="placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 w-full" placeholder="Last Name" value="{{ profile.user.last_name }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl">
+                        <textarea id="bio" name="bio" class="placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 resize-none" rows="3" placeholder="Bio">{{ profile.bio }}</textarea>
+                    </div>
+
+                    <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl">
+                        <img src="{% static 'teknotes/images/Pin.svg' %}" alt="Pin">
+                        <input type="text" id="location" name="location" class="placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 w-full" placeholder="Location" value="{{ profile.location }}">
+                    </div>
+                </div>  
+            
+                <div class="flex p-6 gap-3 w-full border-t-2 border-gray-200 items-center">
+                    <button class="px-4 py-2 text-gray-50 bg-rose-700 font-medium rounded-md w-full">Done</button>
+                    <a href="javascript:history.back()" class="flex px-4 py-2 bg-gray-200 rounded-md w-full justify-center">
+                        <p class="text-gray-700">Cancel</p>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
