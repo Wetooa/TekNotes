@@ -1,4 +1,5 @@
 from django import forms
+from django_ckeditor_5.fields import CKEditor5Widget
 from .models import Note, Course
 
 
@@ -27,14 +28,18 @@ class NoteForm(forms.ModelForm):
         )
     )
 
-    content = forms.CharField(
-        widget=forms.Textarea(
-            attrs={
-                "placeholder": "Content",
-                "class": "placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 resize-none",
-                "rows": 10,
-            }
-        )
+    # content = forms.CharField(
+    #     widget=forms.Textarea(
+    #         attrs={
+    #             "placeholder": "Content",
+    #             "class": "placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 resize-none",
+    #             "rows": 10,
+    #         }
+    #     )
+    # )
+
+    content = CKEditor5Widget(
+        attrs={"class": "django_ckeditor_5"}, config_name="content"
     )
 
     tags = forms.CharField(

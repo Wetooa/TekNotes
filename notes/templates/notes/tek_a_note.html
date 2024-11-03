@@ -5,7 +5,7 @@
 {% block title %} Tek a note {% endblock %}
 
 {% block content %}
-    <div class="flex flex-col max-w-[600px] w-full rounded-xl bg-gray-50 self-center shadow-lg">
+    <div class="flex flex-col max-w-[800px] w-full rounded-xl bg-gray-50 self-center shadow-lg overflow-y-scroll">
         <div class="flex px-4 py-2 bg-rose-700 w-full justify-between items-center rounded-t-xl">
             <p class="font-medium text-gray-50 text-lg">Tek a note</p>
             <a href="javascript:history.back()"><img src="{% static 'teknotes/images/Close.svg' %}" alt="x"></a>
@@ -13,6 +13,7 @@
 
         <div class="flex flex-col items-center justify-center">
             <form action="." method="post" class="flex flex-col w-full">
+                {{ form.media }}
                 {% csrf_token %}
                 <input type="hidden" name="course" id="selected-course-value" value="">
                 
