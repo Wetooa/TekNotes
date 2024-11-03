@@ -1,0 +1,23 @@
+
+.highlight {
+    transition: background-color 5s ease;
+}
+
+.highlight_note_title {
+    background-color: rgb(23, 194, 232); 
+    color: white; 
+}
+
+.highlight_note_detail {
+    background-color: yellow; 
+    color: white;   
+}
+.highlight_user {
+    text-decoration: underline;
+    font-weight: bold;
+
+}
+.ncshadow:hover{
+    box-shadow: 6px 6px 6px rgba(0,0,0,0.1) inset,
+    -5px -5px 5px white inset;
+}
