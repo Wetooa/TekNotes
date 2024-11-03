@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout as log_out
 from django.db.models import OuterRef, Subquery
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
 
 from course.models import Course
 from authentication.forms import RegisterForm
@@ -25,7 +23,7 @@ def register(request):
     else:
         form = RegisterForm()
 
-    return render(request, "auth/register.html", {"form": form})
+    return render(request, "authentication/register.html", {"form": form})
 
 
 def logout(request):
