@@ -153,7 +153,7 @@ customColorPalette = [
 # CK_EDITOR_5_UPLOAD_FILE_VIEW_NAME = "upload_file"
 
 CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True
-CKEDITOR_5_UPLOAD_FILE_TYPES = ["jpeg", "pdf", "png"]
+CKEDITOR_5_UPLOAD_FILE_TYPES = ["jpeg", "pdf", "png", "jpg"]
 CKEDITOR_5_MAX_FILE_SIZE = 5
 
 CKEDITOR_5_CONFIGS = {
@@ -292,7 +292,7 @@ CKEDITOR_5_CONFIGS = {
 
 # Define a constant in settings.py to specify file upload permissions
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = (
-    "staff"  # Possible values: "staff", "authenticated", "any"
+    "any"  # Possible values: "staff", "authenticated", "any"
 )
 
 
