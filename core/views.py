@@ -67,4 +67,3 @@ def likes(request):
     return render(
         request, "core/likes.html", {"notes": liked, "courses": courses, "tags": tags}
     )
-
