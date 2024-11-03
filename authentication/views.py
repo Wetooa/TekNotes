@@ -3,8 +3,8 @@ from django.contrib.auth import logout as log_out
 from django.db.models import OuterRef, Subquery
 
 from course.models import Course
-from .forms import RegisterForm
-from .models import Profile
+from authentication.forms import RegisterForm
+from authentication.models import Profile
 from notes.models import Note
 from comments.models import Like
 
@@ -18,7 +18,7 @@ def register(request):
 
             Profile.objects.create(user=user)
 
-            return redirect("/auth/login/")
+            return redirect("/authentication/login/")
     else:
         form = RegisterForm()
 

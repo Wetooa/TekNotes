@@ -1,7 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from . import views
-from .forms import LoginForm
+from authentication import views
+from authentication.forms import LoginForm
 
 app_name = "auth"
 
