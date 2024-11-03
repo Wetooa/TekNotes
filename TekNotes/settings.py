@@ -29,9 +29,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Login redirect
-LOGIN_URL = '/auth/login/'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 # Application definition
 
@@ -73,7 +73,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                'core.context_processors.courses_list',
+                "core.context_processors.courses_list",
             ],
         },
     },
@@ -117,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC-8"
+TIME_ZONE = "Asia/Singapore"
 
 USE_I18N = True
 
@@ -133,8 +133,8 @@ STATICFILES_DIRS = [
 ]
 
 # Media directory
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "media/"
 
 # Ckeditor settings
 CKEDITOR_BASEPATH = "static/ckeditor/ckeditor/"
