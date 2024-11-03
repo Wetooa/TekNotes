@@ -25,11 +25,11 @@
     </div>
 
     <div class="flex items-center gap-4 h-full">
-      <a href="{% url 'authentication:login' %}"
+      <a href="{% url 'auth:login' %}"
         class="flex bg-rose-700 rounded-xl gap-4 px-6 py-2 transition-all hover:shadow-lg">
         <p class="text-gray-50 font-medium text-lg">Log in</p>
       </a>
-      <a href="{% url 'authentication:register' %}"
+      <a href="{% url 'auth:register' %}"
         class="flex bg-rose-700 rounded-xl gap-4 px-6 py-2 transition-all hover:shadow-lg">
         <p class="text-gray-50 font-medium text-lg">Sign Up</p>
       </a>
@@ -37,13 +37,13 @@
   </header>
 
   <main class="m-auto">
-    <section class="w-screen h-screen flex flex-col items-center justify-center">
+    <section class="w-full h-screen flex flex-col items-center justify-center">
       <div class="max-w-[1000px] text-center">
         <h1 class="text-7xl font-bold mb-6 leading-tight">
           <span class="bg-yellow-100 font-bold">#1 Trusted</span> Note Sharing Application in the Philippines
         </h1>
         <p class="text-2xl text-gray-700 mb-8">Join thousands of users who are sharing and collaborating on notes every day.</p>
-        <a href="/join" class="m-auto text-3xl rounded-xl bg-green-400 shadow-xl py-2 px-4 font-semibold transition-all hover:bg-green-500">
+        <a href="{% url 'auth:register' %}" class="m-auto text-3xl rounded-xl bg-green-400 shadow-xl py-2 px-4 font-semibold transition-all hover:bg-green-500">
           Join Now!
         </a>
       </div>
@@ -52,7 +52,7 @@
       </div>
     </section>
 
-    <section class="w-screen bg-white py-12">
+    <section class="w-full bg-white py-12">
       <div class="max-w-[1000px] m-auto text-center">
         <h2 class="text-4xl font-bold mb-6">Key Features</h2>
         <div class="flex flex-wrap justify-center gap-8">
@@ -75,7 +75,7 @@
       </div>
     </section>
 
-    <section class="w-screen bg-gray-100 py-12">
+    <section class="w-full bg-gray-100 py-12">
       <div class="max-w-[1000px] m-auto text-center">
         <h2 class="text-4xl font-bold mb-6">Why Choose TekNotes?</h2>
         <p class="text-xl text-gray-700 mb-6">Transform your study sessions with <span class="font-bold">collaborative learning</span> and resource sharing.</p>
@@ -99,7 +99,7 @@
       </div>
     </section>
 
-    <section class="w-screen bg-white py-12">
+    <section class="w-full bg-white py-12">
       <div class="max-w-[1000px] m-auto text-center">
         <h2 class="text-4xl font-bold mb-6">User Reviews</h2>
         <div class="flex flex-wrap justify-center gap-8">
@@ -135,17 +135,17 @@
       </div>
     </section>
 
-    <section class="w-screen bg-gray-100 py-12">
+    <section class="w-full bg-gray-100 py-12">
       <div class="max-w-[1000px] m-auto text-center">
         <h2 class="text-4xl font-bold mb-6">Get Started with TekNotes Today!</h2>
         <p class="text-xl text-gray-700 mb-6">Don’t miss out on the opportunity to enhance your learning experience. Join a vibrant community of students sharing resources and collaborating on notes. It’s free, easy to use, and designed for your academic success!</p>
-        <a href="/join" class="text-2xl rounded-xl bg-green-400 shadow-xl py-2 px-4 font-semibold transition-all hover:bg-green-500">
+        <a href="{% url 'auth:register' %}" class="text-2xl rounded-xl bg-green-400 shadow-xl py-2 px-4 font-semibold transition-all hover:bg-green-500">
           Sign Up Now!
         </a>
       </div>
     </section>
 
-    <footer class="w-screen bg-white py-12">
+    <footer class="w-full bg-white py-12">
       <div class="max-w-[1000px] m-auto flex flex-col items-center">
         <h2 class="text-2xl font-bold mb-6">Follow Us On</h2>
         <div class="flex justify-center gap-6 mb-6">

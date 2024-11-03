@@ -27,13 +27,13 @@
                     </a>
 
                     <div class="flex h-full">
-                        <a href="{% url 'authentication:logout' %}" class="transition-all flex gap-4 px-4 py-2 rounded-l-xl bg-gray-200 hover:shadow-lg">
+                        <a href="{% url 'auth:logout' %}" class="transition-all flex gap-4 px-4 py-2 rounded-l-xl bg-gray-200 hover:shadow-lg">
                             <p class="text-gray-700 text-lg">Log out</p>
                         </a>
-                        <a href="{% url 'authentication:profile' request.user.id %}" class="transition-all flex h-full aspect-square rounded-r-xl bg-[url('{{ request.user.profile.avatar.url }}')] bg-cover border-2 border-gray-200 hover:shadow-lg"></a>
+                        <a href="{% url 'auth:profile' request.user.id %}" class="transition-all flex h-full aspect-square rounded-r-xl bg-[url('{{ request.user.profile.avatar.url }}')] bg-cover border-2 border-gray-200 hover:shadow-lg"></a>
                     </div>
                 {% else %}
-                    <a href="{% url 'authentication:login' %}" class="flex bg-rose-700 rounded-xl gap-4 px-6 py-2 transition-all hover:shadow-lg">
+                    <a href="{% url 'auth:login' %}" class="flex bg-rose-700 rounded-xl gap-4 px-6 py-2 transition-all hover:shadow-lg">
                         <p class="text-gray-50 font-medium text-lg">Sign In</p>
                     </a>
                 {% endif %}
