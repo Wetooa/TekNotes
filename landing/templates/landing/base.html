@@ -1,0 +1,186 @@
+{% extends 'core/core.html' %}
+
+{% load static %}
+
+{% block title %} Landing {% endblock %}
+
+{% block body %}
+
+<div class="">
+  <header class="static top-0 flex items-center w-full p-6 gap-3 shadow-lg z-10 bg-transparent ">
+    <div class="flex flex-1 items-center gap-10">
+      <a href="/" class="flex items-center gap-2">
+        <img src="{% static 'teknotes/images/TekNotes-Logo.svg' %}" alt="Logo">
+        <p id="logo-text" class="font-semibold text-rose-700 text-4xl">TekNotes</p>
+      </a>
+
+      <div class="flex gap-5">
+        <a href="/pricing" class="flex items-center gap-2 hover:opacity-60 transition-all">
+          <p id="logo-text" class="text-gray-500 text-xs font-semibold">Pricing</p>
+        </a>
+        <a href="/about" class="flex items-center gap-2 hover:opacity-60 transition-all">
+          <p id="logo-text" class="text-gray-500 text-xs font-semibold">About Us</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 h-full">
+      <a href="{% url 'authentication:login' %}"
+        class="flex bg-rose-700 rounded-xl gap-4 px-6 py-2 transition-all hover:shadow-lg">
+        <p class="text-gray-50 font-medium text-lg">Log in</p>
+      </a>
+      <a href="{% url 'authentication:register' %}"
+        class="flex bg-rose-700 rounded-xl gap-4 px-6 py-2 transition-all hover:shadow-lg">
+        <p class="text-gray-50 font-medium text-lg">Sign Up</p>
+      </a>
+    </div>
+  </header>
+
+  <main class="m-auto">
+    <section class="w-screen h-screen flex flex-col items-center justify-center">
+      <div class="max-w-[1000px] text-center">
+        <h1 class="text-7xl font-bold mb-6 leading-tight">
+          <span class="bg-yellow-100 font-bold">#1 Trusted</span> Note Sharing Application in the Philippines
+        </h1>
+        <p class="text-2xl text-gray-700 mb-8">Join thousands of users who are sharing and collaborating on notes every day.</p>
+        <a href="/join" class="m-auto text-3xl rounded-xl bg-green-400 shadow-xl py-2 px-4 font-semibold transition-all hover:bg-green-500">
+          Join Now!
+        </a>
+      </div>
+      <div class="mt-12 flex flex-col items-center">
+        <p class="text-lg text-gray-600">Experience seamless note sharing and collaboration with TekNotes.</p>
+      </div>
+    </section>
+
+    <section class="w-screen bg-white py-12">
+      <div class="max-w-[1000px] m-auto text-center">
+        <h2 class="text-4xl font-bold mb-6">Key Features</h2>
+        <div class="flex flex-wrap justify-center gap-8">
+          <div class="w-1/3 p-4 bg-gray-50 rounded-lg shadow transition-transform transform hover:scale-105 flex flex-col items-center">
+            <img src="{% static 'teknotes/images/landing/authentication-icon.svg' %}" alt="Authentication Icon" class="w-16 h-16 mb-4">
+            <h3 class="text-2xl font-semibold text-rose-700">Authentication</h3>
+            <p class="text-gray-600 text-center">Securely register, log in, and manage your account with <span class="font-bold">strong password</span> requirements.</p>
+          </div>
+          <div class="w-1/3 p-4 bg-gray-50 rounded-lg shadow transition-transform transform hover:scale-105 flex flex-col items-center">
+            <img src="{% static 'teknotes/images/landing/note-creation-icon.svg' %}" alt="Note Creation Icon" class="w-16 h-16 mb-4">
+            <h3 class="text-2xl font-semibold text-rose-700">Note Creation and Sharing</h3>
+            <p class="text-gray-600 text-center">Create, edit, and share notes easily with a rich-text editor and <span class="font-bold">file attachments</span>.</p>
+          </div>
+          <div class="w-1/3 p-4 bg-gray-50 rounded-lg shadow transition-transform transform hover:scale-105 flex flex-col items-center">
+            <img src="{% static 'teknotes/images/landing/comments-icon.svg' %}" alt="Comments Icon" class="w-16 h-16 mb-4">
+            <h3 class="text-2xl font-semibold text-rose-700">Comments and Feedback</h3>
+            <p class="text-gray-600 text-center">Engage with peers through inline comments and <span class="font-bold">threaded discussions</span> on shared notes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="w-screen bg-gray-100 py-12">
+      <div class="max-w-[1000px] m-auto text-center">
+        <h2 class="text-4xl font-bold mb-6">Why Choose TekNotes?</h2>
+        <p class="text-xl text-gray-700 mb-6">Transform your study sessions with <span class="font-bold">collaborative learning</span> and resource sharing.</p>
+        <div class="flex flex-wrap justify-center gap-8">
+          <div class="w-1/3 p-4 bg-white rounded-lg shadow transition-transform transform hover:scale-105 flex flex-col items-center">
+            <img src="{% static 'teknotes/images/landing/collaboration-icon.svg' %}" alt="Collaboration Icon" class="w-16 h-16 mb-4">
+            <h3 class="text-2xl font-semibold text-rose-700">Collaborative Learning</h3>
+            <p class="text-gray-600 text-center">Join a community of learners and enhance your <span class="font-bold">academic experience</span>.</p>
+          </div>
+          <div class="w-1/3 p-4 bg-white rounded-lg shadow transition-transform transform hover:scale-105 flex flex-col items-center">
+            <img src="{% static 'teknotes/images/landing/accessibility-icon.svg' %}" alt="Accessibility Icon" class="w-16 h-16 mb-4">
+            <h3 class="text-2xl font-semibold text-rose-700">Accessible Anywhere</h3>
+            <p class="text-gray-600 text-center">Access your notes from any <span class="font-bold">device</span>, anytime, and anywhere.</p>
+          </div>
+          <div class="w-1/3 p-4 bg-white rounded-lg shadow transition-transform transform hover:scale-105 flex flex-col items-center">
+            <img src="{% static 'teknotes/images/landing/user-friendly-icon.svg' %}" alt="User-Friendly Icon" class="w-16 h-16 mb-4">
+            <h3 class="text-2xl font-semibold text-rose-700">User-Friendly Interface</h3>
+            <p class="text-gray-600 text-center">Experience a <span class="font-bold">simple, intuitive</span> interface designed for students.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="w-screen bg-white py-12">
+      <div class="max-w-[1000px] m-auto text-center">
+        <h2 class="text-4xl font-bold mb-6">User Reviews</h2>
+        <div class="flex flex-wrap justify-center gap-8">
+          <div class="w-1/3 p-4">
+            <p class="text-gray-600">"TekNotes has revolutionized the way I take and share notes. Highly recommended!"</p>
+            <p class="font-semibold mt-2">- Jane Doe</p>
+            <div class="text-yellow-500 flex justify-center mt-2">
+              <span>⭐⭐⭐⭐⭐</span>
+            </div>
+          </div>
+          <div class="w-1/3 p-4">
+            <p class="text-gray-600">"A must-have tool for students and professionals alike."</p>
+            <p class="font-semibold mt-2">- John Smith</p>
+            <div class="text-yellow-500 flex justify-center mt-2">
+              <span>⭐⭐⭐⭐⭐</span>
+            </div>
+          </div>
+          <div class="w-1/3 p-4">
+            <p class="text-gray-600">"The best note-sharing app I've ever used. Simple, secure, and effective."</p>
+            <p class="font-semibold mt-2">- Maria Garcia</p>
+            <div class="text-yellow-500 flex justify-center mt-2">
+              <span>⭐⭐⭐⭐⭐</span>
+            </div>
+          </div>
+          <div class="w-1/3 p-4">
+            <p class="text-gray-600">"Excellent platform for collaboration and study sessions!"</p>
+            <p class="font-semibold mt-2">- Ali Khan</p>
+            <div class="text-yellow-500 flex justify-center mt-2">
+              <span>⭐⭐⭐⭐⭐</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="w-screen bg-gray-100 py-12">
+      <div class="max-w-[1000px] m-auto text-center">
+        <h2 class="text-4xl font-bold mb-6">Get Started with TekNotes Today!</h2>
+        <p class="text-xl text-gray-700 mb-6">Don’t miss out on the opportunity to enhance your learning experience. Join a vibrant community of students sharing resources and collaborating on notes. It’s free, easy to use, and designed for your academic success!</p>
+        <a href="/join" class="text-2xl rounded-xl bg-green-400 shadow-xl py-2 px-4 font-semibold transition-all hover:bg-green-500">
+          Sign Up Now!
+        </a>
+      </div>
+    </section>
+
+    <footer class="w-screen bg-white py-12">
+      <div class="max-w-[1000px] m-auto flex flex-col items-center">
+        <h2 class="text-2xl font-bold mb-6">Follow Us On</h2>
+        <div class="flex justify-center gap-6 mb-6">
+          <a href="https://www.facebook.com/messenger" target="_blank" rel="noopener noreferrer">
+            <img src="{% static 'teknotes/images/landing/messenger-icon.svg' %}" alt="Messenger" class="w-10 h-10">
+          </a>
+          <a href="https://www.facebook.com/messenger" target="_blank" rel="noopener noreferrer">
+            <img src="{% static 'teknotes/images/landing/facebook-icon.svg' %}" alt="Facebook" class="w-10 h-10">
+          </a>
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+            <img src="{% static 'teknotes/images/landing/linkedin-icon.svg' %}" alt="LinkedIn" class="w-10 h-10">
+          </a>
+        </div>
+
+        <div class="flex flex-wrap justify-around w-full max-w-[800px] text-center mb-6">
+          <div class="flex flex-col flex-1">
+            <p class="font-semibold">Contact Us:</p>
+            <p>Email: support@teknotes.com</p>
+            <p>Phone: +1 (234) 567-890</p>
+          </div>
+          <div class="flex flex-col flex-1">
+            <p class="font-semibold">Office Hours:</p>
+            <p>Mon-Fri: 9 AM - 5 PM</p>
+            <p>Sat-Sun: Closed</p>
+          </div>
+          <div class="flex flex-col flex-1">
+            <p class="font-semibold">Address:</p>
+            <p>N. Bacalso Ave.</p>
+            <p>Cebu City, Phlippines 12345</p>
+          </div>
+        </div>
+
+        <p class="text-gray-600">© 2024 TekNotes. All rights reserved.</p>
+      </div>
+</footer>
+  </main>
+</div>
+{% endblock %}
