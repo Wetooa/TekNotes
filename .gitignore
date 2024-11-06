@@ -1,0 +1,58 @@
+# Python files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Virtual environments
+env/
+venv/
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+db.sqlite3
+
+# Ignore environment variables and secret files
+.env
+*.env
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Static files
+# staticfiles/
+# static/
+
+# Media files
+# media/
+
+# Django migrations
+*/migrations/*.py
+*/migrations/*.pyc
+
+# Coverage reports
+htmlcov/
+.coverage
+.tox/
+.pytest_cache/
+.cache/
+.nox/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Test files
+coverage.xml
+nosetests.xml
+test_result.xml
