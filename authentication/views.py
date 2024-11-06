@@ -9,12 +9,12 @@ from .models import Profile
 from notes.models import Note
 from comments.models import Like
 
-from django.dispatch import receiver  
-from allauth.account.signals import user_signed_up  
+from django.dispatch import receiver
+from allauth.account.signals import user_signed_up
 
 
 def register(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = RegisterForm(request.POST)
 
         if form.is_valid():
@@ -22,17 +22,17 @@ def register(request):
 
             Profile.objects.create(user=user)
 
-            return redirect('login/')
+            return redirect("login/")
     else:
         form = RegisterForm()
 
-    return render(request, 'authentication/register.html', {
-        'form': form
-    })
+    return render(request, "authentication/register.html", {"form": form})
+
 
 def logout(request):
     log_out(request)
-    return redirect('../login/')
+    return redirect("../login/")
+
 
 def profile(request, user_id):
     profile = Profile.objects.get(user__id=user_id)
