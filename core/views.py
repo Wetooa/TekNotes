@@ -64,8 +64,6 @@ def likes(request):
     courses = Course.objects.filter(note__in=liked).distinct()
     tags = Tag.objects.filter(notes__in=liked).distinct()
 
-    return render(request, 'core/likes.html', {
-        'notes': liked,
-        'courses': courses,
-        'tags': tags
-    })
+    return render(
+        request, "core/likes.html", {"notes": liked, "courses": courses, "tags": tags}
+    )
