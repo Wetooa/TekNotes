@@ -33,6 +33,7 @@ def search(request):
         'title': 'Search results for: ' + (query[:8] + '...' if len(query) > 8 else query),
         'courses': courses,
         'users': users,
+        'highlight':  query,
     })
 
 def search_by_course(request, course_id):
@@ -44,4 +45,3 @@ def search_by_course(request, course_id):
         'tags': tags,
         'title': course.code,
         'course': course,
-    })

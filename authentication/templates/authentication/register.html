@@ -2,7 +2,12 @@
 
 {% load static %}
 
+{% load socialaccount %}
+
+
 {% block title %} Register {% endblock %}
+
+{% load socialaccount %}
 
 {% block body %}
     <div class="flex flex-col max-w-[450px] w-full rounded-xl overflow-hidden bg-gray-50 shadow-xl justify-self-center self-center">
@@ -75,7 +80,7 @@
                             <img src="{% static 'teknotes/images/Microsoft.svg' %}" alt="Microsoft">
                             <p class="text-gray-700">Microsoft</p>
                         </a>
-                        <a href="#Google" class="flex px-4 py-2 gap-3 shadow-md bg-gray-200 flex-1 rounded-md justify-center">
+                        <a href="{% provider_login_url 'google' %}?next=/" class="flex px-4 py-2 gap-3 shadow-md bg-gray-200 flex-1 rounded-md justify-center">
                             <img src="{% static 'teknotes/images/Google.svg' %}" alt="Google">
                             <p class="text-gray-700">Google</p>
                         </a>
