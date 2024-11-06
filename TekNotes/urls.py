@@ -24,7 +24,7 @@ from django.urls import include, path
 urlpatterns = [
     path("", include("core.urls")),
     path(
-        "auth/",
+        "authentication/",
         include(("authentication.urls", "authentication"), namespace="authentication"),
     ),
     path("notes/", include("notes.urls")),

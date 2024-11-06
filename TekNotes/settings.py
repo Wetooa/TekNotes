@@ -29,9 +29,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Login redirect
-LOGIN_URL = "/auth/login/"
+LOGIN_URL = "/authentication/login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+SITE_ID = 1
 
 # Application definition
 

@@ -23,7 +23,7 @@ def register(request):
 
             Profile.objects.create(user=user)
 
-            return redirect("login/")
+            return redirect("/authentication/login/")
     else:
         form = RegisterForm()
 
@@ -32,7 +32,7 @@ def register(request):
 
 def logout(request):
     log_out(request)
-    return redirect("../login/")
+    return redirect("/auth/login/")
 
 
 def profile(request, user_id):
@@ -49,9 +49,9 @@ def profile(request, user_id):
     )
 
 
-# @receiver(user_signed_up)
-# def create_profile_on_google_signup(request, user, **kwargs):
-#     Profile.objects.create(user=user)
+@receiver(user_signed_up)
+def create_profile_on_google_signup(request, user, **kwargs):
+    Profile.objects.create(user=user)
 
 
 def profile_likes(request, user_id):
@@ -101,6 +101,6 @@ def edit_profile(request):
         profile.user.save()
         profile.save()
 
-        return redirect("auth:profile", user_id=request.user.id)
+        return redirect("authentication:profile", user_id=request.user.id)
     else:
         return render(request, "authentication/edit_profile.html", {"profile": profile})
