@@ -103,7 +103,7 @@
                             <div class="flex flex-col gap-1 p-3 rounded-lg bg-gray-200 shadow">
                                 <div class="flex gap-2 items-center">
                                     <p class="text-gray-500 text-sm">from</p>
-                                    <a href="{% url 'auth:profile' comment.user.id %}" class="flex gap-1 items-center">
+                                    <a href="{% url 'authentication:profile' comment.user.id %}" class="flex gap-1 items-center">
                                         <img src="{{ comment.user.profile.avatar.url }}" alt="Profile Image" class="h-4 w-4 aspect-square rounded-full">
                                         <p class="text-gray-500 font-medium text-sm">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>
                                     </a>

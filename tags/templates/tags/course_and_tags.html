@@ -1,5 +1,6 @@
-{% load custom_filters %}
+
 {% load static %}
+{% load custom_filters %}
 <link rel="stylesheet" href="{% static 'teknotes/css/highlight.css' %}">
 <div class="flex {% if wrap %} flex-wrap {% else %} overflow-x-auto {% endif %} gap-3 ">
     {% for course in courses %}

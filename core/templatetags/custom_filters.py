@@ -15,15 +15,12 @@ def is_disliked(note, user):
 @register.simple_tag(name='highlight')
 def highlight(text, query, style):
     if not query:
-        return text
+        return text 
     
-    # Split the query into words
     query_terms = query.split()
-    # Escape all terms and join with the OR operator '|'
     escaped_terms = [re.escape(term) for term in query_terms]
     joined_pattern = '|'.join(escaped_terms)
     
-    # Create the replacement pattern dynamically based on the style
     def get_replacement(match):
         match_text = match.group(0)
         if style == 'note_title':
@@ -33,9 +30,9 @@ def highlight(text, query, style):
         elif style == 'note_detail':
             return f'<span class="highlight highlight_note_detail">{match_text}</span>'
         else:
-            return match_text  # Default to no highlight
+            return match_text  
     
-    # Substitute the pattern in the text with the replacement
+    
     highlighted = re.sub(f"({joined_pattern})", get_replacement, text, flags=re.IGNORECASE)
 
     return mark_safe(highlighted)
