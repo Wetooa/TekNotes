@@ -27,6 +27,7 @@ urlpatterns = [
         "authentication/",
         include(("authentication.urls", "authentication"), namespace="authentication"),
     ),
+    path("accounts/", include("allauth.urls")),
     path("notes/", include("notes.urls")),
     path("course/", include("course.urls")),
     path("search/", include("advanced_search.urls")),

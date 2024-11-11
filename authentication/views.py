@@ -32,7 +32,7 @@ def register(request):
 
 def logout(request):
     log_out(request)
-    return redirect("/auth/login/")
+    return redirect("/authentication/login/")
 
 
 def profile(request, user_id):
