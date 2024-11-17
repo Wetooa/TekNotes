@@ -33,12 +33,19 @@ LOGIN_URL = "/authentication/login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    }
+}
+
 SITE_ID = 2
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -105,7 +112,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "TekNotes.wsgi.application"
-
+ASGI_APPLICATION = "TekNotes.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
