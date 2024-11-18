@@ -1,13 +1,17 @@
+from django.dispatch import receiver
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout as log_out
 from django.db.models import OuterRef, Subquery
 from django.contrib.auth.decorators import login_required
 
 from course.models import Course
-from authentication.forms import RegisterForm
-from authentication.models import Profile
+from .forms import RegisterForm
+from .models import Profile
 from notes.models import Note
 from comments.models import Like
+
+from django.dispatch import receiver
+from allauth.account.signals import user_signed_up
 
 
 def register(request):
@@ -19,7 +23,7 @@ def register(request):
 
             Profile.objects.create(user=user)
 
-            return redirect("/auth/login/")
+            return redirect("/authentication/login/")
     else:
         form = RegisterForm()
 
@@ -28,7 +32,7 @@ def register(request):
 
 def logout(request):
     log_out(request)
-    return redirect("/")
+    return redirect("/authentication/login/")
 
 
 def profile(request, user_id):
@@ -43,6 +47,11 @@ def profile(request, user_id):
             "notes": notes,
         },
     )
+
+
+@receiver(user_signed_up)
+def create_profile_on_google_signup(request, user, **kwargs):
+    Profile.objects.create(user=user)
 
 
 def profile_likes(request, user_id):
@@ -92,6 +101,6 @@ def edit_profile(request):
         profile.user.save()
         profile.save()
 
-        return redirect("auth:profile", user_id=request.user.id)
+        return redirect("authentication:profile", user_id=request.user.id)
     else:
         return render(request, "authentication/edit_profile.html", {"profile": profile})

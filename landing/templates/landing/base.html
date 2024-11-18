@@ -25,11 +25,11 @@
     </div>
 
     <div class="flex items-center gap-4 h-full">
-      <a href="{% url 'auth:login' %}"
+      <a href="{% url 'authentication:login' %}"
         class="flex bg-rose-700 rounded-xl gap-4 px-6 py-2 transition-all hover:shadow-lg">
         <p class="text-gray-50 font-medium text-lg">Log in</p>
       </a>
-      <a href="{% url 'auth:register' %}"
+      <a href="{% url 'authentication:register' %}"
         class="flex bg-rose-700 rounded-xl gap-4 px-6 py-2 transition-all hover:shadow-lg">
         <p class="text-gray-50 font-medium text-lg">Sign Up</p>
       </a>
@@ -43,7 +43,7 @@
           <span class="bg-yellow-100 font-bold">#1 Trusted</span> Note Sharing Application in the Philippines
         </h1>
         <p class="text-2xl text-gray-700 mb-8">Join thousands of users who are sharing and collaborating on notes every day.</p>
-        <a href="{% url 'auth:register' %}" class="m-auto text-3xl rounded-xl bg-green-400 shadow-xl py-2 px-4 font-semibold transition-all hover:bg-green-500">
+        <a href="{% url 'authentication:register' %}" class="m-auto text-3xl rounded-xl bg-green-400 shadow-xl py-2 px-4 font-semibold transition-all hover:bg-green-500">
           Join Now!
         </a>
       </div>
@@ -139,7 +139,7 @@
       <div class="max-w-[1000px] m-auto text-center">
         <h2 class="text-4xl font-bold mb-6">Get Started with TekNotes Today!</h2>
         <p class="text-xl text-gray-700 mb-6">Don’t miss out on the opportunity to enhance your learning experience. Join a vibrant community of students sharing resources and collaborating on notes. It’s free, easy to use, and designed for your academic success!</p>
-        <a href="{% url 'auth:register' %}" class="text-2xl rounded-xl bg-green-400 shadow-xl py-2 px-4 font-semibold transition-all hover:bg-green-500">
+        <a href="{% url 'authentication:register' %}" class="text-2xl rounded-xl bg-green-400 shadow-xl py-2 px-4 font-semibold transition-all hover:bg-green-500">
           Sign Up Now!
         </a>
       </div>
