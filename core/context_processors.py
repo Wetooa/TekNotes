@@ -1,6 +1,8 @@
 from django.db.models import Count
 from course.models import Course
 from clicks.models import ClickNote, ClickTag, ClickCourse
+from notes.models import Note
+from tags.models import Tag
 
 
 
@@ -10,22 +12,32 @@ def courses_list(request):
 
 def trending(request):
     trending_notes = (
-        ClickNote.objects.prefetch_related("note")
+        ClickNote.objects.values("note")
         .annotate(click_count=Count("id"))
         .order_by("-click_count")
     )[:5]
 
     trending_tags = (
-        ClickTag.objects.prefetch_related("tag")
+        ClickTag.objects.values("tag")
         .annotate(click_count=Count("id"))
         .order_by("-click_count")
     )[:5]
 
     trending_courses = (
-        ClickCourse.objects.prefetch_related("course")
+        ClickCourse.objects.values("course")
         .annotate(click_count=Count("id"))
         .order_by("-click_count")
     )[:5]
+
+    trending_notes = Note.objects.filter(
+        id__in=[note["note"] for note in trending_notes]
+    )
+
+    trending_tags = Tag.objects.filter(id__in=[tag["tag"] for tag in trending_tags])
+
+    trending_courses = Course.objects.filter(
+        id__in=[course["course"] for course in trending_courses]
+    )
 
     return {
         "trending_notes": trending_notes,
@@ -35,7 +47,8 @@ def trending(request):
 
 
 def recent_posts(request):
-    return {}
+    notes = Note.objects.all().order_by("-created_at")[:5]
+    return {"recent_posts": notes}
 
 
 def notifications(request):
