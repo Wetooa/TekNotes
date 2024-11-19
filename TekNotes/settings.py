@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "clicks",
     "landing",
     "notes",
+    "notifications",
     "tags",
     "django_ckeditor_5",
     "channels",
