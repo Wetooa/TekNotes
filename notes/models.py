@@ -34,13 +34,22 @@ class NoteAdmin(admin.ModelAdmin):
 
     def __str__(self):
         return self.title
-    
+
+
 class NoteAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_by', 'created_at', 'modified_at', 'is_archived', 'is_private')
+    list_display = (
+        "title",
+        "created_by",
+        "created_at",
+        "modified_at",
+        "is_archived",
+        "is_private",
+    )
 
-class TextElement:
-    pass
 
+class Click(models.Model):
+    note = models.ForeignKey(Note, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
-class FileElement:
-    pass
+    def __str__(self):
+        return self.note.title + " clicked at " + str(self.created_at)

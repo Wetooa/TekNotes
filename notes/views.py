@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from .forms import NoteForm
 from tags.models import Tag
-from .models import Note
+from .models import Click, Note
 from django.http import HttpResponseRedirect
 
 
@@ -34,6 +34,7 @@ def tek_a_note(request):
 
 def note_detail(request, note_id):
     note = get_object_or_404(Note, id=note_id)
+    Click.objects.create(note=note)
     return render(request, "notes/note_detail.html", {"note": note})
 
 
