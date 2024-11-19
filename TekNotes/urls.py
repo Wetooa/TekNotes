@@ -29,6 +29,7 @@ urlpatterns = [
     ),
     path("accounts/", include("allauth.urls")),
     path("notes/", include("notes.urls")),
+    path("notifications/", include("notifications.urls")),
     path("course/", include("course.urls")),
     path("search/", include("advanced_search.urls")),
     path("comments/", include("comments.urls")),

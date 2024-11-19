@@ -23,7 +23,7 @@ class Notification(models.Model):
     notification_type = models.CharField(
         max_length=20,
         choices=NotificationType.choices,
-        default=NotificationType.LIKE,
+        default=NotificationType.LIKE_NOTE,
     )
     object_id = models.PositiveIntegerField(null=True, blank=True)  # Related object ID
     created_at = models.DateTimeField(auto_now_add=True)
