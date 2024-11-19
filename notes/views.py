@@ -1,10 +1,10 @@
-from django.http.response import HttpResponse
+from clicks.models import ClickNote, ClickTag, ClickCourse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from .forms import NoteForm
 from tags.models import Tag
-from .models import Click, Note
+from .models import Note
 from django.http import HttpResponseRedirect
 
 
@@ -34,7 +34,15 @@ def tek_a_note(request):
 
 def note_detail(request, note_id):
     note = get_object_or_404(Note, id=note_id)
-    Click.objects.create(note=note)
+
+    ClickNote.objects.create(note=note)
+
+    for tag in note.tags.all():
+        ClickTag.objects.create(tag=tag)
+
+    if note.course:
+        ClickCourse.objects.create(course=note.course)
+
     return render(request, "notes/note_detail.html", {"note": note})
 
 
