@@ -1,4 +1,10 @@
-<div class="flex flex-1 {% if not no_scroll %} overflow-hidden overflow-y-auto {% endif %}">
+{% load static %}
+{% load custom_filters %}
+
+<div id="scoll-container"
+  class="flex flex-1 {% if not no_scroll %} overflow-hidden overflow-y-auto {% endif %} scroll-smooth">
+  <div id="top-anchor"></div>
+
   <div id="notes" class="flex flex-1 gap-3" style="display: none;">
     {% for note in notes %}
     <div class="note" data-note-id="{{ note.id }}">
@@ -8,6 +14,12 @@
   </div>
 
   <div id="notes-container" class="flex flex-1 gap-3"></div>
+
+
+  <a id="go-up" href="#top-anchor"
+    class="fixed bottom-6 right-6 w-12 h-auto aspect-square rounded-full bg-red-500 p-2 animate-bounce">
+    <img src="{% static 'teknotes/images/Arrow-Up.svg' %}" alt="Scroll Up">
+  </a>
 </div>
 
 <script>
@@ -27,5 +39,19 @@
   $(document).ready(function () {
     partitionNotes();
     $(window).resize(partitionNotes);
+
+
+
+    $('#go-up').hide(150);
+    $("#scoll-container").scroll(function () {
+      var scrollTop = $(this).scrollTop();
+      if (scrollTop > 10) {
+        $('#go-up').show(150);
+      } else {
+        $('#go-up').hide(150);
+      }
+    });
+
   });
+
 </script>

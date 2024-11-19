@@ -88,33 +88,13 @@
                 </div>
             </nav>
 
-            <div class="flex flex-col flex-1 h-full p-3 gap-3 overflow-hidden">
+            <div class="flex flex-col flex-1 h-full p-3 gap-3 overflow-x-hidden overflow-y-scroll">
                 {% block content %}
                 {% endblock %}
+
             </div>
-
-
-            <!--<aside>-->
-            <!--  this is widget aside-->
-            <!---->
-            <!--  <div>-->
-            <!--    <h3>Trending</h3>-->
-            <!--  </div>-->
-            <!---->
-            <!--  <div>-->
-            <!--    <h3>Recent Posts</h4>-->
-            <!--  </div>-->
-            <!---->
-            <!--  <div>-->
-            <!--    <h3>Notifications</h3>-->
-            <!--  </div>-->
-            <!---->
-            <!--</aside>-->
         </main>
 
-        <a href="#body" class="fixed bottom-6 right-6 w-12 h-auto aspect-square rounded-full bg-red-500 p-2 animate-bounce">
-          <img  src="{% static 'teknotes/images/Arrow-Up.svg' %}" alt="Scroll Up">
-        </a>
     </div>
 
     <script>
@@ -159,7 +139,6 @@
                 }
             });
 
-            
         });
     </script>
 {% endblock %}
