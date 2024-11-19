@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "comments",
     "core",
     "course",
+    "clicks",
     "landing",
     "notes",
     "tags",
@@ -99,6 +100,9 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "core.context_processors.courses_list",
+                "core.context_processors.trending",
+                "core.context_processors.recent_posts",
+                "core.context_processors.notifications",
             ],
         },
     },
@@ -332,4 +336,3 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
-

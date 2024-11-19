@@ -8,7 +8,6 @@
     {% endfor %}
 
     {% for tag in tags %}
-        
         <a href="/search/?query={{ tag.name }}" class="ncshadow px-3 py-1 {% if query in tag.name %}bg-rose-700 text-white {%else%} bg-gray-50 text-gray-700 {%endif%} rounded-md shadow-lg whitespace-nowrap">{{ tag.name }}</a>
     {% endfor %}
 </div>

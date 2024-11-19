@@ -87,12 +87,18 @@
                     </a>
                 </div>
             </nav>
-
-            <div class="flex flex-col flex-1 h-full p-3 gap-3 overflow-x-hidden overflow-y-scroll">
+            <div class="flex flex-col flex-1 h-full p-3 gap-3 overflow-hidden">
                 {% block content %}
                 {% endblock %}
 
             </div>
+
+
+            <aside class="p-2">
+              {% include 'core/widgets/trending.html' %}
+              {% include 'core/widgets/notifications.html' %}
+              {% include 'core/widgets/recent_posts.html' %}
+            </aside>
         </main>
 
     </div>
