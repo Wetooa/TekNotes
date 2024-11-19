@@ -34,13 +34,14 @@ class NoteAdmin(admin.ModelAdmin):
 
     def __str__(self):
         return self.title
-    
+
+
 class NoteAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_by', 'created_at', 'modified_at', 'is_archived', 'is_private')
-
-class TextElement:
-    pass
-
-
-class FileElement:
-    pass
+    list_display = (
+        "title",
+        "created_by",
+        "created_at",
+        "modified_at",
+        "is_archived",
+        "is_private",
+    )
