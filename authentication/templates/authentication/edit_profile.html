@@ -18,13 +18,13 @@
                     <div class="flex gap-3 w-full">
                         <div id="avatar" class="cursor-pointer flex aspect-square h-full rounded-xl bg-[url('{{ profile.avatar.url }}')] bg-cover border-2 border-yellow-500 relative" onclick="document.getElementById('profileImageInput').click();">
                         </div>
-    
+
                         <div class="flex flex-col gap-3 w-full overflow-hidden">
                             <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl w-full">
                                 <img src="{% static 'teknotes/images/Image.svg' %}" alt="Image">
                                 <input type="file" accept="image/*" id="profileImageInput" name="avatar" class="w-full text-gray-700">
                             </div>
-                            
+
                             <script>
                                 $('#profileImageInput').change(function() {
                                     var input = this;
@@ -37,7 +37,7 @@
                                     }
                                 });
                             </script>
-        
+
                             <div class="flex gap-3 w-full">
                                 <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl flex-1">
                                     <img src="{% static 'teknotes/images/User_yellow.svg' %}" alt="User">
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="flex flex-col gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl">
                         <textarea id="bio" name="bio" class="placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 resize-none" rows="3" placeholder="Bio">{{ profile.bio }}</textarea>
                     </div>
@@ -59,8 +59,8 @@
                         <img src="{% static 'teknotes/images/Pin.svg' %}" alt="Pin">
                         <input type="text" id="location" name="location" class="placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 w-full" placeholder="Location" value="{{ profile.location }}">
                     </div>
-                </div>  
-            
+                </div>
+
                 <div class="flex p-6 gap-3 w-full border-t-2 border-gray-200 items-center">
                     <button class="px-4 py-2 text-gray-50 bg-rose-700 font-medium rounded-md w-full">Done</button>
                     <a href="javascript:history.back()" class="flex px-4 py-2 bg-gray-200 rounded-md w-full justify-center">

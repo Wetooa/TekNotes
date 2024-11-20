@@ -9,12 +9,12 @@
     <div class="flex flex-col bg-gray-50 overflow-hidden shadow-lg rounded-xl w-full h-full max-w-6xl max-h-[700px] self-center justify-self-center">
         <div class="flex {% if not note.course %} bg-gray-50 border-b-2 border-gray-200 {% else %} bg-{{ note.course.color }} {% endif %} px-4 py-2 gap-2 justify-between">
             <p class="text-gray-50 font-semibold text-lg">
-                
+
                 {{ note.course|default:'' }}
             </p>
             <a href="javascript:history.back()"><img src="{% if note.course %} {% static 'teknotes/images/Close.svg' %} {% else %} {% static 'teknotes/images/Close_black.svg' %} {% endif %}" alt="x"></a>
         </div>
-    
+
         <div class="flex flex-1 overflow-hidden">
             <div class="flex flex-col p-6 gap-3 flex-1 border-r-2 border-gray-200">
                 <div class="flex flex-col">
@@ -22,7 +22,7 @@
                         {{ note.title }}
                     </h1>
                 </div>
-                
+
                 <div class="flex flex-col gap-3">
                     <p class="text-gray-700">
                         {{ note.content | safe }}
@@ -79,17 +79,17 @@
                                 </button>
                             </form>
                         </div>
-                
+
                         <div class="flex gap-0.5 items-center">
                             <form action="{% url 'comments:dislike' note.id %}" method="post" class="note-form">
                                 {% csrf_token %}
                                 <button type="submit" class="flex items-center">
                                     <img src="{% if request.user.is_authenticated and note|is_disliked:request.user %}{% static 'teknotes/images/thumbed_down.svg' %}{% else %}{% static 'teknotes/images/thumb_down.svg' %}{% endif %}" alt="thumb_down">
-                                <p class="text-sm {% if request.user.is_authenticated and note|is_disliked:request.user %}text-yellow-500 font-medium{% else %}text-gray-500{% endif %}">{{ note.dislikes.count }}</p>
+                                    <p class="text-sm {% if request.user.is_authenticated and note|is_disliked:request.user %}text-yellow-500 font-medium{% else %}text-gray-500{% endif %}">{{ note.dislikes.count }}</p>
                                 </button>
                             </form>
                         </div>
-                
+
                         <div class="flex gap-0.5 items-center">
                             <img src="{% static 'teknotes/images/comment.svg' %}" alt="comment">
                             <p class="text-sm text-gray-500">{{ note.comments.count }}</p>
