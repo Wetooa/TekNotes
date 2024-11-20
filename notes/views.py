@@ -32,9 +32,7 @@ def tek_a_note(request):
     return render(request, "notes/tek_a_note.html", {"form": form})
 
 
-def note_detail(request, note_id):
-    note = get_object_or_404(Note, id=note_id)
-
+def save_note_clicks(note):
     ClickNote.objects.create(note=note)
 
     for tag in note.tags.all():
@@ -42,6 +40,12 @@ def note_detail(request, note_id):
 
     if note.course:
         ClickCourse.objects.create(course=note.course)
+
+
+def note_detail(request, note_id):
+    note = get_object_or_404(Note, id=note_id)
+
+    save_note_clicks(note)
 
     return render(request, "notes/note_detail.html", {"note": note})
 
