@@ -1,7 +1,7 @@
 {% load static %} {% load custom_filters %}
 
 <a
-  href="{% url 'advanced_search:search_by_course' course.id %}"
+  href="{% url 'advanced_search:view_course' course.id %}"
   class="group transition-all course-elem nav-elem flex rounded-xl px-4 py-3 justify-between bg-gray-50 hover:bg-{{ course.color }}"
 >
   <p class="course-text text-lg text-gray-700 group-hover:text-gray-50">
