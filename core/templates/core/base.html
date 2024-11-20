@@ -18,12 +18,12 @@
                 </a>
                 <form action="{% url 'advanced_search:search' %}" method="get" class="flex flex-1 max-w-[600px] px-4 py-2 rounded-xl bg-gray-200 transition-all hover:bg-gray-300 gap-3 cursor-text min-w-[0px]" onclick="this.querySelector('input[name=\'query\']').focus();">
                     <img src="{% static 'teknotes/images/Search.svg' %}" alt="Search">
-    
+
                     <!-- Search input -->
-                    <input name="query" class="placeholder-gray-500 w-full text-gray-700 bg-transparent border-none focus:outline-none min-w-[0px]" 
-                           type="text" value="{{ query }}" placeholder="Search" 
+                    <input name="query" class="placeholder-gray-500 w-full text-gray-700 bg-transparent border-none focus:outline-none min-w-[0px]"
+                           type="text" value="{{ query }}" placeholder="Search"
                            onclick="event.stopPropagation();"/>
-                    
+
                 </form>
             </div>
 
@@ -96,9 +96,9 @@
 
 
             <aside class="p-2 flex-1">
-              {% include 'core/widgets/trending.html' %}
-              {% include 'core/widgets/notifications.html' %}
-              {% include 'core/widgets/recent_posts.html' %}
+                {% include 'core/widgets/trending.html' %}
+                {% include 'core/widgets/notifications.html' %}
+                {% include 'core/widgets/recent_posts.html' %}
             </aside>
         </main>
 
@@ -124,13 +124,13 @@
                 }
             }
 
-            toggleVisibility(); 
+            toggleVisibility();
             $(window).resize(toggleVisibility);
 
             $('#add-course').hover(
                 function() {
                     $(this).find('img').attr('src', '{% static "teknotes/images/Add_white.svg" %}');
-                    
+
                 },
                 function() {
                     $(this).find('img').attr('src', '{% static "teknotes/images/Add.svg" %}');

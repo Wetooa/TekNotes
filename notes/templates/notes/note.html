@@ -8,7 +8,7 @@
                 <p class="{% if note.is_private %} text-{{ note.course.color }} {% else %} text-gray-50 {% endif %} font-semibold">{{ note.course }}</p>
             </div>
         {% endif %}
-    
+
         <div class="flex flex-col p-4 gap-3 max-h-80 overflow-hidden">
             <div class="flex flex-col gap-2">
                 <div class="flex gap-2 items-center">
@@ -29,50 +29,50 @@
                     {%endif%}
                 </h1>
             </div>
-    
+
             <div class="">
                 <p class="text-gray-700">
                     {%if query%}
-                    {% highlight note.content query "note_detail" %}
+                        {% highlight note.content query "note_detail" %}
                     {%else%}
-                    {{ note.content | safe}}
+                        {{ note.content | safe}}
                     {%endif%}
                 </p>
             </div>
         </div>
-    
+
         <div class="flex justify-between px-4 py-2 border-t-2 {% if note.is_private %} border-gray-500 border-dashed {% else %} border-gray-200 {% endif %}">
             <p class="text-gray-500 text-sm">{{ note.modified_at|timesince }} ago</p>
-        
+
             <div class="flex gap-3">
                 <div class="flex gap-0.5 items-center">
                     <img src="{% if request.user.is_authenticated and note|is_liked:request.user %}{% static 'teknotes/images/thumbed_up.svg' %}{% else %}{% static 'teknotes/images/thumb_up.svg' %}{% endif %}" alt="thumb_up">
                     <p class="text-sm {% if request.user.is_authenticated and note|is_liked:request.user %}text-yellow-500 font-medium{% else %}text-gray-500{% endif %}">{{ note.likes.count }}</p>
                 </div>
-        
+
                 <div class="flex gap-0.5 items-center">
                     <img src="{% if request.user.is_authenticated and note|is_disliked:request.user %}{% static 'teknotes/images/thumbed_down.svg' %}{% else %}{% static 'teknotes/images/thumb_down.svg' %}{% endif %}" alt="thumb_down">
                     <p class="text-sm {% if request.user.is_authenticated and note|is_disliked:request.user %}text-yellow-500 font-medium{% else %}text-gray-500{% endif %}">{{ note.dislikes.count }}</p>
                 </div>
-        
+
                 <div class="flex gap-0.5 items-center">
                     <img src="{% static 'teknotes/images/comment.svg' %}" alt="comment">
                     <p class="text-sm text-gray-500">{{ note.comments.count }}</p>
                 </div>
             </div>
         </div>
-    
+
         {% if note.tags.count > 0 %}
             <div class="flex flex-wrap p-4 gap-3 border-t-2 {% if note.is_private %} border-gray-500 border-dashed {% else %} border-gray-200 {% endif %}">
                 {% for tag in note.tags.all|slice:":3" %}
-                    <p class="text-sm  shadow px-3 py-1 rounded-md inline-block 
-                    {%if query in tag.name%} 
-                        bg-rose-700 text-white 
-                    {% elif note.is_private %} 
-                        bg-gray-50 
-                    {% else %} bg-gray-200 
-                    {% endif %} text-gray-700"> 
-                    {{tag}}  
+                    <p class="text-sm  shadow px-3 py-1 rounded-md inline-block
+                              {%if query in tag.name%}
+                                  bg-rose-700 text-white
+                              {% elif note.is_private %}
+                                  bg-gray-50
+                              {% else %} bg-gray-200
+                              {% endif %} text-gray-700">
+                        {{tag}}
                     </p>
                 {% endfor %}
             </div>

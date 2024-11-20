@@ -1,10 +1,10 @@
-from django.db import models
 from django.contrib import admin
 from django.contrib.auth.models import User
+from django.db import models
+from django_ckeditor_5.fields import CKEditor5Field
+
 from course.models import Course
 from tags.models import Tag
-
-from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Note(models.Model):
