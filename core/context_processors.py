@@ -5,7 +5,6 @@ from notes.models import Note
 from tags.models import Tag
 
 
-
 def courses_list(request):
     return {"your_courses": Course.objects.all().distinct()}
 
@@ -31,7 +30,7 @@ def trending(request):
 
     trending_notes = Note.objects.filter(
         id__in=[note["note"] for note in trending_notes]
-    )
+    ).prefetch_related("created_by")
 
     trending_tags = Tag.objects.filter(id__in=[tag["tag"] for tag in trending_tags])
 
