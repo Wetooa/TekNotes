@@ -21,7 +21,7 @@
         </div>
     </div>
 {% else %}
-    <a href="{% url 'advanced_search:search_by_course' course.id %}" class="group transition-all flex rounded-xl justify-between bg-gray-50 hover:bg-{{ course.color }} gap-4 {% if big %} px-6 py-4 shadow-lg {% else %} px-4 py-3 course-elem nav-elem {% endif %}">
+    <a href="{% url 'advanced_search:view_course' course.id %}" class="group transition-all flex rounded-xl justify-between bg-gray-50 hover:bg-{{ course.color }} gap-4 {% if big %} px-6 py-4 shadow-lg {% else %} px-4 py-3 course-elem nav-elem {% endif %}">
         <p class="text-gray-700 group-hover:text-gray-50 whitespace-nowrap {% if big %} text-2xl font-medium {% else %} course-text text-lg {% endif %}">{% if big %} {{ course }} {% else %} {{ course.code }} {% endif %}</p>
         <div class="rounded-full bg-{{ course.color }} group-hover:bg-gray-50 h-full min-h-7 aspect-square {% if big %} course-color {% endif %}"></div>
     </a>
