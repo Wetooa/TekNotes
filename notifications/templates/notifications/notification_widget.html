@@ -1,0 +1,29 @@
+{% load static %} {% load custom_filters %}
+
+<div class="relative">
+  <button id="notif-button" class="hover:bg-gray-200 transition-all w-10 rounded-full p-2 aspect-square ">
+    <img src="{% static 'teknotes/images/Bell.svg' %}" alt="notif-button" />
+  </button>
+
+  <div id="notif-dropdown" class="absolute top-10 bg-white rounded-lg p-4">
+    <h4>Notification</h4>
+    {% for notif in notifications  %}
+      <div>{{notif.get_notif }}</div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    var dropdown = $("#notif-dropdown");
+    dropdown.hide();
+
+    $("#notif-button").click(function() {
+      if (dropdown.is(":visible")) {
+        dropdown.hide(150);
+      } else {
+        dropdown.show(150);
+      }
+    })
+  })
+</script>

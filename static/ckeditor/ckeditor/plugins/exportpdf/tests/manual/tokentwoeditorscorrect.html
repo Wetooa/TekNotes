@@ -14,7 +14,7 @@
     exportPdfUtils.initManualTest();
 
     var editor1 = CKEDITOR.replace( 'editor1', exportPdfUtils.getDefaultConfig( 'manual', { height: 100 } ) ),
-    editor2 = CKEDITOR.replace( 'editor2', exportPdfUtils.getDefaultConfig( 'manual', { height: 100 } ) );
+        editor2 = CKEDITOR.replace( 'editor2', exportPdfUtils.getDefaultConfig( 'manual', { height: 100 } ) );
 
     editor1.on( 'instanceReady', function() {
         if ( !CKEDITOR.config.exportPdf_tokenUrl ) {
