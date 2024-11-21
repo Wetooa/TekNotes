@@ -3,10 +3,10 @@ from authentication.models import User
 
 
 class NotificationType(models.TextChoices):
-    LIKE_NOTE = "like", "Liked your note"
-    LIKE_COMMENT = "like", "Liked your comment"
-    COMMENT_NOTE = "comment", "Commented on your post"
-    FOLLOW_USER = "follow", "Followed you"
+    LIKE_NOTE = "like_note", "Liked your note"
+    LIKE_COMMENT = "like_comment", "Liked your comment"
+    COMMENT_NOTE = "comment_note", "Commented on your post"
+    FOLLOW_USER = "follow_user", "Followed you"
 
 
 class Notification(models.Model):
@@ -25,7 +25,8 @@ class Notification(models.Model):
         choices=NotificationType.choices,
         default=NotificationType.LIKE_NOTE,
     )
-    object_id = models.PositiveIntegerField(null=True, blank=True)  # Related object ID
+
+    object_id = models.PositiveIntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)
 
@@ -34,6 +35,17 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"{self.sender} {self.get_notification_type_display()}"
+
+    def get_notif(self):
+        if self.notification_type == NotificationType.LIKE_NOTE:
+            return f"{self.sender} liked your note!"
+        if self.notification_type == NotificationType.LIKE_COMMENT:
+            return f"{self.sender} liked your comment!"
+        elif self.notification_type == NotificationType.COMMENT_NOTE:
+            return f"{self.sender} commented on your note!"
+        elif self.notification_type == NotificationType.FOLLOW_USER:
+            return f"{self.sender} followed you!"
+        return ""
 
     def get_url(self):
         if self.notification_type == NotificationType.LIKE_NOTE:

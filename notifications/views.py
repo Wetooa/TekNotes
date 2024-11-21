@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from notifications.models import Notification, NotificationType
+
 # Create your views here.
 
 
