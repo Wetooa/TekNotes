@@ -5,8 +5,8 @@
     <img src="{% static 'teknotes/images/Bell.svg' %}" alt="notif-button" />
   </button>
 
-  <div id="notif-dropdown" class="absolute top-10 bg-white rounded-lg p-4">
-    <h4>Notification</h4>
+  <div id="notif-dropdown" class="absolute top-10 bg-white rounded-lg w-60">
+    <h4 class="bg-red-400">Notification</h4>
     {% for notif in notifications  %}
       <div>{{notif.get_notif }}</div>
     {% endfor %}

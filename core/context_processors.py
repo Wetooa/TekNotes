@@ -52,5 +52,8 @@ def recent_posts(request):
 
 
 def notifications(request):
+    if not request.user.is_authenticated:
+        return {}
+
     notifications = Notification.objects.filter(user=request.user)
     return {"notifications": notifications}
