@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from authentication.models import User
 
 
@@ -36,24 +37,24 @@ class Notification(models.Model):
     def __str__(self):
         return f"{self.sender} {self.get_notification_type_display()}"
 
-    def get_notif(self):
+    def get_content(self):
         if self.notification_type == NotificationType.LIKE_NOTE:
-            return f"{self.sender} liked your note!"
+            return "liked your note!"
         if self.notification_type == NotificationType.LIKE_COMMENT:
-            return f"{self.sender} liked your comment!"
+            return "liked your comment!"
         elif self.notification_type == NotificationType.COMMENT_NOTE:
-            return f"{self.sender} commented on your note!"
+            return "commented on your note!"
         elif self.notification_type == NotificationType.FOLLOW_USER:
-            return f"{self.sender} followed you!"
+            return "followed you!"
         return ""
 
     def get_url(self):
         if self.notification_type == NotificationType.LIKE_NOTE:
-            return f"/note_detail/{self.object_id}/"
+            return reverse("notes:note_detail", args=[self.object_id])
         if self.notification_type == NotificationType.LIKE_COMMENT:
-            return f"/note_detail/{self.object_id}/"
+            return reverse("notes:note_detail", args=[self.object_id])
         elif self.notification_type == NotificationType.COMMENT_NOTE:
-            return f"/note_detail/{self.object_id}/"
+            return reverse("notes:note_detail", args=[self.object_id])
         elif self.notification_type == NotificationType.FOLLOW_USER:
-            return f"/profile/{self.sender.id}/"
+            return reverse("authentication:profile", args=[self.object_id])
         return "#"
