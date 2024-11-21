@@ -1,7 +1,7 @@
 from django.urls import path,include
-
-from . import views
+from .views import *
 
 urlpatterns = [
-    path('', views.lobby)
+    path('', CreateRoom.as_view(), name="create-room"),
+    path('<str:room_name>/<str:username>/', MessageView.as_view(),  name='room'),
 ]

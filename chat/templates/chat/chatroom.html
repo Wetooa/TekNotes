@@ -1,0 +1,100 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="parent">
+    <nav class="chatNav">
+        <a href="">
+
+        </a>
+        {% for user in users %}
+        <a href="/user/{{ user.id }}" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/user/'|add:user.id|stringformat:'s' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
+            <img src="{% static 'teknotes/images/User.svg' %}" alt="{{ user.username }}">
+            <p class="nav-text text-lg text-gray-700 font-medium">{{ user.username }}</p>
+        </a>
+        {% endfor %}
+    </nav>
+    
+    <div class="child" id="childSearch" >
+        <h1 style="color: white;">Enter Room</h1>
+        <form action="" id="roomForm" method="POST" onsubmit="hideChild()">
+            {% csrf_token %}
+            <label for="" style="color: white;">Username</label><br>
+            <input type="text" placeholder="Username" name="username" required><br>
+            <label for="" style="color: white;">Room name</label><br>
+            <input type="text" placeholder="room name" name="room" required><br>
+            <center><button type="submit">Submit</button></center><br>
+        </form>
+    </div>
+    
+</div>
+
+
+<style>
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.chatNav{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: start;
+    width: 20% !important;
+    height: 100vh;
+    background-color: #001825;
+}
+
+.parent {
+    background-color: transparent;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.child {
+    display: flex;
+    background-color: #001825;
+    height: 80vh;
+    width: 50%;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 100px;
+}
+
+form {
+    width: 80%;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid rgb(0, 21, 43);
+    width: 100%;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #843e00;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+}
+
+button:hover {
+    padding: 15px;
+    transition: 0.8s;
+}
+</style> 
+
+{% endblock %}
