@@ -7,8 +7,8 @@
         <a href="">
 
         </a>
-        {% for user in users %}
-        <a href="/user/{{ user.id }}" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/user/'|add:user.id|stringformat:'s' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
+        {% for user in room.users %}
+        <a href="javascript:void(0);" onclick="createOrJoinRoom('{{ user.username }}', '{{ user.id }}')" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/user/'|add:user.id|stringformat:'s' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
             <img src="{% static 'teknotes/images/User.svg' %}" alt="{{ user.username }}">
             <p class="nav-text text-lg text-gray-700 font-medium">{{ user.username }}</p>
         </a>
@@ -17,7 +17,7 @@
     
     <div class="child" id="childSearch" >
         <h1 style="color: white;">Enter Room</h1>
-        <form action="" id="roomForm" method="POST" onsubmit="hideChild()">
+        <form action="" id="roomForm" method="POST">
             {% csrf_token %}
             <label for="" style="color: white;">Username</label><br>
             <input type="text" placeholder="Username" name="username" required><br>
@@ -28,6 +28,26 @@
     </div>
     
 </div>
+
+<script>
+    function createOrJoinRoom(username, userId) {
+        $.ajax({
+            type: 'POST',
+            url: '{% url "chat:create-room" %}', // URL to your create room view
+            data: {
+                'username': username,
+                'room': userId, // Assuming room name is based on user ID
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(response) {
+                window.location.href = response.redirect_url; // Redirect to the chat room
+            },
+            error: function(response) {
+                console.error('An error occurred:', response);
+            }
+        });
+    }
+</script>
 
 
 <style>
