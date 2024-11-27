@@ -3,30 +3,24 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.contrib.auth.models import User
 from chat.models import *
-# Create your views here.
+
 
 
 class ChatRoom(LoginRequiredMixin, View):
     def get(self, request):
-        user = request.user
-        room_ids= ChatUsers.objects.filter(users=user).values_list('room', flat=True)
-        print("Rooms avail: ", room_ids)
-        users = [] 
-        for(room_id) in room_ids:
-            room = (Room.objects.get(id=room_id))
-            users.append(room.users.exclude())
-        room = Room.objects.get(id=room_id)
+        user = request.user   
+        rooms = Room.objects.filter(users=user)
+        rooms_with_users = []  
 
         for room in rooms:
-            room_user = (room.users).first()
-            room_users.append(room_user)
-            
+            other_users = room.users.exclude(id=user.id)  
+            rooms_with_users.append({'room': room, 'users': other_users})
+
         context = {
-            'rooms': rooms,
-            'room_users': room_users,
+            'rooms_with_users': rooms_with_users,  
         }
-        print("Rooms Users: ", room_users)
         return render(request, 'chat/chatroom.html', context)
+    
     
     def post(self, request):
         sender = request.user
@@ -40,7 +34,7 @@ class ChatRoom(LoginRequiredMixin, View):
             
 
         room = self.Create_or_Enter_room(sender, receiver)
-        return redirect('chat:room', UUID=room.id, sender=sender.username)       
+        return redirect('chat:room', UUID=room.id)       
     
     def Create_or_Enter_room(self, sender, receiver):
         rooms_with_sender = ChatUsers.objects.filter(users=sender).values_list('room', flat=True)
@@ -57,8 +51,7 @@ class ChatRoom(LoginRequiredMixin, View):
             print("Room Used: ", room)
         else:
             room = Room.objects.create(room_name=f"{sender}_{receiver}")
-            Room.objects.create(users=sender, room=room)
-            Room.objects.create(users=receiver, room=room)
+            room.users.add(sender, receiver)
             ChatUsers.objects.create(room=room, users=sender)
             ChatUsers.objects.create(room=room, users=receiver)
             print("Created Room: ", room," Sender: ", sender, " Receiver: ", receiver)
@@ -67,14 +60,16 @@ class ChatRoom(LoginRequiredMixin, View):
 
         
 class MessageView(View):
-     def get(self, request, UUID, sender):
+     def get(self, request, UUID):
+        sender = request.user
         get_room = Room.objects.get(id=UUID)
         get_messages = Message.objects.filter(room=get_room)
         receiver = ChatUsers.objects.filter(room=get_room).exclude(users=sender).values_list('users', flat=True)
+        
         context = {
             'messages': get_messages,
             'sender': sender,
-            'room_name': get_room.room_name,
+            'room_name': UUID,
             'receiver': receiver
         }
         return render(request, 'chat/message.html', context)

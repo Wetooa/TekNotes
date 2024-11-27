@@ -39,7 +39,7 @@ CHANNEL_LAYERS = {
     }
 }
 
-SITE_ID = 2
+SITE_ID = 4
 
 
 # Application definition
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     "advanced_search",
     "authentication",
     "chat",
@@ -63,7 +64,6 @@ INSTALLED_APPS = [
     "tags",
     "django_ckeditor_5",
     "channels",
-    "django.contrib.sites",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",

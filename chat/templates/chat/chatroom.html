@@ -4,21 +4,22 @@
 {% block content %}
 <div class="parent">
     <nav class="chatNav">
-        <h1>Chat</h1>
-    {% for user in room_users %}
-        <a href="{% url 'chat:chatroom' user.id %}">{{ user.username }}</a>
+        <h1 style='text-align: center;border-style:solid; border-width: 1px; border-color: black; padding: 5px;'>Chat</h1>
+    {% for pair in rooms_with_users %}
+        {% for user in pair.users %}
+        <form action='' method="post" style="display:inline;">
+            {% csrf_token %} <!-- VERY IMPORTANT for security -->
+            <input type="hidden" name="receiver" value="{{ user.username }}">
+            <a href="#" onclick="this.parentNode.submit(); return false;">
+                {{ user.username }}
+            </a>
+        </form>
+        {% endfor %}
     {% endfor %}
     </nav>
-    
-    <div class="child" id="childSearch" >
-        <center><h2> Create? </h2></center>
-        <form method="post" action="">
-            {% csrf_token %}
-            <input type="hidden" name="sender" value="{{ request.user.id }}">
-            <input type="text" name="receiver" placeholder="Enter receiver username" required>
-            <button type="submit">Create Room</button>
-        </form>
-    </div>
+
+    {%block ChatMessage%}
+    {%endblock%}
     
 </div>
 
@@ -44,7 +45,7 @@
     height: 100vh;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
 }

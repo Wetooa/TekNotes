@@ -51,7 +51,8 @@
     document.getElementById('message-form').addEventListener('submit', function(event){
         event.preventDefault();
         const message = document.getElementById('msg').value;
-        if(message.trim()){    
+        if(message){  
+            try{  
             socket.send(
                 JSON.stringify({
                     'message': message,
@@ -59,7 +60,11 @@
                     'sender': '{{sender}}',
                     'receiver': '{{receiver}}'
                 })
-            )
+            );
+            }catch(error){
+                console.error('Error sending message over WebSocket:', error);
+            }
+            document.getElementById('msg').value = '';
         }
     });
             
@@ -92,7 +97,26 @@
     };
 
     socket.onclose = (event) => {
-        console.log("WebSocket connection closed!");
+        console.log("WebSocket connection closed. Attempting to reconnect...");
+        setTimeout(function(){
+            const websocketProtocol = window.location.protocol === "https:"? "wss" : "ws";
+            const wsEndpoint = `<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics>
+            <mrow><mrow><mi>w</mi><mi>e</mi><mi>b</mi><mi>s</mi><mi>o</mi><mi>c</mi><mi>k</mi><mi>e</mi><mi>t</mi><mi>P</mi><mi>r</mi>
+            <mi>o</mi><mi>t</mi><mi>o</mi><mi>c</mi><mi>o</mi><mi>l</mi></mrow><mo>:</mo><mi mathvariant="normal">/</mi><mi mathvariant="normal">
+            /</mi></mrow><annotation encoding="application/x-tex">{websocketProtocol}://</annotation></semantics></math></span><span class="katex-html" 
+            aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal" 
+            style="margin-right:0.02691em;">w</span><span class="mord mathnormal">e</span><span class="mord mathnormal">b</span><span class="mord 
+            mathnormal">soc</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">e</span><span 
+            class="mord mathnormal" style="margin-right:0.13889em;">tP</span><span class="mord mathnormal">ro</span><span class="mord mathnormal">t
+            </span><span class="mord mathnormal">oco</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span></span>
+            <span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;">
+            </span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">//</span></span>
+            </span></span>{window.location.host}/ws/chat/{{room_name}}/`;
+            const newSocket = new WebSocket(wsEndpoint);
+            // Reassign the new socket to your original 'ocket' variable
+            socket = newSocket;
+            // Rebind events if necessary
+        }, 5000); // Attempt to reconnect every 5 seconds
     };
 </script>
 <style>
