@@ -17,7 +17,7 @@
                             <p class="text-xl text-gray-500"> {{ profile.user.email }} </p>
                         </div>
                         {% if request.user == profile.user %}
-                            <a href="{% url 'auth:edit_profile' %}" class="flex bg-rose-700 rounded-xl gap-4 px-4 py-2">
+                            <a href="{% url 'authentication:edit_profile' %}" class="flex bg-rose-700 rounded-xl gap-4 px-4 py-2">
                                 <p class="new-note-text text-gray-50 font-medium text-lg">Edit profile</p>
                             </a>
                         {% endif %}
@@ -36,17 +36,17 @@
             </div>
 
             <div class="flex flex-wrap w-full p-3 items-start">
-                <a href="{% url 'auth:profile' profile.user.id %}" class="transition-all items-center flex flex-1 px-4 py-3 gap-2 rounded-l-xl justify-center border-2 border-gray-200 {% if '/notes/' in request.path %} bg-rose-700 text-gray-50 hover:shadow-lg {% else %} text-gray-700 font-medium hover:bg-gray-100 {% endif %}">
+                <a href="{% url 'authentication:profile' profile.user.id %}" class="transition-all items-center flex flex-1 px-4 py-3 gap-2 rounded-l-xl justify-center border-2 border-gray-200 {% if '/notes/' in request.path %} bg-rose-700 text-gray-50 hover:shadow-lg {% else %} text-gray-700 font-medium hover:bg-gray-100 {% endif %}">
                     <img src="{% if '/notes/' in request.path %} {% static 'teknotes/images/notebook_white.svg' %} {% else %} {% static 'teknotes/images/notebook.svg' %} {% endif %}" alt="Notebook">
                     <p class="text-xl">Notebook</p>
                     <div class="flex aspect-square h-6 bg-gray-200 rounded-md items-center justify-center text-gray-500 ml-2">{{ profile.user.notes.count }}</div>
                 </a>
-                <a href="{% url 'auth:profile_likes' profile.user.id %}" class="transition-all items-center flex flex-1 px-4 py-3 gap-2 justify-center border-2 border-l-0 border-gray-200 {% if '/likes/' in request.path %} bg-rose-700 text-gray-50 hover:shadow-lg {% else %} text-gray-700 font-medium hover:bg-gray-100 {% endif %}">
+                <a href="{% url 'authentication:profile_likes' profile.user.id %}" class="transition-all items-center flex flex-1 px-4 py-3 gap-2 justify-center border-2 border-l-0 border-gray-200 {% if '/likes/' in request.path %} bg-rose-700 text-gray-50 hover:shadow-lg {% else %} text-gray-700 font-medium hover:bg-gray-100 {% endif %}">
                     <img src="{% if '/likes/' in request.path %} {% static 'teknotes/images/thumb_up_white.svg' %} {% else %} {% static 'teknotes/images/thumb_up_black.svg' %} {% endif %}" alt="Like">
                     <p class="text-xl">Likes</p>
                     <div class="flex aspect-square h-6 bg-gray-200 rounded-md items-center justify-center text-gray-500 ml-2">{{ profile.user.likes.count }}</div>
                 </a>
-                <a href="{% url 'auth:profile_courses' profile.user.id %}" class="transition-all items-center flex flex-1 px-4 py-3 gap-2 rounded-r-xl justify-center border-2 border-l-0 border-gray-200 {% if '/courses/' in request.path %} bg-rose-700 text-gray-50 hover:shadow-lg {% else %} text-gray-700 font-medium hover:bg-gray-100 {% endif %}">
+                <a href="{% url 'authentication:profile_courses' profile.user.id %}" class="transition-all items-center flex flex-1 px-4 py-3 gap-2 rounded-r-xl justify-center border-2 border-l-0 border-gray-200 {% if '/courses/' in request.path %} bg-rose-700 text-gray-50 hover:shadow-lg {% else %} text-gray-700 font-medium hover:bg-gray-100 {% endif %}">
                     <img src="{% if '/courses/' in request.path %} {% static 'teknotes/images/Course_white.svg' %} {% else %} {% static 'teknotes/images/Course.svg' %} {% endif %}" alt="Like">
                     <p class="text-xl">Courses</p>
                     <div class="flex aspect-square h-6 bg-gray-200 rounded-md items-center justify-center text-gray-500 ml-2">{{ profile.user.courses.count }}</div>

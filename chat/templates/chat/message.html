@@ -56,7 +56,8 @@
                 JSON.stringify({
                     'message': message,
                     'room_name': '{{room_name}}',
-                    'sender': '{{user}}',
+                    'sender': '{{sender}}',
+                    'receiver': '{{receiver}}'
                 })
             )
         }
@@ -71,13 +72,13 @@
         var message = messageData['message'];
 
         // empty message input field after message has been sent
-        if (sender == '{{user}}'){
+        if (sender == '{{sender}}'){
             document.getElementById('msg').value = '';
         }
 
         // Here's where we append the message to the chatbox.
         var messageDiv = document.querySelector('.message');
-        if (sender != '{{user}}') { // assuming you have a variable `currentUser` to hold the current user's name
+        if (sender != '{{sender}}') { // assuming you have a variable `currentUser` to hold the current user's name
             messageDiv.innerHTML += '<div class="receive"><p style="color: #000;">' + message + '<strong>-' + sender + '</strong></p></div>';
         } else {
             messageDiv.innerHTML += '<div class="send"><p style="color: #000;">' + message + '</p></div>';

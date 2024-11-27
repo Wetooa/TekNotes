@@ -4,59 +4,28 @@
 {% block content %}
 <div class="parent">
     <nav class="chatNav">
-        <a href="">
-
-        </a>
-        {% for user in room.users %}
-        <a href="javascript:void(0);" onclick="createOrJoinRoom('{{ user.username }}', '{{ user.id }}')" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/user/'|add:user.id|stringformat:'s' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
-            <img src="{% static 'teknotes/images/User.svg' %}" alt="{{ user.username }}">
-            <p class="nav-text text-lg text-gray-700 font-medium">{{ user.username }}</p>
-        </a>
-        {% endfor %}
+        <h1>Chat</h1>
+    {% for user in room_users %}
+        <a href="{% url 'chat:chatroom' user.id %}">{{ user.username }}</a>
+    {% endfor %}
     </nav>
     
     <div class="child" id="childSearch" >
-        <h1 style="color: white;">Enter Room</h1>
-        <form action="" id="roomForm" method="POST">
+        <center><h2> Create? </h2></center>
+        <form method="post" action="">
             {% csrf_token %}
-            <label for="" style="color: white;">Username</label><br>
-            <input type="text" placeholder="Username" name="username" required><br>
-            <label for="" style="color: white;">Room name</label><br>
-            <input type="text" placeholder="room name" name="room" required><br>
-            <center><button type="submit">Submit</button></center><br>
+            <input type="hidden" name="sender" value="{{ request.user.id }}">
+            <input type="text" name="receiver" placeholder="Enter receiver username" required>
+            <button type="submit">Create Room</button>
         </form>
     </div>
     
 </div>
 
-<script>
-    function createOrJoinRoom(username, userId) {
-        $.ajax({
-            type: 'POST',
-            url: '{% url "chat:create-room" %}', // URL to your create room view
-            data: {
-                'username': username,
-                'room': userId, // Assuming room name is based on user ID
-                'csrfmiddlewaretoken': '{{ csrf_token }}'
-            },
-            success: function(response) {
-                window.location.href = response.redirect_url; // Redirect to the chat room
-            },
-            error: function(response) {
-                console.error('An error occurred:', response);
-            }
-        });
-    }
-</script>
 
 
 <style>
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
 
 .chatNav{
     display: flex;
@@ -66,6 +35,8 @@
     width: 20% !important;
     height: 100vh;
     background-color: #001825;
+    color: white;
+    text-size: 20px;
 }
 
 .parent {
