@@ -2,6 +2,7 @@ from django.db.models import Count
 from course.models import Course
 from clicks.models import ClickNote, ClickTag, ClickCourse
 from notes.models import Note
+from notifications.models import Notification
 from tags.models import Tag
 
 
@@ -51,4 +52,8 @@ def recent_posts(request):
 
 
 def notifications(request):
-    return {}
+    if not request.user.is_authenticated:
+        return {}
+
+    notifications = Notification.objects.filter(user=request.user)
+    return {"notifications": notifications}

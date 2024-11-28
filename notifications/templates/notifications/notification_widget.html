@@ -1,0 +1,37 @@
+{% load static %} {% load custom_filters %}
+
+<div class="relative">
+  <button id="notif-button" class="hover:bg-gray-200 transition-all w-10 rounded-full p-2 aspect-square">
+    <img src="{% static 'teknotes/images/Bell.svg' %}" alt="notif-button" />
+  </button>
+
+  <div id="notif-dropdown" class="absolute top-10 bg-white rounded-lg w-60 overflow-hidden">
+    <h4 class="bg-red-400 p-2">Notification</h4>
+    {% for notif in notifications  %}
+    <div  class="border-t border-gray-400 p-2 flex">
+      <a href="{% url 'authentication:profile' notif.sender.id %}">
+        <img class="h-6 w-6 aspect-square rounded-full" src="{{ notif.sender.profile.avatar.url }}" alt="Profile Image">
+        <p class="text-lg font-bold">
+        {{ notif.sender }}
+        </p>
+      </a>
+      <a href={{ notif.get_url }}>{{ notif.get_content }}</a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    var dropdown = $("#notif-dropdown");
+    dropdown.hide();
+
+    $("#notif-button").click(function() {
+      if (dropdown.is(":visible")) {
+        dropdown.hide(150);
+      } else {
+        dropdown.show(150);
+      }
+    })
+  })
+</script>
