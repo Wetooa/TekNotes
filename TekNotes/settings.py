@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -118,11 +121,11 @@ WSGI_APPLICATION = "TekNotes.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "teknotes_db",
-        "USER": "teknotes_user",
-        "PASSWORD": "123456789",
-        "HOST": "wetooa.me",
-        "PORT": "8002",
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT"),
     }
 }
 
@@ -166,8 +169,25 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-MEDIA_URL = "media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+DEFAULT_FILE_STORAGE = "storages.backends.sftpstorage.SFTPStorage"
+
+SFTP_STORAGE_HOST = "wetooa.me"
+SFTP_STORAGE_ROOT = "/home/wetooa/Documents/code/projects/TekNotes/media"
+
+SFTP_STORAGE_PARAMS = {
+    "username": "wetooa",
+    "password": "dfjkkjfd",
+    "port": 9022,
+    "allow_agent": False,
+    "look_for_keys": False,
+}
+
+MEDIA_URL = "http://wetooa.me:8003/"
+MEDIA_ROOT = "http://wetooa.me:8003/"
+
+
+# MEDIA_URL = "media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 customColorPalette = [
     {"color": "hsl(4, 90%, 58%)", "label": "Red"},
