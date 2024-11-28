@@ -169,8 +169,25 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-MEDIA_URL = "media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+DEFAULT_FILE_STORAGE = "storages.backends.sftpstorage.SFTPStorage"
+
+SFTP_STORAGE_HOST = "wetooa.me"
+SFTP_STORAGE_ROOT = "/home/wetooa/Documents/code/projects/TekNotes/media"
+
+SFTP_STORAGE_PARAMS = {
+    "username": "wetooa",
+    "password": "dfjkkjfd",
+    "port": 9022,
+    "allow_agent": False,
+    "look_for_keys": False,
+}
+
+MEDIA_URL = "http://wetooa.me:8003/"
+MEDIA_ROOT = "http://wetooa.me:8003/"
+
+
+# MEDIA_URL = "media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 customColorPalette = [
     {"color": "hsl(4, 90%, 58%)", "label": "Red"},

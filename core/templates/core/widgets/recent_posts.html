@@ -13,7 +13,7 @@
         </h4>
         <p class="mt-2 text-gray-700 text-sm">
           {% if note.content %}
-            {{ note.content|truncatewords:30 }}
+            {{ note.content| safe | truncatewords:30 }}
           {% else %}
             No content available
           {% endif %}
