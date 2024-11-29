@@ -1,7 +1,6 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
-from chat.models import *
 
 class ChatConsumer(AsyncWebsocketConsumer):
     def close_code_debugger(self, close_code):
@@ -19,8 +18,20 @@ class ChatConsumer(AsyncWebsocketConsumer):
             print(f"WebSocket disconnected: Unknown close code {close_code}.")
             
     async def connect(self):
-        self.room_name = f"room_{self.scope['url_route']['kwargs']['room_name']}"
-        self.room_group_name = 'chat_%s' % self.room_name
+        from chat.models import Room
+
+        self.room_uuid = self.scope['url_route']['kwargs']['room_uuid']
+        print("room we check: ", self.room_uuid)
+
+        try:
+            Room.objects.get(id=self.room_uuid)
+        except Room.DoesNotExist:
+            print(f"Room with UUID {self.room_uuid} does not exist. Connection rejected.")
+            await self.close()  # Close the connection
+            return
+        
+        self.room_group_name = f"chat_{self.room_uuid}"
+        print("group name to fix? ", self.room_group_name)
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
 
@@ -53,7 +64,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
       
     @database_sync_to_async 
     def create_message(self, data):
-        get_room_by_name = Room.objects.get(UUID=data['room_name'])
+        from chat.models import Room,Message
+        get_room_by_name = Room.objects.get(id=data['room_name'])
         if not Message.objects.filter(message=data['message']).exists():
             new_message = Message(room=get_room_by_name, sender=data['sender'], message=data['message'])
             new_message.save()

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.contrib.auth.models import User
-from chat.models import *
+from .models import *
 
 
 
@@ -64,8 +64,8 @@ class MessageView(View):
         sender = request.user
         get_room = Room.objects.get(id=UUID)
         get_messages = Message.objects.filter(room=get_room)
-        receiver = ChatUsers.objects.filter(room=get_room).exclude(users=sender).values_list('users', flat=True)
-        
+        Freceiver = ChatUsers.objects.filter(room=get_room).exclude(users=sender).values_list('users', flat=True)
+        receiver = Freceiver.first()
         context = {
             'messages': get_messages,
             'sender': sender,

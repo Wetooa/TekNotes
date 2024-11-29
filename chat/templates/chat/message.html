@@ -43,16 +43,19 @@
         var chatContainer = document.getElementById("chatContainer");
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
-
+    console.log("Room name:", "{{ room_name }}");
+    console.log("Sender:", "{{ sender }}");
+    console.log("Receiver:", "{{ receiver }}");
     const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
     const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/chat/{{room_name}}/`;
+    console.log("WebSocket endpoint:", wsEndpoint);
     const socket = new WebSocket(wsEndpoint);
 
     document.getElementById('message-form').addEventListener('submit', function(event){
         event.preventDefault();
         const message = document.getElementById('msg').value;
         if(message){  
-            try{  
+            try{
             socket.send(
                 JSON.stringify({
                     'message': message,
@@ -67,6 +70,10 @@
             document.getElementById('msg').value = '';
         }
     });
+    
+    socket.onerror = function(event) {
+        console.error("WebSocket error observed:", event);
+    };
             
     // response from consumer on server
     socket.addEventListener("message", (event) => {
