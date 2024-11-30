@@ -24,7 +24,9 @@ class ChatRoom(LoginRequiredMixin, View):
     
     def post(self, request):
         sender = request.user
+        print("this is a sender: ", sender)
         receiver_username = request.POST.get('receiver')
+        print("This is the receiver", receiver_username)
         try:
             receiver = User.objects.get(username=receiver_username)
             print("The receiver exists: ", receiver)
@@ -37,6 +39,7 @@ class ChatRoom(LoginRequiredMixin, View):
         return redirect('chat:room', UUID=room.id)       
     
     def Create_or_Enter_room(self, sender, receiver):
+        print("This is sender: ", sender, "this is the receiver: ", receiver)
         rooms_with_sender = ChatUsers.objects.filter(users=sender).values_list('room', flat=True)
         print("Rooms with sender: ", rooms_with_sender)
         rooms_with_receiver = ChatUsers.objects.filter(users=receiver).values_list('room', flat=True)

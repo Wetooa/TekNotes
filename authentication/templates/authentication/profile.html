@@ -33,6 +33,13 @@
                     </div>
 
                 </div>
+                {%if request.user != profile.user %}
+                <form id="message-form" method="post" action="{% url 'chat:create-room' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="receiver" value="{{ profile.user.username }}">
+                    <a href="#" onclick="document.getElementById('message-form').submit(); return false;" class="text-gray-700 text-lg">Message</a>
+                </form>
+                {% endif %}
             </div>
 
             <div class="flex flex-wrap w-full p-3 items-start">
