@@ -118,16 +118,24 @@ WSGI_APPLICATION = "TekNotes.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
+if not DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("DB_NAME"),
+            "USER": os.getenv("DB_USER"),
+            "PASSWORD": os.getenv("DB_PASSWORD"),
+            "HOST": os.getenv("DB_HOST"),
+            "PORT": os.getenv("DB_PORT"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 
 # Password validation
@@ -169,25 +177,24 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-DEFAULT_FILE_STORAGE = "storages.backends.sftpstorage.SFTPStorage"
 
-SFTP_STORAGE_HOST = "wetooa.me"
-SFTP_STORAGE_ROOT = "/home/wetooa/Documents/code/projects/TekNotes/media"
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = "storages.backends.sftpstorage.SFTPStorage"
+    SFTP_STORAGE_HOST = "wetooa.me"
+    SFTP_STORAGE_ROOT = "/home/wetooa/Documents/code/projects/TekNotes/media"
+    SFTP_STORAGE_PARAMS = {
+        "username": "wetooa",
+        "password": "dfjkkjfd",
+        "port": 9022,
+        "allow_agent": False,
+        "look_for_keys": False,
+    }
+    MEDIA_URL = "http://wetooa.me:8003/"
+    MEDIA_ROOT = "http://wetooa.me:8003/"
+else:
+    MEDIA_URL = "media/"
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-SFTP_STORAGE_PARAMS = {
-    "username": "wetooa",
-    "password": "dfjkkjfd",
-    "port": 9022,
-    "allow_agent": False,
-    "look_for_keys": False,
-}
-
-MEDIA_URL = "http://wetooa.me:8003/"
-MEDIA_ROOT = "http://wetooa.me:8003/"
-
-
-# MEDIA_URL = "media/"
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 customColorPalette = [
     {"color": "hsl(4, 90%, 58%)", "label": "Red"},
