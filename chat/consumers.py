@@ -20,18 +20,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         from chat.models import Room
 
-        self.room_uuid = self.scope['url_route']['kwargs']['room_uuid']
-        print("room we check: ", self.room_uuid)
+        self.room_name = self.scope['url_route']['kwargs']['room_name']
+        print("room we check: ", self.room_name)
 
         try:
-            Room.objects.get(id=self.room_uuid)
+            Room.objects.get(id=self.room_name)
         except Room.DoesNotExist:
-            print(f"Room with UUID {self.room_uuid} does not exist. Connection rejected.")
+            print(f"Room with room name {self.room_name} does not exist. Connection rejected.")
             await self.close()  # Close the connection
             return
         
-        self.room_group_name = f"chat_{self.room_uuid}"
-        print("group name to fix? ", self.room_group_name)
+        self.room_group_name = "room_%s" % self.room_name
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
 
@@ -43,13 +42,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # The receive method is automatically triggered to handle the incoming message.
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        message = text_data_json
+        message = text_data_json['message']
         # Trigger send_message method
         await self.channel_layer.group_send(
             self.room_group_name,
             {
                 'type': 'send_message',
-                'message': text_data_json,
+                'message': message,
             }
         )
     async def send_message(self, event):

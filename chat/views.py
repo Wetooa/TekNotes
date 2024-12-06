@@ -14,11 +14,13 @@ class ChatRoom(LoginRequiredMixin, View):
 
         for room in rooms:
             other_users = room.users.exclude(id=user.id)  
+            print("room name: ", room.room_name)
             rooms_with_users.append({'room': room, 'users': other_users})
 
         context = {
             'rooms_with_users': rooms_with_users,  
         }
+        
         return render(request, 'chat/chatroom.html', context)
     
     
@@ -36,7 +38,7 @@ class ChatRoom(LoginRequiredMixin, View):
             
 
         room = self.Create_or_Enter_room(sender, receiver)
-        return redirect('chat:room', UUID=room.id)       
+        return redirect('chat:room', room_name=room)       
     
     def Create_or_Enter_room(self, sender, receiver):
         print("This is sender: ", sender, "this is the receiver: ", receiver)
@@ -63,16 +65,16 @@ class ChatRoom(LoginRequiredMixin, View):
 
         
 class MessageView(View):
-     def get(self, request, UUID):
+     def get(self, request, room_name):
         sender = request.user
-        get_room = Room.objects.get(id=UUID)
+        get_room = Room.objects.get(room_name=room_name)
         get_messages = Message.objects.filter(room=get_room)
         Freceiver = ChatUsers.objects.filter(room=get_room).exclude(users=sender).values_list('users', flat=True)
         receiver = Freceiver.first()
         context = {
             'messages': get_messages,
             'sender': sender,
-            'room_name': UUID,
+            'room_name': room_name,
             'receiver': receiver
         }
         return render(request, 'chat/message.html', context)
