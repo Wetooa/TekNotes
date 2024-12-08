@@ -6,3 +6,11 @@ django_settings_module = "Teknotes.settings"
 
 [tool.djlint]
 profile = "django"
+indent_size = 2
+indent_char = " "
+block_indent_size = 2
+tag_end = "auto"
+space_between_tags = true
+space_between_block_tags = true
+line_length = 80
+max_line_length = 120
