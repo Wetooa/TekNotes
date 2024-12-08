@@ -1,7 +1,7 @@
 
 {% load static %}
 {% load custom_filters %}
-<link rel="stylesheet" href="{% static 'teknotes/css/highlight.css' %}">
+
 <div class="flex {% if wrap %} flex-wrap {% else %} overflow-x-auto {% endif %} gap-3 ">
     {% for course in courses %}
         <a href="{% url 'advanced_search:view_course' course.id %}" class="px-3 py-1 bg-{{ course.color }} rounded-md shadow-lg font-medium text-gray-50 whitespace-nowrap">{{ course.code }}</a>
