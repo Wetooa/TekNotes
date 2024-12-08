@@ -102,7 +102,7 @@
                 </a>
 
                 {% if request.user.is_authenticated %}
-                    <div class="nav-elem transition-all flex rounded-xl bg-gray-50 hover:bg-gray-100 hover:shadow-xl px-4 py-3 gap-3 justify-between items-center">
+                    <div class="nav-elem transition-all flex rounded-xl bg-gray-50 hover:bg-gray-100 hover:shadow-xl px-4 py-3 gap-3 justify-between items-center relative">
                         <a href="{% url 'authentication:profile' request.user.id %}" class="flex flex-1 gap-3 h-full overflow-hidden">
                             <div class="flex aspect-square min-h-6 h-full rounded-full bg-[url('{{ user.profile.avatar.url }}')] bg-cover border-2 border-yellow-500 shadow-lg"></div>
                             <div class="flex flex-col user-text flex-1 overflow-hidden">
@@ -110,9 +110,36 @@
                                 <p class="text-gray-500">@{{ request.user.username|truncatechars:13 }}</p>
                             </div>
                         </a>
-                        <svg id="user-settings" class="fill-gray-700 cursor-pointer mr-2 select-none" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">
+                        <svg id="user-settings-btn" class="fill-gray-700 cursor-pointer mr-2 select-none" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">
                             <path d="M64 112c26.5 0 48-21.5 48-48S90.5 16 64 16S16 37.5 16 64S37.5 112 64 112zM64 400c-26.5 0-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48S90.5 400 64 400zM64 208C37.5 208 16 229.5 16 256S37.5 304 64 304s48-21.5 48-48S90.5 208 64 208z"/>
                         </svg>
+
+                        <script>
+                            $('#user-settings-btn').click((event) => {
+                                if ($("#user-settings").is(':visible')) {
+                                    $('#user-settings').hide(100);
+                                } else {
+                                    $('#user-settings').show(100);
+                                }
+                                event.stopPropagation();
+                            });
+
+                            $(document).click((event) => {
+                                const isClickInside = $(event.target).closest('#user-settings, #user-settings-btn').length > 0;
+                                if (!isClickInside) {
+                                    $('#user-settings').hide(100);
+                                }
+                            });
+                        </script>
+
+                        <div id="user-settings" class="flex flex-col absolute bg-gray-50 bottom-full mb-2 rounded-xl right-0 w-full text-gray-700 overflow-hidden hidden">
+                            <a class="flex px-4 py-3 hover:bg-gray-100 cursor-pointer">
+                                Edit account details
+                            </a>
+                            <a href="{% url 'authentication:logout' %}" class="flex px-4 py-3 border-t border-gray-300 hover:bg-gray-100 cursor-pointer">
+                                Log out @{{ request.user.username }}
+                            </a>
+                        </div>
                     </div>
                 {% else %}
                     <a href="{% url 'authentication:login' %}" class="nav-elem transition-all group flex hover:bg-yellow-500 border-2 border-yellow-500 rounded-xl gap-4 px-4 py-3 transition-all hover:shadow-lg items-center">
@@ -156,7 +183,7 @@
             let navIsVisible = $(window).width() > 678;
             function toggleNav(condition) {
                 if (condition) {
-                    $('#logo, .nav-text, .new-note-text, .course-text, .user-text, #courses-dropdown-arrow, #user-settings').hide(150);
+                    $('#logo, .nav-text, .new-note-text, .course-text, .user-text, #courses-dropdown-arrow, #user-settings-btn').hide(150);
                     $('nav').removeClass('w-full');
                     $('nav').removeClass('px-5').addClass('px-3');
                     $('.active-nav').removeClass('px-6').addClass('px-3')
@@ -165,8 +192,9 @@
                     $('.course-elem, .nav-elem').removeClass('justify-between');
                     $('.course-elem, .nav-elem').removeClass('px-4').addClass('px-3')
                     $(".nav-elem").addClass('justify-center');
+                    $("#user-settings").hide(150);
                 } else {
-                    $('#logo, .nav-text, .new-note-text, .course-text, .user-text, #courses-dropdown-arrow, #user-settings').show(150);
+                    $('#logo, .nav-text, .new-note-text, .course-text, .user-text, #courses-dropdown-arrow, #user-settings-btn').show(150);
                     $('nav').addClass('w-full');
                     $('nav').removeClass('px-3').addClass('px-5');
                     $('.active-nav').removeClass('px-3').addClass('px-6')
