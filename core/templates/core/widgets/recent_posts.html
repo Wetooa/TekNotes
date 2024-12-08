@@ -11,13 +11,13 @@
         <h4 class="text-lg font-semibold text-gray-900">
           <a href="{% url 'notes:note_detail' note.id %}" class="hover:text-blue-600">{{ note.title }}</a>
         </h4>
-        <p class="mt-2 text-gray-700 text-sm">
+        <div class="mt-2 text-gray-700 text-sm">
           {% if note.content %}
             {{ note.content| safe | truncatewords:30 }}
           {% else %}
             No content available
           {% endif %}
-        </p>
+        </div>
         <a href="{% url 'notes:note_detail' note.id %}" class="text-sm text-blue-500 hover:underline mt-2 block">Read more</a>
       </div>
     {% empty %}

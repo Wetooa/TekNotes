@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 from django.db.models import Count
 from course.models import Course
 from clicks.models import ClickNote, ClickTag, ClickCourse

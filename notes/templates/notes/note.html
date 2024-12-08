@@ -31,13 +31,13 @@
             </div>
 
             <div class="">
-                <p class="text-gray-700">
+                <div class="text-gray-700">
                     {%if query%}
                         {% highlight note.content query "note_detail" %}
                     {%else%}
                         {{ note.content | safe}}
                     {%endif%}
-                </p>
+                </div>
             </div>
         </div>
 

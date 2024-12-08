@@ -6,7 +6,7 @@
   </button>
 
   <div id="notif-dropdown" class="absolute top-10 bg-white rounded-lg w-60 overflow-hidden">
-    <h4 class="bg-red-400 p-2">Notification</h4>
+    <h4 class="bg-red-400 p-2 font-bold">Notification</h4>
     {% for notif in notifications  %}
     <div  class="border-t border-gray-400 p-2 flex">
       <a href="{% url 'authentication:profile' notif.sender.id %}">
