@@ -5,19 +5,18 @@
     <img src="{% static 'teknotes/images/Bell.svg' %}" alt="notif-button" />
   </button>
 
-  <div id="notif-dropdown" class="absolute top-10 bg-white rounded-lg w-60 overflow-hidden">
-    <h4 class="bg-red-400 p-2 font-bold">Notification</h4>
-    {% for notif in notifications  %}
-    <div  class="border-t border-gray-400 p-2 flex">
-      <a href="{% url 'authentication:profile' notif.sender.id %}">
-        <img class="h-6 w-6 aspect-square rounded-full" src="{{ notif.sender.profile.avatar.url }}" alt="Profile Image">
-        <p class="text-lg font-bold">
-        {{ notif.sender }}
-        </p>
-      </a>
-      <a href={{ notif.get_url }}>{{ notif.get_content }}</a>
+  <div id="notif-dropdown" class="absolute top-10 bg-white rounded-lg w-72 overflow-hidden shadow-lg">
+    <h4 class="bg-rose-700 p-2 text-xl text-white">Notification</h4>
+
+    <div class="flex justify-evenly p-2">
+      <button id="all-button" class="rounded-full py-1 px-4 hover:opacity-95 bg-red-100 hover:bg-red-200">All</button>
+      <button id="unread-button" class="rounded-full py-1 px-4 hover:opacity-95 bg-red-100 hover:bg-red-200">Unread</button>
     </div>
+
+    {% for notif in notifications  %}
+      {% include "notifications/notification.html" %}
     {% endfor %}
+
   </div>
 </div>
 
@@ -34,4 +33,5 @@
       }
     })
   })
+
 </script>

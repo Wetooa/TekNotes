@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup
 from django.db.models import Count
 from course.models import Course
 from clicks.models import ClickNote, ClickTag, ClickCourse
@@ -57,4 +56,6 @@ def notifications(request):
         return {}
 
     notifications = Notification.objects.filter(user=request.user)
+    for n in notifications:
+        print(n.is_read)
     return {"notifications": notifications}

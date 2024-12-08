@@ -4,4 +4,7 @@
 
 <div class="border-b-1">
   <h3 class="text-2xl font-semibold text-gray-800 mb-3">Notifications</h3>
+  {% for notif in notifications %}
+    {% include "notifications/notification.html" with class="bg-white rounded-lg" %}
+  {% endfor %}
 </div>
