@@ -15,7 +15,7 @@
             </a>
         </div>
 
-        <div class="flex flex-col items-center justify-center">
+        <div class="flex flex-col justify-center items-center">
             <form action="." method="post" class="flex flex-col w-full">
                 {{ form.media }}
                 {% csrf_token %}
@@ -46,24 +46,14 @@
 
                     <script>
                         $(document).ready(function(){
-                            function changePath(path, viewBox) {
-                                $("#dropdown-arrow").html(path);
-                                $("#dropdown-arrow").attr('viewBox', viewBox);
-                            }
-                            const angleRight = `
-                                <path d="M89.45 87.5l143.1 152c4.375 4.625 6.562 10.56 6.562 16.5c0 5.937-2.188 11.87-6.562 16.5l-143.1 152C80.33 434.1 65.14 434.5 55.52 425.4c-9.688-9.125-10.03-24.38-.9375-33.94l128.4-135.5l-128.4-135.5C45.49 110.9 45.83 95.75 55.52 86.56C65.14 77.47 80.33 77.87 89.45 87.5z"/>
-                            `;
-                            const angleDown = `
-                                <path d="M360.5 217.5l-152 143.1C203.9 365.8 197.9 368 192 368s-11.88-2.188-16.5-6.562L23.5 217.5C13.87 208.3 13.47 193.1 22.56 183.5C31.69 173.8 46.94 173.5 56.5 182.6L192 310.9l135.5-128.4c9.562-9.094 24.75-8.75 33.94 .9375C370.5 193.1 370.1 208.3 360.5 217.5z"/>
-                            `;
                             $('#dropdown-button').click(function() {
                                 var dropdownMenu = $('#dropdown-menu');
                                 if (dropdownMenu.is(':visible')) {
                                     dropdownMenu.hide(150);
-                                    changePath(angleRight, '0 0 256 512');
+                                    changePath("#dropdown-arrow", angleRight, '0 0 256 512');
                                 } else {
                                     dropdownMenu.show(150);
-                                    changePath(angleDown, '0 0 384 512');
+                                    changePath("#dropdown-arrow", angleDown, '0 0 384 512');
                                 }
                             });
 
@@ -71,7 +61,7 @@
                                 if(!$(event.target).closest('#dropdown-button, #dropdown-menu').length) {
                                     if($('#dropdown-menu').is(":visible")) {
                                         $('#dropdown-menu').hide(150);
-                                        changePath(angleRight, '0 0 256 512');
+                                        changePath("#dropdown-arrow", angleRight, '0 0 256 512');
                                     }
                                 }
                             });
@@ -83,7 +73,7 @@
                                 $('#selected-course').text(courseText);
                                 $('#selected-course-value').val(courseValue);
                                 $('#dropdown-menu').hide(150);
-                                changePath(angleRight, '0 0 256 512');
+                                changePath("#dropdown-arrow", angleRight, '0 0 256 512');
                             });
                         });
                     </script>

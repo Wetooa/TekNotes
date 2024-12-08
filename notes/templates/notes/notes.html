@@ -1,59 +1,52 @@
 {% load static %}
 {% load custom_filters %}
 
-<div id="scoll-container"
-     class="flex flex-1 {% if not no_scroll %} overflow-hidden overflow-y-auto {% endif %} scroll-smooth">
-  <div id="top-anchor"></div>
+<div class="flex flex-1 relative overflow-hidden">
+    <div id="scroll-container" class="flex flex-1 {% if not no_scroll %} overflow-hidden overflow-y-auto {% endif %} scroll-smooth">
+        <div id="top-anchor"></div>
+        <div id="notes" class="flex flex-1 gap-3" style="display: none;">
+            {% for note in notes %}
+                <div class="note" data-note-id="{{ note.id }}">
+                    {% include 'notes/note.html' %}
+                </div>
+            {% endfor %}
+        </div>
 
-  <div id="notes" class="flex flex-1 gap-3" style="display: none;">
-    {% for note in notes %}
-      <div class="note" data-note-id="{{ note.id }}">
-        {% include 'notes/note.html' %}
-      </div>
-    {% endfor %}
-  </div>
-
-  <div id="notes-container" class="flex flex-1 gap-3"></div>
-
-
-  <a id="go-up" href="#top-anchor"
-     class="fixed flex items-center justify-center bottom-6 right-6 w-12 h-auto aspect-square rounded-full bg-rose-700 p-2 animate-bounce">
-     <svg class="fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-      <path d="M23.5 294.5l152-143.1C180.1 146.2 186.1 144 192 144s11.88 2.188 16.5 6.562l152 143.1c9.625 9.125 10.03 24.31 .9375 33.93c-9.125 9.688-24.38 10.03-33.94 .9375l-135.5-128.4l-135.5 128.4c-9.562 9.094-24.75 8.75-33.94-.9375C13.47 318.9 13.87 303.7 23.5 294.5z"/>
-    </svg>
-  </a>
+        <div id="notes-container" class="flex flex-1 gap-3"></div>
+    </div>
+    <a id="go-up" href="#top-anchor" class="absolute flex justify-center items-center rounded-full bg-rose-700 p-3 shadow-md bottom-4 right-4 animate-bounce">
+        <svg class="fill-gray-50" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+            <path d="M23.5 294.5l152-143.1C180.1 146.2 186.1 144 192 144s11.88 2.188 16.5 6.562l152 143.1c9.625 9.125 10.03 24.31 .9375 33.93c-9.125 9.688-24.38 10.03-33.94 .9375l-135.5-128.4l-135.5 128.4c-9.562 9.094-24.75 8.75-33.94-.9375C13.47 318.9 13.87 303.7 23.5 294.5z"/>
+        </svg>
+    </a>
 </div>
 
 <script>
-  function partitionNotes() {
-    $('#notes-container').empty();
-    const width = $('#notes-container').width();
-    let columns = width <= 574 ? 1 : (width <= 788 ? 2 : (width <= 1148 ? 3 : 4));
-    for (let i = 0; i < columns; i++) {
-      $('#notes-container').append('<div class="flex flex-col flex-1 gap-3"></div>');
+    function partitionNotes() {
+        $('#notes-container').empty();
+        const width = $('#notes-container').width();
+        let columns = width <= 574 ? 1 : (width <= 788 ? 2 : (width <= 1148 ? 3 : 4));
+        for (let i = 0; i < columns; i++) {
+            $('#notes-container').append('<div class="flex flex-col flex-1"></div>');
+        }
+        $('#notes .note').each(function (index) {
+            const columnIndex = index % columns;
+            $('#notes-container > div').eq(columnIndex).append($(this).clone());
+        });
     }
-    $('#notes .note').each(function (index) {
-      const columnIndex = index % columns;
-      $('#notes-container > div').eq(columnIndex).append($(this).clone());
-    });
-  }
 
-  $(document).ready(function () {
-    partitionNotes();
-    $(window).resize(partitionNotes);
+    $(document).ready(function () {
+        partitionNotes();
+        $(window).resize(partitionNotes);
 
-
-
-    $('#go-up').hide(150);
-    $("#scoll-container").scroll(function () {
-      var scrollTop = $(this).scrollTop();
-      if (scrollTop > 10) {
-        $('#go-up').show(150);
-      } else {
         $('#go-up').hide(150);
-      }
+        $("#scroll-container").scroll(function () {
+            var scrollTop = $(this).scrollTop();
+            if (scrollTop > 10) {
+            $('#go-up').show(150);
+            } else {
+            $('#go-up').hide(150);
+            }
+        });
     });
-
-  });
-
 </script>

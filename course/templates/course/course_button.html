@@ -7,12 +7,12 @@
             <p>course created by</p>
             <a href="{% url 'authentication:profile' course.created_by.id %}" class="flex gap-2">
                 <img src="{{ course.created_by.profile.avatar.url }}" alt="Profile Image" class="h-6 w-6 aspect-square rounded-full">
-                <p class="font-medium">{{ course.created_by.first_name }} {{ course.created_by.last_name }}</p>
+                <p class="font-medium">{{ course.created_by.get_full_name }}</p>
             </a>
             {% if course.created_by == request.user %}
                 <form action="{% url 'course:delete_course' course.id %}" method="POST" class="flex">
                     {% csrf_token %}
-                    <button type="submit" class="transition-all flex gap-1 items-center justify-center text-sm bg-rose-200 text-rose-700 rounded-md px-3 py-2 w-full border-2 border-rose-700 ml-4 hover:bg-rose-100 hover:shadow-lg">
+                    <button type="submit" class="transition-all flex gap-1 justify-center items-center text-sm bg-rose-200 text-rose-700 rounded-md px-3 py-2 w-full border-2 border-rose-700 ml-4 hover:bg-rose-100 hover:shadow-lg">
                         <svg class="fill-rose-700" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                             <path d="M424 80h-74.38l-34-56.75C306.9 8.875 291.3 0 274.4 0H173.6c-16.88 0-32.5 8.875-41.25 23.25L98.38 80H23.1C10.75 80 0 90.75 0 103.1S10.75 128 23.1 128H32l21.21 339c1.5 25.25 22.52 45 47.9 45h245.8c25.38 0 46.4-19.75 47.9-45L416 128h8C437.3 128 448 117.3 448 104S437.3 80 424 80zM173.6 48h100.8l19.25 32H154.4L173.6 48zM346.9 464H101.1L80.13 128h287.8L346.9 464z"/>
                         </svg>

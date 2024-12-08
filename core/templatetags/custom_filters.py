@@ -1,4 +1,6 @@
 from django import template
+from django import template
+from django.utils import timezone
 import re
 from django.utils.safestring import mark_safe
 
@@ -36,3 +38,24 @@ def highlight(text, query, style):
     highlighted = re.sub(f"({joined_pattern})", get_replacement, text, flags=re.IGNORECASE)
 
     return mark_safe(highlighted)
+
+@register.filter(name='formattime')
+def formattime(value):
+    if isinstance(value, timezone.datetime):
+        now = timezone.now()
+        diff = now - value
+
+        days = diff.days
+        seconds = diff.seconds
+        hours = seconds // 3600
+        minutes = (seconds // 60) % 60
+
+        if days > 0:
+            return f"{days}d ago"
+        elif hours > 0:
+            return f"{hours}h ago"
+        elif minutes > 0:
+            return f"{minutes}m ago"
+        else:
+            return "Just now"
+    return value

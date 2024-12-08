@@ -14,7 +14,7 @@
                 </svg>
             </a>
         </div>
-        <div class="flex flex-col items-center justify-center">
+        <div class="flex flex-col justify-center items-center">
             <form action="." method="post" class="flex flex-col w-full">
                 {% csrf_token %}
                 <div class="flex flex-col p-6 gap-6">
@@ -30,7 +30,7 @@
                         {% for color_code, color_name in form.color.field.choices %}
                             <div class="color-option transition-all h-10 w-full rounded-md cursor-pointer bg-{{ color_code }} hover:ring hover:ring-yellow-500" title="{{ color_name }}">
                                 <input type="radio" name="color" value="{{ color_code }}" id="{{ color_code }}" class="hidden" />
-                                <label for="{{ color_code }}" class="w-full h-full flex items-center justify-center rounded-md cursor-pointer bg-{{ color_code }}"></label>
+                                <label for="{{ color_code }}" class="w-full h-full flex justify-center items-center rounded-md cursor-pointer bg-{{ color_code }}"></label>
                             </div>
                         {% endfor %}
                     </div>
