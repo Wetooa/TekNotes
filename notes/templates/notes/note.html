@@ -8,7 +8,6 @@
                 <p class="{% if note.is_private %} text-{{ note.course.color }} {% else %} text-gray-50 {% endif %} font-semibold">{{ note.course }}</p>
             </div>
         {% endif %}
-
         <div class="flex flex-col p-4 gap-3 max-h-80 overflow-hidden">
             <div class="flex flex-col gap-2">
                 <div class="flex gap-2 items-center">
@@ -27,9 +26,9 @@
                 <h1 class="text-xl text-gray-700 dark:text-gray-50 font-semibold">
                     {%if query%}
                         {% highlight note.title query "note_title" %}
-                    {%else%}
-                        {{ note.title}}
-                    {%endif%}
+                    {% else %}
+                        {{ note.title }}
+                    {% endif %}
                 </h1>
             </div>
 
@@ -80,7 +79,6 @@
                 </div>
             </div>
         </div>
-
         {% if note.tags.count > 0 %}
             <div class="flex flex-wrap p-4 gap-3 border-t-2 {% if note.is_private %} border-gray-500 dark:border-gray-700 border-dashed {% else %} border-gray-200 dark:border-gray-900 {% endif %}">
                 {% for tag in note.tags.all|slice:":3" %}
@@ -97,10 +95,11 @@
             </div>
         {% endif %}
     </a>
-
     {% if request.user == note.created_by %}
         <div class="flex rounded-b-xl overflow-hidden p-2 gap-2">
-            <form action="{% url 'notes:delete_note' note.id %}" method="POST" class="flex">
+            <form action="{% url 'notes:delete_note' note.id %}"
+                  method="POST"
+                  class="flex">
                 {% csrf_token %}
                 <button type="submit" class="flex justify-center items-center text-sm bg-rose-200 dark:bg-rose-600 text-rose-700 rounded-md p-2 w-full">
                     <svg class="fill-rose-700 dark:fill-gray-50" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -127,7 +126,9 @@
                     {% endif %}
                 </button>
             </form>
-            <form action="{% url 'notes:archive_note' note.id %}" method="POST" class="flex flex-1">
+            <form action="{% url 'notes:archive_note' note.id %}"
+                  method="POST"
+                  class="flex flex-1">
                 {% csrf_token %}
                 <button type="submit" class="flex justify-center items-center text-sm  {% if note.is_private %} bg-gray-50 dark:bg-gray-800 shadow {% else %} bg-gray-200 dark:bg-gray-900 {% endif %} text-gray-500 dark:text-gray-400 rounded-md py-1 w-full">
                     <p>{% if note.is_archived %}Unarchive{% else %}Archive{% endif %}</p>

@@ -1,31 +1,26 @@
 {% extends 'core/base.html' %}
-
 {% load static %}
 {% block content %}
-<div class="parent">
-    <nav class="chatNav">
-        <h1 style='text-align: center;border-style:solid; border-width: 1px; border-color: black; padding: 5px;'>Chat</h1>
-    {% for pair in rooms_with_users %}
-        {% for user in pair.users %}
-        <form action='' method="post" style="display:inline;">
-            {% csrf_token %} <!-- VERY IMPORTANT for security -->
-            <input type="hidden" name="receiver" value="{{ user.username }}">
-            <a href="#" onclick="this.parentNode.submit(); return false;">
-                {{ user.username }}
-            </a>
-        </form>
-        {% endfor %}
-    {% endfor %}
-    </nav>
-
-    {%block ChatMessage%}
-    {%endblock%}
-    
-</div>
-
-
-
-<style>
+    <div class="parent">
+        <nav class="chatNav">
+            <h1 style='text-align: center;
+                       border-style:solid;
+                       border-width: 1px;
+                       border-color: black;
+                       padding: 5px'>Chat</h1>
+            {% for pair in rooms_with_users %}
+                {% for user in pair.users %}
+                    <form action='' method="post" style="display:inline;">
+                        {% csrf_token %} <!-- VERY IMPORTANT for security -->
+                        <input type="hidden" name="receiver" value="{{ user.username }}">
+                        <a href="#" onclick="this.parentNode.submit(); return false;">{{ user.username }}</a>
+                    </form>
+                {% endfor %}
+            {% endfor %}
+        </nav>
+        {% block ChatMessage %}{% endblock %}
+    </div>
+    <style>
 
 
 .chatNav{
@@ -87,6 +82,5 @@ button:hover {
     padding: 15px;
     transition: 0.8s;
 }
-</style> 
-
+    </style>
 {% endblock %}
