@@ -49,6 +49,8 @@ class Notification(models.Model):
         return ""
 
     def get_url(self):
+        self.is_read = True
+
         if self.notification_type == NotificationType.LIKE_NOTE:
             return reverse("notes:note_detail", args=[self.object_id])
         if self.notification_type == NotificationType.LIKE_COMMENT:
