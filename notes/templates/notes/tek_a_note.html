@@ -36,9 +36,15 @@
                                     None
                                 </li>
                                 {% for course in form.course.field.queryset %}
-                                    <li class="rounded-md cursor-pointer px-3 py-1.5 hover:bg-gray-600 text-gray-50 bg-{{ course.color }} select-course" data-value="{{ course.id }}">
-                                        {{ course }}
-                                    </li>
+                                    <div class="flex flex-wrap rounded-md cursor-pointer gap-1.5 px-3 py-1.5 justify-between hover:bg-gray-600 text-gray-50 bg-{{ course.color }}" data-value="{{ course.id }}">
+                                        <p class="text-nowrap select-course">{{ course }}</p>
+                                        {% if request.user != course.created_by %}
+                                            <div class="flex gap-2 items-center text-nowrap">
+                                                <img src="{{ course.created_by.profile.avatar.url }}" alt="Profile Image" class="h-4 w-4 aspect-square rounded-full">
+                                                <div class="font-medium text-sm">{{ course.created_by.get_full_name }}</div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 {% endfor %}
                             </ul>
                         </div>
