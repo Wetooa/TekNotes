@@ -8,84 +8,51 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    <div class="flex flex-col h-full overflow-hidden">
-        <header class="flex items-center w-full p-3 gap-3 shadow-lg z-10 bg-gray-50">
-            <div class="flex flex-1 items-center gap-4">
+    <div class="flex h-full overflow-hidden">
+        <nav class="flex flex-col w-full max-w-72 h-full p-3 gap-3 overflow-y-auto">
+            <div class="flex">
                 <img class="cursor-pointer" id="menu-icon" src="{% static 'teknotes/images/Menu.svg' %}" alt="Menu">
                 <a href="/" class="flex items-center gap-2">
                     <img src="{% static 'teknotes/images/TekNotes-Logo.svg' %}" alt="Logo">
                     <p id="logo-text" class="font-semibold text-rose-700 text-4xl">TekNotes</p>
                 </a>
-                <form action="{% url 'advanced_search:search' %}" method="get" class="flex flex-1 max-w-[600px] px-4 py-2 rounded-xl bg-gray-200 transition-all hover:bg-gray-300 gap-3 cursor-text min-w-[0px]" onclick="this.querySelector('input[name=\'query\']').focus();">
-                    <img src="{% static 'teknotes/images/Search.svg' %}" alt="Search">
+            </div>
+            <a href="/" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
+                <img src="{% static 'teknotes/images/Home.svg' %}" alt="Home">
+                <p class="nav-text text-lg text-gray-700 font-medium">Home</p>
+            </a>
 
-                    <!-- Search input -->
-                    <input name="query" class="placeholder-gray-500 w-full text-gray-700 bg-transparent border-none focus:outline-none min-w-[0px]"
-                           type="text" value="{{ query }}" placeholder="Search"
-                           onclick="event.stopPropagation();"/>
+            <a href="/notebook/" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/notebook/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
+                <img src="{% static 'teknotes/images/notebook.svg' %}" alt="Notebook">
+                <p class="nav-text text-lg text-gray-700 font-medium">Notebook</p>
+            </a>
 
-                </form>
+            <a href="/archive/" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/archive/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
+                <img src="{% static 'teknotes/images/Archive.svg' %}" alt="Archive">
+                <p class="nav-text text-lg text-gray-700 font-medium">Archive</p>
+            </a>
+
+            <a href="/likes/" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/likes/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
+                <img src="{% static 'teknotes/images/Likes.svg' %}" alt="Likes">
+                <p class="nav-text text-lg text-gray-700 font-medium">Likes</p>
+            </a>
+
+            <div class="nav-elem flex rounded-xl px-4 py-3 gap-4">
+                <img src="{% static 'teknotes/images/Course.svg' %}" alt="Courses">
+                <p class="nav-text text-lg text-gray-700 font-medium">Courses</p>
             </div>
 
-            <div class="flex items-center gap-4 h-full">
-                {% if request.user.is_authenticated %}
-                    {% include 'notifications/notification_widget.html' %}
-
-                    <a href="{% url 'notes:tek_a_note' %}" class="flex bg-rose-700 rounded-xl gap-4 px-4 py-2 transition-all hover:shadow-lg">
-                        <img src="{% static 'teknotes/images/Edit.svg' %}" alt="Edit">
-                        <p class="new-note-text text-gray-50 font-medium text-lg">Tek a Note</p>
-                    </a>
-
-                    <div class="flex h-full">
-                        <a href="{% url 'authentication:logout' %}" class="transition-all flex gap-4 px-4 py-2 rounded-l-xl bg-gray-200 hover:shadow-lg">
-                            <p class="text-gray-700 text-lg">Log out</p>
-                        </a>
-                        <a href="{% url 'authentication:profile' request.user.id %}" class="transition-all flex h-full aspect-square rounded-r-xl bg-[url('{{ request.user.profile.avatar.url }}')] bg-cover border-2 border-gray-200 hover:shadow-lg"></a>
-                    </div>
-                {% else %}
-                    <a href="{% url 'authentication:login' %}" class="flex bg-rose-700 rounded-xl gap-4 px-6 py-2 transition-all hover:shadow-lg">
-                        <p class="text-gray-50 font-medium text-lg">Sign In</p>
-                    </a>
-                {% endif %}
+            <div id="courses" class="flex flex-col pl-6 gap-3">
+                {% for course in your_courses %}
+                    {% include 'course/course_item.html' with course=course %}
+                {% endfor %}
+                <a id="add-course" href="{% url 'course:add_a_course' %}" class="transition-all course-elem nav-elem flex rounded-xl px-4 py-3 justify-between border-2 border-rose-700 hover:bg-rose-700 text-rose-700 hover:text-gray-50 hover:font-regular">
+                    <p class="course-text text-lg font-medium">Add a course</p>
+                    <img src="{% static 'teknotes/images/Add.svg' %}" alt="Courses">
+                </a>
             </div>
-        </header>
+        </nav>
         <main class="flex bg-gray-200 h-full overflow-hidden">
-            <nav class="flex flex-col w-full max-w-72 h-full p-3 gap-3 overflow-y-auto">
-                <a href="/" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
-                    <img src="{% static 'teknotes/images/Home.svg' %}" alt="Home">
-                    <p class="nav-text text-lg text-gray-700 font-medium">Home</p>
-                </a>
-
-                <a href="/notebook/" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/notebook/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
-                    <img src="{% static 'teknotes/images/notebook.svg' %}" alt="Notebook">
-                    <p class="nav-text text-lg text-gray-700 font-medium">Notebook</p>
-                </a>
-
-                <a href="/archive/" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/archive/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
-                    <img src="{% static 'teknotes/images/Archive.svg' %}" alt="Archive">
-                    <p class="nav-text text-lg text-gray-700 font-medium">Archive</p>
-                </a>
-
-                <a href="/likes/" class="nav-elem flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/likes/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% endif %}">
-                    <img src="{% static 'teknotes/images/Likes.svg' %}" alt="Likes">
-                    <p class="nav-text text-lg text-gray-700 font-medium">Likes</p>
-                </a>
-
-                <div class="nav-elem flex rounded-xl px-4 py-3 gap-4">
-                    <img src="{% static 'teknotes/images/Course.svg' %}" alt="Courses">
-                    <p class="nav-text text-lg text-gray-700 font-medium">Courses</p>
-                </div>
-
-                <div id="courses" class="flex flex-col pl-6 gap-3">
-                    {% for course in your_courses %}
-                        {% include 'course/course_item.html' with course=course %}
-                    {% endfor %}
-                    <a id="add-course" href="{% url 'course:add_a_course' %}" class="transition-all course-elem nav-elem flex rounded-xl px-4 py-3 justify-between border-2 border-rose-700 hover:bg-rose-700 text-rose-700 hover:text-gray-50 hover:font-regular">
-                        <p class="course-text text-lg font-medium">Add a course</p>
-                        <img src="{% static 'teknotes/images/Add.svg' %}" alt="Courses">
-                    </a>
-                </div>
-            </nav>
 
             <div class="flex flex-col flex-[4] h-full p-3 gap-3 overflow-hidden">
                 {% block content %}
