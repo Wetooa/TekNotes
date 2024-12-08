@@ -36,12 +36,19 @@ LOGIN_URL = "/authentication/login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-SITE_ID = 2
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    }
+}
+
+SITE_ID = 4
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -49,6 +56,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     'livereload',
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     "advanced_search",
     "authentication",
     "chat",
@@ -62,7 +70,6 @@ INSTALLED_APPS = [
     "tags",
     "django_ckeditor_5",
     "channels",
-    "django.contrib.sites",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -115,7 +122,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "TekNotes.wsgi.application"
-
+ASGI_APPLICATION = "TekNotes.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
