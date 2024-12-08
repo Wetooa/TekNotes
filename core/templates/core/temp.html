@@ -5,26 +5,11 @@
             <img src="{% static 'teknotes/images/TekNotes-Logo.svg' %}" alt="Logo">
             <p id="logo-text" class="font-semibold text-rose-700 text-4xl">TekNotes</p>
         </a>
-        <form action="{% url 'advanced_search:search' %}" method="get" class="flex flex-1 max-w-[600px] px-4 py-2 rounded-xl bg-gray-200 transition-all hover:bg-gray-300 gap-3 cursor-text min-w-[0px]" onclick="this.querySelector('input[name=\'query\']').focus();">
-            <img src="{% static 'teknotes/images/Search.svg' %}" alt="Search">
-
-            <!-- Search input -->
-            <input name="query" class="placeholder-gray-500 w-full text-gray-700 bg-transparent border-none focus:outline-none min-w-[0px]"
-                   type="text" value="{{ query }}" placeholder="Search"
-                   onclick="event.stopPropagation();"/>
-
-        </form>
     </div>
 
     <div class="flex items-center gap-4 h-full">
         {% if request.user.is_authenticated %}
             {% include 'notifications/notification_widget.html' %}
-
-            <a href="{% url 'notes:tek_a_note' %}" class="flex bg-rose-700 rounded-xl gap-4 px-4 py-2 transition-all hover:shadow-lg">
-                <img src="{% static 'teknotes/images/Edit.svg' %}" alt="Edit">
-                <p class="new-note-text text-gray-50 font-medium text-lg">Tek a Note</p>
-            </a>
-
             <div class="flex h-full">
                 <a href="{% url 'authentication:logout' %}" class="transition-all flex gap-4 px-4 py-2 rounded-l-xl bg-gray-200 hover:shadow-lg">
                     <p class="text-gray-700 text-lg">Log out</p>

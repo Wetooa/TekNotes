@@ -40,11 +40,15 @@
 
                             <div class="flex gap-3 w-full">
                                 <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl flex-1">
-                                    <img src="{% static 'teknotes/images/User_yellow.svg' %}" alt="User">
+                                    <svg class="fill-yellow-500" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"/>
+                                    </svg>
                                     <input type="text" id="firstName" name="first_name" class="placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 w-full" placeholder="First Name" value="{{ profile.user.first_name }}">
                                 </div>
                                 <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl flex-1">
-                                    <img src="{% static 'teknotes/images/User_yellow.svg' %}" alt="User">
+                                    <svg class="fill-yellow-500" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"/>
+                                    </svg>
                                     <input type="text" id="lastName" name="last_name" class="placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 w-full" placeholder="Last Name" value="{{ profile.user.last_name }}">
                                 </div>
                             </div>
@@ -56,7 +60,9 @@
                     </div>
 
                     <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl">
-                        <img src="{% static 'teknotes/images/Pin.svg' %}" alt="Pin">
+                        <svg class="fill-yellow-500" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M256 168C207.4 168 168 207.4 168 256s39.38 88 88 88S344 304.6 344 256S304.6 168 256 168zM256 296C233.1 296 216 278 216 256c0-21.1 17.1-40 40-40c21.1 0 40 18 40 40C296 278 277.1 296 256 296zM488 232h-41.63C435.5 145.2 366.8 76.5 280 65.62V23.1c0-13.25-10.75-24-23.1-24S232 10.75 232 23.1V65.62C145.2 76.5 76.5 145.2 65.62 232H23.1C10.75 232 0 242.7 0 255.1S10.75 280 23.1 280h41.63C76.5 366.8 145.2 435.5 232 446.4v41.63c0 13.25 10.75 23.1 23.1 23.1S280 501.3 280 488v-41.63C366.8 435.5 435.5 366.8 446.4 280H488c13.25 0 24-10.75 24-23.1S501.3 232 488 232zM256 400c-79.38 0-144-64.63-144-144S176.6 112 256 112s144 64.62 144 144S335.4 400 256 400z"/>
+                        </svg>
                         <input type="text" id="location" name="location" class="placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 w-full" placeholder="Location" value="{{ profile.location }}">
                     </div>
                 </div>
