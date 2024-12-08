@@ -1,12 +1,4 @@
 <header class="flex items-center w-full p-3 gap-3 shadow-lg z-10 bg-gray-50">
-    <div class="flex flex-1 items-center gap-4">
-        <img class="cursor-pointer" id="menu-icon" src="{% static 'teknotes/images/Menu.svg' %}" alt="Menu">
-        <a href="/" class="flex items-center gap-2">
-            <img src="{% static 'teknotes/images/TekNotes-Logo.svg' %}" alt="Logo">
-            <p id="logo-text" class="font-semibold text-rose-700 text-4xl">TekNotes</p>
-        </a>
-    </div>
-
     <div class="flex items-center gap-4 h-full">
         {% if request.user.is_authenticated %}
             {% include 'notifications/notification_widget.html' %}
