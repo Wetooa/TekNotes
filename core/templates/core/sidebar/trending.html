@@ -1,50 +1,69 @@
 {% load static %}
 {% load custom_filters %}
-<link rel="stylesheet" href="{% static 'teknotes/css/highlight.css' %}">
 
 <!-- Trending Notes Section -->
-<div class="border-b-2 pb-4 mb-6">
-  <h3 class="text-2xl font-semibold text-gray-800 mb-3">Trending Notes</h3>
-
-  {% if trending_notes %}
-    <div class="space-y-2 py-4">
-      {% for note in trending_notes %}
-        <div class="block p-4 bg-gray-100 rounded-lg hover:shadow-lg hover:bg-gray-200 transition duration-300 ease-in-out flex flex-col">
-          <a href="{% url 'notes:note_detail' note.id %}">
-            {% include "core/sidebar/user_pfp_and_time.html" %}
-            <p class="mt-2 text-xl text-gray-700 font-semibold">{{ note.title }}</p>
-            <div>{{ note.content | safe }}</div>
-          </a>
-        </div>
-      {% endfor %}
+{% if trending_notes %}
+<div class="flex flex-col mb-3">
+    <div class="flex items-center bg-rose-700 px-4 py-2 gap-2 rounded-t-xl bg-gradient-to-r from-amber-500 to-red-600">
+        <svg class="fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M323.5 51.25C302.8 70.5 284 90.75 267.4 111.1C240.1 73.62 206.2 35.5 168 0C69.75 91.12 0 210 0 281.6C0 408.9 100.2 512 224 512s224-103.1 224-230.4C448 228.4 396 118.5 323.5 51.25zM224 464c-97 0-176-81.88-176-182.4c0-45.38 44.25-133.2 120.1-214.1C190.5 90.88 211 115.2 228.5 139.4l36.63 50.38l39.38-48.25c5.875-7.125 11.88-14.12 18-21C368.9 178 400 250.4 400 281.6C400 382.1 321 464 224 464zM313.5 243.1l-51.38 58.5c0 0-80.37-102.6-86.37-109.6C133.2 242.9 112 272.6 112 306.4C112 374.3 163.4 416 226.5 416c25.25 0 48.63-7.875 67.63-21.12c43-30.12 53.12-88.63 29.25-134.3C320.4 255 317.1 249.1 313.5 243.1z"/>
+        </svg>
+        <h3 class="text-lg font-semibold text-gray-700 text-gray-50">Trending Notes</h3>
     </div>
-  {% endif %}
+    <div class="flex flex-col gap-3 p-4 border-2 border-gray-300 border-t-0 rounded-b-xl">
+        {% for note in trending_notes %}
+            <a href="{% url 'notes:note_detail' note.id %}" class="transition-all flex flex-col cursor-pointer bg-gray-50 hover:bg-gray-100 hover:shadow-md rounded-md p-3 gap-2 items-start overflow-hidden">
+                <div class="flex gap-2 items-center overflow-hidden">
+                    {% if note.course %}
+                        <p class="text-sm text-gray-50 bg-{{ note.course.color }} px-2 py-0.5 rounded text-nowrap overflow-hidden text-ellipsis ">{{ note.course.code }}</p>
+                    {% endif %}
+                    <h3 class="text-lg font-semibold text-gray-700 text-nowrap overflow-hidden text-ellipsis ">{{ note.title|truncatechars:13 }}</h3>
+                </div>
+                <div class="flex gap-2 items-center">
+                    <img src="{{ note.created_by.profile.avatar.url }}" alt="Profile Image" class="h-4 w-4 aspect-square rounded-full">
+                    <p class="text-gray-500 font-medium text-sm">{{ note.created_by.get_full_name }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
 </div>
+{% endif %}
 
 <!-- Trending Tags Section -->
-<div class="border-b-2 pb-4 mb-6">
-  <h3 class="text-2xl font-semibold text-gray-800 mb-3">Trending Tags</h3>
-
-  {% if trending_tags %}
-    <div class="flex flex-wrap gap-2">
-      {% for tag in trending_tags %}
-        <a href="/search/?query={{ tag.name }}" class="inline-block px-4 py-2 bg-indigo-500 text-white rounded-full text-sm font-medium hover:bg-indigo-600 transition duration-200 ease-in-out">
-          {{ tag.name }}
-        </a>
-      {% endfor %}
+{% if trending_tags %}
+<div class="flex flex-col mb-3">
+    <div class="flex items-center bg-rose-700 px-4 py-2 gap-2 rounded-t-xl bg-gradient-to-r from-amber-500 to-red-600">
+        <svg class="fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M323.5 51.25C302.8 70.5 284 90.75 267.4 111.1C240.1 73.62 206.2 35.5 168 0C69.75 91.12 0 210 0 281.6C0 408.9 100.2 512 224 512s224-103.1 224-230.4C448 228.4 396 118.5 323.5 51.25zM224 464c-97 0-176-81.88-176-182.4c0-45.38 44.25-133.2 120.1-214.1C190.5 90.88 211 115.2 228.5 139.4l36.63 50.38l39.38-48.25c5.875-7.125 11.88-14.12 18-21C368.9 178 400 250.4 400 281.6C400 382.1 321 464 224 464zM313.5 243.1l-51.38 58.5c0 0-80.37-102.6-86.37-109.6C133.2 242.9 112 272.6 112 306.4C112 374.3 163.4 416 226.5 416c25.25 0 48.63-7.875 67.63-21.12c43-30.12 53.12-88.63 29.25-134.3C320.4 255 317.1 249.1 313.5 243.1z"/>
+        </svg>
+        <h3 class="text-lg font-semibold text-gray-700 text-gray-50">Trending Tags</h3>
     </div>
-  {% endif %}
+    <div class="flex flex-wrap gap-3 p-4 border-2 border-gray-300 border-t-0 rounded-b-xl">
+        {% for tag in trending_tags %}
+        <a href="/search/?query={{ tag.name }}" class="text-gray-700 px-3 py-1 bg-gray-50 hover:bg-gray-100 hover:shadow-md rounded-md whitespace-nowrap">
+            {{ tag.name }}
+        </a>
+        {% endfor %}
+    </div>
 </div>
+{% endif %}
 
 <!-- Trending Courses Section -->
-<div class="border-b-2 pb-4 mb-6">
-  <h3 class="text-2xl font-semibold text-gray-800 mb-3">Trending Courses</h3>
-
-  {% if trending_courses %}
-    <div class="space-y-4">
-      {% for course in trending_courses %}
-        {% include 'course/course_item.html' with course=course  %}
-      {% endfor %}
+{% if trending_courses %}
+<div class="flex flex-col mb-3">
+    <div class="flex items-center bg-rose-700 px-4 py-2 gap-2 rounded-t-xl bg-gradient-to-r from-amber-500 to-red-600">
+        <svg class="fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M323.5 51.25C302.8 70.5 284 90.75 267.4 111.1C240.1 73.62 206.2 35.5 168 0C69.75 91.12 0 210 0 281.6C0 408.9 100.2 512 224 512s224-103.1 224-230.4C448 228.4 396 118.5 323.5 51.25zM224 464c-97 0-176-81.88-176-182.4c0-45.38 44.25-133.2 120.1-214.1C190.5 90.88 211 115.2 228.5 139.4l36.63 50.38l39.38-48.25c5.875-7.125 11.88-14.12 18-21C368.9 178 400 250.4 400 281.6C400 382.1 321 464 224 464zM313.5 243.1l-51.38 58.5c0 0-80.37-102.6-86.37-109.6C133.2 242.9 112 272.6 112 306.4C112 374.3 163.4 416 226.5 416c25.25 0 48.63-7.875 67.63-21.12c43-30.12 53.12-88.63 29.25-134.3C320.4 255 317.1 249.1 313.5 243.1z"/>
+        </svg>
+        <h3 class="text-lg font-semibold text-gray-700 text-gray-50">Trending Courses</h3>
     </div>
-  {% endif %}
+    <div class="flex flex-col gap-3 p-4 rounded-b-xl border-2 border-gray-300 border-t-0">
+        {% for course in trending_courses %}
+            <a href="{% url 'advanced_search:view_course' course.id %}" class="group transition-all flex rounded-xl px-4 py-3 justify-between bg-gray-50 hover:bg-{{ course.color }}">
+                <p class="text-lg text-gray-700 group-hover:text-gray-50">{{ course.code|truncatechars:8 }}</p>
+                <div class="rounded-full bg-{{ course.color }} group-hover:bg-gray-50 h-full min-h-7 aspect-square course-color"></div>
+            </a>
+        {% endfor %}
+    </div>
 </div>
+{% endif %}
