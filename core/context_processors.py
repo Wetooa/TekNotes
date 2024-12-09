@@ -56,4 +56,6 @@ def notifications(request):
         return {}
 
     notifications = Notification.objects.filter(user=request.user)
+    for n in notifications:
+        print(n.is_read)
     return {"notifications": notifications}
