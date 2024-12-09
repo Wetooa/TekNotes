@@ -29,9 +29,11 @@
                 </div>
             {% endif %}
 
-            {% for notif in notifications %}
-                {% include "notifications/notification.html" %}
-            {% endfor %}
+            <div class="flex flex-col max-h-72 overflow-y-auto">
+                {% for notif in notifications %}
+                    {% include "notifications/notification.html" %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
