@@ -1,33 +1,25 @@
-{% load static %} {% load custom_filters %}
+{% load static %} 
+{% load custom_filters %}
 
-<div
-  onclick="redirect_to_notif('{{ notif.get_url }}')"
-  class="transition-all border-t border-gray-400 p-2 flex justify-between gap-4 hover:bg-rose-100 {% if notif.is_read %} is_read {% endif %} {{ class }}"
->
-  <a href="{% url 'authentication:profile' notif.sender.id %}">
-    <img
-      class="h-6 w-6 aspect-square rounded-full"
-      src="{{ notif.sender.profile.avatar.url }}"
-      alt="Profile Image"
-    />
-  </a>
-  <div class="text-sm flex-1">
-    <p class="font-medium">
-      {{ notif.sender.first_name }} {{ notif.sender.last_name }}
-    </p>
-    <p class="text-sm">{{ notif.get_content }}</p>
-    <p class="text-gray-500 text-sm">{{ notif.created_at|timesince }} ago</p>
-  </div>
+<div onclick="redirect_to_notif('{{ notif.get_url }}')" class="cursor-pointer transition-all flex border-t-2 border-gray-200 px-4 py-3 gap-4 justify-between hover:bg-gray-100 {% if notif.is_read %} is_read {% endif %} {{ class }}">
+    <a href="{% url 'authentication:profile' notif.sender.id %}">
+        <img class="h-6 w-6 aspect-square rounded-full" src="{{ notif.sender.profile.avatar.url }}" alt="Profile Image"/>
+    </a>
+    <div class="text-sm flex-1 text-gray-700">
+        <p><span class="font-medium">{{ notif.sender.get_full_name }}</span> {{ notif.get_content }}</p>
+        <p class="text-gray-500">{{ notif.created_at|formattime }}</p>
+    </div>
 
-  {% if not notif.is_read %}
-  <button class="aspect-square">
-    <img src="{% static 'teknotes/images/Dot.svg' %}" alt="Dot" />
-  </button>
-  {% endif %}
+    {% if not notif.is_read %}
+    <button class="aspect-square">
+        <img src="{% static 'teknotes/images/Dot.svg' %}" alt="Dot" />
+    </button>
+    {% endif %}
 </div>
 
 <script>
-  function redirect_to_notif(url) {
-    window.location.href = url;
-  }
+    function redirect_to_notif(url) {
+        window.location.href = url;
+    }
+    
 </script>

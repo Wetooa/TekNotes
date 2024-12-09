@@ -8,10 +8,14 @@
     <div class="flex flex-col max-w-[800px] w-full rounded-xl bg-gray-50 self-center shadow-lg overflow-y-scroll">
         <div class="flex px-4 py-2 bg-rose-700 w-full justify-between items-center rounded-t-xl">
             <p class="font-medium text-gray-50 text-lg">Tek a note</p>
-            <a href="javascript:history.back()"><img src="{% static 'teknotes/images/Close.svg' %}" alt="x"></a>
+            <a href="javascript:history.back()">
+                <svg class="fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path d="M312.1 375c9.369 9.369 9.369 24.57 0 33.94s-24.57 9.369-33.94 0L160 289.9l-119 119c-9.369 9.369-24.57 9.369-33.94 0s-9.369-24.57 0-33.94L126.1 256L7.027 136.1c-9.369-9.369-9.369-24.57 0-33.94s24.57-9.369 33.94 0L160 222.1l119-119c9.369-9.369 24.57-9.369 33.94 0s9.369 24.57 0 33.94L193.9 256L312.1 375z"/>
+                </svg>
+            </a>
         </div>
 
-        <div class="flex flex-col items-center justify-center">
+        <div class="flex flex-col justify-center items-center">
             <form action="." method="post" class="flex flex-col w-full">
                 {{ form.media }}
                 {% csrf_token %}
@@ -21,7 +25,9 @@
                     <div class="relative">
                         <div id="dropdown-button" class="flex justify-between w-full px-4 py-3 bg-gray-50 border-2 border-yellow-500 rounded-t-xl cursor-pointer">
                             <span class="text-left text-gray-500" id="selected-course">Course</span>
-                            <img id="dropdown-arrow" src="{% static 'teknotes/images/arrow_right.svg' %}" alt="arrow_right">
+                            <svg id="dropdown-arrow" class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                                <path d="M89.45 87.5l143.1 152c4.375 4.625 6.562 10.56 6.562 16.5c0 5.937-2.188 11.87-6.562 16.5l-143.1 152C80.33 434.1 65.14 434.5 55.52 425.4c-9.688-9.125-10.03-24.38-.9375-33.94l128.4-135.5l-128.4-135.5C45.49 110.9 45.83 95.75 55.52 86.56C65.14 77.47 80.33 77.87 89.45 87.5z"/>
+                            </svg>
                         </div>
 
                         <div id="dropdown-menu" class="hidden absolute w-full bg-gray-50 border-2 border-t-0 border-yellow-500 rounded-b-xl shadow-lg z-10">
@@ -30,9 +36,15 @@
                                     None
                                 </li>
                                 {% for course in form.course.field.queryset %}
-                                    <li class="rounded-md cursor-pointer px-3 py-1.5 hover:bg-gray-600 text-gray-50 bg-{{ course.color }} select-course" data-value="{{ course.id }}">
-                                        {{ course }}
-                                    </li>
+                                    <div class="flex flex-wrap rounded-md cursor-pointer gap-1.5 px-3 py-1.5 justify-between hover:bg-gray-600 text-gray-50 bg-{{ course.color }}" data-value="{{ course.id }}">
+                                        <p class="text-nowrap select-course">{{ course }}</p>
+                                        {% if request.user != course.created_by %}
+                                            <div class="flex gap-2 items-center text-nowrap">
+                                                <img src="{{ course.created_by.profile.avatar.url }}" alt="Profile Image" class="h-4 w-4 aspect-square rounded-full">
+                                                <div class="font-medium text-sm">{{ course.created_by.get_full_name }}</div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -44,10 +56,10 @@
                                 var dropdownMenu = $('#dropdown-menu');
                                 if (dropdownMenu.is(':visible')) {
                                     dropdownMenu.hide(150);
-                                    $('#dropdown-arrow').attr('src', "{% static 'teknotes/images/arrow_right.svg' %}");
+                                    changePath("#dropdown-arrow", angleRight, '0 0 256 512');
                                 } else {
                                     dropdownMenu.show(150);
-                                    $('#dropdown-arrow').attr('src', "{% static 'teknotes/images/arrow_down.svg' %}");
+                                    changePath("#dropdown-arrow", angleDown, '0 0 384 512');
                                 }
                             });
 
@@ -55,7 +67,7 @@
                                 if(!$(event.target).closest('#dropdown-button, #dropdown-menu').length) {
                                     if($('#dropdown-menu').is(":visible")) {
                                         $('#dropdown-menu').hide(150);
-                                        $('#dropdown-arrow').attr('src', "{% static 'teknotes/images/arrow_right.svg' %}");
+                                        changePath("#dropdown-arrow", angleRight, '0 0 256 512');
                                     }
                                 }
                             });
@@ -67,7 +79,7 @@
                                 $('#selected-course').text(courseText);
                                 $('#selected-course-value').val(courseValue);
                                 $('#dropdown-menu').hide(150);
-                                $('#dropdown-arrow').attr('src', "{% static 'teknotes/images/arrow_right.svg' %}");
+                                changePath("#dropdown-arrow", angleRight, '0 0 256 512');
                             });
                         });
                     </script>
@@ -75,22 +87,6 @@
                     <div class="flex flex-col gap-3 px-4 py-3 border-2 border-b-0 border-yellow-500 mt-[-2px]">
                         {{ form.title }}
                         {{ form.content }}
-                        <div class="flex gap-3">
-                            <label for="image-upload">
-                                <img class="cursor-pointer" src="{% static 'teknotes/images/Image.svg' %}" alt="image">
-                                <input id="image-upload" type="file" accept="image/png, image/jpeg" style="display:none;">
-                            </label>
-
-                            <label for="video-upload">
-                                <img class="cursor-pointer" src="{% static 'teknotes/images/Video.svg' %}" alt="video">
-                                <input id="video-upload" type="file" accept="video/mp4, video/avi" style="display:none;">
-                            </label>
-
-                            <label for="sound-upload">
-                                <img class="cursor-pointer" src="{% static 'teknotes/images/Sound.svg' %}" alt="sound">
-                                <input id="sound-upload" type="file" accept="audio/mpeg, audio/wav" style="display:none;">
-                            </label>
-                        </div>
                     </div>
 
                     <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 mt-[-2px]">

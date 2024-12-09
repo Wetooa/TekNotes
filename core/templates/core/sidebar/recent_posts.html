@@ -1,27 +1,25 @@
 {% load static %}
 {% load custom_filters %}
-<link rel="stylesheet" href="{% static 'teknotes/css/highlight.css' %}">
 
-<div class="border-b-2 pb-4 mb-6">
-  <h3 class="text-2xl font-semibold text-gray-800">Recent Posts</h3>
-  <div class="space-y-6">
-    {% for note in recent_posts %}
-      <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition-shadow duration-200">
-        {% include "core/sidebar/user_pfp_and_time.html" %}
-        <h4 class="text-lg font-semibold text-gray-900">
-          <a href="{% url 'notes:note_detail' note.id %}" class="hover:text-blue-600">{{ note.title }}</a>
-        </h4>
-        <div class="mt-2 text-gray-700 text-sm">
-          {% if note.content %}
-            {{ note.content| safe | truncatewords:30 }}
-          {% else %}
-            No content available
-          {% endif %}
-        </div>
-        <a href="{% url 'notes:note_detail' note.id %}" class="text-sm text-blue-500 hover:underline mt-2 block">Read more</a>
-      </div>
-    {% empty %}
-      <p class="text-gray-500">No recent posts available.</p>
-    {% endfor %}
-  </div>
+<div class="flex flex-col gap-3 p-4 rounded-xl rounded-xl border-2 border-gray-300 mb-3">
+    <h3 class="text-xl font-semibold text-gray-700">Recent Notes</h3>
+    <div class="flex flex-col gap-3">
+        {% for note in recent_posts %}
+            <a href="{% url 'notes:note_detail' note.id %}" class="transition-all flex flex-col cursor-pointer bg-gray-50 hover:bg-gray-100 hover:shadow-md rounded-md p-3 gap-2 items-start overflow-hidden">
+                <div class="flex items-center w-full overflow-hidden gap-2">
+                    <div class="flex flex-1 gap-2 items-center overflow-hidden">
+                        <img src="{{ note.created_by.profile.avatar.url }}" alt="Profile Image" class="h-4 w-4 aspect-square rounded-full">
+                        <p class="text-gray-500 font-medium text-sm overflow-hidden">{{ note.created_by.get_full_name }}</p>
+                    </div>
+                    <p class="text-gray-500 text-sm">{{ note.modified_at|formattime }}</p>
+                </div>
+                <div class="flex gap-2 items-center overflow-hidden">
+                    {% if note.course %}
+                        <p class="text-sm text-gray-50 bg-{{ note.course.color }} px-2 py-0.5 rounded text-nowrap overflow-hidden text-ellipsis ">{{ note.course.code }}</p>
+                    {% endif %}
+                    <h3 class="text-lg font-semibold text-gray-700 text-nowrap overflow-hidden text-ellipsis ">{{ note.title|truncatechars:13 }}</h3>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
 </div>

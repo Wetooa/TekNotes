@@ -11,8 +11,10 @@
             {% if users %}
                 <div class="flex flex-col gap-3">
                     {% for user in users %}
-                        <div class="flex rounded-xl gap-3">
-                            <img src="{% static 'teknotes/images/User.svg' %}" alt="User">
+                        <div class="flex rounded-xl gap-3 items-center">
+                            <svg class="fill-gray-700" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"/>
+                            </svg>
                             <p class="nav-text text-lg text-gray-700 font-medium">Users</p>
                         </div>
                         <a href="{% url 'authentication:profile' user.id %}" class="transition-all flex flex-wrap bg-gray-50 w-full p-6 gap-6 rounded-xl overflow-hidden shadow-xl justify-between hover:bg-gray-100">
@@ -20,23 +22,29 @@
                                 <div class="flex aspect-square h-full rounded-full bg-[url('{{ user.profile.avatar.url }}')] bg-cover border-2 border-yellow-500 shadow-lg"></div>
                                 <div class="flex flex-col gap-3 items-baseline">
                                     <p class="text-2xl text-gray-700 font-semibold">
-                                        {% highlight user.first_name query "user" %} {% highlight user.last_name query "user" %}
+                                        {% highlight user.get_full_name query "user" %}
                                     </p>
                                     <p class="text-xl text-gray-500"> {% highlight user.email query "user" %} </p>
                                     <p class="text-gray-700 text-xl">{% highlight user.profile.bio query "user" %}</p>
                                 </div>
                             </div>
                             <div class="flex items-end gap-3 justify-between">
-                                <div class="flex gap-2 bg-gray-200 rounded-lg overflow-hidden px-3 py-1.5">
-                                    <img src="{% static 'teknotes/images/notebook.svg' %}" alt="Notebook">
+                                <div class="flex gap-2 bg-gray-200 rounded-lg items-center overflow-hidden px-3 py-1.5">
+                                    <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <path d="M416 0H128C92.65 0 64 28.65 64 64v32H24C10.75 96 0 106.8 0 120S10.75 144 24 144H64v88H24C10.75 232 0 242.8 0 256s10.75 24 24 24H64v88H24C10.75 368 0 378.8 0 392S10.75 416 24 416H64v32c0 35.35 28.65 64 64 64h288c35.35 0 64-28.65 64-64V64C480 28.65 451.3 0 416 0zM112 448v-32h24C149.3 416 160 405.3 160 392S149.3 368 136 368H112V280h24C149.3 280 160 269.3 160 256S149.3 232 136 232H112V144h24C149.3 144 160 133.3 160 120S149.3 96 136 96H112V64c0-8.838 7.164-16 16-16h64v416H128C119.2 464 112 456.8 112 448zM432 448c0 8.836-7.164 16-16 16H240v-416H416c8.836 0 16 7.162 16 16V448z"/>
+                                    </svg>
                                     <p class="text-gray-700 text-lg">{{ user.notes.count }} notes</p>
                                 </div>
-                                <div class="flex gap-2 bg-gray-200 rounded-lg overflow-hidden px-3 py-1.5">
-                                    <img src="{% static 'teknotes/images/likes.svg' %}" alt="Like">
+                                <div class="flex gap-2 bg-gray-200 rounded-lg items-center overflow-hidden px-3 py-1.5">
+                                    <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <path d="M96 191.1H32c-17.67 0-32 14.33-32 31.1v223.1c0 17.67 14.33 31.1 32 31.1h64c17.67 0 32-14.33 32-31.1V223.1C128 206.3 113.7 191.1 96 191.1zM512 227c0-36.89-30.05-66.92-66.97-66.92h-99.86C354.7 135.1 360 113.5 360 100.8c0-33.8-26.2-68.78-70.06-68.78c-46.61 0-59.36 32.44-69.61 58.5c-31.66 80.5-60.33 66.39-60.33 93.47c0 12.84 10.36 23.99 24.02 23.99c5.256 0 10.55-1.721 14.97-5.26c76.76-61.37 57.97-122.7 90.95-122.7c16.08 0 22.06 12.75 22.06 20.79c0 7.404-7.594 39.55-25.55 71.59c-2.046 3.646-3.066 7.686-3.066 11.72c0 13.92 11.43 23.1 24 23.1h137.6C455.5 208.1 464 216.6 464 227c0 9.809-7.766 18.03-17.67 18.71c-12.66 .8593-22.36 11.4-22.36 23.94c0 15.47 11.39 15.95 11.39 28.91c0 25.37-35.03 12.34-35.03 42.15c0 11.22 6.392 13.03 6.392 22.25c0 22.66-29.77 13.76-29.77 40.64c0 4.515 1.11 5.961 1.11 9.456c0 10.45-8.516 18.95-18.97 18.95h-52.53c-25.62 0-51.02-8.466-71.5-23.81l-36.66-27.51c-4.315-3.245-9.37-4.811-14.38-4.811c-13.85 0-24.03 11.38-24.03 24.04c0 7.287 3.312 14.42 9.596 19.13l36.67 27.52C235 468.1 270.6 480 306.6 480h52.53c35.33 0 64.36-27.49 66.8-62.2c17.77-12.23 28.83-32.51 28.83-54.83c0-3.046-.2187-6.107-.6406-9.122c17.84-12.15 29.28-32.58 29.28-55.28c0-5.311-.6406-10.54-1.875-15.64C499.9 270.1 512 250.2 512 227z"/>
+                                    </svg>
                                     <p class="text-gray-700 text-lg">{{ user.likes.count }} likes</p>
                                 </div>
-                                <div class="flex gap-2 bg-gray-200 rounded-lg overflow-hidden px-3 py-1.5">
-                                    <img src="{% static 'teknotes/images/Course.svg' %}" alt="Course">
+                                <div class="flex gap-2 bg-gray-200 rounded-lg items-center overflow-hidden px-3 py-1.5">
+                                    <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                                        <path d="M623.1 136.9l-282.7-101.2C334.3 33.23 327.2 32 320 32S305.7 33.23 298.8 35.68L16.05 136.9C6.438 140.4 0 149.6 0 160s6.438 19.65 16.05 23.09L76.07 204.6c-11.89 15.8-20.26 34.16-24.55 53.95C40.05 263.4 32 274.8 32 288c0 9.953 4.814 18.49 11.94 24.36l-24.83 149C17.48 471.1 25 480 34.89 480H93.11c9.887 0 17.41-8.879 15.78-18.63l-24.83-149C91.19 306.5 96 297.1 96 288c0-10.29-5.174-19.03-12.72-24.89c4.252-17.76 12.88-33.82 24.94-47.03l190.6 68.23C305.7 286.8 312.8 288 320 288s14.35-1.229 21.21-3.684l282.7-101.2C633.6 179.6 640 170.4 640 160S633.6 140.4 623.1 136.9zM325.1 239.1c-4.428 1.584-8.197 .6816-10.09 .0059L175.5 189.2l149.2-45.92c8.453-2.594 13.16-11.55 10.57-20.02c-2.594-8.438-11.57-13.27-20.01-10.55L125.2 171.2L93.96 160l220.1-79.12c4.428-1.584 8.197-.6836 10.09-.0059L546 160L325.1 239.1zM452.3 278.5L464 390.7C464 401.3 414.5 432 320 432s-144-30.72-144-41.34l11.72-112.1l-46.08-16.5l-13.51 126.1C128 449.3 224.6 480 320 480s192-30.69 191.9-91.81l-13.51-126.1L452.3 278.5z"/>
+                                    </svg>
                                     <p class="text-gray-700 text-lg">{{ user.courses.count }} courses</p>
                                 </div>
                             </div>
@@ -51,8 +59,10 @@
 
             {% if tags %}
                 <div class="flex flex-col gap-3">
-                    <div class="flex rounded-xl gap-3">
-                        <img src="{% static 'teknotes/images/Tag.svg' %}" alt="Tag">
+                    <div class="flex rounded-xl gap-3 items-center">
+                        <svg class="fill-gray-700" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 447">
+                            <path d="m427.36,198.23c-28.66-28.49-57.2-57.1-85.79-85.67-30.52-30.51-61.12-60.95-91.52-91.59C236.75,7.56,221.07.1,202.08.09c-50.52-.03-101.04-.22-151.55.1-17.07.11-31.6,6.57-41.55,21.22C2.75,30.56.11,40.86.07,51.8c-.09,25.94-.03,51.89-.03,77.83,0,23.45.13,46.9-.04,70.35-.14,19.35,6.51,35.7,20.23,49.39,59.34,59.21,118.54,118.54,177.9,177.72,12.7,12.66,28.32,19.62,46.24,19.9,18.31.29,34.51-5.91,47.65-19.01,45.14-45,90.26-90.02,135.32-135.1,12.04-12.04,19.58-26.35,20.53-43.63,1.12-20.18-6.33-36.91-20.54-51.03Zm-35.48,60.95c-44.39,44.34-88.79,88.67-133.19,132.99-8.5,8.48-17.73,8.56-26.19.11-59.21-59.15-118.39-118.33-177.6-177.48-3.8-3.8-5.93-8.06-5.92-13.58.08-49.64.04-99.29.05-148.93,0-.86.08-1.73.15-3.18h4.36c48.52,0,97.04.05,145.56-.06,6.67-.02,11.97,2.17,16.68,6.88,58.7,58.78,117.48,117.49,176.23,176.22,8.97,8.96,8.93,17.99-.12,27.03Z"/><path d="m114.43,82.18c-19.16.09-32.37,13.39-32.34,32.59.03,18.81,13.85,32.56,32.63,32.44,18.68-.12,32.37-13.78,32.42-32.36.05-19.2-13.52-32.76-32.71-32.67Z"/>
+                        </svg>
                         <p class="text-lg text-gray-700 font-medium">Tags</p>
                     </div>
                     {% include 'tags/course_and_tags.html' with wrap=True %}
@@ -61,8 +71,10 @@
 
             {% if courses %}
                 <div class="flex flex-col gap-3">
-                    <div class="flex rounded-xl gap-3">
-                        <img src="{% static 'teknotes/images/Course.svg' %}" alt="Courses">
+                    <div class="flex rounded-xl gap-3 items-center">
+                        <svg class="fill-gray-700" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                            <path d="M623.1 136.9l-282.7-101.2C334.3 33.23 327.2 32 320 32S305.7 33.23 298.8 35.68L16.05 136.9C6.438 140.4 0 149.6 0 160s6.438 19.65 16.05 23.09L76.07 204.6c-11.89 15.8-20.26 34.16-24.55 53.95C40.05 263.4 32 274.8 32 288c0 9.953 4.814 18.49 11.94 24.36l-24.83 149C17.48 471.1 25 480 34.89 480H93.11c9.887 0 17.41-8.879 15.78-18.63l-24.83-149C91.19 306.5 96 297.1 96 288c0-10.29-5.174-19.03-12.72-24.89c4.252-17.76 12.88-33.82 24.94-47.03l190.6 68.23C305.7 286.8 312.8 288 320 288s14.35-1.229 21.21-3.684l282.7-101.2C633.6 179.6 640 170.4 640 160S633.6 140.4 623.1 136.9zM325.1 239.1c-4.428 1.584-8.197 .6816-10.09 .0059L175.5 189.2l149.2-45.92c8.453-2.594 13.16-11.55 10.57-20.02c-2.594-8.438-11.57-13.27-20.01-10.55L125.2 171.2L93.96 160l220.1-79.12c4.428-1.584 8.197-.6836 10.09-.0059L546 160L325.1 239.1zM452.3 278.5L464 390.7C464 401.3 414.5 432 320 432s-144-30.72-144-41.34l11.72-112.1l-46.08-16.5l-13.51 126.1C128 449.3 224.6 480 320 480s192-30.69 191.9-91.81l-13.51-126.1L452.3 278.5z"/>
+                        </svg>
                         <p class="text-lg text-gray-700 font-medium">Courses</p>
                     </div>
                     <div class="flex flex-wrap gap-3">
@@ -75,8 +87,10 @@
 
             {% if notes %}
                 <div class="flex flex-col gap-3">
-                    <div class="flex rounded-xl gap-3">
-                        <img src="{% static 'teknotes/images/notebook.svg' %}" alt="Note">
+                    <div class="flex rounded-xl gap-3 items-center">
+                        <svg class="fill-gray-700" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M416 0H128C92.65 0 64 28.65 64 64v32H24C10.75 96 0 106.8 0 120S10.75 144 24 144H64v88H24C10.75 232 0 242.8 0 256s10.75 24 24 24H64v88H24C10.75 368 0 378.8 0 392S10.75 416 24 416H64v32c0 35.35 28.65 64 64 64h288c35.35 0 64-28.65 64-64V64C480 28.65 451.3 0 416 0zM112 448v-32h24C149.3 416 160 405.3 160 392S149.3 368 136 368H112V280h24C149.3 280 160 269.3 160 256S149.3 232 136 232H112V144h24C149.3 144 160 133.3 160 120S149.3 96 136 96H112V64c0-8.838 7.164-16 16-16h64v416H128C119.2 464 112 456.8 112 448zM432 448c0 8.836-7.164 16-16 16H240v-416H416c8.836 0 16 7.162 16 16V448z"/>
+                        </svg>
                         <p class="text-lg text-gray-700 font-medium">Notes</p>
                     </div>
                     {% include 'notes/notes.html' with no_scroll=True %}
@@ -91,109 +105,116 @@
                 {% include 'core/no_results.html' with message="No results for" query=query %}
             {% endif %}
         </div>
-        {% if not course %}
-            <div id="filters" class="flex flex-col bg-gray-50 max-w-72 w-full rounded-xl overflow-hidden shadow-xl">
-                <div class="flex items-center bg-rose-700 px-4 py-2 gap-2">
-                    <img src="{% static 'teknotes/images/Filter.svg' %}" alt="Filter">
-                    <h1 class="text-gray-50 font-medium text-lg">Filters</h1>
-                </div>
-                <form action="{% url 'advanced_search:search' %}" method="get" class="flex flex-col p-3 gap-2">
-                    <input type="hidden" name="query" value="{{ query }}">
-
-                    <button type="submit" name="category" value="all" class="transition-all flex px-4 py-3 gap-3 rounded-md {% if request.GET.category == 'all' %}bg-gray-200{% else %}bg-gray-50{% endif %} hover:bg-gray-200">
-                        <img src="{% static 'teknotes/images/All.svg' %}" alt="All">
-                        <p class="text-lg text-gray-700 font-medium">All</p>
-                    </button>
-
-                    <button type="submit" name="category" value="notes" class="transition-all flex px-4 py-3 gap-3 rounded-md {% if request.GET.category == 'notes' %}bg-gray-200{% else %}bg-gray-50{% endif %} hover:bg-gray-200">
-                        <img src="{% static 'teknotes/images/Notebook.svg' %}" alt="Note">
-                        <p class="text-lg text-gray-700 font-medium">Notes</p>
-                    </button>
-
-                    {% if request.GET.category == 'notes' %}
-                        <div class="transition-all px-4 py-3 gap-3 flex flex-col rounded-md border-2 border-gray-200 items-end">
-                            <div class="flex gap-3 items-center w-full">
-                                <p class="text-gray-700 text-sm bg-gray-200 px-2 py-1 rounded-md">From</p>
-                                <input type="date" name="from" value="{{ request.GET.from }}" class="bg-gray-50 text-gray-700 flex-1 border-none outline-none">
-                            </div>
-                            <div class="flex gap-3 items-center w-full">
-                                <p class="text-gray-700 text-sm bg-gray-200 px-2 py-1 rounded-md">To</p>
-                                <input type="date" name="to" value="{{ request.GET.to }}" class="bg-gray-50 text-gray-700 flex-1 border-none outline-none">
-                            </div>
-                            <div class="flex gap-3 items-center w-full">
-                                <p class="text-gray-700 text-sm bg-gray-200 px-2 py-1 rounded-md">By</p>
-                                <select name="by" class="text-gray-700 bg-gray-50 flex-1 border-none outline-none">
-                                    <option value="">Anyone</option>
-                                    {% for author in authors %}
-                                        <option value="{{ author.id }}" {% if request.GET.by == author.id|stringformat:"s" %}selected{% endif %}>
-                                            {{ author }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <button type="submit" name="category" value="notes" class="text-gray-50 bg-rose-700 rounded-md shadow-md px-2 py-1">Search</button>
-                        </div>
-                    {% endif %}
-
-                    <button type="submit" name="category" value="users" class="transition-all flex px-4 py-3 gap-3 rounded-md {% if request.GET.category == 'users' %}bg-gray-200{% else %}bg-gray-50{% endif %} hover:bg-gray-200">
-                        <img src="{% static 'teknotes/images/User.svg' %}" alt="User">
-                        <p class="text-lg text-gray-700 font-medium">Users</p>
-                    </button>
-
-                    {% if request.GET.category == 'users' %}
-                        <div class="transition-all px-4 py-3 gap-3 flex flex-col rounded-md border-2 border-gray-200 items-end">
-                            <div class="flex gap-3 items-center w-full">
-                                <p class="text-gray-700 text-sm bg-gray-200 px-2 py-1 rounded-md">Location</p>
-                                <select name="location" class="text-gray-700 bg-gray-50 flex-1 border-none outline-none">
-                                    <option value="">Anywhere</option>
-                                    {% for location in locations %}
-                                        <option value="{{ location }}" {% if request.GET.location == location %}selected{% endif %}>
-                                            {{ location }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <button type="submit" name="category" value="users" class="text-gray-50 bg-rose-700 rounded-md shadow-md px-2 py-1">Search</button>
-                        </div>
-                    {% endif %}
-
-                    <button type="submit" name="category" value="courses" class="transition-all flex px-4 py-3 gap-3 rounded-md {% if request.GET.category == 'courses' %}bg-gray-200{% else %}bg-gray-50{% endif %} hover:bg-gray-200">
-                        <img src="{% static 'teknotes/images/Course.svg' %}" alt="Course">
-                        <p class="text-lg text-gray-700 font-medium">Courses</p>
-                    </button>
-
-                    {% if request.GET.category == 'courses' %}
-                        <div class="transition-all px-4 py-3 gap-3 flex flex-col rounded-md border-2 border-gray-200 items-end">
-                            <div class="flex gap-3 items-center w-full">
-                                <p class="text-gray-700 text-sm bg-gray-200 px-2 py-1 rounded-md">By</p>
-                                <select name="by" class="text-gray-700 bg-gray-50 flex-1 border-none outline-none">
-                                    <option value="">Anyone</option>
-                                    {% for author in authors %}
-                                        <option value="{{ author.id }}" {% if request.GET.by == author.id|stringformat:"s" %}selected{% endif %}>
-                                            {{ author }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <button type="submit" name="category" value="courses" class="text-gray-50 bg-rose-700 rounded-md shadow-md px-2 py-1">Search</button>
-                        </div>
-                    {% endif %}
-
-                    <button type="submit" name="category" value="tags" class="transition-all flex px-4 py-3 gap-3 rounded-md {% if request.GET.category == 'tags' %}bg-gray-200{% else %}bg-gray-50{% endif %} hover:bg-gray-200">
-                        <img src="{% static 'teknotes/images/Tag.svg' %}" alt="Tag">
-                        <p class="text-lg text-gray-700 font-medium">Tags</p>
-                    </button>
-                </form>
-            </div>
-            <script>
-                $(window).resize(() => {
-                    if ($(window).width() < 760) {
-                        $("#filters").hide(150);
-                    } else {
-                        $("#filters").show(150);
-                    }
-                });
-            </script>
-        {% endif %}
     </div>
+{% endblock %}
+
+
+{% block other-widgets %}
+    {% if not course %}
+        <div id="filters" class="flex flex-col bg-gray-50 rounded-xl shadow-xl">
+            <div class="flex items-center bg-rose-700 px-4 py-2 gap-2 rounded-t-xl">
+                <svg class="fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path d="M507.7 58.71C500 42.23 483.8 32 465.3 32H46.65C28.21 32 11.97 42.23 4.283 58.71C-3.195 74.73-.7578 93.16 10.64 106.8l165.4 203.1v67.71c0 12.55 6.178 24.3 16.52 31.45l82.32 63.55C281.1 477.6 289.6 480 297.4 480c21.28 0 38.59-17.19 38.59-38.33V309.9l165.5-203.3C512.8 93.16 515.2 74.73 507.7 58.71zM295.2 283.1c-4.652 5.713-7.191 12.86-7.191 20.23V422.1l-64-49.39V304.2c0-7.371-2.539-14.52-7.191-20.23L50.77 80.04h410.4L295.2 283.1z"/>
+                </svg>
+                <h1 class="text-gray-50 font-medium text-lg">Filters</h1>
+            </div>
+            <form action="{% url 'advanced_search:search' %}" method="get" class="flex flex-col p-3 gap-2">
+                <input type="hidden" name="query" value="{{ query }}">
+
+                <button type="submit" name="category" value="all" class="transition-all flex px-4 py-3 gap-3 items-center rounded-md {% if request.GET.category == 'all' %}bg-gray-200{% else %}bg-gray-50{% endif %} hover:bg-gray-200">
+                    <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M504.1 471l-134-134C399.1 301.5 415.1 256.8 415.1 208c0-114.9-93.13-208-208-208S-.0002 93.13-.0002 208S93.12 416 207.1 416c48.79 0 93.55-16.91 129-45.04l134 134C475.7 509.7 481.9 512 488 512s12.28-2.344 16.97-7.031C514.3 495.6 514.3 480.4 504.1 471zM48 208c0-88.22 71.78-160 160-160s160 71.78 160 160s-71.78 160-160 160S48 296.2 48 208z"/>
+                    </svg>
+                    <p class="text-lg text-gray-700 font-medium">All</p>
+                </button>
+
+                <button type="submit" name="category" value="notes" class="transition-all flex px-4 py-3 gap-3 items-center rounded-md {% if request.GET.category == 'notes' %}bg-gray-200{% else %}bg-gray-50{% endif %} hover:bg-gray-200">
+                    <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M416 0H128C92.65 0 64 28.65 64 64v32H24C10.75 96 0 106.8 0 120S10.75 144 24 144H64v88H24C10.75 232 0 242.8 0 256s10.75 24 24 24H64v88H24C10.75 368 0 378.8 0 392S10.75 416 24 416H64v32c0 35.35 28.65 64 64 64h288c35.35 0 64-28.65 64-64V64C480 28.65 451.3 0 416 0zM112 448v-32h24C149.3 416 160 405.3 160 392S149.3 368 136 368H112V280h24C149.3 280 160 269.3 160 256S149.3 232 136 232H112V144h24C149.3 144 160 133.3 160 120S149.3 96 136 96H112V64c0-8.838 7.164-16 16-16h64v416H128C119.2 464 112 456.8 112 448zM432 448c0 8.836-7.164 16-16 16H240v-416H416c8.836 0 16 7.162 16 16V448z"/>
+                    </svg>
+                    <p class="text-lg text-gray-700 font-medium">Notes</p>
+                </button>
+
+                {% if request.GET.category == 'notes' %}
+                    <div class="transition-all px-4 py-3 gap-3 flex flex-col rounded-md border-2 border-gray-200 items-end">
+                        <div class="flex gap-3 items-center w-full">
+                            <p class="text-gray-700 text-sm bg-gray-200 px-2 py-1 rounded-md">From</p>
+                            <input type="date" name="from" value="{{ request.GET.from }}" class="bg-gray-50 text-gray-700 flex-1 border-none outline-none">
+                        </div>
+                        <div class="flex gap-3 items-center w-full">
+                            <p class="text-gray-700 text-sm bg-gray-200 px-2 py-1 rounded-md">To</p>
+                            <input type="date" name="to" value="{{ request.GET.to }}" class="bg-gray-50 text-gray-700 flex-1 border-none outline-none">
+                        </div>
+                        <div class="flex gap-3 items-center w-full">
+                            <p class="text-gray-700 text-sm bg-gray-200 px-2 py-1 rounded-md">By</p>
+                            <select name="by" class="text-gray-700 bg-gray-50 flex-1 border-none outline-none">
+                                <option value="">Anyone</option>
+                                {% for author in authors %}
+                                    <option value="{{ author.id }}" {% if request.GET.by == author.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ author }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" name="category" value="notes" class="text-gray-50 bg-rose-700 rounded-md shadow-md px-2 py-1">Search</button>
+                    </div>
+                {% endif %}
+
+                <button type="submit" name="category" value="users" class="transition-all flex px-4 py-3 gap-3 items-center rounded-md {% if request.GET.category == 'users' %}bg-gray-200{% else %}bg-gray-50{% endif %} hover:bg-gray-200">
+                    <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"/>
+                    </svg>
+                    <p class="text-lg text-gray-700 font-medium">Users</p>
+                </button>
+
+                {% if request.GET.category == 'users' %}
+                    <div class="transition-all px-4 py-3 gap-3 flex flex-col rounded-md border-2 border-gray-200 items-end">
+                        <div class="flex gap-3 items-center w-full">
+                            <p class="text-gray-700 text-sm bg-gray-200 px-2 py-1 rounded-md">Location</p>
+                            <select name="location" class="text-gray-700 bg-gray-50 flex-1 border-none outline-none">
+                                <option value="">Anywhere</option>
+                                {% for location in locations %}
+                                    <option value="{{ location }}" {% if request.GET.location == location %}selected{% endif %}>
+                                        {{ location }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" name="category" value="users" class="text-gray-50 bg-rose-700 rounded-md shadow-md px-2 py-1">Search</button>
+                    </div>
+                {% endif %}
+
+                <button type="submit" name="category" value="courses" class="transition-all flex px-4 py-3 gap-3 items-center rounded-md {% if request.GET.category == 'courses' %}bg-gray-200{% else %}bg-gray-50{% endif %} hover:bg-gray-200">
+                    <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                        <path d="M623.1 136.9l-282.7-101.2C334.3 33.23 327.2 32 320 32S305.7 33.23 298.8 35.68L16.05 136.9C6.438 140.4 0 149.6 0 160s6.438 19.65 16.05 23.09L76.07 204.6c-11.89 15.8-20.26 34.16-24.55 53.95C40.05 263.4 32 274.8 32 288c0 9.953 4.814 18.49 11.94 24.36l-24.83 149C17.48 471.1 25 480 34.89 480H93.11c9.887 0 17.41-8.879 15.78-18.63l-24.83-149C91.19 306.5 96 297.1 96 288c0-10.29-5.174-19.03-12.72-24.89c4.252-17.76 12.88-33.82 24.94-47.03l190.6 68.23C305.7 286.8 312.8 288 320 288s14.35-1.229 21.21-3.684l282.7-101.2C633.6 179.6 640 170.4 640 160S633.6 140.4 623.1 136.9zM325.1 239.1c-4.428 1.584-8.197 .6816-10.09 .0059L175.5 189.2l149.2-45.92c8.453-2.594 13.16-11.55 10.57-20.02c-2.594-8.438-11.57-13.27-20.01-10.55L125.2 171.2L93.96 160l220.1-79.12c4.428-1.584 8.197-.6836 10.09-.0059L546 160L325.1 239.1zM452.3 278.5L464 390.7C464 401.3 414.5 432 320 432s-144-30.72-144-41.34l11.72-112.1l-46.08-16.5l-13.51 126.1C128 449.3 224.6 480 320 480s192-30.69 191.9-91.81l-13.51-126.1L452.3 278.5z"/>
+                    </svg>
+                    <p class="text-lg text-gray-700 font-medium">Courses</p>
+                </button>
+
+                {% if request.GET.category == 'courses' %}
+                    <div class="transition-all px-4 py-3 gap-3 flex flex-col rounded-md border-2 border-gray-200 items-end">
+                        <div class="flex gap-3 items-center w-full">
+                            <p class="text-gray-700 text-sm bg-gray-200 px-2 py-1 rounded-md">By</p>
+                            <select name="by" class="text-gray-700 bg-gray-50 flex-1 border-none outline-none">
+                                <option value="">Anyone</option>
+                                {% for author in authors %}
+                                    <option value="{{ author.id }}" {% if request.GET.by == author.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ author }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" name="category" value="courses" class="text-gray-50 bg-rose-700 rounded-md shadow-md px-2 py-1">Search</button>
+                    </div>
+                {% endif %}
+
+                <button type="submit" name="category" value="tags" class="transition-all flex px-4 py-3 gap-3 items-center rounded-md {% if request.GET.category == 'tags' %}bg-gray-200{% else %}bg-gray-50{% endif %} hover:bg-gray-200">
+                    <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 447">
+                        <path d="m427.36,198.23c-28.66-28.49-57.2-57.1-85.79-85.67-30.52-30.51-61.12-60.95-91.52-91.59C236.75,7.56,221.07.1,202.08.09c-50.52-.03-101.04-.22-151.55.1-17.07.11-31.6,6.57-41.55,21.22C2.75,30.56.11,40.86.07,51.8c-.09,25.94-.03,51.89-.03,77.83,0,23.45.13,46.9-.04,70.35-.14,19.35,6.51,35.7,20.23,49.39,59.34,59.21,118.54,118.54,177.9,177.72,12.7,12.66,28.32,19.62,46.24,19.9,18.31.29,34.51-5.91,47.65-19.01,45.14-45,90.26-90.02,135.32-135.1,12.04-12.04,19.58-26.35,20.53-43.63,1.12-20.18-6.33-36.91-20.54-51.03Zm-35.48,60.95c-44.39,44.34-88.79,88.67-133.19,132.99-8.5,8.48-17.73,8.56-26.19.11-59.21-59.15-118.39-118.33-177.6-177.48-3.8-3.8-5.93-8.06-5.92-13.58.08-49.64.04-99.29.05-148.93,0-.86.08-1.73.15-3.18h4.36c48.52,0,97.04.05,145.56-.06,6.67-.02,11.97,2.17,16.68,6.88,58.7,58.78,117.48,117.49,176.23,176.22,8.97,8.96,8.93,17.99-.12,27.03Z"/><path d="m114.43,82.18c-19.16.09-32.37,13.39-32.34,32.59.03,18.81,13.85,32.56,32.63,32.44,18.68-.12,32.37-13.78,32.42-32.36.05-19.2-13.52-32.76-32.71-32.67Z"/>
+                    </svg>
+                    <p class="text-lg text-gray-700 font-medium">Tags</p>
+                </button>
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}
