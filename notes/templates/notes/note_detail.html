@@ -4,6 +4,7 @@
 {% load custom_filters %}
 
 {% block title %} {{ note.title|truncatechars:16 }} {% endblock %}
+{% block page-title %} {{ note.title }} by {{ note.created_by.get_full_name }} {% endblock %}
 
 {% block content %}
     <div class="flex flex-col bg-gray-50 overflow-hidden shadow-lg rounded-xl w-full h-full max-w-6xl max-h-[700px] self-center justify-self-center">

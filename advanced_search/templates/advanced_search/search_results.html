@@ -4,6 +4,16 @@
 {% load custom_filters %}
 
 {% block title %} {{ title }} {% endblock %}
+{% block page-title %} 
+    {% if not course %}
+        Search results for '{{ query }}' 
+        {% if not request.GET.category == 'all' %}
+            in {{ request.GET.category|title }}
+        {% endif %}
+    {% else %}
+        {{ course.code }} by {{ course.created_by.get_full_name }}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     <div class="flex w-full h-full gap-4">
