@@ -21,14 +21,14 @@
                         window.history.back();
                     }); 
                 </script>
-                <div class="group transition-all course-elem nav-elem flex rounded-xl py-3 bg-gray-50 hover:bg-gray-500 justify-between px-4 w-full border-2 border-gray-200">
+                <div class="group transition-all course-elem nav-elem flex rounded-xl py-3 bg-gray-50 hover:bg-gray-500 justify-between px-4 w-full border-2 border-gray-200 cursor-not-allowed">
                     <p class="course-text text-lg text-gray-700 group-hover:text-gray-50">Course missing </p>
                     <div class="rounded-full bg-gray-500 group-hover:bg-gray-50 h-full min-h-7 aspect-square"></div>
                 </div>
             </div>
             <div class="flex w-full max-w-72 p-6 border-t-2 border-gray-200">
                 <p class="text-gray-700">
-                    <span class="text-gray-400 font-medium">Course (id: {{ course_id }})</span> either doesn't exist or has been deleted.
+                    <span class="text-gray-400 font-medium cursor-not-allowed">Course (id: {{ course_id }})</span> either doesn't exist or has been deleted.
                 </p>
             </div>
         </div>
