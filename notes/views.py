@@ -84,3 +84,34 @@ def hide_note(request, note_id):
         return HttpResponseRedirect(request.META.get("HTTP_REFERER", ""))
 
     return HttpResponseRedirect(request.META.get("HTTP_REFERER", ""))
+
+@login_required
+def edit_note(request, note_id):
+    try:
+        note = Note.objects.get(id=note_id)
+    except Note.DoesNotExist:
+        return render(request, "notes/note_missing.html", {"note_id": note_id})
+    
+    tags = ", ".join(tag.name for tag in note.tags.all())
+
+    if request.method == "POST":
+        form = NoteForm(request.POST, instance=note)
+        if form.is_valid():
+            updated_note = form.save(commit=False)
+            updated_note.created_by = request.user
+            updated_note.save()
+
+            tag_input = request.POST.get("tags", "")
+            if tag_input:
+                tag_names = [tag.strip() for tag in tag_input.split(",")]
+                note.tags.clear()
+                for tag_name in tag_names:
+                    if tag_name:
+                        tag, created = Tag.objects.get_or_create(name=tag_name)
+                        updated_note.tags.add(tag)
+
+            return HttpResponseRedirect("/notebook/")
+    else:
+        form = NoteForm(instance=note)
+
+    return render(request, "notes/edit_note.html", {"form": form, "note": note, "tags": tags})
