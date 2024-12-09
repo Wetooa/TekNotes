@@ -104,9 +104,9 @@
                 {% if request.user.is_authenticated %}
                     <div class="nav-elem transition-all flex rounded-xl bg-gray-50 hover:bg-gray-100 hover:shadow-xl px-4 py-3 gap-3 justify-between items-center relative">
                         <a href="{% url 'authentication:profile' request.user.id %}" class="flex flex-1 gap-3 h-full overflow-hidden">
-                            <div class="flex aspect-square min-h-6 h-full rounded-full bg-[url('{{ user.profile.avatar.url }}')] bg-cover border-2 border-yellow-500 shadow-lg"></div>
+                            <div class="flex aspect-square min-h-6 h-full rounded-full bg-[url('{% if user.profile.avatar.url %}{{ user.profile.avatar.url }}{% else %}https://ui-avatars.com/api/?name={{ user.first_name }}+{{ user.last_name }}{% endif %}')] bg-cover border-2 border-yellow-500"></div>
                             <div class="flex flex-col user-text flex-1 overflow-hidden">
-                                <p class="text-gray-700 font-semibold">{{ request.user.get_full_name }}</p>
+                                <p class="text-gray-700 font-semibold">{{ request.user.get_full_name|truncatechars:14 }}</p>
                                 <p class="text-gray-500">@{{ request.user.username|truncatechars:13 }}</p>
                             </div>
                         </a>
@@ -133,7 +133,10 @@
                         </script>
 
                         <div id="user-settings" class="flex flex-col absolute bg-gray-50 bottom-full mb-2 rounded-xl right-0 w-full text-gray-700 overflow-hidden hidden">
-                            <a class="flex px-4 py-3 hover:bg-gray-100 cursor-pointer">
+                            <a href="{% url 'authentication:edit_profile' %}" class="flex px-4 py-3 hover:bg-gray-100 cursor-pointer">
+                                Edit profile
+                            </a>
+                            <a class="flex px-4 py-3 border-t border-gray-300 hover:bg-gray-100 cursor-pointer">
                                 Edit account details
                             </a>
                             <a href="{% url 'authentication:logout' %}" class="flex px-4 py-3 border-t border-gray-300 hover:bg-gray-100 cursor-pointer">
