@@ -43,10 +43,12 @@ def save_note_clicks(note):
 
 
 def note_detail(request, note_id):
-    note = get_object_or_404(Note, id=note_id)
+    try:
+        note = Note.objects.get(id=note_id)
+    except Note.DoesNotExist:
+        return render(request, "notes/note_missing.html", {"note_id": note_id})
 
     save_note_clicks(note)
-
     return render(request, "notes/note_detail.html", {"note": note})
 
 

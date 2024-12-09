@@ -75,7 +75,11 @@ def search(request):
 
 
 def view_course(request, course_id):
-    course = Course.objects.get(id=course_id)
+    try:
+        course = Course.objects.get(id=course_id)
+    except Course.DoesNotExist:
+        return render(request, "course/course_missing.html", {"course_id": course_id})
+
     notes = Note.objects.filter(course=course)
     tags = Tag.objects.filter(notes__in=notes).distinct()
     return render(
