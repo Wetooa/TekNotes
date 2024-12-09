@@ -47,7 +47,7 @@
                     </svg>
                     <p class="nav-text text-lg text-gray-700 font-medium">Likes</p>
                 </a>
-    
+
                 <div id="courses-dropdown" class="nav-elem hover:bg-gray-300 items-center flex rounded-xl px-4 py-3 gap-4 justify-between select-none">
                     <div class="flex gap-4 items-center">
                         <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
@@ -155,7 +155,13 @@
             </div>
         </nav>
         <main class="flex flex-col flex-1 bg-gray-200 h-full overflow-hidden">
-            <div class="flex flex-col flex-1 h-full gap-3 overflow-hidden p-5 pb-0">
+            <div class="flex px-6 py-3 gap-3 border-b-2 border-gray-300 justify-between items-center">
+                <h3 class="text-xl text-gray-700 font-semibold">Home</h3>
+                <div class="flex items-center gap-6">
+                    {% include 'notifications/notification_widget.html' %}
+                </div>
+            </div>
+            <div class="flex flex-col flex-1 gap-3 overflow-hidden p-5 pb-0">
                 {% block content %}
                 {% endblock %}
             </div>
