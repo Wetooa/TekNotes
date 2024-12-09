@@ -55,9 +55,9 @@ def delete_note(request, note_id):
     note = get_object_or_404(Note, id=note_id, created_by=request.user)
     if request.method == "POST":
         note.delete()
-        return HttpResponseRedirect(request.META.get("HTTP_REFERER", ""))
+        return HttpResponseRedirect("/notebook/")
 
-    return HttpResponseRedirect(request.META.get("HTTP_REFERER", ""))
+    return HttpResponseRedirect("/notebook/")
 
 
 @login_required

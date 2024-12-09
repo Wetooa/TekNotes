@@ -47,7 +47,7 @@
 
                 {% if request.user == note.created_by %}
                     <div class="flex rounded-b-xl overflow-hidden p-2 gap-2">
-                        <form action="{% url 'notes:delete_note' note.id %}" method="POST" class="flex note-form">
+                        <form action="{% url 'notes:delete_note' note.id %}" method="POST" class="flex">
                             {% csrf_token %}
                             <button type="submit" class="flex gap-1 justify-center items-center text-sm bg-rose-200 text-rose-700 rounded-md p-2 w-full">
                                 <svg class="fill-rose-700" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
