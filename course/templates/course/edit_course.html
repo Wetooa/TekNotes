@@ -2,12 +2,13 @@
 
 {% load static %}
 
-{% block title %} Add a course {% endblock %}
+{% block title %} Edit course: {{ course.code }}{% endblock %}
+{% block page-title %} Edit course: {{ course.code }} {% endblock %}
 
 {% block content %}
     <div class="flex flex-col max-w-[450px] w-full rounded-xl bg-gray-50 self-center shadow-lg">
-        <div id="course-bar" class="flex px-4 py-2 bg-rose-700 w-full justify-between items-center rounded-t-xl">
-            <p class="font-medium text-gray-50 text-lg">Add a course</p>
+        <div id="course-bar" class="flex px-4 py-2 bg-{{ course.color }} w-full justify-between items-center rounded-t-xl">
+            <p class="font-medium text-gray-50 text-lg">Edit course</p>
             <a href="javascript:history.back()">
                 <svg class="fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                     <path d="M312.1 375c9.369 9.369 9.369 24.57 0 33.94s-24.57 9.369-33.94 0L160 289.9l-119 119c-9.369 9.369-24.57 9.369-33.94 0s-9.369-24.57 0-33.94L126.1 256L7.027 136.1c-9.369-9.369-9.369-24.57 0-33.94s24.57-9.369 33.94 0L160 222.1l119-119c9.369-9.369 24.57-9.369 33.94 0s9.369 24.57 0 33.94L193.9 256L312.1 375z"/>
@@ -49,7 +50,7 @@
                 </div>
 
                 <div class="flex p-6 gap-3 w-full border-t-2 border-gray-200 items-center">
-                    <button id="course-btn" class="px-4 py-2 text-gray-50 bg-rose-700 font-medium rounded-md w-full">Add course</button>
+                    <button id="course-btn" class="px-4 py-2 text-gray-50 bg-{{ course.color }} font-medium rounded-md w-full">Save</button>
                     <a href="javascript:history.back()" class=" flex px-4 py-2 bg-gray-200 rounded-md w-full justify-center">
                         <p class="text-gray-700">Cancel</p>
                     </a>

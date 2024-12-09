@@ -50,7 +50,6 @@
 
     $(document).click((event) => {
         const isClickInside = $(event.target).closest('#notif-dropdown, #notif-btn').length > 0;
-        console.log(isClickInside);
         if (!isClickInside) {
             $('#notif-dropdown').hide(150);
         }
