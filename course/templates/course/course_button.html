@@ -7,7 +7,12 @@
             <p>course created by</p>
             <a href="{% url 'authentication:profile' course.created_by.id %}" class="flex gap-2">
                 <img src="{{ course.created_by.profile.avatar.url }}" alt="Profile Image" class="h-6 w-6 aspect-square rounded-full">
-                <p class="font-medium">{{ course.created_by.get_full_name }}</p>
+                <p class="font-medium">
+                    {{ course.created_by.get_full_name }}
+                    {% if course.created_by == request.user %}
+                        <span class="font-normal">(You)</span>
+                    {% endif %}
+                </p>
             </a>
             {% if course.created_by == request.user %}
                 <div class="flex ml-4 gap-2">

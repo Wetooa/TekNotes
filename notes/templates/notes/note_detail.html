@@ -4,7 +4,14 @@
 {% load custom_filters %}
 
 {% block title %} {{ note.title|truncatechars:16 }} {% endblock %}
-{% block page-title %} {{ note.title }} by {{ note.created_by.get_full_name }} {% endblock %}
+{% block page-title %} 
+    '{{ note.title }}' by
+    {% if note.created_by == request.user %}
+        you
+    {% else %}
+        {{ note.created_by.get_full_name }} 
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     <div class="flex flex-col bg-gray-50 overflow-hidden shadow-lg rounded-xl w-full h-full max-w-6xl max-h-[700px] self-center justify-self-center">
@@ -41,6 +48,9 @@
                         <img src="{{ note.created_by.profile.avatar.url }}" alt="Profile Image" class="h-6 w-6 aspect-square rounded-full">
                         <p class="text-gray-700 font-semibold">
                             {{ note.created_by.get_full_name }}
+                            {% if note.created_by == request.user %}
+                                <span class="font-normal text-gray-400">(You)</span>
+                            {% endif %}
                         </p>
                     </a>
                 </div>

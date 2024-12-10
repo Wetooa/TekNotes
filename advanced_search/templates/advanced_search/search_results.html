@@ -7,7 +7,7 @@
 {% block page-title %} 
     {% if not course %}
         Search results for '{{ query }}' 
-        {% if not request.GET.category == 'all' %}
+        {% if request.GET.category != 'all' and request.GET.category %}
             in {{ request.GET.category|title }}
         {% endif %}
     {% else %}
@@ -28,13 +28,16 @@
                             <p class="nav-text text-lg text-gray-700 font-medium">Users</p>
                         </div>
                         <a href="{% url 'authentication:profile' user.id %}" class="transition-all flex flex-wrap bg-gray-50 w-full p-6 gap-6 rounded-xl overflow-hidden shadow-xl justify-between hover:bg-gray-100">
-                            <div class="flex gap-6">
+                            <div class="flex flex-1 gap-6">
                                 <div class="flex aspect-square h-full rounded-full bg-[url('{{ user.profile.avatar.url }}')] bg-cover border-2 border-yellow-500 shadow-lg"></div>
                                 <div class="flex flex-col gap-3 items-baseline">
-                                    <p class="text-2xl text-gray-700 font-semibold">
+                                    <p class="inline-block text-2xl text-gray-700 font-semibold">
                                         {% highlight user.get_full_name query "user" %}
+                                        {% if user == request.user %}
+                                            <span class="font-normal text-gray-400">(You)</span>
+                                        {% endif %}
                                     </p>
-                                    <p class="text-xl text-gray-500"> {% highlight user.email query "user" %} </p>
+                                    <p class="text-xl text-gray-500"> @{% highlight user.username query "user" %} </p>
                                     <p class="text-gray-700 text-xl">{% highlight user.profile.bio query "user" %}</p>
                                 </div>
                             </div>
