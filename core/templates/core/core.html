@@ -76,13 +76,24 @@
     </body>
 
     <script>
+        let lastPage = JSON.parse(localStorage.getItem('lastPage'));
+        if (!/tek_a_note|delete|edit|hide|archive\/\d+|add_a_course/.test(window.location.href)) {
+            lastPage = window.location.href;
+            localStorage.setItem('lastPage', JSON.stringify(lastPage));
+        }
+
+        function goToLastPage() {
+            if (lastPage) {
+                window.location.href = lastPage;
+            }
+        }
+
         function changePath(elem, path, viewBox) {
             $(elem).html(path);
             $(elem).attr('viewBox', viewBox);
         }
 
         function toggleDarkMode() {
-            console.log("YOO");
             isDark = !isDark;
             localStorage.setItem('isDark', JSON.stringify(isDark));
             setDarkMode();
