@@ -157,19 +157,19 @@
         </nav>
         <main class="flex flex-col flex-1 bg-gray-200 h-full overflow-hidden">
             <div class="flex px-6 py-3 gap-3 border-b-2 border-gray-300 justify-between items-center">
-                <div class="flex items-center gap-6">
-                    <svg id="title-back-btn" class="transition-all fill-gray-700 hover:fill-gray-400 cursor-pointer hidden" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                <div id="title-back-btn" class="group flex items-center gap-6 cursor-pointer">
+                    <svg id="title-back-arrow" class="transition-all fill-gray-700 group-hover:fill-gray-400 hidden" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
                         <path d="M166.5 424.5l-143.1-152c-4.375-4.625-6.562-10.56-6.562-16.5c0-5.938 2.188-11.88 6.562-16.5l143.1-152c9.125-9.625 24.31-10.03 33.93-.9375c9.688 9.125 10.03 24.38 .9375 33.94l-128.4 135.5l128.4 135.5c9.094 9.562 8.75 24.75-.9375 33.94C190.9 434.5 175.7 434.1 166.5 424.5z"/>
                     </svg>
+                    <h3 class="transition-all text-xl text-gray-700 font-semibold group-hover:text-gray-400">{% block page-title %}{% endblock %}</h3>
                     <script>
                         if (document.referrer && document.referrer.startsWith(window.location.origin)) {
-                            $("#title-back-btn").show(150);
+                            $("#title-back-arrow").show(150);
                         }
                         $("#title-back-btn").click(() => {
                             window.history.back();
                         }); 
                     </script>
-                    <h3 class="text-xl text-gray-700 font-semibold">{% block page-title %}{% endblock %}</h3>
                 </div>
                 <div class="flex items-center gap-6">
                     {% include 'notifications/notification_widget.html' %}
