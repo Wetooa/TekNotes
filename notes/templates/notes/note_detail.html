@@ -153,7 +153,13 @@
                                     <p class="text-gray-500 text-sm">from</p>
                                     <a href="{% url 'authentication:profile' comment.user.id %}" class="flex gap-1 items-center">
                                         <img src="{{ comment.user.profile.avatar.url }}" alt="Profile Image" class="h-4 w-4 aspect-square rounded-full">
-                                        <p class="text-gray-500 font-medium text-sm">{{ comment.user.get_full_name }}</p>
+                                        <p class="text-gray-500 font-medium text-sm">
+                                            {% if comment.user == request.user %}
+                                                <span class="font-normal">You</span>
+                                            {% else %}
+                                                {{ comment.user.get_full_name }}
+                                            {% endif %}
+                                        </p>
                                     </a>
                                 </div>
                                 <p class="text-gray-700 font-medium">{{ comment.content }}</p>
