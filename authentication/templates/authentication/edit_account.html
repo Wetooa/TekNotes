@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %} Edit account details {% endblock %}
+{% block page-title %} Edit account details for @{{ user.username }} {% endblock %}
+
+{% block content %}
+    <div class="flex flex-col max-w-[500px] w-full rounded-xl bg-gray-50 dark:bg-gray-800 self-center shadow-lg">
+        <div class="flex px-4 py-2 bg-rose-700 w-full justify-between items-center rounded-t-xl">
+            <p class="font-medium text-gray-50 text-lg">Edit account details</p>
+            <a href="{% url 'authentication:profile' request.user.id %}">
+                <svg class="fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path d="M312.1 375c9.369 9.369 9.369 24.57 0 33.94s-24.57 9.369-33.94 0L160 289.9l-119 119c-9.369 9.369-24.57 9.369-33.94 0s-9.369-24.57 0-33.94L126.1 256L7.027 136.1c-9.369-9.369-9.369-24.57 0-33.94s24.57-9.369 33.94 0L160 222.1l119-119c9.369-9.369 24.57-9.369 33.94 0s9.369 24.57 0 33.94L193.9 256L312.1 375z"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="flex flex-col justify-center items-center">
+            <form action="." method="post" class="flex flex-col w-full" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="flex flex-col p-6 gap-3">
+                    <h3 class="text-gray-700 dark:text-gray-50 font-medium text-xl mb-1">Personal details</h3>
+                    <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl">
+                        <svg class="fill-yellow-500" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"/>
+                        </svg>
+                        <input type="text" placeholder="Username" name="username" class="placeholder-gray-500 text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none flex-1" value="{{ user.username }}">
+                    </div>
+
+                    <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl">
+                        <svg class="fill-yellow-500" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M448 64H64C28.65 64 0 92.65 0 128v256c0 35.35 28.65 64 64 64h384c35.35 0 64-28.65 64-64V128C512 92.65 483.3 64 448 64zM64 112h384c8.822 0 16 7.178 16 16v22.16l-166.8 138.1c-23.19 19.28-59.34 19.27-82.47 .0156L48 150.2V128C48 119.2 55.18 112 64 112zM448 400H64c-8.822 0-16-7.178-16-16V212.7l136.1 113.4C204.3 342.8 229.8 352 256 352s51.75-9.188 71.97-25.98L464 212.7V384C464 392.8 456.8 400 448 400z"/>
+                        </svg>
+                        <input type="email" placeholder="Email" name="email" class="placeholder-gray-500 text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none flex-1" value="{{ user.email }}">
+                    </div>
+
+                    {% if personal_detail_error %}
+                        <div class="px-4 py-3 bg-rose-100 rounded-xl text-rose-700">
+                            {{ personal_detail_error }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="flex flex-col p-6 gap-3 border-t-2 border-gray-200 dark:border-gray-900">
+                    <h3 class="text-gray-700 dark:text-gray-50 font-medium text-xl mb-1">Change password</h3>
+                    <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl">
+                        <svg class="fill-yellow-500" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M384 192h-32V127.1c0-70.58-57.42-127.1-128-127.1s-128 57.42-128 127.1V192H64C28.65 192 0 220.7 0 256v191.1c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V256C448 220.7 419.3 192 384 192zM144 128c0-44.11 35.89-80 80-80s80 35.89 80 80v64h-160V128zM400 448c0 8.822-7.178 16-16 16H64c-8.822 0-16-7.178-16-16V256c0-8.822 7.178-16 16-16h320c8.822 0 16 7.178 16 16V448zM224 304c-13.25 0-24 10.75-24 24v48c0 13.25 10.75 23.1 24 23.1S248 389.3 248 376v-48C248 314.8 237.3 304 224 304z"/>
+                        </svg>
+                        <input autocomplete="new-password" type="password" placeholder="Old password" name="old_password" class="placeholder-gray-500 text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none flex-1">
+                    </div>
+
+                    <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl">
+                        <svg class="fill-yellow-500" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M384 192h-32V127.1c0-70.58-57.42-127.1-128-127.1s-128 57.42-128 127.1V192H64C28.65 192 0 220.7 0 256v191.1c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V256C448 220.7 419.3 192 384 192zM144 128c0-44.11 35.89-80 80-80s80 35.89 80 80v64h-160V128zM400 448c0 8.822-7.178 16-16 16H64c-8.822 0-16-7.178-16-16V256c0-8.822 7.178-16 16-16h320c8.822 0 16 7.178 16 16V448zM224 304c-13.25 0-24 10.75-24 24v48c0 13.25 10.75 23.1 24 23.1S248 389.3 248 376v-48C248 314.8 237.3 304 224 304z"/>
+                        </svg>
+                        <input type="password" placeholder="New password" name="new_password" class="placeholder-gray-500 text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none flex-1">
+                    </div>
+
+                    <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl">
+                        <svg class="fill-yellow-500" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M384 192h-32V127.1c0-70.58-57.42-127.1-128-127.1s-128 57.42-128 127.1V192H64C28.65 192 0 220.7 0 256v191.1c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V256C448 220.7 419.3 192 384 192zM144 128c0-44.11 35.89-80 80-80s80 35.89 80 80v64h-160V128zM400 448c0 8.822-7.178 16-16 16H64c-8.822 0-16-7.178-16-16V256c0-8.822 7.178-16 16-16h320c8.822 0 16 7.178 16 16V448zM224 304c-13.25 0-24 10.75-24 24v48c0 13.25 10.75 23.1 24 23.1S248 389.3 248 376v-48C248 314.8 237.3 304 224 304z"/>
+                        </svg>
+                        <input type="password" placeholder="Confirm new password" name="confirm_new_password" class="placeholder-gray-500 text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none flex-1">
+                    </div>
+
+                    {% if change_password_error %}
+                        <div class="px-4 py-3 bg-rose-100 rounded-xl text-rose-700">
+                            {{ change_password_error }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="flex p-6 gap-3 w-full border-t-2 border-gray-200 dark:border-gray-900 items-center">
+                    <button class="px-4 py-2 text-gray-50 bg-rose-700 font-medium rounded-md w-full">Save</button>
+                    <a href="{% url 'authentication:profile' request.user.id %}" class="flex px-4 py-2 bg-gray-200 dark:bg-gray-900 rounded-md w-full justify-center">
+                        <p class="text-gray-700 dark:text-gray-50">Cancel</p>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

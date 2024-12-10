@@ -13,7 +13,7 @@ class NoteForm(forms.ModelForm):
         empty_label=None,
         widget=forms.Select(
             attrs={
-                "class": "placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 w-full"
+                "class": "placeholder-gray-500 text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none flex-1 w-full"
             }
         ),
         required=False,
@@ -23,7 +23,7 @@ class NoteForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Title",
-                "class": "placeholder-gray-500 font-medium text-xl text-gray-700 bg-transparent border-none focus:outline-none",
+                "class": "placeholder-gray-500 font-medium text-xl text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none",
             }
         )
     )
@@ -32,7 +32,7 @@ class NoteForm(forms.ModelForm):
     #     widget=forms.Textarea(
     #         attrs={
     #             "placeholder": "Content",
-    #             "class": "placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1 resize-none",
+    #             "class": "placeholder-gray-500 text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none flex-1 resize-none",
     #             "rows": 10,
     #         }
     #     )
@@ -46,7 +46,7 @@ class NoteForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Tags (separate with comma)",
-                "class": "placeholder-gray-500 text-gray-700 bg-transparent border-none focus:outline-none flex-1",
+                "class": "placeholder-gray-500 text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none flex-1",
             }
         ),
         required=False,

@@ -1,13 +1,13 @@
 {% load static %} 
 {% load custom_filters %}
 
-<div onclick="redirect_to_notif('{{ notif.get_url }}')" class="cursor-pointer transition-all flex border-t-2 border-gray-200 px-4 py-3 gap-4 justify-between hover:bg-gray-100 {% if notif.is_read %} is_read {% endif %} {{ class }}">
+<div onclick="redirect_to_notif('{{ notif.get_url }}')" class="cursor-pointer transition-all flex border-t-2 border-gray-200 dark:border-gray-900 px-4 py-3 gap-4 justify-between hover:bg-gray-100 dark:hover:bg-gray-700 {% if notif.is_read %} is_read {% endif %} {{ class }}">
     <a href="{% url 'authentication:profile' notif.sender.id %}">
         <img class="h-6 w-6 aspect-square rounded-full" src="{{ notif.sender.profile.avatar.url }}" alt="Profile Image"/>
     </a>
-    <div class="text-sm flex-1 text-gray-700">
+    <div class="text-sm flex-1 text-gray-700 dark:text-gray-50">
         <p><span class="font-medium">{{ notif.sender.get_full_name }}</span> {{ notif.get_content }}</p>
-        <p class="text-gray-500">{{ notif.created_at|formattime }}</p>
+        <p class="text-gray-500 dark:text-gray-400">{{ notif.created_at|formattime }}</p>
     </div>
 
     {% if not notif.is_read %}

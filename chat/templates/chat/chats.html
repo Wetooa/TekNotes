@@ -1,57 +1,57 @@
-<div class="absolute flex flex-col text-gray-700 bottom-0 right-4 w-80 z-10 shadow-xl">
+<div class="absolute flex flex-col text-gray-700 dark:text-gray-50 bottom-0 right-4 w-80 z-10 shadow-xl">
     <div id="chat-header" class="flex px-4 py-2 gap-2 justify-between bg-rose-700 w-full rounded-t-xl items-center cursor-pointer">
         <p class="text-xl font-medium text-gray-50">Chats</p>
         <svg class="fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
             <path d="M23.5 294.5l152-143.1C180.1 146.2 186.1 144 192 144s11.88 2.188 16.5 6.562l152 143.1c9.625 9.125 10.03 24.31 .9375 33.93c-9.125 9.688-24.38 10.03-33.94 .9375l-135.5-128.4l-135.5 128.4c-9.562 9.094-24.75 8.75-33.94-.9375C13.47 318.9 13.87 303.7 23.5 294.5z"/>
         </svg>
     </div>
-    <div id="chat-dropdown" class="flex flex-col bg-gray-50 select-none overflow-y-auto h-72">
-        <div class="flex p-4 gap-4 border-b-2 border-gray-200 hover:bg-gray-100 cursor-pointer">
+    <div id="chat-dropdown" class="flex flex-col bg-gray-50 dark:bg-gray-800 select-none overflow-y-auto h-72">
+        <div class="flex p-4 gap-4 border-b-2 border-gray-200 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-all">
             <div class="flex aspect-square h-full rounded-full bg-[url('{{user.profile.avatar.url}}')] bg-cover border-2 border-yellow-500"></div>
             <div class="flex flex-col flex-1 overflow-hidden gap-1">
                 <div class="flex overflow-hidden gap-2 text-sm text-sm">
-                    <p class="text-gray-500 flex-1 truncate"><span class="text-gray-700 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
-                    <p class="text-gray-500 text-nowrap">2d ago</p>
+                    <p class="text-gray-500 dark:text-gray-400 flex-1 truncate"><span class="text-gray-700 dark:text-gray-50 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-nowrap">2d ago</p>
                 </div>
                 <p class="truncate">Sample rani ha</p>
             </div>
         </div>
-        <div class="flex p-4 gap-4 border-b-2 border-gray-200 hover:bg-gray-100 cursor-pointer">
+        <div class="flex p-4 gap-4 border-b-2 border-gray-200 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-all">
             <div class="flex aspect-square h-full rounded-full bg-[url('{{user.profile.avatar.url}}')] bg-cover border-2 border-yellow-500"></div>
             <div class="flex flex-col flex-1 overflow-hidden gap-1">
                 <div class="flex overflow-hidden gap-2 text-sm">
-                    <p class="text-gray-500 flex-1 truncate"><span class="text-gray-700 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
-                    <p class="text-gray-500 text-nowrap">2d ago</p>
+                    <p class="text-gray-500 dark:text-gray-400 flex-1 truncate"><span class="text-gray-700 dark:text-gray-50 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-nowrap">2d ago</p>
                 </div>
                 <p class="truncate">Ako raning gi hard code</p>
             </div>
         </div>
-        <div class="flex p-4 gap-4 border-b-2 border-gray-200 hover:bg-gray-100 cursor-pointer">
+        <div class="flex p-4 gap-4 border-b-2 border-gray-200 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-all">
             <div class="flex aspect-square h-full rounded-full bg-[url('{{user.profile.avatar.url}}')] bg-cover border-2 border-yellow-500"></div>
             <div class="flex flex-col flex-1 overflow-hidden gap-1">
                 <div class="flex overflow-hidden gap-2 text-sm">
-                    <p class="text-gray-500 flex-1 truncate"><span class="text-gray-700 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
-                    <p class="text-gray-500 text-nowrap">2d ago</p>
+                    <p class="text-gray-500 dark:text-gray-400 flex-1 truncate"><span class="text-gray-700 dark:text-gray-50 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-nowrap">2d ago</p>
                 </div>
                 <p class="truncate">Pang prep rani sa UI</p>
             </div>
         </div>
-        <div class="flex p-4 gap-4 border-b-2 border-gray-200 hover:bg-gray-100 cursor-pointer">
+        <div class="flex p-4 gap-4 border-b-2 border-gray-200 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-all">
             <div class="flex aspect-square h-full rounded-full bg-[url('{{user.profile.avatar.url}}')] bg-cover border-2 border-yellow-500"></div>
             <div class="flex flex-col flex-1 overflow-hidden gap-1">
                 <div class="flex overflow-hidden gap-2 text-sm">
-                    <p class="text-gray-500 flex-1 truncate"><span class="text-gray-700 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
-                    <p class="text-gray-500 text-nowrap">2d ago</p>
+                    <p class="text-gray-500 dark:text-gray-400 flex-1 truncate"><span class="text-gray-700 dark:text-gray-50 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-nowrap">2d ago</p>
                 </div>
                 <p class="truncate">Pang prep rani sa UI</p>
             </div>
         </div>
-        <div class="flex p-4 gap-4 border-b-2 border-gray-200 hover:bg-gray-100 cursor-pointer">
+        <div class="flex p-4 gap-4 border-b-2 border-gray-200 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-all">
             <div class="flex aspect-square h-full rounded-full bg-[url('{{user.profile.avatar.url}}')] bg-cover border-2 border-yellow-500"></div>
             <div class="flex flex-col flex-1 overflow-hidden gap-1">
                 <div class="flex overflow-hidden gap-2 text-sm">
-                    <p class="text-gray-500 flex-1 truncate"><span class="text-gray-700 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
-                    <p class="text-gray-500 text-nowrap">2d ago</p>
+                    <p class="text-gray-500 dark:text-gray-400 flex-1 truncate"><span class="text-gray-700 dark:text-gray-50 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-nowrap">2d ago</p>
                 </div>
                 <p class="truncate">Pang prep rani sa UI</p>
             </div>

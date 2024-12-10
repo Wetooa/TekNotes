@@ -12,6 +12,7 @@ from comments.models import Like
 
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
+from django.contrib.auth import update_session_auth_hash
 
 
 def register(request):
@@ -104,3 +105,47 @@ def edit_profile(request):
         return redirect("authentication:profile", user_id=request.user.id)
     else:
         return render(request, "authentication/edit_profile.html", {"profile": profile})
+
+@login_required
+def edit_account(request):
+    personal_detail_error = None
+    change_password_error = None
+
+    if request.method == "POST":
+        user = request.user
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        old_password = request.POST.get("old_password")
+        new_password = request.POST.get("new_password")
+        confirm_new_password = request.POST.get("confirm_new_password")
+
+        if username:
+            if user.__class__.objects.filter(username=username).exclude(id=user.id).exists():
+                personal_detail_error = "Username is already taken."
+            else:
+                user.username = username
+
+        if email:
+            user.email = email
+
+        if old_password:
+            if not user.check_password(old_password):
+                change_password_error = "Old password is incorrect."
+            elif new_password and confirm_new_password:
+                if new_password != confirm_new_password:
+                    change_password_error = "New passwords do not match."
+                else:
+                    user.set_password(new_password)
+                    update_session_auth_hash(request, user)
+            elif not new_password or not confirm_new_password:
+                change_password_error = "Both new password and confirmation are required."
+
+        if not personal_detail_error and not change_password_error:
+            user.save()
+            return redirect("authentication:profile", user_id=request.user.id)
+
+    return render(request, "authentication/edit_account.html", {
+        "personal_detail_error": personal_detail_error,
+        "change_password_error": change_password_error,
+        "user": request.user
+    })

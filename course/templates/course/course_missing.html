@@ -8,9 +8,9 @@
 
 {% block content %}
     <div class="flex h-full w-full items-center justify-center">
-        <div class="flex flex-col bg-gray-50 overflow-hidden shadow-lg rounded-xl self-center justify-self-center">
+        <div class="flex flex-col bg-gray-50 dark:bg-gray-800 overflow-hidden shadow-lg rounded-xl self-center justify-self-center">
             <div class="flex p-2 items-center gap-4">
-                <svg id="note-back-btn" class="ml-2 transition-all fill-gray-700 hover:fill-gray-400 cursor-pointer hidden" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                <svg id="note-back-btn" class="ml-2 transition-all fill-gray-700 dark:fill-gray-50 hover:fill-gray-400 cursor-pointer hidden" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
                     <path d="M166.5 424.5l-143.1-152c-4.375-4.625-6.562-10.56-6.562-16.5c0-5.938 2.188-11.88 6.562-16.5l143.1-152c9.125-9.625 24.31-10.03 33.93-.9375c9.688 9.125 10.03 24.38 .9375 33.94l-128.4 135.5l128.4 135.5c9.094 9.562 8.75 24.75-.9375 33.94C190.9 434.5 175.7 434.1 166.5 424.5z"/>
                 </svg>
                 <script>
@@ -21,13 +21,13 @@
                         window.history.back();
                     }); 
                 </script>
-                <div class="group transition-all course-elem nav-elem flex rounded-xl py-3 bg-gray-50 hover:bg-gray-500 justify-between px-4 w-full border-2 border-gray-200 cursor-not-allowed">
-                    <p class="course-text text-lg text-gray-700 group-hover:text-gray-50">Course missing </p>
-                    <div class="rounded-full bg-gray-500 group-hover:bg-gray-50 h-full min-h-7 aspect-square"></div>
+                <div class="group transition-all course-elem nav-elem flex rounded-xl py-3 bg-gray-50 dark:bg-gray-800 hover:bg-gray-500 dark:hover:bg-gray-500 justify-between px-4 w-full border-2 border-gray-200 dark:border-gray-900 cursor-not-allowed">
+                    <p class="course-text text-lg text-gray-700 dark:text-gray-50 group-hover:text-gray-50">Course missing </p>
+                    <div class="transition-all rounded-full bg-gray-500 group-hover:bg-gray-50 h-full min-h-7 aspect-square"></div>
                 </div>
             </div>
-            <div class="flex w-full max-w-72 p-6 border-t-2 border-gray-200">
-                <p class="text-gray-700">
+            <div class="flex w-full max-w-72 p-6 border-t-2 border-gray-200 dark:border-gray-900">
+                <p class="text-gray-700 dark:text-gray-50">
                     <span class="text-gray-400 font-medium cursor-not-allowed">Course (id: {{ course_id }})</span> either doesn't exist or has been deleted.
                 </p>
             </div>

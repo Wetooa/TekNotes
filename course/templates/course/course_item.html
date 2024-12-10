@@ -1,6 +1,6 @@
 {% load static %} {% load custom_filters %}
 
-<a href="{% url 'advanced_search:view_course' course.id %}" class="group transition-all course-elem nav-elem flex rounded-xl px-4 py-3 justify-between bg-gray-50 hover:bg-{{ course.color }}">
-    <p class="course-text text-lg text-gray-700 group-hover:text-gray-50">{{ course.code|truncatechars:8 }}</p>
-    <div class="rounded-full bg-{{ course.color }} group-hover:bg-gray-50 h-full min-h-7 aspect-square course-color"></div>
+<a href="{% url 'advanced_search:view_course' course.id %}" class="group transition-all {% if collapsible %} course-elem nav-elem {% endif %} flex rounded-xl px-4 py-3 justify-between bg-gray-50 dark:bg-gray-800 hover:bg-{{ course.color }} dark:hover:bg-{{ course.color }}">
+    <p class="{% if collapsible %} course-text {% endif %} text-lg text-gray-700 dark:text-gray-50 group-hover:text-gray-50">{{ course.code|truncatechars:8 }}</p>
+    <div class="transition-all rounded-full bg-{{ course.color }} group-hover:bg-gray-50 h-full min-h-7 aspect-square course-color"></div>
 </a>

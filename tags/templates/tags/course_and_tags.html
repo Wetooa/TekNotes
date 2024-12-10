@@ -8,6 +8,6 @@
     {% endfor %}
 
     {% for tag in tags %}
-        <a href="/search/?query={{ tag.name }}&category=all" class="transition-all hover:bg-gray-50/50 px-3 py-1 {% if query in tag.name %}bg-rose-700 text-white {%else%} bg-gray-50 text-gray-700 {%endif%} rounded-md shadow-lg whitespace-nowrap">{{ tag.name }}</a>
+        <a href="/search/?query={{ tag.name }}&category=all" class="transition-all hover:bg-gray-50/50 dark:hover:bg-gray-800/50 px-3 py-1 {% if query in tag.name %}bg-rose-700 text-white {%else%} bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-50 {%endif%} rounded-md shadow-lg whitespace-nowrap">{{ tag.name }}</a>
     {% endfor %}
 </div>

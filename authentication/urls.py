@@ -15,6 +15,7 @@ urlpatterns = [
         name="login",
     ),
     path("logout/", views.logout, name="logout"),
+    path("edit/", views.edit_account, name="edit_account"),
     path("profile/<int:user_id>/notes/", views.profile, name="profile"),
     path("profile/<int:user_id>/likes/", views.profile_likes, name="profile_likes"),
     path(

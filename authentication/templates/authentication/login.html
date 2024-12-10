@@ -7,12 +7,12 @@
 {% load socialaccount %}
 
 {% block body %}
-    <div class="flex flex-col max-w-[450px] w-full rounded-xl overflow-hidden bg-gray-50 shadow-xl justify-self-center self-center">
+    <div class="flex flex-col max-w-[450px] w-full rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-800 shadow-xl justify-self-center self-center">
         <div class="h-9 bg-rose-700 w-full"></div>
 
         <div class="flex flex-col justify-center items-center">
             <div class="flex flex-col justify-center items-center p-6 pb-0">
-                <p class="text-gray-700 font-semibold text-2xl">Welcome to</p>
+                <p class="text-gray-700 dark:text-gray-50 font-semibold text-2xl">Welcome to</p>
                 <div class="flex items-center gap-2">
                     <img src="{% static 'images/TekNotes-Logo.svg' %}" alt="Logo">
                     <p class="font-semibold text-rose-700 text-4xl">TekNotes</p>
@@ -48,26 +48,26 @@
                     {% endif %}
                 </div>
 
-                <div class="flex flex-col p-6 gap-3 w-full border-t-2 border-gray-200 items-center">
+                <div class="flex flex-col p-6 gap-3 w-full border-t-2 border-gray-200 dark:border-gray-900 items-center">
                     <button class="px-4 py-2 text-gray-50 bg-rose-700 font-medium rounded-md w-full">Log In</button>
                     <div class="flex gap-3 w-full items-center">
-                        <hr class="border-1 border-gray-400 flex-1">
-                        <p class="">or sign in using</p>
-                        <hr class="border-1 border-gray-400 flex-1">
+                        <hr class="border-1 border-gray-400 dark:border-gray-900 flex-1">
+                        <p class="text-gray-700 dark:text-gray-50">or sign in using</p>
+                        <hr class="border-1 border-gray-400 dark:border-gray-900 flex-1">
                     </div>
                     <div class="flex gap-3 w-full">
-                        <a href="" class="flex px-4 py-2 gap-3 shadow-md bg-gray-200 flex-1 rounded-md justify-center">
+                        <a href="" class="flex px-4 py-2 gap-3 shadow-md bg-gray-200 dark:bg-gray-900 flex-1 rounded-md justify-center">
                             <img src="{% static 'images/Microsoft.svg' %}" alt="Microsoft">
-                            <p class="text-gray-700">Microsoft</p>
+                            <p class="text-gray-700 dark:text-gray-50">Microsoft</p>
                         </a>
                         {%comment%}
-                        <a href="{% provider_login_url 'google' %}?next=/" class="flex px-4 py-2 gap-3 shadow-md bg-gray-200 flex-1 rounded-md justify-center">
+                        <a href="{% provider_login_url 'google' %}?next=/" class="flex px-4 py-2 gap-3 shadow-md bg-gray-200 dark:bg-gray-900 flex-1 rounded-md justify-center">
                             <img src="{% static 'images/Google.svg' %}" alt="Google">
-                            <p class="text-gray-700">Google</p>
+                            <p class="text-gray-700 dark:text-gray-50">Google</p>
                         </a>
                         {%endcomment%}
                     </div>
-                    <p class="text-sm text-gray-700">Don't have an account? <a href="{% url 'authentication:register' %}" class="underline text-rose-700 font-semibold">Sign Up!</a></p>
+                    <p class="text-sm text-gray-700 dark:text-gray-50">Don't have an account? <a href="{% url 'authentication:register' %}" class="underline text-rose-700 font-semibold">Sign Up!</a></p>
                 </div>
             </form>
         </div>

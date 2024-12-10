@@ -19,7 +19,36 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+            };
+
+            let isDark = JSON.parse(localStorage.getItem('isDark')) || false;
+            setDarkMode();
+
+            function setDarkMode() {
+                if (isDark) {
+                    $('html').addClass('dark');
+                } else {
+                    $('html').removeClass('dark');
+                }
+            }
+        </script>
+
         <style>
+            :root {
+                --scrollbar-thumb: #D1D5DB;
+                --scrollbar-thumb-hover: #6B7280;
+                --scrollbar-track: #E5E7EB;
+            }
+
+            .dark {
+                --scrollbar-thumb: #030712;
+                --scrollbar-thumb-hover: #374151;
+                --scrollbar-track: #111827;
+            }
+
             ::-webkit-scrollbar {
                 width: 8px;
                 height: 8px;
@@ -27,21 +56,21 @@
 
             ::-webkit-scrollbar-thumb {
                 transition: all 0.15s;
-                background-color: #D1D5DB;
+                background-color: var(--scrollbar-thumb);
                 border-radius: 4px;
             }
 
             ::-webkit-scrollbar-thumb:hover {
-                background-color: #6B7280;
+                background-color: var(--scrollbar-thumb-hover);
             }
 
             ::-webkit-scrollbar-track {
-                background: #E5E7EB;
+                background: var(--scrollbar-track);
                 border-radius: 4px;
             }
         </style>
     </head>
-    <body id="body" class="grid font-sans h-full bg-gray-200 relative" style="font-family: 'Poppins', sans-serif;">
+    <body id="body" class="transition-all grid font-sans h-full bg-gray-200 dark:bg-gray-900 relative" style="font-family: 'Poppins', sans-serif;">
         {% block body %}
         {% endblock %}
     </body>
@@ -51,6 +80,14 @@
             $(elem).html(path);
             $(elem).attr('viewBox', viewBox);
         }
+
+        function toggleDarkMode() {
+            console.log("YOO");
+            isDark = !isDark;
+            localStorage.setItem('isDark', JSON.stringify(isDark));
+            setDarkMode();
+        }
+
         const angleRight = `
             <path d="M89.45 87.5l143.1 152c4.375 4.625 6.562 10.56 6.562 16.5c0 5.937-2.188 11.87-6.562 16.5l-143.1 152C80.33 434.1 65.14 434.5 55.52 425.4c-9.688-9.125-10.03-24.38-.9375-33.94l128.4-135.5l-128.4-135.5C45.49 110.9 45.83 95.75 55.52 86.56C65.14 77.47 80.33 77.87 89.45 87.5z"/>
         `;

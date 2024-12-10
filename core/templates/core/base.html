@@ -10,9 +10,9 @@
 {% block body %}
     {% include 'chat/chats.html' %}
     <div class="flex h-full overflow-hidden">
-        <nav class="flex flex-col w-full max-w-72 h-full px-5 py-5 gap-5 overflow-y-auto border-r-2 border-gray-300">
+        <nav class="flex flex-col w-full max-w-72 h-full px-5 py-5 gap-5 overflow-y-auto border-r-2 border-gray-300 dark:border-gray-800">
             <div class="flex items-center gap-4 nav-elem">
-                <svg id="menu-icon" class="fill-gray-700 cursor-pointer select-none" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <svg id="menu-icon" class="fill-gray-700 dark:fill-gray-50 cursor-pointer select-none" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                     <path d="M424 392H23.1C10.8 392 0 402.8 0 415.1C0 429.2 10.8 440 23.1 440H424c13.2 0 24-10.8 24-23.1C448 402.8 437.2 392 424 392zM424 72H23.1C10.8 72 0 82.8 0 95.1S10.8 120 23.1 120H424c13.2 0 24-10.8 24-23.1S437.2 72 424 72zM424 232H23.1C10.8 232 0 242.8 0 256c0 13.2 10.8 24 23.1 24H424C437.2 280 448 269.2 448 256S437.2 232 424 232z"/>
                 </svg>
                 <a id="logo" href="/" class="flex items-center gap-2">
@@ -21,42 +21,42 @@
                 </a>
             </div>
             <div class="flex-1 flex flex-col gap-3 overflow-y-auto">
-                <a href="/" class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 {% endif %}">
-                    <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                <a href="/" class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
+                    <svg class="fill-gray-700 dark:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                         <path d="M576 247.1c0-6.802-2.877-13.56-8.471-18.31l-263.1-224c-4.484-3.781-10.01-5.669-15.53-5.669S276.1 1.891 272.5 5.672L8.471 229.7C2.877 234.4 0 241.2 0 247.1C0 264.1 13.83 271.1 24.02 271.1c5.479 0 10.99-1.867 15.51-5.687l24.47-20.76v226.5C64 494.1 81.94 512 104 512h95.1c22.06 0 39.1-17.94 39.1-40l.0056-120h95.1l-.0032 120C335.1 494.1 353.9 512 375.1 512h95.1c22.06 0 39.1-17.94 39.1-40V245.5L536.5 266.3c4.516 3.813 10.03 5.688 15.52 5.688C562.1 271.1 576 263.1 576 247.1zM463.1 463.1H383.1v-120c0-22.06-17.94-40-39.1-40H232c-22.06 0-39.1 17.94-39.1 40v120H112V207.1c0-.9629-.4375-1.783-.5488-2.717L288 55.45l175.1 149.4V463.1z"/>
                     </svg>
-                    <p class="nav-text text-lg text-gray-700 font-medium">Home</p>
+                    <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Home</p>
                 </a>
     
-                <a href="/notebook/" class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/notebook/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 {% endif %}">
-                    <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <a href="/notebook/" class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/notebook/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
+                    <svg class="fill-gray-700 dark:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M416 0H128C92.65 0 64 28.65 64 64v32H24C10.75 96 0 106.8 0 120S10.75 144 24 144H64v88H24C10.75 232 0 242.8 0 256s10.75 24 24 24H64v88H24C10.75 368 0 378.8 0 392S10.75 416 24 416H64v32c0 35.35 28.65 64 64 64h288c35.35 0 64-28.65 64-64V64C480 28.65 451.3 0 416 0zM112 448v-32h24C149.3 416 160 405.3 160 392S149.3 368 136 368H112V280h24C149.3 280 160 269.3 160 256S149.3 232 136 232H112V144h24C149.3 144 160 133.3 160 120S149.3 96 136 96H112V64c0-8.838 7.164-16 16-16h64v416H128C119.2 464 112 456.8 112 448zM432 448c0 8.836-7.164 16-16 16H240v-416H416c8.836 0 16 7.162 16 16V448z"/>
                     </svg>
-                    <p class="nav-text text-lg text-gray-700 font-medium">Notebook</p>
+                    <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Notebook</p>
                 </a>
     
-                <a href="/archive/" class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/archive/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 {% endif %}">
-                    <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <a href="/archive/" class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/archive/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
+                    <svg class="fill-gray-700 dark:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M464 32h-416C21.49 32 0 53.49 0 80v64C0 161.6 14.4 176 31.1 176L32 416c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V176c17.6 0 32-14.4 32-31.1V80C512 53.49 490.5 32 464 32zM416 432H96c-8.837 0-16-7.163-16-16V176h352V416C432 424.8 424.8 432 416 432zM464 128h-416V80h416V128zM183.1 272h144C341.3 272 352 261.3 352 248C352 234.7 341.3 224 328 224H183.1C170.7 224 160 234.7 160 247.1C160 261.3 170.7 272 183.1 272z"/>
                     </svg>
-                    <p class="nav-text text-lg text-gray-700 font-medium">Archive</p>
+                    <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Archive</p>
                 </a>
     
-                <a href="/likes/" class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/likes/' %} active-nav bg-gray-50 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 {% endif %}">
-                    <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <a href="/likes/" class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/likes/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
+                    <svg class="fill-gray-700 dark:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M96 191.1H32c-17.67 0-32 14.33-32 31.1v223.1c0 17.67 14.33 31.1 32 31.1h64c17.67 0 32-14.33 32-31.1V223.1C128 206.3 113.7 191.1 96 191.1zM512 227c0-36.89-30.05-66.92-66.97-66.92h-99.86C354.7 135.1 360 113.5 360 100.8c0-33.8-26.2-68.78-70.06-68.78c-46.61 0-59.36 32.44-69.61 58.5c-31.66 80.5-60.33 66.39-60.33 93.47c0 12.84 10.36 23.99 24.02 23.99c5.256 0 10.55-1.721 14.97-5.26c76.76-61.37 57.97-122.7 90.95-122.7c16.08 0 22.06 12.75 22.06 20.79c0 7.404-7.594 39.55-25.55 71.59c-2.046 3.646-3.066 7.686-3.066 11.72c0 13.92 11.43 23.1 24 23.1h137.6C455.5 208.1 464 216.6 464 227c0 9.809-7.766 18.03-17.67 18.71c-12.66 .8593-22.36 11.4-22.36 23.94c0 15.47 11.39 15.95 11.39 28.91c0 25.37-35.03 12.34-35.03 42.15c0 11.22 6.392 13.03 6.392 22.25c0 22.66-29.77 13.76-29.77 40.64c0 4.515 1.11 5.961 1.11 9.456c0 10.45-8.516 18.95-18.97 18.95h-52.53c-25.62 0-51.02-8.466-71.5-23.81l-36.66-27.51c-4.315-3.245-9.37-4.811-14.38-4.811c-13.85 0-24.03 11.38-24.03 24.04c0 7.287 3.312 14.42 9.596 19.13l36.67 27.52C235 468.1 270.6 480 306.6 480h52.53c35.33 0 64.36-27.49 66.8-62.2c17.77-12.23 28.83-32.51 28.83-54.83c0-3.046-.2187-6.107-.6406-9.122c17.84-12.15 29.28-32.58 29.28-55.28c0-5.311-.6406-10.54-1.875-15.64C499.9 270.1 512 250.2 512 227z"/>
                     </svg>
-                    <p class="nav-text text-lg text-gray-700 font-medium">Likes</p>
+                    <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Likes</p>
                 </a>
 
-                <div id="courses-dropdown" class="nav-elem hover:bg-gray-300 items-center flex rounded-xl px-4 py-3 gap-4 justify-between select-none cursor-pointer">
+                <div id="courses-dropdown" class="transition-all nav-elem hover:bg-gray-300 dark:hover:bg-gray-950 items-center flex rounded-xl px-4 py-3 gap-4 justify-between select-none cursor-pointer">
                     <div class="flex gap-4 items-center">
-                        <svg class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                        <svg class="fill-gray-700 dark:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                             <path d="M623.1 136.9l-282.7-101.2C334.3 33.23 327.2 32 320 32S305.7 33.23 298.8 35.68L16.05 136.9C6.438 140.4 0 149.6 0 160s6.438 19.65 16.05 23.09L76.07 204.6c-11.89 15.8-20.26 34.16-24.55 53.95C40.05 263.4 32 274.8 32 288c0 9.953 4.814 18.49 11.94 24.36l-24.83 149C17.48 471.1 25 480 34.89 480H93.11c9.887 0 17.41-8.879 15.78-18.63l-24.83-149C91.19 306.5 96 297.1 96 288c0-10.29-5.174-19.03-12.72-24.89c4.252-17.76 12.88-33.82 24.94-47.03l190.6 68.23C305.7 286.8 312.8 288 320 288s14.35-1.229 21.21-3.684l282.7-101.2C633.6 179.6 640 170.4 640 160S633.6 140.4 623.1 136.9zM325.1 239.1c-4.428 1.584-8.197 .6816-10.09 .0059L175.5 189.2l149.2-45.92c8.453-2.594 13.16-11.55 10.57-20.02c-2.594-8.438-11.57-13.27-20.01-10.55L125.2 171.2L93.96 160l220.1-79.12c4.428-1.584 8.197-.6836 10.09-.0059L546 160L325.1 239.1zM452.3 278.5L464 390.7C464 401.3 414.5 432 320 432s-144-30.72-144-41.34l11.72-112.1l-46.08-16.5l-13.51 126.1C128 449.3 224.6 480 320 480s192-30.69 191.9-91.81l-13.51-126.1L452.3 278.5z"/>
                         </svg>
-                        <p class="nav-text text-lg text-gray-700 font-medium">Courses</p>
+                        <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Courses</p>
                     </div>
-                    <svg id="courses-dropdown-arrow" class="fill-gray-700" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                    <svg id="courses-dropdown-arrow" class="fill-gray-700 dark:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                         <path d="M360.5 217.5l-152 143.1C203.9 365.8 197.9 368 192 368s-11.88-2.188-16.5-6.562L23.5 217.5C13.87 208.3 13.47 193.1 22.56 183.5C31.69 173.8 46.94 173.5 56.5 182.6L192 310.9l135.5-128.4c9.562-9.094 24.75-8.75 33.94 .9375C370.5 193.1 370.1 208.3 360.5 217.5z"/>
                     </svg>
                 </div>
@@ -80,7 +80,7 @@
                     <div id="courses-content" class="flex flex-col w-full">
                         {% for course in your_courses %}
                             {% if request.user == course.created_by %}
-                                {% include 'course/course_item.html' with course=course %}
+                                {% include 'course/course_item.html' with course=course collapsible=True %}
                                 <div class="h-3"></div>
                             {% endif %}
                         {% endfor %}
@@ -103,15 +103,15 @@
                 </a>
 
                 {% if request.user.is_authenticated %}
-                    <div class="nav-elem transition-all flex rounded-xl bg-gray-50 hover:bg-gray-100 hover:shadow-xl px-4 py-3 gap-3 justify-between items-center relative">
+                    <div class="nav-elem transition-all flex rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-xl px-4 py-3 gap-3 justify-between items-center relative">
                         <a href="{% url 'authentication:profile' request.user.id %}" class="flex flex-1 gap-3 h-full overflow-hidden">
                             <div class="flex aspect-square min-h-6 h-full rounded-full bg-[url('{{user.profile.avatar.url}}')] bg-cover border-2 border-yellow-500"></div>
                             <div class="flex flex-col user-text flex-1 overflow-hidden">
-                                <p class="text-gray-700 font-semibold">{{ request.user.get_full_name|truncatechars:14 }}</p>
-                                <p class="text-gray-500 text-sm">@{{ request.user.username|truncatechars:15 }}</p>
+                                <p class="text-gray-700 dark:text-gray-50 font-semibold">{{ request.user.get_full_name|truncatechars:14 }}</p>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm">@{{ request.user.username|truncatechars:15 }}</p>
                             </div>
                         </a>
-                        <svg id="user-settings-btn" class="fill-gray-700 cursor-pointer mr-2 select-none" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">
+                        <svg id="user-settings-btn" class="fill-gray-700 dark:fill-gray-50 cursor-pointer mr-2 select-none" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">
                             <path d="M64 112c26.5 0 48-21.5 48-48S90.5 16 64 16S16 37.5 16 64S37.5 112 64 112zM64 400c-26.5 0-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48S90.5 400 64 400zM64 208C37.5 208 16 229.5 16 256S37.5 304 64 304s48-21.5 48-48S90.5 208 64 208z"/>
                         </svg>
 
@@ -133,14 +133,14 @@
                             });
                         </script>
 
-                        <div id="user-settings" class="flex flex-col absolute bg-gray-50 bottom-full mb-2 rounded-xl right-0 w-full text-gray-700 overflow-hidden hidden">
-                            <a href="{% url 'authentication:edit_profile' %}" class="flex px-4 py-3 hover:bg-gray-100 cursor-pointer">
+                        <div id="user-settings" class="flex flex-col absolute bg-gray-50 dark:bg-gray-800 bottom-full mb-2 rounded-xl right-0 w-full text-gray-700 dark:text-gray-50 overflow-hidden hidden">
+                            <a href="{% url 'authentication:edit_profile' %}" class="transition-all flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                                 Edit profile
                             </a>
-                            <a class="flex px-4 py-3 border-t border-gray-300 hover:bg-gray-100 cursor-pointer">
+                            <a href="{% url 'authentication:edit_account' %}" class="transition-all flex px-4 py-3 border-t border-gray-300 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                                 Edit account details
                             </a>
-                            <a href="{% url 'authentication:logout' %}" class="flex px-4 py-3 border-t border-gray-300 hover:bg-gray-100 cursor-pointer">
+                            <a href="{% url 'authentication:logout' %}" class="transition-all flex px-4 py-3 border-t border-gray-300 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                                 Log out @{{ request.user.username }}
                             </a>
                         </div>
@@ -155,13 +155,13 @@
                 {% endif %}
             </div>
         </nav>
-        <main class="flex flex-col flex-1 bg-gray-200 h-full overflow-hidden">
-            <div class="flex px-6 py-4 gap-3 border-b-2 border-gray-300 justify-between items-center">
+        <main class="flex flex-col flex-1 bg-gray-200 dark:bg-gray-900 h-full overflow-hidden">
+            <div class="flex px-6 py-4 gap-3 border-b-2 border-gray-300 dark:border-gray-800 justify-between items-center">
                 <div id="title-back-btn" class="group flex items-center gap-6 cursor-pointer">
-                    <svg id="title-back-arrow" class="transition-all fill-gray-700 group-hover:fill-gray-400 hidden" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                    <svg id="title-back-arrow" class="transition-all fill-gray-700 dark:fill-gray-50 group-hover:fill-gray-400 hidden" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
                         <path d="M166.5 424.5l-143.1-152c-4.375-4.625-6.562-10.56-6.562-16.5c0-5.938 2.188-11.88 6.562-16.5l143.1-152c9.125-9.625 24.31-10.03 33.93-.9375c9.688 9.125 10.03 24.38 .9375 33.94l-128.4 135.5l128.4 135.5c9.094 9.562 8.75 24.75-.9375 33.94C190.9 434.5 175.7 434.1 166.5 424.5z"/>
                     </svg>
-                    <h3 class="transition-all text-2xl text-gray-700 font-semibold group-hover:text-gray-400">{% block page-title %}{% endblock %}</h3>
+                    <h3 class="transition-all text-2xl text-gray-700 dark:text-gray-50 font-semibold group-hover:text-gray-400">{% block page-title %}{% endblock %}</h3>
                     <script>
                         if (document.referrer && document.referrer.startsWith(window.location.origin)) {
                             $("#title-back-arrow").show(150);
@@ -172,6 +172,29 @@
                     </script>
                 </div>
                 <div class="flex items-center gap-6">
+                    <div id="dark-mode-btn" class="group cursor-pointer select-none">
+                        <svg id="dark-mode-icon" class="transition-all fill-gray-700 dark:fill-gray-50 group-hover:fill-gray-400" height="28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        </svg>
+                    </div>
+                    <script>
+                        setDarkModeIcon();
+                        $("#dark-mode-btn").click(() => {
+                            toggleDarkMode();
+                            setDarkModeIcon();
+                        });
+
+                        function setDarkModeIcon() {
+                            if (isDark) {
+                                $("#dark-mode-icon").html(`
+                                    <path d="M375.7 19.7c-1.5-8-6.9-14.7-14.4-17.8s-16.1-2.2-22.8 2.4L256 61.1 173.5 4.2c-6.7-4.6-15.3-5.5-22.8-2.4s-12.9 9.8-14.4 17.8l-18.1 98.5L19.7 136.3c-8 1.5-14.7 6.9-17.8 14.4s-2.2 16.1 2.4 22.8L61.1 256 4.2 338.5c-4.6 6.7-5.5 15.3-2.4 22.8s9.8 13 17.8 14.4l98.5 18.1 18.1 98.5c1.5 8 6.9 14.7 14.4 17.8s16.1 2.2 22.8-2.4L256 450.9l82.5 56.9c6.7 4.6 15.3 5.5 22.8 2.4s12.9-9.8 14.4-17.8l18.1-98.5 98.5-18.1c8-1.5 14.7-6.9 17.8-14.4s2.2-16.1-2.4-22.8L450.9 256l56.9-82.5c4.6-6.7 5.5-15.3 2.4-22.8s-9.8-12.9-17.8-14.4l-98.5-18.1L375.7 19.7zM269.6 110l65.6-45.2 14.4 78.3c1.8 9.8 9.5 17.5 19.3 19.3l78.3 14.4L402 242.4c-5.7 8.2-5.7 19 0 27.2l45.2 65.6-78.3 14.4c-9.8 1.8-17.5 9.5-19.3 19.3l-14.4 78.3L269.6 402c-8.2-5.7-19-5.7-27.2 0l-65.6 45.2-14.4-78.3c-1.8-9.8-9.5-17.5-19.3-19.3L64.8 335.2 110 269.6c5.7-8.2 5.7-19 0-27.2L64.8 176.8l78.3-14.4c9.8-1.8 17.5-9.5 19.3-19.3l14.4-78.3L242.4 110c8.2 5.7 19 5.7 27.2 0zM256 368a112 112 0 1 0 0-224 112 112 0 1 0 0 224zM192 256a64 64 0 1 1 128 0 64 64 0 1 1 -128 0z"/>
+                                `);
+                            } else {
+                                $("#dark-mode-icon").html(`
+                                    <path d="M144.7 98.7c-21 34.1-33.1 74.3-33.1 117.3c0 98 62.8 181.4 150.4 211.7c-12.4 2.8-25.3 4.3-38.6 4.3C126.6 432 48 353.3 48 256c0-68.9 39.4-128.4 96.8-157.3zm62.1-66C91.1 41.2 0 137.9 0 256C0 379.7 100 480 223.5 480c47.8 0 92-15 128.4-40.6c1.9-1.3 3.7-2.7 5.5-4c4.8-3.6 9.4-7.4 13.9-11.4c2.7-2.4 5.3-4.8 7.9-7.3c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-3.7 .6-7.4 1.2-11.1 1.6c-5 .5-10.1 .9-15.3 1c-1.2 0-2.5 0-3.7 0l-.3 0c-96.8-.2-175.2-78.9-175.2-176c0-54.8 24.9-103.7 64.1-136c1-.9 2.1-1.7 3.2-2.6c4-3.2 8.2-6.2 12.5-9c3.1-2 6.3-4 9.6-5.8c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-3.6-.3-7.1-.5-10.7-.6c-2.7-.1-5.5-.1-8.2-.1c-3.3 0-6.5 .1-9.8 .2c-2.3 .1-4.6 .2-6.9 .4z"/>
+                                `);
+                            }
+                        }
+                    </script>
                     {% include 'notifications/notification_widget.html' %}
                 </div>
             </div>
@@ -180,13 +203,13 @@
                 {% endblock %}
             </div>
         </main>
-        <aside class="flex flex-col w-full max-w-80 p-5 pb-0 gap-5 border-l-2 border-gray-300">
-            <form action="{% url 'advanced_search:search' %}" method="get" class="flex flex-1 px-4 py-2 rounded-xl bg-gray-300 transition-all gap-3 cursor-text min-w-[0px]" onclick="this.querySelector('input[name=\'query\']').focus();">
-                <svg class="fill-gray-500" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <aside class="flex flex-col w-full max-w-80 p-5 pb-0 gap-5 border-l-2 border-gray-300 dark:border-gray-800">
+            <form action="{% url 'advanced_search:search' %}" method="get" class="flex flex-1 px-4 py-2 rounded-xl bg-gray-300 dark:bg-gray-950 dark:hover:bg-gray-800 transition-all gap-3 cursor-text min-w-[0px]" onclick="this.querySelector('input[name=\'query\']').focus();">
+                <svg class="fill-gray-500 dark:fill-gray-400 " height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path d="M504.1 471l-134-134C399.1 301.5 415.1 256.8 415.1 208c0-114.9-93.13-208-208-208S-.0002 93.13-.0002 208S93.12 416 207.1 416c48.79 0 93.55-16.91 129-45.04l134 134C475.7 509.7 481.9 512 488 512s12.28-2.344 16.97-7.031C514.3 495.6 514.3 480.4 504.1 471zM48 208c0-88.22 71.78-160 160-160s160 71.78 160 160s-71.78 160-160 160S48 296.2 48 208z"/>
                 </svg>
     
-                <input name="query" class="placeholder-gray-500 w-full text-gray-700 bg-transparent border-none focus:outline-none min-w-[0px]"
+                <input name="query" class="placeholder-gray-500 w-full text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none min-w-[0px]"
                        type="text" value="{{ query }}" placeholder="Search"
                        onclick="event.stopPropagation();"/>
             </form>
