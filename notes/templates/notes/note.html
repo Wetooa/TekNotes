@@ -82,7 +82,7 @@
         </div>
 
         {% if note.tags.count > 0 %}
-            <div class="flex flex-wrap p-4 pb-2 gap-3 border-t-2 {% if note.is_private %} border-gray-500 border-dashed {% else %} border-gray-200 {% endif %}">
+            <div class="flex flex-wrap p-4 gap-3 border-t-2 {% if note.is_private %} border-gray-500 border-dashed {% else %} border-gray-200 {% endif %}">
                 {% for tag in note.tags.all|slice:":3" %}
                     <p class="text-sm  shadow px-3 py-1 rounded-md inline-block
                               {%if query in tag.name%}

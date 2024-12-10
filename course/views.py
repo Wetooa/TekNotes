@@ -14,7 +14,7 @@ def add_a_course(request):
             course = form.save(commit=False)
             course.created_by = request.user
             course.save()
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect(f"/search/course_{course.id}/")
     else:
         form = CourseForm()
 
