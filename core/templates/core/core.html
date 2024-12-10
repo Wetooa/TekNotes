@@ -77,7 +77,7 @@
 
     <script>
         let lastPage = JSON.parse(localStorage.getItem('lastPage'));
-        if (!/tek_a_note|delete|edit|hide|archive\/\d+|add_a_course/.test(window.location.href)) {
+        if (!/notes|course|edit/.test(window.location.href)) {
             lastPage = window.location.href;
             localStorage.setItem('lastPage', JSON.stringify(lastPage));
         }
