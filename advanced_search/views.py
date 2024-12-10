@@ -38,6 +38,7 @@ def search(request):
         notes_query |= Q(created_by__first_name__icontains=query_parts[0]) & Q(created_by__last_name__icontains=query_parts[1])
         users_query |= Q(first_name__icontains=query_parts[0]) & Q(last_name__icontains=query_parts[1])
 
+    notes_query &= Q(is_archived=False, is_private=False)
 
     notes, tags, courses, users, authors, locations = [], [], [], [], [], []
 
@@ -80,7 +81,7 @@ def view_course(request, course_id):
     except Course.DoesNotExist:
         return render(request, "course/course_missing.html", {"course_id": course_id})
 
-    notes = Note.objects.filter(course=course)
+    notes = Note.objects.filter(course=course, is_archived=False, is_private=False)
     tags = Tag.objects.filter(notes__in=notes).distinct()
     return render(
         request,

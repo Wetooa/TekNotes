@@ -30,7 +30,9 @@ def trending(request):
     )[:5]
 
     trending_notes = Note.objects.filter(
-        id__in=[note["note"] for note in trending_notes]
+        id__in=[note["note"] for note in trending_notes],
+        is_private=False,
+        is_archived=False
     ).prefetch_related("created_by")
 
     trending_tags = Tag.objects.filter(id__in=[tag["tag"] for tag in trending_tags])
@@ -47,7 +49,7 @@ def trending(request):
 
 
 def recent_posts(request):
-    notes = Note.objects.all().order_by("-created_at")[:5]
+    notes = Note.objects.filter(is_private=False, is_archived=False).order_by("-created_at")[:5]
     return {"recent_posts": notes}
 
 

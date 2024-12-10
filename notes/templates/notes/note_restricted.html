@@ -3,8 +3,8 @@
 {% load static %}
 {% load custom_filters %}
 
-{% block title %} Note doesn't exist {% endblock %}
-{% block page-title %} Note with (id: {{ note_id }}) doesn't exist {% endblock %}
+{% block title %} Note restricted {% endblock %}
+{% block page-title %} Note with (id: {{ note_id }}) is restricted {% endblock %}
 
 {% block content %}
     <div class="flex h-full w-full items-center justify-center">
@@ -21,11 +21,11 @@
                         }); 
                     }
                 </script>
-                <h2 class="transition-all text-gray-700 font-medium text-xl group-hover:text-gray-400">Note missing</h2>
+                <h2 class="transition-all text-gray-700 font-medium text-xl group-hover:text-gray-400">Note restricted</h2>
             </div>
             <div class="flex w-full max-w-72 p-6 border-t-2 border-gray-200">
                 <p class="text-gray-700">
-                    <span class="text-gray-400 font-medium cursor-not-allowed">Note (id: {{ note_id }})</span> either doesn't exist or has been deleted.
+                    <span class="text-gray-400 font-medium cursor-not-allowed">Note (id: {{ note_id }})</span> is either private or archived.
                 </p>
             </div>
         </div>

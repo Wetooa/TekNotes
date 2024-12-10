@@ -165,10 +165,10 @@
                     <script>
                         if (document.referrer && document.referrer.startsWith(window.location.origin)) {
                             $("#title-back-arrow").show(150);
+                            $("#title-back-btn").click(() => {
+                                window.history.back();
+                            }); 
                         }
-                        $("#title-back-btn").click(() => {
-                            window.history.back();
-                        }); 
                     </script>
                 </div>
                 <div class="flex items-center gap-6">

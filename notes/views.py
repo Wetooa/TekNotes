@@ -48,6 +48,9 @@ def note_detail(request, note_id):
     except Note.DoesNotExist:
         return render(request, "notes/note_missing.html", {"note_id": note_id})
 
+    if note.created_by != request.user and (note.is_private or note.is_archived):
+        return render(request, "notes/note_restricted.html", {"note_id": note_id})
+
     save_note_clicks(note)
     return render(request, "notes/note_detail.html", {"note": note})
 
