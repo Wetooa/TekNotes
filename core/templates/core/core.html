@@ -41,12 +41,16 @@
                 --scrollbar-thumb: #D1D5DB;
                 --scrollbar-thumb-hover: #6B7280;
                 --scrollbar-track: #E5E7EB;
+                --black: #374151;
+                --bg: #f9fafb;
             }
 
             .dark {
                 --scrollbar-thumb: #030712;
                 --scrollbar-thumb-hover: #374151;
                 --scrollbar-track: #111827;
+                --black: #f9fafb;
+                --bg: #374151;
             }
 
             ::-webkit-scrollbar {
@@ -67,6 +71,40 @@
             ::-webkit-scrollbar-track {
                 background: var(--scrollbar-track);
                 border-radius: 4px;
+            }
+
+            .ck-editor__editable {
+                --ck-color-base-background: transparent !important;
+                --ck-color-base-border: transparent !important;
+                --ck-focus-ring: transparent !important;
+                --ck-border-radius: 0px !important;
+                --ck-toolbar-dropdown-max-width: 500px !important;
+            }
+
+            .ck.ck-toolbar-dropdown>.ck-dropdown__panel {
+                max-width: 500px !important;
+            }
+
+            .ck-reset_all {
+                --ck-color-text: var(--black) !important;
+            }
+            
+            .ck.ck-dropdown__panel {
+                background: var(--bg) !important;
+                border: none !important;
+            }
+
+            .ck-toolbar {
+                background-color: transparent !important;
+            }
+
+            .ck-toolbar > * {
+                border: none !important;
+            }
+
+            .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content {
+                border: none !important;
+                border-width: 0px !important;
             }
         </style>
     </head>

@@ -5,7 +5,7 @@
 {% block title %} Tek a note {% endblock %}
 
 {% block content %}
-    <div class="flex flex-col max-w-[760px] max-h-[760px] w-full rounded-xl bg-gray-50 dark:bg-gray-800 self-center shadow-lg overflow-hidden">
+    <div class="flex flex-col max-w-[600px] max-h-[760px] w-full rounded-xl bg-gray-50 dark:bg-gray-800 self-center shadow-lg overflow-hidden">
         <div id="note-bar" class="transition-all flex px-4 py-2 bg-rose-700 w-full justify-between items-center rounded-t-xl">
             <p class="font-medium text-gray-50 hover:bg-rose-600 text-lg">Tek a note</p>
             <div onclick="goToLastPage()" class="cursor-pointer">
@@ -99,7 +99,7 @@
                         <div class="flex flex-col gap-3 px-4 py-3">
                             {{ form.title }}
                         </div>
-                        <div class="flex flex-1 overflow-y-auto mb-0.5 text-gray-700 dark:text-gray-50">
+                        <div class="flex flex-1 border-t-2 border-gray-200 dark:border-gray-700 overflow-y-auto mb-0.5 text-gray-700 dark:text-gray-50">
                             {{ form.content }}
                             <script>
                                 $(document).ready(function() {
