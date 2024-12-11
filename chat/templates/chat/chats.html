@@ -59,13 +59,21 @@
     </div>
 </div>
 <script>
-    let chatIsOpen = true;
+    let chatIsOpen = JSON.parse(localStorage.getItem('chatIsOpen')) ?? true;
+
+    toggleChat(chatIsOpen);
+
     $("#chat-header").click(() => {
         chatIsOpen = !chatIsOpen;
-        if (chatIsOpen) {
+        toggleChat(chatIsOpen);
+        localStorage.setItem('chatIsOpen', JSON.stringify(chatIsOpen));
+    });
+
+    function toggleChat(condition) {
+        if (condition) {
             $("#chat-dropdown").show(150);
         } else {
             $("#chat-dropdown").hide(150);
         }
-    });
+    }
 </script>
