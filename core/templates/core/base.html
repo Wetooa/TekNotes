@@ -280,9 +280,9 @@
     <script>
         $(document).ready(function() {
             let navIsClosed = JSON.parse(localStorage.getItem('navIsClosed')) || false;
-            function toggleNav(condition) {
+            function toggleNav(condition, duration) {
                 if (condition) {
-                    $('#logo, .nav-text, .new-note-text, .course-text, .user-text, #courses-dropdown-arrow, #user-settings-btn').hide(150);
+                    $('#logo, .nav-text, .new-note-text, .course-text, .user-text, #courses-dropdown-arrow, #user-settings-btn').hide(duration);
                     $('nav').removeClass('w-full');
                     $('nav').removeClass('px-5').addClass('px-3');
                     $('.active-nav').removeClass('px-6').addClass('px-3')
@@ -293,7 +293,7 @@
                     $(".nav-elem").addClass('justify-center');
                     $("#user-settings").hide(150);
                 } else {
-                    $('#logo, .nav-text, .new-note-text, .course-text, .user-text, #courses-dropdown-arrow, #user-settings-btn').show(150);
+                    $('#logo, .nav-text, .new-note-text, .course-text, .user-text, #courses-dropdown-arrow, #user-settings-btn').show(duration);
                     $('nav').addClass('w-full');
                     $('nav').removeClass('px-3').addClass('px-5');
                     $('.active-nav').removeClass('px-3').addClass('px-6')
@@ -305,28 +305,28 @@
                 }
             }
 
-            function toggleAside(condition) {
+            function toggleAside(condition, duration) {
                 if (condition) {
-                    $('aside').hide(150);
+                    $('aside').hide(duration);
                 } else {
-                    $('aside').show(150);
+                    $('aside').show(duration);
                 }
             }
 
-            toggleNav(navIsClosed);
-            toggleAside($(window).width() <= 996)
+            toggleNav(navIsClosed, 0);
+            toggleAside($(window).width() <= 996, 0)
 
             $(window).resize(() => {
                 if (!navIsClosed) {
-                    toggleNav($(window).width() <= 678)
+                    toggleNav($(window).width() <= 678, 150)
                 }
-                toggleAside($(window).width() <= 996);
+                toggleAside($(window).width() <= 996, 150);
             });
 
             $('#menu-icon').click(function() {
                 navIsClosed = !navIsClosed;
                 localStorage.setItem('navIsClosed', JSON.stringify(navIsClosed));
-                toggleNav(navIsClosed);
+                toggleNav(navIsClosed, 150);
             });
         });
     </script>
