@@ -42,7 +42,7 @@ CHANNEL_LAYERS = {
     }
 }
 
-SITE_ID = 4
+SITE_ID = 2
 
 
 # Application definition

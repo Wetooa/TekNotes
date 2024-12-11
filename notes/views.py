@@ -58,38 +58,38 @@ def note_detail(request, note_id):
 
 @login_required
 def delete_note(request, note_id):
-    success = False
-    note = get_object_or_404(Note, id=note_id, created_by=request.user)
-    if request.method == "POST":
-        note.delete()
-        success = True
-    return render(request, "core/loading.html", {"success": success, "message": f"Deleting note (id: {note_id})"})
+    try:
+        note = Note.objects.get(id=note_id)
+    except Note.DoesNotExist:
+        return render(request, "notes/note_missing.html", {"note_id": note_id})
+    note.delete()
+    return render(request, "core/loading.html", {"success": True, "message": f"Deleting note (id: {note_id})"})
 
 
 @login_required
 def archive_note(request, note_id):
-    note = get_object_or_404(Note, id=note_id, created_by=request.user)
-    success = False
+    try:
+        note = Note.objects.get(id=note_id)
+    except Note.DoesNotExist:
+        return render(request, "notes/note_missing.html", {"note_id": note_id})
 
-    if request.method == "POST":
-        note.is_archived = not note.is_archived
-        note.save()
-        success = True
+    note.is_archived = not note.is_archived
+    note.save()
 
-    return render(request, "core/loading.html", {"success": success, "message": f"Archiving note (id: {note_id})"})
+    return render(request, "core/loading.html", {"success": True, "message": f"Archiving note (id: {note_id})"})
 
 
 @login_required
 def hide_note(request, note_id):
-    note = get_object_or_404(Note, id=note_id, created_by=request.user)
-    success = False
+    try:
+        note = Note.objects.get(id=note_id)
+    except Note.DoesNotExist:
+        return render(request, "notes/note_missing.html", {"note_id": note_id})
 
-    if request.method == "POST":
-        note.is_private = not note.is_private
-        note.save()
-        success = True
+    note.is_private = not note.is_private
+    note.save()
 
-    return render(request, "core/loading.html", {"success": success, "message": f"Hiding note (id: {note_id})"})
+    return render(request, "core/loading.html", {"success": True, "message": f"Hiding note (id: {note_id})"})
 
 @login_required
 def edit_note(request, note_id):
