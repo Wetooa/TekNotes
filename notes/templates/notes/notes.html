@@ -48,7 +48,9 @@
         }
 
         partitionNotes();
-        $(window).resize(partitionNotes);
+        $(window).resize(() => {
+            partitionNotes();
+        });
 
         $("#scroll-container").scroll(function () {
             var scrollTop = $(this).scrollTop();
