@@ -268,11 +268,13 @@
                        placeholder="Search"
                        onclick="event.stopPropagation();" />
             </form>
-            {% block other-widgets %}
+            {% block other-widgets %}{% endblock %}
+
+            <div class="flex flex-col overflow-y-auto">
                 {% include 'core/sidebar/recent_posts.html' %}
                 {% include 'core/sidebar/trending.html' %}
                 {% include 'core/sidebar/notifications.html' %}
-            {% endblock %}
+            </div>
         </aside>
     </div>
     <script>
