@@ -4,8 +4,7 @@
 {% block page-title %}Home{% endblock %}
 {% block content %}
     {% if notes %}
-        {% include
-        'tags/course_and_tags.html' %}
+        {% include 'tags/course_and_tags.html' %}
         {% include 'notes/notes.html' %}
     {% else %}
         {% include 'core/no_results.html' with message="It looks like there are no notes yet. Start contributing to the community!" complex=True %}
