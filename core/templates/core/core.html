@@ -27,6 +27,12 @@
             if (!/notes|course|loading|edit/.test(window.location.href)) {
                 lastPage = window.location.href;
                 localStorage.setItem('lastPage', JSON.stringify(lastPage));
+            } else {
+                $(document).on('keydown', function(event) {
+                    if (event.key === 'Escape') {
+                        goToLastPage();
+                    }
+                });
             }
             setDarkMode();
 
