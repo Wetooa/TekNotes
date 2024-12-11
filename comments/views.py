@@ -26,7 +26,7 @@ def like(request, note_id):
     if not created:
         like.delete()
     else:
-        Notification.objects.create(
+        Notification.objects.create(    
             user=note.created_by,
             sender=request.user,
             notification_type=NotificationType.LIKE_NOTE,

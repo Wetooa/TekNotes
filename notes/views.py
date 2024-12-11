@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from clicks.models import ClickNote, ClickTag, ClickCourse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -80,6 +81,8 @@ def archive_note(request, note_id):
     note.is_archived = not note.is_archived
     note.save()
 
+    if (request.GET.get('note_detail')):
+        return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
     return render(request, "core/loading.html", {"success": True, "message": f"Archiving note (id: {note_id})"})
 
 
@@ -93,6 +96,8 @@ def hide_note(request, note_id):
     note.is_private = not note.is_private
     note.save()
 
+    if (request.GET.get('note_detail')):
+        return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
     return render(request, "core/loading.html", {"success": True, "message": f"Hiding note (id: {note_id})"})
 
 @login_required
