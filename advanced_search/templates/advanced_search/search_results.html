@@ -156,7 +156,7 @@
                 <button type="submit"
                         name="category"
                         value="all"
-                        class="transition-all flex px-4 py-3 gap-3 items-center rounded-md {% if request.GET.category == 'all' %}bg-gray-200 dark:bg-gray-900{% else %}bg-gray-50 dark:bg-gray-800{% endif %} hover:bg-gray-200 dark:hover:bg-gray-900">
+                        class="transition-all flex px-4 py-3 gap-3 items-center rounded-md {% if request.GET.category == 'all' or not request.GET.category %}bg-gray-200 dark:bg-gray-900{% else %}bg-gray-50 dark:bg-gray-800{% endif %} hover:bg-gray-200 dark:hover:bg-gray-900">
                     <svg class="fill-gray-700 dark:fill-gray-50"
                          height="22"
                          xmlns="http://www.w3.org/2000/svg"
