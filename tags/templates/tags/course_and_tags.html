@@ -1,12 +1,12 @@
 {% load static %}
 {% load custom_filters %}
-<div class="flex flex-1 {% if wrap %} flex-wrap {% else %} overflow-x-auto {% endif %} gap-3 ">
+<div class="flex {% if wrap %} flex-wrap {% endif %} gap-3 ">
     {% for course in courses %}
         <a href="{% url 'advanced_search:view_course' course.id %}"
-           class="transition-all px-3 py-1 bg-{{ course.color }} hover:bg-{{ course.color }}/50 rounded-md shadow-lg font-medium text-gray-50 whitespace-nowrap">{{ course.code }}</a>
+           class="transition-all px-3 py-1 bg-{{ course.color }} hover:bg-{{ course.color }}/50 rounded-md shadow-lg font-medium text-gray-50 whitespace-nowrap {% if wrap %} max-w-full truncate {% endif %}">{{ course.code }}</a>
     {% endfor %}
     {% for tag in tags %}
         <a href="/search/?query={{ tag.name }}&category=all"
-           class="transition-all hover:bg-gray-50/50 dark:hover:bg-gray-800/50 px-3 py-1 {% if query in tag.name %}bg-rose-700 text-white {% else %} bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-50 {% endif %} rounded-md shadow-lg whitespace-nowrap">{{ tag.name }}</a>
+           class="transition-all hover:bg-gray-50/50 dark:hover:bg-gray-800/50 px-3 py-1 {% if query in tag.name %}bg-rose-700 hover:bg-rose-500 text-white {% else %} bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-50 {% endif %} rounded-md shadow-lg whitespace-nowrap {% if wrap %} max-w-full truncate {% endif %}">{{ tag.name }}</a>
     {% endfor %}
 </div>

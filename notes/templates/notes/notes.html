@@ -2,7 +2,7 @@
 {% load custom_filters %}
 
 <div class="flex flex-1 relative overflow-hidden">
-    <div id="scroll-container" class="flex flex-1 {% if not no_scroll %} overflow-hidden overflow-y-auto {% endif %} scroll-smooth">
+    <div id="scroll-container" class="flex flex-1 {% if not no_scroll %} overflow-hidden overflow-y-auto {% endif %} scroll-smooth w-full">
         <div id="top-anchor"></div>
         <div id="notes" class="flex flex-1 gap-3" style="display: none;">
             {% for note in notes %}
@@ -12,7 +12,7 @@
             {% endfor %}
         </div>
 
-        <div id="notes-container" class="flex flex-1 gap-3"></div>
+        <div id="notes-container" class="flex flex-1 gap-3 w-full items-start"></div>
     </div>
     <a id="go-up" href="#top-anchor" class="absolute flex justify-center items-center rounded-full bg-rose-700 p-3 shadow-md bottom-4 right-4 animate-bounce hidden">
         <svg class="fill-gray-50" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -28,7 +28,7 @@
         let columns = width <= 574 ? 1 : (width <= 788 ? 2 : (width <= 1148 ? 3 : 4));
         
         for (let i = 0; i < columns; i++) {
-            $('#notes-container').append('<div class="flex flex-col flex-1"></div>');
+            $('#notes-container').append('<div class="flex flex-col flex-1 overflow-x-hidden"></div>');
         }
 
         $('#notes .note').each(function (index) {

@@ -1,18 +1,18 @@
 {% load static %}
 {% load custom_filters %}
 
-<div class="rounded-xl hover:bg-gray-100 transition-all {% if note.is_private %} dark:hover:bg-gray-800 border-2 border-dashed border-gray-500 dark:border-gray-700 {% else %} bg-gray-50 dark:bg-gray-800 shadow-lg hover:shadow-xl dark:hover:bg-gray-700 {% endif %} mb-3">
+<div class="rounded-xl hover:bg-gray-100 transition-all {% if note.is_private %} dark:hover:bg-gray-800 border-2 border-dashed border-gray-500 dark:border-gray-700 {% else %} bg-gray-50 dark:bg-gray-800 drop-shadow-md hover:drop-shadow-lg dark:hover:bg-gray-700 {% endif %} mb-3">
     <a href="{% url 'notes:note_detail' note.id %}" class="flex flex-col {% if note.is_archived %} opacity-70 {% endif %}">
         {% if note.course %}
             <div class="flex {% if note.is_private %} border-b-2 border-dashed border-gray-500 dark:border-gray-700 {% else %} bg-{{ note.course.color }} {% endif %} px-3 py-1.5 rounded-t-xl">
-                <p class="{% if note.is_private %} text-{{ note.course.color }} {% else %} text-gray-50 {% endif %} font-semibold">{{ note.course }}</p>
+                <p class="{% if note.is_private %} text-{{ note.course.color }} {% else %} text-gray-50 {% endif %} font-semibold truncate">{{ note.course }}</p>
             </div>
         {% endif %}
         <div class="flex flex-col p-4 gap-3 max-h-80 overflow-hidden">
             <div class="flex flex-col gap-2">
                 <div class="flex gap-2 items-center">
                     <img src="{{ note.created_by.profile.avatar.url }}" alt="Profile Image" class="h-4 w-4 aspect-square rounded-full">
-                    <p class="text-gray-500 dark:text-gray-400 font-medium text-sm">
+                    <p class="text-gray-500 dark:text-gray-400 font-medium text-sm truncate">
                         {%if query%}
                             {% highlight note.created_by.get_full_name query "user" %}
                         {% else %}
@@ -23,7 +23,7 @@
                         {% endif %}
                     </p>
                 </div>
-                <h1 class="text-xl text-gray-700 dark:text-gray-50 font-semibold">
+                <h1 class="text-xl text-gray-700 dark:text-gray-50 font-semibold break-words">
                     {%if query%}
                         {% highlight note.title query "note_title" %}
                     {% else %}
@@ -32,7 +32,7 @@
                 </h1>
             </div>
 
-            <div class="text-gray-700 dark:text-gray-50 overflow-y-auto overflow-x-hidden">
+            <div class="text-gray-700 dark:text-gray-50 overflow-y-auto overflow-x-hidden break-words">
                 {%if query%}
                     {% highlight note.content query "note_detail" %}
                 {%else%}
@@ -88,7 +88,7 @@
                               {% elif note.is_private %}
                                   bg-gray-50 dark:bg-gray-800
                               {% else %} bg-gray-200 dark:bg-gray-900
-                              {% endif %} text-gray-700 dark:text-gray-50">
+                              {% endif %} text-gray-700 dark:text-gray-50 max-w-full truncate">
                         {{tag}}
                     </p>
                 {% endfor %}

@@ -5,6 +5,12 @@ class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ['code', 'description', 'color']
+    
+    def clean_code(self):
+        code = self.cleaned_data.get('code')
+        if len(code) > 20:
+            raise forms.ValidationError("Course code cannot be longer than 20 characters.")
+        return code
 
     code = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Code',

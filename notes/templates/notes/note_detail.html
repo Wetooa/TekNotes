@@ -29,24 +29,24 @@
         <div class="flex flex-1 overflow-hidden">
             <div class="flex flex-col p-6 gap-3 flex-1 border-r-2 border-gray-200 dark:border-gray-900 overflow-y-auto">
                 <div class="flex flex-col">
-                    <h1 class="text-2xl text-gray-700 dark:text-gray-50 font-semibold">
+                    <h1 class="text-2xl text-gray-700 dark:text-gray-50 font-semibold break-words">
                         {{ note.title }}
                     </h1>
                 </div>
 
                 <div class="flex flex-col gap-3">
-                    <div class="text-gray-700 dark:text-gray-50">
+                    <div class="text-gray-700 dark:text-gray-50 break-words">
                         {{ note.content | safe }}
                     </div>
                 </div>
             </div>
 
             <div class="flex flex-col flex-1 max-w-md overflow-hidden">
-                <div class="px-4 py-3 gap-3 flex items-center">
-                    <p class="text-gray-700 dark:text-gray-50">Posted by</p>
-                    <a href="{% url 'authentication:profile' note.created_by.id %}" class="flex gap-3">
+                <div class="px-4 py-3 gap-3 flex items-center overflow-hidden">
+                    <p class="text-gray-700 dark:text-gray-50 text-nowrap">Posted by</p>
+                    <a href="{% url 'authentication:profile' note.created_by.id %}" class="flex gap-3 overflow-hidden">
                         <img src="{{ note.created_by.profile.avatar.url }}" alt="Profile Image" class="h-6 w-6 aspect-square rounded-full">
-                        <p class="text-gray-700 dark:text-gray-50 font-semibold">
+                        <p class="text-gray-700 dark:text-gray-50 font-semibold truncate">
                             {{ note.created_by.get_full_name }}
                             {% if note.created_by == request.user %}
                                 <span class="font-normal text-gray-400">(You)</span>
@@ -56,7 +56,7 @@
                 </div>
 
                 {% if request.user == note.created_by %}
-                    <div class="flex rounded-b-xl overflow-hidden p-2 gap-2">
+                    <div class="flex flex-wrap rounded-b-xl overflow-hidden p-2 gap-2">
                         <a href="{% url 'notes:delete_note' note.id %}" class="flex gap-1 justify-center items-center text-sm bg-rose-200 dark:bg-rose-600 text-rose-700 dark:text-gray-50 rounded-md p-2">
                             <svg class="fill-rose-700 dark:fill-gray-50" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                 <path d="M424 80h-74.38l-34-56.75C306.9 8.875 291.3 0 274.4 0H173.6c-16.88 0-32.5 8.875-41.25 23.25L98.38 80H23.1C10.75 80 0 90.75 0 103.1S10.75 128 23.1 128H32l21.21 339c1.5 25.25 22.52 45 47.9 45h245.8c25.38 0 46.4-19.75 47.9-45L416 128h8C437.3 128 448 117.3 448 104S437.3 80 424 80zM173.6 48h100.8l19.25 32H154.4L173.6 48zM346.9 464H101.1L80.13 128h287.8L346.9 464z"/>
@@ -89,7 +89,7 @@
                 {% endif %}
 
                 <div class="flex justify-between px-4 py-3 gap-3 border-t-2 border-gray-200 dark:border-gray-900">
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">{{ note.modified_at }}</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm truncate">{{ note.modified_at }}</p>
 
                     <div class="flex gap-3">
                         <a href="{% url 'comments:like' note.id %}" class="flex gap-1 items-center">
@@ -130,12 +130,12 @@
                 <div class="flex flex-1 overflow-hidden border-t-2 border-gray-200 dark:border-gray-900 w-full">
                     <div class="flex flex-col gap-4 p-4 items-start overflow-y-auto w-full">
                         {% for comment in note.comments.all %}
-                            <div class="flex flex-col gap-1 p-3 rounded-lg bg-gray-200 dark:bg-gray-900 shadow">
+                            <div class="flex flex-col gap-1 p-3 rounded-lg bg-gray-200 dark:bg-gray-900 shadow max-w-full overflow-hidden">
                                 <div class="flex gap-2 items-center">
                                     <p class="text-gray-500 dark:text-gray-400 text-sm">from</p>
-                                    <a href="{% url 'authentication:profile' comment.user.id %}" class="flex gap-1 items-center">
+                                    <a href="{% url 'authentication:profile' comment.user.id %}" class="flex gap-1 items-center overflow-hidden">
                                         <img src="{{ comment.user.profile.avatar.url }}" alt="Profile Image" class="h-4 w-4 aspect-square rounded-full">
-                                        <p class="text-gray-500 dark:text-gray-400 font-medium text-sm">
+                                        <p class="text-gray-500 dark:text-gray-400 font-medium text-sm truncate">
                                             {% if comment.user == request.user %}
                                                 <span class="font-normal">You</span>
                                             {% else %}
@@ -144,7 +144,7 @@
                                         </p>
                                     </a>
                                 </div>
-                                <p class="text-gray-700 dark:text-gray-50 font-medium">{{ comment.content }}</p>
+                                <p class="text-gray-700 dark:text-gray-50 font-medium break-words">{{ comment.content }}</p>
                                 <p class="text-gray-500 dark:text-gray-400 text-sm">{{ comment.created_at|formattime }}</p>
                             </div>
                         {% empty %}
@@ -168,7 +168,7 @@
                 {% if note.tags.count > 0 %}
                     <div class="flex flex-wrap p-4 gap-3 border-t-2 border-gray-200 dark:border-gray-900">
                         {% for tag in note.tags.all|slice:":3" %}
-                            <a href="/search/?query={{ tag.name }}&category=all" class="transition-all bg-gray-200 dark:bg-gray-900 hover:bg-gray-200/50 dark:hover:bg-gray-900/50 text-sm text-gray-700 dark:text-gray-50 shadow px-3 py-1 rounded-md inline-block">{{ tag }}</a>
+                            <a href="/search/?query={{ tag.name }}&category=all" class="transition-all bg-gray-200 dark:bg-gray-900 hover:bg-gray-200/50 dark:hover:bg-gray-900/50 text-sm text-gray-700 dark:text-gray-50 shadow px-3 py-1 rounded-md inline-block max-w-full truncate">{{ tag }}</a>
                         {% endfor %}
                     </div>
                 {% endif %}

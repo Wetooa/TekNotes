@@ -14,7 +14,7 @@
                         <img src="{{ note.created_by.profile.avatar.url }}"
                              alt="Profile Image"
                              class="h-4 w-4 aspect-square rounded-full">
-                        <p class="text-gray-500 dark:text-gray-400 font-medium text-sm overflow-hidden">
+                        <p class="text-gray-500 dark:text-gray-400 font-medium text-sm truncate">
                             {% if note.created_by == request.user %}
                                 <span class="font-normal text-gray-400">You</span>
                             {% else %}

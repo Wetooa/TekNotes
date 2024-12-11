@@ -7,7 +7,7 @@
 
 {% block content %}
     <div class="flex flex-col max-w-[600px] max-h-[760px] w-full rounded-xl bg-gray-50 dark:bg-gray-800 self-center shadow-lg overflow-hidden">
-        <div id="note-bar" class="transition-all flex px-4 py-2 bg-{{ note.course.color }} w-full justify-between items-center rounded-t-xl">
+        <div id="note-bar" class="transition-all flex px-4 py-2 {% if note.course %} bg-{{ note.course.color }} {% else %} bg-red-700 {% endif %} w-full justify-between items-center rounded-t-xl">
             <p class="font-medium text-gray-50 text-lg">Edit note</p>
             <div onclick="goToLastPage()" class="cursor-pointer">
                 <svg class="fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -123,7 +123,7 @@
                 </div>
 
                 <div class="flex p-6 gap-3 w-full border-t-2 border-gray-200 dark:border-gray-900 items-center">
-                    <button id="note-btn" class="transition-all px-4 py-2 text-gray-50 bg-{{ note.course.color }} font-medium rounded-md w-full">Save</button>
+                    <button id="note-btn" class="transition-all px-4 py-2 text-gray-50 {% if note.course %} bg-{{ note.course.color }} {% else %} bg-red-700 {% endif %} font-medium rounded-md w-full">Save</button>
                     <div onclick="goToLastPage()" class="cursor-pointer flex px-4 py-2 bg-gray-200 dark:bg-gray-900 rounded-md w-full justify-center">
                         <p class="text-gray-700 dark:text-gray-50">Cancel</p>
                     </div>

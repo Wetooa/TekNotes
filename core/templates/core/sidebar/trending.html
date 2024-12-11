@@ -17,21 +17,21 @@
         {% for note in trending_notes %}
             <a href="{% url 'notes:note_detail' note.id %}"
                 class="transition-all flex flex-col cursor-pointer bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-md rounded-md p-3 gap-2 items-start overflow-hidden">
-                <div class="flex gap-2 items-center overflow-hidden">
+                <div class="flex gap-2 items-center overflow-hidden w-full">
                     {% if note.course %}
-                        <p class="text-sm text-gray-50 bg-{{ note.course.color }} px-2 py-0.5 rounded text-nowrap overflow-hidden text-ellipsis ">
+                        <p class="text-sm text-gray-50 bg-{{ note.course.color }} px-2 py-0.5 rounded">
                             {{ note.course.code }}
                         </p>
                     {% endif %}
-                    <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-50 text-nowrap overflow-hidden text-ellipsis ">
-                        {{ note.title|truncatechars:13 }}
+                    <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-50 truncate">
+                        {{ note.title }}
                     </h3>
                 </div>
-                <div class="flex gap-2 items-center">
+                <div class="flex gap-2 items-center w-full">
                     <img src="{{ note.created_by.profile.avatar.url }}"
                             alt="Profile Image"
                             class="h-4 w-4 aspect-square rounded-full">
-                    <p class="text-gray-500 dark:text-gray-400 font-medium text-sm">
+                    <p class="text-gray-500 dark:text-gray-400 font-medium text-sm truncate">
                         {{ note.created_by.get_full_name }}
                         {% if note.created_by == request.user %}<span class="font-normal text-gray-400">(You)</span>{% endif %}
                     </p>
@@ -56,7 +56,7 @@
     <div class="flex flex-wrap gap-3 p-4 border-2 border-gray-300 dark:border-gray-800 border-t-0 rounded-b-xl">
         {% for tag in trending_tags %}
             <a href="/search/?query={{ tag.name }}"
-                class="text-gray-700 dark:text-gray-50 px-3 py-1 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-md rounded-md whitespace-nowrap">
+                class="text-gray-700 dark:text-gray-50 px-3 py-1 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-md rounded-md max-w-full truncate">
                 {{ tag.name }}
             </a>
         {% endfor %}

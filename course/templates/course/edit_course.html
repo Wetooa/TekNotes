@@ -27,11 +27,18 @@
                             {{ form.description }}
                         </div>
                     </div>
+                    {% if form.code.errors %}
+                        <div class="p-4 bg-rose-100 rounded-xl text-rose-700">
+                            {% for error in form.code.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     <div class="grid cols grid-cols-7 w-full gap-2">
                         {% for color_code, color_name in form.color.field.choices %}
                             <div class="color-option transition-all h-10 w-full rounded-md cursor-pointer bg-{{ color_code }} hover:ring hover:ring-yellow-500" title="{{ color_name }}">
                                 <input onclick="changeColor('{{ color_code }}')" type="radio" name="color" value="{{ color_code }}" id="{{ color_code }}" class="hidden" {% if form.color.value == color_code %} checked {% endif %} />
-                                <label for="{{ color_code }}" class="w-full h-full flex justify-center items-center rounded-md cursor-pointer bg-{{ color_code }}"></label>
+                                <label for="{{ color_code }}" class="w-full h-full flex justify-center items-center rounded-md cursor-pointer bg-{{ color_code }} {% if form.color.value == color_code %} ring-2 ring-yellow-500 {% endif %}"></label>
                             </div>
                             <script>
                                 function changeColor(color_code) {

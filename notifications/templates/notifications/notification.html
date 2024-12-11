@@ -5,9 +5,9 @@
     <a href="{% url 'authentication:profile' notif.sender.id %}">
         <img class="h-6 w-6 aspect-square rounded-full" src="{{ notif.sender.profile.avatar.url }}" alt="Profile Image"/>
     </a>
-    <div class="text-sm flex-1 text-gray-700 dark:text-gray-50">
-        <p><span class="font-medium">{{ notif.sender.get_full_name }}</span> {{ notif.get_content }}</p>
-        <p class="text-gray-500 dark:text-gray-400">{{ notif.created_at|formattime }}</p>
+    <div class="text-sm flex-1 text-gray-700 dark:text-gray-50 overflow-hidden">
+        <p><span class="font-medium break-words">{{ notif.sender.get_full_name }}</span> {{ notif.get_content }}</p>
+        <p class="text-gray-500 dark:text-gray-400 break-words">{{ notif.created_at|formattime }}</p>
     </div>
 
     {% if not notif.is_read %}

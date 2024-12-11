@@ -24,7 +24,7 @@
 
             let isDark = JSON.parse(localStorage.getItem('isDark')) || false;
             let lastPage = JSON.parse(localStorage.getItem('lastPage'));
-            if (!/notes|loading|edit|course(?!_)/.test(window.location.href)) {
+            if (/profile\/\d+\/notes/.test(window.location.href) || !/notes|loading|edit|course(?!_)/.test(window.location.href)) {
                 lastPage = window.location.href;
                 localStorage.setItem('lastPage', JSON.stringify(lastPage));
             } else {
