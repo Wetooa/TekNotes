@@ -24,14 +24,14 @@
                     </div>
                     <p class="text-gray-500 dark:text-gray-400 text-sm">{{ note.modified_at|formattime }}</p>
                 </div>
-                <div class="flex gap-2 items-center overflow-hidden">
+                <div class="flex gap-2 items-center overflow-hidden w-full">
                     {% if note.course %}
-                        <p class="text-sm text-gray-50 bg-{{ note.course.color }} px-2 py-0.5 rounded text-nowrap overflow-hidden text-ellipsis ">
+                        <p class="text-sm text-gray-50 bg-{{ note.course.color }} px-2 py-0.5 rounded text-nowrap">
                             {{ note.course.code }}
                         </p>
                     {% endif %}
                     <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-50 text-nowrap overflow-hidden text-ellipsis ">
-                        {{ note.title|truncatechars:13 }}
+                        {{ note.title }}
                     </h3>
                 </div>
             </a>
