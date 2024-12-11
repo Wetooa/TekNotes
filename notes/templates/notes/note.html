@@ -1,7 +1,7 @@
 {% load static %}
 {% load custom_filters %}
 
-<div class="rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-all {% if note.is_private %} border-2 border-dashed border-gray-500 dark:border-gray-700 {% else %} bg-gray-50 dark:bg-gray-800 shadow-lg hover:shadow-xl {% endif %} mb-3">
+<div class="rounded-xl hover:bg-gray-100 transition-all {% if note.is_private %} dark:hover:bg-gray-800 border-2 border-dashed border-gray-500 dark:border-gray-700 {% else %} bg-gray-50 dark:bg-gray-800 shadow-lg hover:shadow-xl dark:hover:bg-gray-700 {% endif %} mb-3">
     <a href="{% url 'notes:note_detail' note.id %}" class="flex flex-col {% if note.is_archived %} opacity-70 {% endif %}">
         {% if note.course %}
             <div class="flex {% if note.is_private %} border-b-2 border-dashed border-gray-500 dark:border-gray-700 {% else %} bg-{{ note.course.color }} {% endif %} px-3 py-1.5 rounded-t-xl">
