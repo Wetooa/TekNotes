@@ -22,20 +22,35 @@
 </div>
 
 <script>
-    function partitionNotes() {
+    function partitionNotes(transition=false) {
         $('#notes-container').empty();
         const width = $('#notes-container').width();
         let columns = width <= 574 ? 1 : (width <= 788 ? 2 : (width <= 1148 ? 3 : 4));
+        
         for (let i = 0; i < columns; i++) {
             $('#notes-container').append('<div class="flex flex-col flex-1"></div>');
         }
+
         $('#notes .note').each(function (index) {
             const columnIndex = index % columns;
-            $('#notes-container > div').eq(columnIndex).append($(this).clone());
+            const noteClone = $(this).clone();
+
+            if (transition) {
+                $('#notes-container > div').eq(columnIndex).append(noteClone.hide().fadeIn(300));
+            } else {
+                $('#notes-container > div').eq(columnIndex).append($(this).clone());
+            }
         });
     }
 
     $(document).ready(function () {
+        let newestToOldest = JSON.parse(localStorage.getItem('newestToOldest')) ?? true;
+        changeSortIcon(newestToOldest);
+
+        if (!newestToOldest) {
+            reverseNotes();
+        }
+
         partitionNotes();
         $(window).resize(partitionNotes);
 
@@ -47,5 +62,32 @@
             $('#go-up').hide(150);
             }
         });
+
+        $("#reverse-btn").click(function () {
+            newestToOldest = !newestToOldest;
+            localStorage.setItem('newestToOldest', JSON.stringify(newestToOldest));
+
+            reverseNotes()
+            partitionNotes(true);
+            changeSortIcon(newestToOldest);
+        });
+
+        function reverseNotes() {
+            const notes = $('#notes .note');
+            const reversedNotes = notes.toArray().reverse();
+            $('#notes').empty().append(reversedNotes);
+        }
+
+        function changeSortIcon(condition) {
+            if (condition) {
+                $("#reverse-btn").html(`
+                    <path d="M360 432h-48c-13.25 0-24 10.75-24 24S298.8 480 312 480h48c13.25 0 23.1-10.75 23.1-24S373.2 432 360 432zM423.1 304H312C298.8 304 288 314.8 288 328S298.8 352 312 352h111.1c13.25 0 24-10.75 24-24S437.2 304 423.1 304zM487.1 176H312C298.8 176 288 186.8 288 200S298.8 224 312 224h175.1c13.25 0 24-10.75 24-24S501.2 176 487.1 176zM551.1 48H312C298.8 48 288 58.75 288 72S298.8 96 312 96h239.1c13.25 0 24-10.75 24-24S565.2 48 551.1 48zM206.4 335.1L152 394.9V56.02C152 42.76 141.3 32 128 32S104 42.76 104 56.02v338.9l-54.37-58.95c-4.719-5.125-11.16-7.719-17.62-7.719c-5.812 0-11.66 2.094-16.28 6.375c-9.75 8.977-10.34 24.18-1.344 33.94l95.1 104.1c9.062 9.82 26.19 9.82 35.25 0l95.1-104.1c9-9.758 8.406-24.96-1.344-33.94C230.5 325.5 215.3 326.2 206.4 335.1z"/>
+                `);
+            } else {
+                $("#reverse-btn").html(`
+                    <path d="M551.1 47.67H312c-13.25 0-24 10.76-24 24.02c0 13.26 10.75 24.02 24 24.02h239.1c13.25 0 24-10.76 24-24.02C575.1 58.43 565.2 47.67 551.1 47.67zM360 431.1h-48c-13.25 0-24 10.76-24 24.02S298.8 480 312 480h48c13.25 0 23.1-10.76 23.1-24.02S373.2 431.1 360 431.1zM423.1 303.9H312c-13.25 0-24 10.76-24 24.02s10.75 24.02 24 24.02h111.1c13.25 0 24-10.76 24-24.02S437.2 303.9 423.1 303.9zM487.1 175.8H312c-13.25 0-24 10.76-24 24.02s10.75 24.02 24 24.02h175.1c13.25 0 24-10.76 24-24.02S501.2 175.8 487.1 175.8zM145.6 39.37c-9.062-9.82-26.19-9.82-35.25 0L14.38 143.4c-9 9.758-8.406 24.96 1.344 33.94C20.35 181.7 26.19 183.8 32 183.8c6.469 0 12.91-2.594 17.62-7.719L104 117.1v338.9C104 469.2 114.8 480 128 480S152 469.2 152 455.1V117.1l54.37 58.95C215.3 185.8 230.5 186.5 240.3 177.4C250 168.4 250.6 153.2 241.6 143.4L145.6 39.37z"/>
+                `);
+            }
+        }
     });
 </script>

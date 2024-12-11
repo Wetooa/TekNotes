@@ -4,7 +4,17 @@
 {% block page-title %}Home{% endblock %}
 {% block content %}
     {% if notes %}
-        {% include 'tags/course_and_tags.html' %}
+        <div class="flex gap-4 w-full items-center">
+            {% include 'tags/course_and_tags.html' %}
+            <svg id="reverse-btn" class="transition-all fill-gray-700 hover:fill-gray-500 dark:fill-gray-50 dark:hover:fill-gray-400 cursor-pointer" xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 576 512">
+            </svg>
+
+            <script>
+                $("#reverse-btn").click(() => {
+
+                });
+            </script>
+        </div>
         {% include 'notes/notes.html' %}
     {% else %}
         {% include 'core/no_results.html' with message="It looks like there are no notes yet. Start contributing to the community!" complex=True %}
