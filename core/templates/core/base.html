@@ -250,7 +250,7 @@
                 {% endblock %}
             </div>
         </main>
-        <aside class="flex flex-col w-full max-w-80 p-5 pb-0 gap-5 border-l-2 border-gray-300 dark:border-gray-800">
+        <aside class="flex flex-col w-full max-w-80 p-5 pb-11 gap-5 border-l-2 border-gray-300 dark:border-gray-800">
             <form action="{% url 'advanced_search:search' %}"
                   method="get"
                   class="flex px-4 py-2 rounded-xl bg-gray-300 dark:bg-gray-950 dark:hover:bg-gray-800 transition-all gap-3 cursor-text min-w-[0px]"
@@ -270,7 +270,7 @@
             </form>
             {% block other-widgets %}{% endblock %}
 
-            <div class="flex flex-col overflow-y-auto">
+            <div class="flex flex-col overflow-x-hidden overflow-y-auto">
                 {% include 'core/sidebar/recent_posts.html' %}
                 {% include 'core/sidebar/trending.html' %}
                 {% include 'core/sidebar/notifications.html' %}
