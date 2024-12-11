@@ -7,7 +7,7 @@ from tags.models import Tag
 from .models import Note
 from django.http import HttpResponseRedirect
 
-
+@login_required
 def tek_a_note(request):
     if request.method == "POST":
         form = NoteForm(request.POST)
