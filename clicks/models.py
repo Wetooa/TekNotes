@@ -30,11 +30,11 @@ class ClickTag(Click):
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 
     def __str__(self):
-        return super().__str__() + " on tag" + self.tag.title
+        return super().__str__() + " on tag" + self.tag.name
 
 
 class ClickCourse(Click):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):
-        return super().__str__() + " on course" + self.course.title
+        return super().__str__() + " on course" + self.course

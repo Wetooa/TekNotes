@@ -62,7 +62,13 @@ def delete_note(request, note_id):
         note = Note.objects.get(id=note_id)
     except Note.DoesNotExist:
         return render(request, "notes/note_missing.html", {"note_id": note_id})
+
+    for tag in note.tags.all():
+        if tag.notes.count() == 1:
+            tag.delete()
+
     note.delete()
+
     return render(request, "core/loading.html", {"success": True, "message": f"Deleting note (id: {note_id})"})
 
 
