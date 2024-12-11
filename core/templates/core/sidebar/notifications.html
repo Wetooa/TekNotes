@@ -8,6 +8,9 @@
         </svg>
         <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-50">Notifications</h3>
     </div>
+    {% if not notifications %}
+        <p class="text-gray-500 dark:text-gray-400">No activity yet.</p>
+    {% endif %}
     {% for notif in notifications %}
         {% include "notifications/notification.html" with class="bg-white rounded-lg" %}
     {% endfor %}
