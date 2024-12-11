@@ -279,7 +279,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            let navIsVisible = $(window).width() > 678;
+            let navIsClosed = JSON.parse(localStorage.getItem('navIsClosed')) || false;
             function toggleNav(condition) {
                 if (condition) {
                     $('#logo, .nav-text, .new-note-text, .course-text, .user-text, #courses-dropdown-arrow, #user-settings-btn').hide(150);
@@ -313,19 +313,20 @@
                 }
             }
 
-            toggleNav($(window).width() <= 678);
+            toggleNav(navIsClosed);
             toggleAside($(window).width() <= 996)
 
             $(window).resize(() => {
-                if (navIsVisible) {
+                if (!navIsClosed) {
                     toggleNav($(window).width() <= 678)
                 }
                 toggleAside($(window).width() <= 996);
             });
 
             $('#menu-icon').click(function() {
-                toggleNav(navIsVisible);
-                navIsVisible = !navIsVisible
+                navIsClosed = !navIsClosed;
+                localStorage.setItem('navIsClosed', JSON.stringify(navIsClosed));
+                toggleNav(navIsClosed);
             });
         });
     </script>
