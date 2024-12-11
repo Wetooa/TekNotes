@@ -26,11 +26,11 @@ def highlight(text, query, style):
     def get_replacement(match):
         match_text = match.group(0)
         if style == 'note_title':
-            return f'<span class="bg-yellow-300 dark:bg-yellow-600">{match_text}</span>'
+            return f'<span class="bg-yellow-200 dark:bg-yellow-500 text-yellow-600 dark:text-gray-50">{match_text}</span>'
         elif style == 'user':
-            return f'<span class="font-medium bg-yellow-300 dark:bg-yellow-600">{match_text}</span>'
+            return f'<span class="font-medium bg-yellow-200 dark:bg-yellow-500 text-yellow-600 dark:text-gray-50">{match_text}</span>'
         elif style == 'note_detail':
-            return f'<span class="bg-yellow-300 dark:bg-yellow-600">{match_text}</span>'
+            return f'<span class="bg-yellow-200 dark:bg-yellow-500 text-yellow-600 dark:text-gray-50">{match_text}</span>'
         else:
             return match_text  
     
