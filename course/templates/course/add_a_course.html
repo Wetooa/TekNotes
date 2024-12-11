@@ -1,9 +1,6 @@
 {% extends 'core/base.html' %}
-
 {% load static %}
-
-{% block title %} Add a course {% endblock %}
-
+{% block title %}Add a course{% endblock %}
 {% block content %}
     <div class="flex flex-col max-w-[450px] w-full rounded-xl bg-gray-50 dark:bg-gray-800 self-center shadow-lg">
         <div id="course-bar" class="transition-all flex px-4 py-2 bg-rose-700 w-full justify-between items-center rounded-t-xl">
@@ -19,12 +16,8 @@
                 {% csrf_token %}
                 <div class="flex flex-col p-6 gap-6">
                     <div class="flex flex-col">
-                        <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-t-xl">
-                            {{ form.code }}
-                        </div>
-                        <div class="flex gap-3 px-4 py-3 border-2 border-t-0 border-yellow-500 rounded-b-xl">
-                            {{ form.description }}
-                        </div>
+                        <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-t-xl">{{ form.code }}</div>
+                        <div class="flex gap-3 px-4 py-3 border-2 border-t-0 border-yellow-500 rounded-b-xl">{{ form.description }}</div>
                     </div>
                     <div class="grid cols grid-cols-7 w-full gap-2">
                         {% for color_code, color_name in form.color.field.choices %}

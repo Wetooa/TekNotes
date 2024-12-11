@@ -2,7 +2,9 @@
 {% load custom_filters %}
 {% if unclickable %}
     <div class="flex flex-wrap bg-{{ course.color }} rounded-xl px-6 py-4 gap-2 shadow-lg items-center justify-between">
-        <p class="text-gray-50 text-2xl">From <span class="font-semibold">{{ course }}</span></p>
+        <p class="text-gray-50 text-2xl">
+            From <span class="font-semibold">{{ course }}</span>
+        </p>
         <div class="flex gap-3 text-gray-50 font-light items-center">
             <p>course created by</p>
             <a href="{% url 'authentication:profile' course.created_by.id %}" class="flex gap-2">
@@ -35,5 +37,4 @@
         <p class="text-gray-700 dark:text-gray-50 group-hover:text-gray-50 whitespace-nowrap {% if big %} text-2xl font-medium {% else %} course-text text-lg {% endif %}">{% if big %} {{ course }} {% else %} {{ course.code }} {% endif %}</p>
         <div class="transition-all rounded-full bg-{{ course.color }} group-hover:bg-gray-50 h-full min-h-7 aspect-square {% if big %} course-color {% endif %}"></div>
     </a>
-
-{%endif%}
+{% endif %}

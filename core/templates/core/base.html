@@ -1,19 +1,18 @@
 {% extends 'core/core.html' %}
-
 {% load static %}
-
 {% load custom_filters %}
-
-
 {% block title %}{% endblock %}
-
 {% block body %}
     {% include 'chat/chats.html' %}
     <div class="flex h-full overflow-hidden">
         <nav class="flex flex-col w-full max-w-72 h-full px-5 py-5 gap-5 overflow-y-auto border-r-2 border-gray-300 dark:border-gray-800">
             <div class="flex items-center gap-4 nav-elem">
-                <svg id="menu-icon" class="fill-gray-700 dark:fill-gray-50 cursor-pointer select-none" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                    <path d="M424 392H23.1C10.8 392 0 402.8 0 415.1C0 429.2 10.8 440 23.1 440H424c13.2 0 24-10.8 24-23.1C448 402.8 437.2 392 424 392zM424 72H23.1C10.8 72 0 82.8 0 95.1S10.8 120 23.1 120H424c13.2 0 24-10.8 24-23.1S437.2 72 424 72zM424 232H23.1C10.8 232 0 242.8 0 256c0 13.2 10.8 24 23.1 24H424C437.2 280 448 269.2 448 256S437.2 232 424 232z"/>
+                <svg id="menu-icon"
+                     class="fill-gray-700 dark:fill-gray-50 cursor-pointer select-none"
+                     height="22"
+                     xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 448 512">
+                    <path d="M424 392H23.1C10.8 392 0 402.8 0 415.1C0 429.2 10.8 440 23.1 440H424c13.2 0 24-10.8 24-23.1C448 402.8 437.2 392 424 392zM424 72H23.1C10.8 72 0 82.8 0 95.1S10.8 120 23.1 120H424c13.2 0 24-10.8 24-23.1S437.2 72 424 72zM424 232H23.1C10.8 232 0 242.8 0 256c0 13.2 10.8 24 23.1 24H424C437.2 280 448 269.2 448 256S437.2 232 424 232z" />
                 </svg>
                 <a id="logo" href="/" class="flex items-center gap-2">
                     <img src="{% static 'images/TekNotes-Logo.svg' %}" alt="Logo">
@@ -21,46 +20,65 @@
                 </a>
             </div>
             <div class="flex-1 flex flex-col gap-3 overflow-y-auto">
-                <a href="/" class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
-                    <svg class="fill-gray-700 dark:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                        <path d="M576 247.1c0-6.802-2.877-13.56-8.471-18.31l-263.1-224c-4.484-3.781-10.01-5.669-15.53-5.669S276.1 1.891 272.5 5.672L8.471 229.7C2.877 234.4 0 241.2 0 247.1C0 264.1 13.83 271.1 24.02 271.1c5.479 0 10.99-1.867 15.51-5.687l24.47-20.76v226.5C64 494.1 81.94 512 104 512h95.1c22.06 0 39.1-17.94 39.1-40l.0056-120h95.1l-.0032 120C335.1 494.1 353.9 512 375.1 512h95.1c22.06 0 39.1-17.94 39.1-40V245.5L536.5 266.3c4.516 3.813 10.03 5.688 15.52 5.688C562.1 271.1 576 263.1 576 247.1zM463.1 463.1H383.1v-120c0-22.06-17.94-40-39.1-40H232c-22.06 0-39.1 17.94-39.1 40v120H112V207.1c0-.9629-.4375-1.783-.5488-2.717L288 55.45l175.1 149.4V463.1z"/>
+                <a href="/"
+                   class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
+                    <svg class="fill-gray-700 dark:fill-gray-50"
+                         height="22"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 576 512">
+                        <path d="M576 247.1c0-6.802-2.877-13.56-8.471-18.31l-263.1-224c-4.484-3.781-10.01-5.669-15.53-5.669S276.1 1.891 272.5 5.672L8.471 229.7C2.877 234.4 0 241.2 0 247.1C0 264.1 13.83 271.1 24.02 271.1c5.479 0 10.99-1.867 15.51-5.687l24.47-20.76v226.5C64 494.1 81.94 512 104 512h95.1c22.06 0 39.1-17.94 39.1-40l.0056-120h95.1l-.0032 120C335.1 494.1 353.9 512 375.1 512h95.1c22.06 0 39.1-17.94 39.1-40V245.5L536.5 266.3c4.516 3.813 10.03 5.688 15.52 5.688C562.1 271.1 576 263.1 576 247.1zM463.1 463.1H383.1v-120c0-22.06-17.94-40-39.1-40H232c-22.06 0-39.1 17.94-39.1 40v120H112V207.1c0-.9629-.4375-1.783-.5488-2.717L288 55.45l175.1 149.4V463.1z" />
                     </svg>
                     <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Home</p>
                 </a>
-    
-                <a href="/notebook/" class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/notebook/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
-                    <svg class="fill-gray-700 dark:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <path d="M416 0H128C92.65 0 64 28.65 64 64v32H24C10.75 96 0 106.8 0 120S10.75 144 24 144H64v88H24C10.75 232 0 242.8 0 256s10.75 24 24 24H64v88H24C10.75 368 0 378.8 0 392S10.75 416 24 416H64v32c0 35.35 28.65 64 64 64h288c35.35 0 64-28.65 64-64V64C480 28.65 451.3 0 416 0zM112 448v-32h24C149.3 416 160 405.3 160 392S149.3 368 136 368H112V280h24C149.3 280 160 269.3 160 256S149.3 232 136 232H112V144h24C149.3 144 160 133.3 160 120S149.3 96 136 96H112V64c0-8.838 7.164-16 16-16h64v416H128C119.2 464 112 456.8 112 448zM432 448c0 8.836-7.164 16-16 16H240v-416H416c8.836 0 16 7.162 16 16V448z"/>
+                <a href="/notebook/"
+                   class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/notebook/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
+                    <svg class="fill-gray-700 dark:fill-gray-50"
+                         height="22"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 512 512">
+                        <path d="M416 0H128C92.65 0 64 28.65 64 64v32H24C10.75 96 0 106.8 0 120S10.75 144 24 144H64v88H24C10.75 232 0 242.8 0 256s10.75 24 24 24H64v88H24C10.75 368 0 378.8 0 392S10.75 416 24 416H64v32c0 35.35 28.65 64 64 64h288c35.35 0 64-28.65 64-64V64C480 28.65 451.3 0 416 0zM112 448v-32h24C149.3 416 160 405.3 160 392S149.3 368 136 368H112V280h24C149.3 280 160 269.3 160 256S149.3 232 136 232H112V144h24C149.3 144 160 133.3 160 120S149.3 96 136 96H112V64c0-8.838 7.164-16 16-16h64v416H128C119.2 464 112 456.8 112 448zM432 448c0 8.836-7.164 16-16 16H240v-416H416c8.836 0 16 7.162 16 16V448z" />
                     </svg>
                     <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Notebook</p>
                 </a>
-    
-                <a href="/archive/" class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/archive/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
-                    <svg class="fill-gray-700 dark:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <path d="M464 32h-416C21.49 32 0 53.49 0 80v64C0 161.6 14.4 176 31.1 176L32 416c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V176c17.6 0 32-14.4 32-31.1V80C512 53.49 490.5 32 464 32zM416 432H96c-8.837 0-16-7.163-16-16V176h352V416C432 424.8 424.8 432 416 432zM464 128h-416V80h416V128zM183.1 272h144C341.3 272 352 261.3 352 248C352 234.7 341.3 224 328 224H183.1C170.7 224 160 234.7 160 247.1C160 261.3 170.7 272 183.1 272z"/>
+                <a href="/archive/"
+                   class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/archive/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
+                    <svg class="fill-gray-700 dark:fill-gray-50"
+                         height="22"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 512 512">
+                        <path d="M464 32h-416C21.49 32 0 53.49 0 80v64C0 161.6 14.4 176 31.1 176L32 416c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V176c17.6 0 32-14.4 32-31.1V80C512 53.49 490.5 32 464 32zM416 432H96c-8.837 0-16-7.163-16-16V176h352V416C432 424.8 424.8 432 416 432zM464 128h-416V80h416V128zM183.1 272h144C341.3 272 352 261.3 352 248C352 234.7 341.3 224 328 224H183.1C170.7 224 160 234.7 160 247.1C160 261.3 170.7 272 183.1 272z" />
                     </svg>
                     <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Archive</p>
                 </a>
-    
-                <a href="/likes/" class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/likes/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
-                    <svg class="fill-gray-700 dark:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <path d="M96 191.1H32c-17.67 0-32 14.33-32 31.1v223.1c0 17.67 14.33 31.1 32 31.1h64c17.67 0 32-14.33 32-31.1V223.1C128 206.3 113.7 191.1 96 191.1zM512 227c0-36.89-30.05-66.92-66.97-66.92h-99.86C354.7 135.1 360 113.5 360 100.8c0-33.8-26.2-68.78-70.06-68.78c-46.61 0-59.36 32.44-69.61 58.5c-31.66 80.5-60.33 66.39-60.33 93.47c0 12.84 10.36 23.99 24.02 23.99c5.256 0 10.55-1.721 14.97-5.26c76.76-61.37 57.97-122.7 90.95-122.7c16.08 0 22.06 12.75 22.06 20.79c0 7.404-7.594 39.55-25.55 71.59c-2.046 3.646-3.066 7.686-3.066 11.72c0 13.92 11.43 23.1 24 23.1h137.6C455.5 208.1 464 216.6 464 227c0 9.809-7.766 18.03-17.67 18.71c-12.66 .8593-22.36 11.4-22.36 23.94c0 15.47 11.39 15.95 11.39 28.91c0 25.37-35.03 12.34-35.03 42.15c0 11.22 6.392 13.03 6.392 22.25c0 22.66-29.77 13.76-29.77 40.64c0 4.515 1.11 5.961 1.11 9.456c0 10.45-8.516 18.95-18.97 18.95h-52.53c-25.62 0-51.02-8.466-71.5-23.81l-36.66-27.51c-4.315-3.245-9.37-4.811-14.38-4.811c-13.85 0-24.03 11.38-24.03 24.04c0 7.287 3.312 14.42 9.596 19.13l36.67 27.52C235 468.1 270.6 480 306.6 480h52.53c35.33 0 64.36-27.49 66.8-62.2c17.77-12.23 28.83-32.51 28.83-54.83c0-3.046-.2187-6.107-.6406-9.122c17.84-12.15 29.28-32.58 29.28-55.28c0-5.311-.6406-10.54-1.875-15.64C499.9 270.1 512 250.2 512 227z"/>
+                <a href="/likes/"
+                   class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/likes/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
+                    <svg class="fill-gray-700 dark:fill-gray-50"
+                         height="22"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 512 512">
+                        <path d="M96 191.1H32c-17.67 0-32 14.33-32 31.1v223.1c0 17.67 14.33 31.1 32 31.1h64c17.67 0 32-14.33 32-31.1V223.1C128 206.3 113.7 191.1 96 191.1zM512 227c0-36.89-30.05-66.92-66.97-66.92h-99.86C354.7 135.1 360 113.5 360 100.8c0-33.8-26.2-68.78-70.06-68.78c-46.61 0-59.36 32.44-69.61 58.5c-31.66 80.5-60.33 66.39-60.33 93.47c0 12.84 10.36 23.99 24.02 23.99c5.256 0 10.55-1.721 14.97-5.26c76.76-61.37 57.97-122.7 90.95-122.7c16.08 0 22.06 12.75 22.06 20.79c0 7.404-7.594 39.55-25.55 71.59c-2.046 3.646-3.066 7.686-3.066 11.72c0 13.92 11.43 23.1 24 23.1h137.6C455.5 208.1 464 216.6 464 227c0 9.809-7.766 18.03-17.67 18.71c-12.66 .8593-22.36 11.4-22.36 23.94c0 15.47 11.39 15.95 11.39 28.91c0 25.37-35.03 12.34-35.03 42.15c0 11.22 6.392 13.03 6.392 22.25c0 22.66-29.77 13.76-29.77 40.64c0 4.515 1.11 5.961 1.11 9.456c0 10.45-8.516 18.95-18.97 18.95h-52.53c-25.62 0-51.02-8.466-71.5-23.81l-36.66-27.51c-4.315-3.245-9.37-4.811-14.38-4.811c-13.85 0-24.03 11.38-24.03 24.04c0 7.287 3.312 14.42 9.596 19.13l36.67 27.52C235 468.1 270.6 480 306.6 480h52.53c35.33 0 64.36-27.49 66.8-62.2c17.77-12.23 28.83-32.51 28.83-54.83c0-3.046-.2187-6.107-.6406-9.122c17.84-12.15 29.28-32.58 29.28-55.28c0-5.311-.6406-10.54-1.875-15.64C499.9 270.1 512 250.2 512 227z" />
                     </svg>
                     <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Likes</p>
                 </a>
-
-                <div id="courses-dropdown" class="transition-all nav-elem hover:bg-gray-300 dark:hover:bg-gray-950 items-center flex rounded-xl px-4 py-3 gap-4 justify-between select-none cursor-pointer">
+                <div id="courses-dropdown"
+                     class="transition-all nav-elem hover:bg-gray-300 dark:hover:bg-gray-950 items-center flex rounded-xl px-4 py-3 gap-4 justify-between select-none cursor-pointer">
                     <div class="flex gap-4 items-center">
-                        <svg class="fill-gray-700 dark:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-                            <path d="M623.1 136.9l-282.7-101.2C334.3 33.23 327.2 32 320 32S305.7 33.23 298.8 35.68L16.05 136.9C6.438 140.4 0 149.6 0 160s6.438 19.65 16.05 23.09L76.07 204.6c-11.89 15.8-20.26 34.16-24.55 53.95C40.05 263.4 32 274.8 32 288c0 9.953 4.814 18.49 11.94 24.36l-24.83 149C17.48 471.1 25 480 34.89 480H93.11c9.887 0 17.41-8.879 15.78-18.63l-24.83-149C91.19 306.5 96 297.1 96 288c0-10.29-5.174-19.03-12.72-24.89c4.252-17.76 12.88-33.82 24.94-47.03l190.6 68.23C305.7 286.8 312.8 288 320 288s14.35-1.229 21.21-3.684l282.7-101.2C633.6 179.6 640 170.4 640 160S633.6 140.4 623.1 136.9zM325.1 239.1c-4.428 1.584-8.197 .6816-10.09 .0059L175.5 189.2l149.2-45.92c8.453-2.594 13.16-11.55 10.57-20.02c-2.594-8.438-11.57-13.27-20.01-10.55L125.2 171.2L93.96 160l220.1-79.12c4.428-1.584 8.197-.6836 10.09-.0059L546 160L325.1 239.1zM452.3 278.5L464 390.7C464 401.3 414.5 432 320 432s-144-30.72-144-41.34l11.72-112.1l-46.08-16.5l-13.51 126.1C128 449.3 224.6 480 320 480s192-30.69 191.9-91.81l-13.51-126.1L452.3 278.5z"/>
+                        <svg class="fill-gray-700 dark:fill-gray-50"
+                             height="22"
+                             xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 640 512">
+                            <path d="M623.1 136.9l-282.7-101.2C334.3 33.23 327.2 32 320 32S305.7 33.23 298.8 35.68L16.05 136.9C6.438 140.4 0 149.6 0 160s6.438 19.65 16.05 23.09L76.07 204.6c-11.89 15.8-20.26 34.16-24.55 53.95C40.05 263.4 32 274.8 32 288c0 9.953 4.814 18.49 11.94 24.36l-24.83 149C17.48 471.1 25 480 34.89 480H93.11c9.887 0 17.41-8.879 15.78-18.63l-24.83-149C91.19 306.5 96 297.1 96 288c0-10.29-5.174-19.03-12.72-24.89c4.252-17.76 12.88-33.82 24.94-47.03l190.6 68.23C305.7 286.8 312.8 288 320 288s14.35-1.229 21.21-3.684l282.7-101.2C633.6 179.6 640 170.4 640 160S633.6 140.4 623.1 136.9zM325.1 239.1c-4.428 1.584-8.197 .6816-10.09 .0059L175.5 189.2l149.2-45.92c8.453-2.594 13.16-11.55 10.57-20.02c-2.594-8.438-11.57-13.27-20.01-10.55L125.2 171.2L93.96 160l220.1-79.12c4.428-1.584 8.197-.6836 10.09-.0059L546 160L325.1 239.1zM452.3 278.5L464 390.7C464 401.3 414.5 432 320 432s-144-30.72-144-41.34l11.72-112.1l-46.08-16.5l-13.51 126.1C128 449.3 224.6 480 320 480s192-30.69 191.9-91.81l-13.51-126.1L452.3 278.5z" />
                         </svg>
                         <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Courses</p>
                     </div>
-                    <svg id="courses-dropdown-arrow" class="fill-gray-700 dark:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                        <path d="M360.5 217.5l-152 143.1C203.9 365.8 197.9 368 192 368s-11.88-2.188-16.5-6.562L23.5 217.5C13.87 208.3 13.47 193.1 22.56 183.5C31.69 173.8 46.94 173.5 56.5 182.6L192 310.9l135.5-128.4c9.562-9.094 24.75-8.75 33.94 .9375C370.5 193.1 370.1 208.3 360.5 217.5z"/>
+                    <svg id="courses-dropdown-arrow"
+                         class="fill-gray-700 dark:fill-gray-50"
+                         height="22"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 384 512">
+                        <path d="M360.5 217.5l-152 143.1C203.9 365.8 197.9 368 192 368s-11.88-2.188-16.5-6.562L23.5 217.5C13.87 208.3 13.47 193.1 22.56 183.5C31.69 173.8 46.94 173.5 56.5 182.6L192 310.9l135.5-128.4c9.562-9.094 24.75-8.75 33.94 .9375C370.5 193.1 370.1 208.3 360.5 217.5z" />
                     </svg>
                 </div>
-
                 <script>
                     let courseIsDropped = false;
                     $("#courses-dropdown").click(() => {
@@ -75,7 +93,6 @@
                         }
                     });
                 </script>
-    
                 <div id="courses" class="flex flex-col pl-6">
                     <div id="courses-content" class="flex flex-col w-full">
                         {% for course in your_courses %}
@@ -85,36 +102,48 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                    <a id="add-course" href="{% url 'course:add_a_course' %}" class="group transition-all course-elem nav-elem items-center flex rounded-xl px-4 py-3 justify-between border-2 border-rose-700 hover:bg-rose-700 text-rose-700 hover:text-gray-50 hover:font-regular">
+                    <a id="add-course"
+                       href="{% url 'course:add_a_course' %}"
+                       class="group transition-all course-elem nav-elem items-center flex rounded-xl px-4 py-3 justify-between border-2 border-rose-700 hover:bg-rose-700 text-rose-700 hover:text-gray-50 hover:font-regular">
                         <p class="course-text text-lg font-medium">Add a course</p>
-                        <svg class="fill-rose-700 group-hover:fill-gray-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="22">
-                            <path d="M352 232H280V160c0-13.26-10.74-24-23.1-24S232 146.7 232 160v72H160C146.7 232 136 242.7 136 256c0 13.25 10.75 24 24 24H232V352c0 13.25 10.75 24 24 24S280 365.3 280 352V280h72C365.3 280 376 269.3 376 256C376 242.7 365.3 232 352 232zM256 0C114.6 0 0 114.6 0 256s114.6 256 256 256S512 397.4 512 256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464z"/>
+                        <svg class="fill-rose-700 group-hover:fill-gray-50"
+                             xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 512 512"
+                             height="22">
+                            <path d="M352 232H280V160c0-13.26-10.74-24-23.1-24S232 146.7 232 160v72H160C146.7 232 136 242.7 136 256c0 13.25 10.75 24 24 24H232V352c0 13.25 10.75 24 24 24S280 365.3 280 352V280h72C365.3 280 376 269.3 376 256C376 242.7 365.3 232 352 232zM256 0C114.6 0 0 114.6 0 256s114.6 256 256 256S512 397.4 512 256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464z" />
                         </svg>
                     </a>
                 </div>
             </div>
-
             <div class="flex flex-col gap-3">
-                <a href="{% url 'notes:tek_a_note' %}" class="nav-elem flex bg-rose-700 hover:bg-rose-600 rounded-xl gap-4 px-4 py-3 transition-all hover:shadow-lg items-center">
-                    <svg class="fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <path d="M495.6 49.23l-32.82-32.82C451.8 5.471 437.5 0 423.1 0c-14.33 0-28.66 5.469-39.6 16.41L167.5 232.5C159.1 240 154.8 249.5 152.4 259.8L128.3 367.2C126.5 376.1 133.4 384 141.1 384c.916 0 1.852-.0918 2.797-.2813c0 0 74.03-15.71 107.4-23.56c10.1-2.377 19.13-7.459 26.46-14.79l217-217C517.5 106.5 517.4 71.1 495.6 49.23zM461.7 94.4L244.7 311.4C243.6 312.5 242.5 313.1 241.2 313.4c-13.7 3.227-34.65 7.857-54.3 12.14l12.41-55.2C199.6 268.9 200.3 267.5 201.4 266.5l216.1-216.1C419.4 48.41 421.6 48 423.1 48s3.715 .4062 5.65 2.342l32.82 32.83C464.8 86.34 464.8 91.27 461.7 94.4zM424 288c-13.25 0-24 10.75-24 24v128c0 13.23-10.78 24-24 24h-304c-13.22 0-24-10.77-24-24v-304c0-13.23 10.78-24 24-24h144c13.25 0 24-10.75 24-24S229.3 64 216 64L71.1 63.99C32.31 63.99 0 96.29 0 135.1v304C0 479.7 32.31 512 71.1 512h303.1c39.69 0 71.1-32.3 71.1-72L448 312C448 298.8 437.3 288 424 288z"/>
+                <a href="{% url 'notes:tek_a_note' %}"
+                   class="nav-elem flex bg-rose-700 hover:bg-rose-600 rounded-xl gap-4 px-4 py-3 transition-all hover:shadow-lg items-center">
+                    <svg class="fill-gray-50"
+                         height="22"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 512 512">
+                        <path d="M495.6 49.23l-32.82-32.82C451.8 5.471 437.5 0 423.1 0c-14.33 0-28.66 5.469-39.6 16.41L167.5 232.5C159.1 240 154.8 249.5 152.4 259.8L128.3 367.2C126.5 376.1 133.4 384 141.1 384c.916 0 1.852-.0918 2.797-.2813c0 0 74.03-15.71 107.4-23.56c10.1-2.377 19.13-7.459 26.46-14.79l217-217C517.5 106.5 517.4 71.1 495.6 49.23zM461.7 94.4L244.7 311.4C243.6 312.5 242.5 313.1 241.2 313.4c-13.7 3.227-34.65 7.857-54.3 12.14l12.41-55.2C199.6 268.9 200.3 267.5 201.4 266.5l216.1-216.1C419.4 48.41 421.6 48 423.1 48s3.715 .4062 5.65 2.342l32.82 32.83C464.8 86.34 464.8 91.27 461.7 94.4zM424 288c-13.25 0-24 10.75-24 24v128c0 13.23-10.78 24-24 24h-304c-13.22 0-24-10.77-24-24v-304c0-13.23 10.78-24 24-24h144c13.25 0 24-10.75 24-24S229.3 64 216 64L71.1 63.99C32.31 63.99 0 96.29 0 135.1v304C0 479.7 32.31 512 71.1 512h303.1c39.69 0 71.1-32.3 71.1-72L448 312C448 298.8 437.3 288 424 288z" />
                     </svg>
                     <p class="new-note-text text-gray-50 font-medium text-lg">Tek a Note</p>
                 </a>
-
                 {% if request.user.is_authenticated %}
                     <div class="nav-elem transition-all flex rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-xl px-4 py-3 gap-3 justify-between items-center relative">
-                        <a href="{% url 'authentication:profile' request.user.id %}" class="flex flex-1 gap-3 h-full overflow-hidden">
-                            <div class="flex aspect-square min-h-6 h-full rounded-full bg-[url('{{user.profile.avatar.url}}')] bg-cover border-2 border-yellow-500"></div>
+                        <a href="{% url 'authentication:profile' request.user.id %}"
+                           class="flex flex-1 gap-3 h-full overflow-hidden">
+                            <div class="flex aspect-square min-h-6 h-full rounded-full bg-[url('{{ user.profile.avatar.url }}')] bg-cover border-2 border-yellow-500">
+                            </div>
                             <div class="flex flex-col user-text flex-1 overflow-hidden">
                                 <p class="text-gray-700 dark:text-gray-50 font-semibold">{{ request.user.get_full_name|truncatechars:14 }}</p>
                                 <p class="text-gray-500 dark:text-gray-400 text-sm">@{{ request.user.username|truncatechars:15 }}</p>
                             </div>
                         </a>
-                        <svg id="user-settings-btn" class="fill-gray-700 dark:fill-gray-50 cursor-pointer mr-2 select-none" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">
-                            <path d="M64 112c26.5 0 48-21.5 48-48S90.5 16 64 16S16 37.5 16 64S37.5 112 64 112zM64 400c-26.5 0-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48S90.5 400 64 400zM64 208C37.5 208 16 229.5 16 256S37.5 304 64 304s48-21.5 48-48S90.5 208 64 208z"/>
+                        <svg id="user-settings-btn"
+                             class="fill-gray-700 dark:fill-gray-50 cursor-pointer mr-2 select-none"
+                             height="22"
+                             xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 128 512">
+                            <path d="M64 112c26.5 0 48-21.5 48-48S90.5 16 64 16S16 37.5 16 64S37.5 112 64 112zM64 400c-26.5 0-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48S90.5 400 64 400zM64 208C37.5 208 16 229.5 16 256S37.5 304 64 304s48-21.5 48-48S90.5 208 64 208z" />
                         </svg>
-
                         <script>
                             $('#user-settings-btn').click((event) => {
                                 if ($("#user-settings").is(':visible')) {
@@ -132,23 +161,30 @@
                                 }
                             });
                         </script>
-
-                        <div id="user-settings" class="flex flex-col absolute bg-gray-50 dark:bg-gray-800 bottom-full mb-2 rounded-xl right-0 w-full text-gray-700 dark:text-gray-50 overflow-hidden hidden">
-                            <a href="{% url 'authentication:edit_profile' %}" class="transition-all flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                        <div id="user-settings"
+                             class="flex flex-col absolute bg-gray-50 dark:bg-gray-800 bottom-full mb-2 rounded-xl right-0 w-full text-gray-700 dark:text-gray-50 overflow-hidden hidden">
+                            <a href="{% url 'authentication:edit_profile' %}"
+                               class="transition-all flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                                 Edit profile
                             </a>
-                            <a href="{% url 'authentication:edit_account' %}" class="transition-all flex px-4 py-3 border-t border-gray-300 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                            <a href="{% url 'authentication:edit_account' %}"
+                               class="transition-all flex px-4 py-3 border-t border-gray-300 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                                 Edit account details
                             </a>
-                            <a href="{% url 'authentication:logout' %}" class="transition-all flex px-4 py-3 border-t border-gray-300 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                            <a href="{% url 'authentication:logout' %}"
+                               class="transition-all flex px-4 py-3 border-t border-gray-300 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                                 Log out @{{ request.user.username }}
                             </a>
                         </div>
                     </div>
                 {% else %}
-                    <a href="{% url 'authentication:login' %}" class="nav-elem transition-all group flex hover:bg-yellow-500 border-2 border-yellow-500 rounded-xl gap-4 px-4 py-3 transition-all hover:shadow-lg items-center">
-                        <svg class="fill-yellow-500 group-hover:fill-gray-50" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                            <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"/>
+                    <a href="{% url 'authentication:login' %}"
+                       class="nav-elem transition-all group flex hover:bg-yellow-500 border-2 border-yellow-500 rounded-xl gap-4 px-4 py-3 transition-all hover:shadow-lg items-center">
+                        <svg class="fill-yellow-500 group-hover:fill-gray-50"
+                             height="22"
+                             xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 448 512">
+                            <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z" />
                         </svg>
                         <p class="nav-text text-yellow-500 group-hover:text-gray-50 font-medium text-lg">Sign In</p>
                     </a>
@@ -157,11 +193,18 @@
         </nav>
         <main class="flex flex-col flex-1 bg-gray-200 dark:bg-gray-900 h-full overflow-hidden">
             <div class="flex px-6 py-4 gap-3 border-b-2 border-gray-300 dark:border-gray-800 justify-between items-center">
-                <div id="title-back-btn" class="group flex items-center gap-6 cursor-pointer">
-                    <svg id="title-back-arrow" class="transition-all fill-gray-700 dark:fill-gray-50 group-hover:fill-gray-400 hidden" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-                        <path d="M166.5 424.5l-143.1-152c-4.375-4.625-6.562-10.56-6.562-16.5c0-5.938 2.188-11.88 6.562-16.5l143.1-152c9.125-9.625 24.31-10.03 33.93-.9375c9.688 9.125 10.03 24.38 .9375 33.94l-128.4 135.5l128.4 135.5c9.094 9.562 8.75 24.75-.9375 33.94C190.9 434.5 175.7 434.1 166.5 424.5z"/>
+                <div id="title-back-btn"
+                     class="group flex items-center gap-6 cursor-pointer">
+                    <svg id="title-back-arrow"
+                         class="transition-all fill-gray-700 dark:fill-gray-50 group-hover:fill-gray-400 hidden"
+                         height="26"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 256 512">
+                        <path d="M166.5 424.5l-143.1-152c-4.375-4.625-6.562-10.56-6.562-16.5c0-5.938 2.188-11.88 6.562-16.5l143.1-152c9.125-9.625 24.31-10.03 33.93-.9375c9.688 9.125 10.03 24.38 .9375 33.94l-128.4 135.5l128.4 135.5c9.094 9.562 8.75 24.75-.9375 33.94C190.9 434.5 175.7 434.1 166.5 424.5z" />
                     </svg>
-                    <h3 class="transition-all text-2xl text-gray-700 dark:text-gray-50 font-semibold group-hover:text-gray-400">{% block page-title %}{% endblock %}</h3>
+                    <h3 class="transition-all text-2xl text-gray-700 dark:text-gray-50 font-semibold group-hover:text-gray-400">
+                        {% block page-title %}{% endblock %}
+                    </h3>
                     <script>
                         if (document.referrer && document.referrer.startsWith(window.location.origin)) {
                             $("#title-back-arrow").show(150);
@@ -173,7 +216,11 @@
                 </div>
                 <div class="flex items-center gap-6">
                     <div id="dark-mode-btn" class="group cursor-pointer select-none">
-                        <svg id="dark-mode-icon" class="transition-all fill-gray-700 dark:fill-gray-50 group-hover:fill-gray-400" height="28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <svg id="dark-mode-icon"
+                             class="transition-all fill-gray-700 dark:fill-gray-50 group-hover:fill-gray-400"
+                             height="28"
+                             xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 512 512">
                         </svg>
                     </div>
                     <script>
@@ -186,11 +233,11 @@
                         function setDarkModeIcon() {
                             if (isDark) {
                                 $("#dark-mode-icon").html(`
-                                    <path d="M256 144C194.1 144 144 194.1 144 256c0 61.86 50.14 112 112 112s112-50.14 112-112C368 194.1 317.9 144 256 144zM256 320c-35.29 0-64-28.71-64-64c0-35.29 28.71-64 64-64s64 28.71 64 64C320 291.3 291.3 320 256 320zM256 112c13.25 0 24-10.75 24-24v-64C280 10.75 269.3 0 256 0S232 10.75 232 24v64C232 101.3 242.8 112 256 112zM256 400c-13.25 0-24 10.75-24 24v64C232 501.3 242.8 512 256 512s24-10.75 24-24v-64C280 410.8 269.3 400 256 400zM488 232h-64c-13.25 0-24 10.75-24 24s10.75 24 24 24h64C501.3 280 512 269.3 512 256S501.3 232 488 232zM112 256c0-13.25-10.75-24-24-24h-64C10.75 232 0 242.8 0 256s10.75 24 24 24h64C101.3 280 112 269.3 112 256zM391.8 357.8c-9.344-9.375-24.56-9.372-33.94 .0031s-9.375 24.56 0 33.93l45.25 45.28c4.672 4.688 10.83 7.031 16.97 7.031s12.28-2.344 16.97-7.031c9.375-9.375 9.375-24.56 0-33.94L391.8 357.8zM120.2 154.2c4.672 4.688 10.83 7.031 16.97 7.031S149.5 158.9 154.2 154.2c9.375-9.375 9.375-24.56 0-33.93L108.9 74.97c-9.344-9.375-24.56-9.375-33.94 0s-9.375 24.56 0 33.94L120.2 154.2zM374.8 161.2c6.141 0 12.3-2.344 16.97-7.031l45.25-45.28c9.375-9.375 9.375-24.56 0-33.94s-24.59-9.375-33.94 0l-45.25 45.28c-9.375 9.375-9.375 24.56 0 33.93C362.5 158.9 368.7 161.2 374.8 161.2zM120.2 357.8l-45.25 45.28c-9.375 9.375-9.375 24.56 0 33.94c4.688 4.688 10.83 7.031 16.97 7.031s12.3-2.344 16.97-7.031l45.25-45.28c9.375-9.375 9.375-24.56 0-33.93S129.6 348.4 120.2 357.8z"/>
+                                    <path d="M256 144C194.1 144 144 194.1 144 256c0 61.86 50.14 112 112 112s112-50.14 112-112C368 194.1 317.9 144 256 144zM256 320c-35.29 0-64-28.71-64-64c0-35.29 28.71-64 64-64s64 28.71 64 64C320 291.3 291.3 320 256 320zM256 112c13.25 0 24-10.75 24-24v-64C280 10.75 269.3 0 256 0S232 10.75 232 24v64C232 101.3 242.8 112 256 112zM256 400c-13.25 0-24 10.75-24 24v64C232 501.3 242.8 512 256 512s24-10.75 24-24v-64C280 410.8 269.3 400 256 400zM488 232h-64c-13.25 0-24 10.75-24 24s10.75 24 24 24h64C501.3 280 512 269.3 512 256S501.3 232 488 232zM112 256c0-13.25-10.75-24-24-24h-64C10.75 232 0 242.8 0 256s10.75 24 24 24h64C101.3 280 112 269.3 112 256zM391.8 357.8c-9.344-9.375-24.56-9.372-33.94 .0031s-9.375 24.56 0 33.93l45.25 45.28c4.672 4.688 10.83 7.031 16.97 7.031s12.28-2.344 16.97-7.031c9.375-9.375 9.375-24.56 0-33.94L391.8 357.8zM120.2 154.2c4.672 4.688 10.83 7.031 16.97 7.031S149.5 158.9 154.2 154.2c9.375-9.375 9.375-24.56 0-33.93L108.9 74.97c-9.344-9.375-24.56-9.375-33.94 0s-9.375 24.56 0 33.94L120.2 154.2zM374.8 161.2c6.141 0 12.3-2.344 16.97-7.031l45.25-45.28c9.375-9.375 9.375-24.56 0-33.94s-24.59-9.375-33.94 0l-45.25 45.28c-9.375 9.375-9.375 24.56 0 33.93C362.5 158.9 368.7 161.2 374.8 161.2zM120.2 357.8l-45.25 45.28c-9.375 9.375-9.375 24.56 0 33.94c4.688 4.688 10.83 7.031 16.97 7.031s12.3-2.344 16.97-7.031l45.25-45.28c9.375-9.375 9.375-24.56 0-33.93S129.6 348.4 120.2 357.8z" />
                                 `);
                             } else {
                                 $("#dark-mode-icon").html(`
-                                    <path d="M144.7 98.7c-21 34.1-33.1 74.3-33.1 117.3c0 98 62.8 181.4 150.4 211.7c-12.4 2.8-25.3 4.3-38.6 4.3C126.6 432 48 353.3 48 256c0-68.9 39.4-128.4 96.8-157.3zm62.1-66C91.1 41.2 0 137.9 0 256C0 379.7 100 480 223.5 480c47.8 0 92-15 128.4-40.6c1.9-1.3 3.7-2.7 5.5-4c4.8-3.6 9.4-7.4 13.9-11.4c2.7-2.4 5.3-4.8 7.9-7.3c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-3.7 .6-7.4 1.2-11.1 1.6c-5 .5-10.1 .9-15.3 1c-1.2 0-2.5 0-3.7 0l-.3 0c-96.8-.2-175.2-78.9-175.2-176c0-54.8 24.9-103.7 64.1-136c1-.9 2.1-1.7 3.2-2.6c4-3.2 8.2-6.2 12.5-9c3.1-2 6.3-4 9.6-5.8c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-3.6-.3-7.1-.5-10.7-.6c-2.7-.1-5.5-.1-8.2-.1c-3.3 0-6.5 .1-9.8 .2c-2.3 .1-4.6 .2-6.9 .4z"/>
+                                    <path d="M144.7 98.7c-21 34.1-33.1 74.3-33.1 117.3c0 98 62.8 181.4 150.4 211.7c-12.4 2.8-25.3 4.3-38.6 4.3C126.6 432 48 353.3 48 256c0-68.9 39.4-128.4 96.8-157.3zm62.1-66C91.1 41.2 0 137.9 0 256C0 379.7 100 480 223.5 480c47.8 0 92-15 128.4-40.6c1.9-1.3 3.7-2.7 5.5-4c4.8-3.6 9.4-7.4 13.9-11.4c2.7-2.4 5.3-4.8 7.9-7.3c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-3.7 .6-7.4 1.2-11.1 1.6c-5 .5-10.1 .9-15.3 1c-1.2 0-2.5 0-3.7 0l-.3 0c-96.8-.2-175.2-78.9-175.2-176c0-54.8 24.9-103.7 64.1-136c1-.9 2.1-1.7 3.2-2.6c4-3.2 8.2-6.2 12.5-9c3.1-2 6.3-4 9.6-5.8c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-3.6-.3-7.1-.5-10.7-.6c-2.7-.1-5.5-.1-8.2-.1c-3.3 0-6.5 .1-9.8 .2c-2.3 .1-4.6 .2-6.9 .4z" />
                                 `);
                             }
                         }
@@ -204,26 +251,30 @@
             </div>
         </main>
         <aside class="flex flex-col w-full max-w-80 p-5 pb-0 gap-5 border-l-2 border-gray-300 dark:border-gray-800">
-            <form action="{% url 'advanced_search:search' %}" method="get" class="flex flex-1 px-4 py-2 rounded-xl bg-gray-300 dark:bg-gray-950 dark:hover:bg-gray-800 transition-all gap-3 cursor-text min-w-[0px]" onclick="this.querySelector('input[name=\'query\']').focus();">
-                <svg class="fill-gray-500 dark:fill-gray-400 " height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <path d="M504.1 471l-134-134C399.1 301.5 415.1 256.8 415.1 208c0-114.9-93.13-208-208-208S-.0002 93.13-.0002 208S93.12 416 207.1 416c48.79 0 93.55-16.91 129-45.04l134 134C475.7 509.7 481.9 512 488 512s12.28-2.344 16.97-7.031C514.3 495.6 514.3 480.4 504.1 471zM48 208c0-88.22 71.78-160 160-160s160 71.78 160 160s-71.78 160-160 160S48 296.2 48 208z"/>
+            <form action="{% url 'advanced_search:search' %}"
+                  method="get"
+                  class="flex px-4 py-2 rounded-xl bg-gray-300 dark:bg-gray-950 dark:hover:bg-gray-800 transition-all gap-3 cursor-text min-w-[0px]"
+                  onclick="this.querySelector('input[name=\'query\']').focus();">
+                <svg class="fill-gray-500 dark:fill-gray-400 "
+                     height="22"
+                     xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 512 512">
+                    <path d="M504.1 471l-134-134C399.1 301.5 415.1 256.8 415.1 208c0-114.9-93.13-208-208-208S-.0002 93.13-.0002 208S93.12 416 207.1 416c48.79 0 93.55-16.91 129-45.04l134 134C475.7 509.7 481.9 512 488 512s12.28-2.344 16.97-7.031C514.3 495.6 514.3 480.4 504.1 471zM48 208c0-88.22 71.78-160 160-160s160 71.78 160 160s-71.78 160-160 160S48 296.2 48 208z" />
                 </svg>
-    
-                <input name="query" class="placeholder-gray-500 w-full text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none min-w-[0px]"
-                       type="text" value="{{ query }}" placeholder="Search"
-                       onclick="event.stopPropagation();"/>
+                <input name="query"
+                       class="placeholder-gray-500 w-full text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none min-w-[0px]"
+                       type="text"
+                       value="{{ query }}"
+                       placeholder="Search"
+                       onclick="event.stopPropagation();" />
             </form>
-
             {% block other-widgets %}
-            {% endblock %}
-
-            <div class="flex flex-col overflow-y-auto">
-                {% include 'core/sidebar/trending.html' %}
                 {% include 'core/sidebar/recent_posts.html' %}
-            </div>
+                {% include 'core/sidebar/trending.html' %}
+                {% include 'core/sidebar/notifications.html' %}
+            {% endblock %}
         </aside>
     </div>
-
     <script>
         $(document).ready(function() {
             let navIsVisible = $(window).width() > 678;

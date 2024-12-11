@@ -1,0 +1,86 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="parent">
+        <nav class="chatNav">
+            <h1 style='text-align: center;
+                       border-style:solid;
+                       border-width: 1px;
+                       border-color: black;
+                       padding: 5px'>Chat</h1>
+            {% for pair in rooms_with_users %}
+                {% for user in pair.users %}
+                    <form action='' method="post" style="display:inline;">
+                        {% csrf_token %} <!-- VERY IMPORTANT for security -->
+                        <input type="hidden" name="receiver" value="{{ user.username }}">
+                        <a href="#" onclick="this.parentNode.submit(); return false;">{{ user.username }}</a>
+                    </form>
+                {% endfor %}
+            {% endfor %}
+        </nav>
+        {% block ChatMessage %}{% endblock %}
+    </div>
+    <style>
+
+
+.chatNav{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: start;
+    width: 20% !important;
+    height: 100vh;
+    background-color: #001825;
+    color: white;
+    text-size: 20px;
+}
+
+.parent {
+    background-color: transparent;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.child {
+    display: flex;
+    background-color: #001825;
+    height: 80vh;
+    width: 50%;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 100px;
+}
+
+form {
+    width: 80%;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid rgb(0, 21, 43);
+    width: 100%;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #843e00;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+}
+
+button:hover {
+    padding: 15px;
+    transition: 0.8s;
+}
+    </style>
+{% endblock %}
