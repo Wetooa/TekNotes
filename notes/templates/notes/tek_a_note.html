@@ -32,11 +32,11 @@
 
                         <div id="dropdown-menu" class="hidden absolute w-full bg-gray-50 dark:bg-gray-800 border-2 border-t-0 border-yellow-500 rounded-b-xl shadow-lg z-10">
                             <ul class="flex flex-col gap-1 p-2">
-                                <li class="rounded-md cursor-pointer px-3 py-1.5 hover:bg-gray-200 text-gray-500 dark:text-gray-400 select-course" data-value="">
+                                <li class="transition-all rounded-md cursor-pointer px-3 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-900 text-gray-500 dark:text-gray-400 select-course" data-value="">
                                     None
                                 </li>
                                 {% for course in form.course.field.queryset %}
-                                    <div onclick="changeColor('{{ course.color }}')" class="flex flex-wrap rounded-md cursor-pointer gap-1.5 px-3 py-1.5 justify-between hover:bg-gray-600 text-gray-50 bg-{{ course.color }} select-course" data-value="{{ course.id }}">
+                                    <div onclick="changeColor('{{ course.color }}')" class="transition-all flex flex-wrap rounded-md cursor-pointer gap-1.5 px-3 py-1.5 justify-between hover:bg-{{ course.color }}/50 text-gray-50 bg-{{ course.color }} select-course" data-value="{{ course.id }}">
                                         <p class="text-nowrap select-course-text">{{ course }}</p>
                                         {% if request.user != course.created_by %}
                                             <div class="flex gap-2 items-center text-nowrap">
