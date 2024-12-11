@@ -22,7 +22,7 @@
 </div>
 
 <script>
-    function partitionNotes(transition=false) {
+    function partitionNotes(duration=0) {
         $('#notes-container').empty();
         const width = $('#notes-container').width();
         let columns = width <= 574 ? 1 : (width <= 788 ? 2 : (width <= 1148 ? 3 : 4));
@@ -35,11 +35,7 @@
             const columnIndex = index % columns;
             const noteClone = $(this).clone();
 
-            if (transition) {
-                $('#notes-container > div').eq(columnIndex).append(noteClone.hide().fadeIn(300));
-            } else {
-                $('#notes-container > div').eq(columnIndex).append($(this).clone());
-            }
+            $('#notes-container > div').eq(columnIndex).append(noteClone.hide().fadeIn(duration));
         });
     }
 
@@ -68,7 +64,7 @@
             localStorage.setItem('newestToOldest', JSON.stringify(newestToOldest));
 
             reverseNotes()
-            partitionNotes(true);
+            partitionNotes(300);
             changeSortIcon(newestToOldest);
         });
 
