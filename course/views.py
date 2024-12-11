@@ -26,7 +26,7 @@ def delete_course(request, course_id):
     try:
         course = Course.objects.get(id=course_id, created_by=request.user)
         course.delete()
-        return HttpResponseRedirect("/")
+        return render(request, "core/loading.html", {"success": True, "message": f"Deleting course (id: {course_id})"})
     except Course.DoesNotExist:
         return render(request, "course/course_missing.html", {"course_id": course_id})
     

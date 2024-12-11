@@ -23,6 +23,11 @@
             };
 
             let isDark = JSON.parse(localStorage.getItem('isDark')) || false;
+            let lastPage = JSON.parse(localStorage.getItem('lastPage'));
+            if (!/notes|course|loading|edit/.test(window.location.href)) {
+                lastPage = window.location.href;
+                localStorage.setItem('lastPage', JSON.stringify(lastPage));
+            }
             setDarkMode();
 
             function setDarkMode() {
@@ -30,6 +35,12 @@
                     $('html').addClass('dark');
                 } else {
                     $('html').removeClass('dark');
+                }
+            }
+
+            function goToLastPage() {
+                if (lastPage) {
+                    window.location.href = lastPage;
                 }
             }
         </script>
@@ -115,18 +126,6 @@
         {% block body %}{% endblock %}
     </body>
     <script>
-        let lastPage = JSON.parse(localStorage.getItem('lastPage'));
-        if (!/notes|course|edit/.test(window.location.href)) {
-            lastPage = window.location.href;
-            localStorage.setItem('lastPage', JSON.stringify(lastPage));
-        }
-
-        function goToLastPage() {
-            if (lastPage) {
-                window.location.href = lastPage;
-            }
-        }
-
         function changePath(elem, path, viewBox) {
             $(elem).html(path);
             $(elem).attr('viewBox', viewBox);

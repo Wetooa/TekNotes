@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 
 @login_required
 def tek_a_note(request):
+    success = False
     if request.method == "POST":
         form = NoteForm(request.POST)
         if form.is_valid():
@@ -25,11 +26,11 @@ def tek_a_note(request):
                         tag, created = Tag.objects.get_or_create(name=tag_name)
                         note.tags.add(tag)
 
-            return HttpResponseRedirect("/notebook/")
+            success = True
     else:
         form = NoteForm()
 
-    return render(request, "notes/tek_a_note.html", {"form": form})
+    return render(request, "notes/tek_a_note.html", {"form": form, "success": success})
 
 
 def save_note_clicks(note):
@@ -57,36 +58,38 @@ def note_detail(request, note_id):
 
 @login_required
 def delete_note(request, note_id):
+    success = False
     note = get_object_or_404(Note, id=note_id, created_by=request.user)
     if request.method == "POST":
         note.delete()
-        return HttpResponseRedirect("/notebook/")
-
-    return HttpResponseRedirect("/notebook/")
+        success = True
+    return render(request, "core/loading.html", {"success": success, "message": f"Deleting note (id: {note_id})"})
 
 
 @login_required
 def archive_note(request, note_id):
     note = get_object_or_404(Note, id=note_id, created_by=request.user)
+    success = False
 
     if request.method == "POST":
         note.is_archived = not note.is_archived
         note.save()
-        return HttpResponseRedirect(request.META.get("HTTP_REFERER", ""))
+        success = True
 
-    return HttpResponseRedirect(request.META.get("HTTP_REFERER", ""))
+    return render(request, "core/loading.html", {"success": success, "message": f"Archiving note (id: {note_id})"})
 
 
 @login_required
 def hide_note(request, note_id):
     note = get_object_or_404(Note, id=note_id, created_by=request.user)
+    success = False
 
     if request.method == "POST":
         note.is_private = not note.is_private
         note.save()
-        return HttpResponseRedirect(request.META.get("HTTP_REFERER", ""))
+        success = True
 
-    return HttpResponseRedirect(request.META.get("HTTP_REFERER", ""))
+    return render(request, "core/loading.html", {"success": success, "message": f"Hiding note (id: {note_id})"})
 
 @login_required
 def edit_note(request, note_id):
@@ -96,6 +99,7 @@ def edit_note(request, note_id):
         return render(request, "notes/note_missing.html", {"note_id": note_id})
     
     tags = ", ".join(tag.name for tag in note.tags.all())
+    success = False
 
     if request.method == "POST":
         form = NoteForm(request.POST, instance=note)
@@ -113,8 +117,8 @@ def edit_note(request, note_id):
                         tag, created = Tag.objects.get_or_create(name=tag_name)
                         updated_note.tags.add(tag)
 
-            return HttpResponseRedirect("/notebook/")
+            success = True
     else:
         form = NoteForm(instance=note)
 
-    return render(request, "notes/edit_note.html", {"form": form, "note": note, "tags": tags})
+    return render(request, "notes/edit_note.html", {"form": form, "note": note, "tags": tags, "success": success})
