@@ -6,12 +6,6 @@
 {% block page-title %} Edit '{{ note.title }}' {% endblock %}
 
 {% block content %}
-    {% if success %}
-        <script> 
-            goToLastPage() 
-        </script>
-    {% endif %}
-
     <div class="flex flex-col max-w-[600px] max-h-[760px] w-full rounded-xl bg-gray-50 dark:bg-gray-800 self-center shadow-lg overflow-hidden">
         <div id="note-bar" class="transition-all flex px-4 py-2 bg-{{ note.course.color }} w-full justify-between items-center rounded-t-xl">
             <p class="font-medium text-gray-50 text-lg">Edit note</p>

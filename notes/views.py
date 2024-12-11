@@ -5,11 +5,9 @@ from django.shortcuts import get_object_or_404
 from .forms import NoteForm
 from tags.models import Tag
 from .models import Note
-from django.http import HttpResponseRedirect
 
 @login_required
 def tek_a_note(request):
-    success = False
     if request.method == "POST":
         form = NoteForm(request.POST)
         if form.is_valid():
@@ -26,11 +24,11 @@ def tek_a_note(request):
                         tag, created = Tag.objects.get_or_create(name=tag_name)
                         note.tags.add(tag)
 
-            success = True
+            return render(request, "core/loading.html", {"success": True, "message": f"Teking note..."})
     else:
         form = NoteForm()
 
-    return render(request, "notes/tek_a_note.html", {"form": form, "success": success})
+    return render(request, "notes/tek_a_note.html", {"form": form})
 
 
 def save_note_clicks(note):
@@ -105,7 +103,6 @@ def edit_note(request, note_id):
         return render(request, "notes/note_missing.html", {"note_id": note_id})
     
     tags = ", ".join(tag.name for tag in note.tags.all())
-    success = False
 
     if request.method == "POST":
         form = NoteForm(request.POST, instance=note)
@@ -123,8 +120,8 @@ def edit_note(request, note_id):
                         tag, created = Tag.objects.get_or_create(name=tag_name)
                         updated_note.tags.add(tag)
 
-            success = True
+            return render(request, "core/loading.html", {"success": True, "message": f"Saving note..."})
     else:
         form = NoteForm(instance=note)
 
-    return render(request, "notes/edit_note.html", {"form": form, "note": note, "tags": tags, "success": success})
+    return render(request, "notes/edit_note.html", {"form": form, "note": note, "tags": tags})
