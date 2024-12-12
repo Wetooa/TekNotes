@@ -42,7 +42,7 @@ CHANNEL_LAYERS = {
     }
 }
 
-SITE_ID = 4
+SITE_ID = 5
 
 
 # Application definition
@@ -79,11 +79,14 @@ INSTALLED_APPS = [
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
+        'approval_prompt': 'auto',
         "SCOPE": [
             "profile",
             "email",
         ],
-        "AUTH_PARAMS": {"access_type": "online"},
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
     }
 }
 
