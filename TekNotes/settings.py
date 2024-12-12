@@ -37,8 +37,8 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
     }
 }
 
@@ -54,12 +54,13 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    'livereload',
+    "livereload",
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "advanced_search",
     "authentication",
     "chat",
+    "chats",
     "comments",
     "core",
     "course",
@@ -99,7 +100,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
-    'livereload.middleware.LiveReloadScript',
+    "livereload.middleware.LiveReloadScript",
 ]
 
 ROOT_URLCONF = "TekNotes.urls"
