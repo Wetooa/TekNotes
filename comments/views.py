@@ -15,6 +15,13 @@ def comment(request, note_id):
     if content:
         Comment.objects.create(user=request.user, note=note, content=content)
 
+    Notification.objects.create(
+        user=note.created_by,
+        sender=request.user,
+        notification_type=NotificationType.COMMENT_NOTE,
+        object_id=note_id,
+    )
+
     return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
 
 
@@ -26,7 +33,7 @@ def like(request, note_id):
     if not created:
         like.delete()
     else:
-        Notification.objects.create(    
+        Notification.objects.create(
             user=note.created_by,
             sender=request.user,
             notification_type=NotificationType.LIKE_NOTE,
