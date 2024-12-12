@@ -106,6 +106,7 @@ def edit_profile(request):
     else:
         return render(request, "authentication/edit_profile.html", {"profile": profile})
 
+
 @login_required
 def edit_account(request):
     personal_detail_error = None
@@ -120,7 +121,11 @@ def edit_account(request):
         confirm_new_password = request.POST.get("confirm_new_password")
 
         if username:
-            if user.__class__.objects.filter(username=username).exclude(id=user.id).exists():
+            if (
+                user.__class__.objects.filter(username=username)
+                .exclude(id=user.id)
+                .exists()
+            ):
                 personal_detail_error = "Username is already taken."
             else:
                 user.username = username
@@ -138,14 +143,20 @@ def edit_account(request):
                     user.set_password(new_password)
                     update_session_auth_hash(request, user)
             elif not new_password or not confirm_new_password:
-                change_password_error = "Both new password and confirmation are required."
+                change_password_error = (
+                    "Both new password and confirmation are required."
+                )
 
         if not personal_detail_error and not change_password_error:
             user.save()
             return redirect("authentication:profile", user_id=request.user.id)
 
-    return render(request, "authentication/edit_account.html", {
-        "personal_detail_error": personal_detail_error,
-        "change_password_error": change_password_error,
-        "user": request.user
-    })
+    return render(
+        request,
+        "authentication/edit_account.html",
+        {
+            "personal_detail_error": personal_detail_error,
+            "change_password_error": change_password_error,
+            "user": request.user,
+        },
+    )
