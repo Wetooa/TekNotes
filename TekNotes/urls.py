@@ -32,10 +32,10 @@ urlpatterns = [
     path("notifications/", include("notifications.urls")),
     path("course/", include("course.urls")),
     path("search/", include("advanced_search.urls")),
-    path('chat/', include(('chat.urls', 'chat'), namespace='chat')),
+    path("chat/", include(("chat.urls", "chat"), namespace="chat")),
+    path("chats/", include("chats.urls")),
     path("comments/", include("comments.urls")),
     path("landing/", include("landing.urls")),
     path("ckeditor5/", include("django_ckeditor_5.urls")),
     path("admin/", admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    
