@@ -20,10 +20,10 @@
                 {% csrf_token %}
                 <div class="flex flex-col p-6 gap-6">
                     <div class="flex flex-col">
-                        <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-t-xl">
+                        <div class="flex gap-3 px-4 py-3 border border-yellow-500 rounded-t-xl">
                             {{ form.code }}
                         </div>
-                        <div class="flex gap-3 px-4 py-3 border-2 border-t-0 border-yellow-500 rounded-b-xl">
+                        <div class="flex gap-3 px-4 py-3 border border-t-0 border-yellow-500 rounded-b-xl">
                             {{ form.description }}
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="flex p-6 gap-3 w-full border-t-2 border-gray-200 dark:border-gray-900 items-center">
+                <div class="flex p-6 gap-3 w-full border-t border-gray-200 dark:border-gray-900 items-center">
                     <button id="course-btn" class="transition-all px-4 py-2 text-gray-50 bg-{{ course.color }} font-medium rounded-md w-full">Save</button>
                     <div onclick="goToLastPage()" class="cursor-pointer flex px-4 py-2 bg-gray-200 dark:bg-gray-900 rounded-md w-full justify-center">
                         <p class="text-gray-700 dark:text-gray-50">Cancel</p>

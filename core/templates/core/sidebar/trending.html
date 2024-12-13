@@ -13,7 +13,7 @@
         </svg>
         <h3 class="text-lg font-medium text-gray-50">Trending Notes</h3>
     </div>
-    <div class="flex flex-col gap-3 p-4 border-2 border-gray-300 dark:border-gray-800 border-t-0 rounded-b-xl">
+    <div class="flex flex-col gap-3 p-4 border border-gray-300 dark:border-gray-800 border-t-0 rounded-b-xl">
         {% for note in trending_notes %}
             <a href="{% url 'notes:note_detail' note.id %}"
                 class="transition-all flex flex-col cursor-pointer bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-md rounded-md p-3 gap-2 items-start overflow-hidden">
@@ -53,7 +53,7 @@
         </svg>
         <h3 class="text-lg font-medium text-gray-50">Trending Tags</h3>
     </div>
-    <div class="flex flex-wrap gap-3 p-4 border-2 border-gray-300 dark:border-gray-800 border-t-0 rounded-b-xl">
+    <div class="flex flex-wrap gap-3 p-4 border border-gray-300 dark:border-gray-800 border-t-0 rounded-b-xl">
         {% for tag in trending_tags %}
             <a href="/search/?query={{ tag.name }}"
                 class="text-gray-700 dark:text-gray-50 px-3 py-1 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-md rounded-md max-w-full truncate">
@@ -75,7 +75,7 @@
         </svg>
         <h3 class="text-lg font-medium text-gray-50">Trending Courses</h3>
     </div>
-    <div class="flex flex-col gap-3 p-4 rounded-b-xl border-2 border-gray-300 dark:border-gray-800 border-t-0">
+    <div class="flex flex-col gap-3 p-4 rounded-b-xl border border-gray-300 dark:border-gray-800 border-t-0">
         {% for course in trending_courses %}
             {% include 'course/course_item.html' %}
         {% endfor %}

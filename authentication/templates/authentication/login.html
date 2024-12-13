@@ -23,14 +23,14 @@
                 {% csrf_token %}
 
                 <div class="flex flex-col p-6 gap-3">
-                    <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl">
+                    <div class="flex gap-3 px-4 py-3 border border-yellow-500 rounded-xl">
                         <svg class="fill-yellow-500" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                             <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"/>
                         </svg>
                         {{ form.username }}
                     </div>
 
-                    <div class="flex gap-3 px-4 py-3 border-2 border-yellow-500 rounded-xl">
+                    <div class="flex gap-3 px-4 py-3 border border-yellow-500 rounded-xl">
                         <svg class="fill-yellow-500" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                             <path d="M384 192h-32V127.1c0-70.58-57.42-127.1-128-127.1s-128 57.42-128 127.1V192H64C28.65 192 0 220.7 0 256v191.1c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V256C448 220.7 419.3 192 384 192zM144 128c0-44.11 35.89-80 80-80s80 35.89 80 80v64h-160V128zM400 448c0 8.822-7.178 16-16 16H64c-8.822 0-16-7.178-16-16V256c0-8.822 7.178-16 16-16h320c8.822 0 16 7.178 16 16V448zM224 304c-13.25 0-24 10.75-24 24v48c0 13.25 10.75 23.1 24 23.1S248 389.3 248 376v-48C248 314.8 237.3 304 224 304z"/>
                         </svg>
@@ -48,12 +48,12 @@
                     {% endif %}
                 </div>
 
-                <div class="flex flex-col p-6 gap-3 w-full border-t-2 border-gray-200 dark:border-gray-900 items-center">
+                <div class="flex flex-col p-6 gap-3 w-full border-t border-gray-200 dark:border-gray-900 items-center">
                     <button class="px-4 py-2 text-gray-50 bg-rose-700 font-medium rounded-md w-full">Log In</button>
                     <div class="flex gap-3 w-full items-center">
-                        <hr class="border-1 border-gray-400 dark:border-gray-900 flex-1">
+                        <hr class="border border-gray-400 dark:border-gray-900 flex-1">
                         <p class="text-gray-700 dark:text-gray-50">or sign in using</p>
-                        <hr class="border-1 border-gray-400 dark:border-gray-900 flex-1">
+                        <hr class="border border-gray-400 dark:border-gray-900 flex-1">
                     </div>
                     <div class="flex gap-3 w-full">
                         <a href="" class="flex px-4 py-2 gap-3 shadow-md bg-gray-200 dark:bg-gray-900 flex-1 rounded-md justify-center">

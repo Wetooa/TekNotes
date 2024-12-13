@@ -22,11 +22,20 @@
 </div>
 
 <script>
-    function partitionNotes(duration=0) {
-        $('#notes-container').empty();
+    function partitionNotes(duration = 0) {
+        const breakpoints = [
+            { maxWidth: 520, columns: 1 },
+            { maxWidth: 750, columns: 2 },
+            { maxWidth: 1000, columns: 3 },
+            { maxWidth: 1249, columns: 4 },
+            { maxWidth: Infinity, columns: 5 },
+        ];
+
         const width = $('#notes-container').width();
-        let columns = width <= 574 ? 1 : (width <= 788 ? 2 : (width <= 1148 ? 3 : 4));
-        
+        const columns = breakpoints.find(bp => width <= bp.maxWidth).columns;
+
+        $('#notes-container').empty();
+
         for (let i = 0; i < columns; i++) {
             $('#notes-container').append('<div class="flex flex-col flex-1 overflow-x-hidden"></div>');
         }

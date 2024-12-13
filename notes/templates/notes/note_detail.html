@@ -12,7 +12,7 @@
 {% endblock %}
 {% block content %}
     <div class="flex flex-col bg-gray-50 dark:bg-gray-800 overflow-hidden shadow-lg rounded-xl w-full h-full max-w-6xl max-h-[700px] self-center justify-self-center">
-        <div class="flex {% if not note.course %} text-gray-400 bg-gray-50 dark:bg-gray-800 border-b-2 border-gray-200 dark:border-gray-900 {% else %} bg-{{ note.course.color }} {% endif %} pl-2 pr-4 py-2 gap-4 justify-between items-center">
+        <div class="flex {% if not note.course %} text-gray-400 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-900 {% else %} bg-{{ note.course.color }} {% endif %} pl-2 pr-4 py-2 gap-4 justify-between items-center">
             <a {% if note.course %} href="{% url 'advanced_search:view_course' note.course.id %}" {% endif %}
                class="px-2 transition-all flex-1 hover:bg-gray-50/50 dark:hover:bg-gray-800/50 cursor-pointer {% if note.course %}text-gray-50 font-semibold{% endif %} text-lg rounded-md">
                 {{ note.course|default:'No course' }}
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="flex flex-1 overflow-hidden">
-            <div class="flex flex-col p-6 gap-3 flex-1 border-r-2 border-gray-200 dark:border-gray-900 overflow-y-auto">
+            <div class="flex flex-col p-6 gap-3 flex-1 border-r border-gray-200 dark:border-gray-900 overflow-y-auto">
                 <div class="flex flex-col">
                     <h1 class="text-2xl text-gray-700 dark:text-gray-50 font-semibold break-words">{{ note.title }}</h1>
                 </div>
@@ -103,7 +103,7 @@
                         </a>
                     </div>
                 {% endif %}
-                <div class="flex justify-between px-4 py-3 gap-3 border-t-2 border-gray-200 dark:border-gray-900">
+                <div class="flex justify-between px-4 py-3 gap-3 border-t border-gray-200 dark:border-gray-900">
                     <p class="text-gray-500 dark:text-gray-400 text-sm truncate">{{ note.modified_at }}</p>
                     <div class="flex gap-3">
                         <a href="{% url 'comments:like' note.id %}"
@@ -159,7 +159,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-1 overflow-hidden border-t-2 border-gray-200 dark:border-gray-900 w-full">
+                <div class="flex flex-1 overflow-hidden border-t border-gray-200 dark:border-gray-900 w-full">
                     <div class="flex flex-col gap-4 p-4 items-start overflow-y-auto w-full">
                         {% for comment in note.comments.all %}
                             <div class="flex flex-col gap-1 p-3 rounded-lg bg-gray-200 dark:bg-gray-900 shadow max-w-full overflow-hidden">
@@ -187,10 +187,10 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="flex p-4 gap-3 border-t-2 border-gray-200 dark:border-gray-900">
+                <div class="flex p-4 gap-3 border-t border-gray-200 dark:border-gray-900">
                     <form action="{% url 'comments:comment' note.id %}"
                           method="post"
-                          class="flex  note-form flex-1 gap-3 px-3 py-2 border-2 border-yellow-500 rounded-xl">
+                          class="flex  note-form flex-1 gap-3 px-3 py-2 border border-yellow-500 rounded-xl">
                         {% csrf_token %}
                         <svg class="fill-yellow-500"
                              height="22"
@@ -206,7 +206,7 @@
                     </form>
                 </div>
                 {% if note.tags.count > 0 %}
-                    <div class="flex flex-wrap p-4 gap-3 border-t-2 border-gray-200 dark:border-gray-900">
+                    <div class="flex flex-wrap p-4 gap-3 border-t border-gray-200 dark:border-gray-900">
                         {% for tag in note.tags.all|slice:":3" %}
                             <a href="/search/?query={{ tag.name }}&category=all"
                                class="transition-all bg-gray-200 dark:bg-gray-900 hover:bg-gray-200/50 dark:hover:bg-gray-900/50 text-sm text-gray-700 dark:text-gray-50 shadow px-3 py-1 rounded-md inline-block max-w-full truncate">{{ tag }}</a>
