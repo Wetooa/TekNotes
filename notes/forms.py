@@ -55,5 +55,5 @@ class NoteForm(forms.ModelForm):
     is_private = forms.BooleanField(
         required=False,
         initial=False,
-        widget=forms.CheckboxInput(attrs={"class": "border-2 border-rose-700 w-4 h-4"}),
+        widget=forms.CheckboxInput(attrs={"class": "border border-rose-700 w-4 h-4"}),
     )
