@@ -1,27 +1,28 @@
-{% load static %} 
+{% load static %}
 {% load custom_filters %}
-
-<div onclick="redirect_to_notif('{{ notif.get_url }}')" class="cursor-pointer transition-all flex border-t border-gray-200 dark:border-gray-900 px-4 py-3 gap-4 justify-between dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 {% if notif.is_read %} is_read {% endif %} {{ class }}">
+<div onclick="redirect_to_notif('{{ notif.get_url }}')"
+     class="cursor-pointer transition-all flex border-t-2 border-gray-200 dark:border-gray-900 px-4 py-3 gap-4 justify-between dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 {% if notif.is_read %}is_read{% endif %} {{ class }}">
     <a href="{% url 'authentication:profile' notif.sender.id %}">
-        <img class="h-6 w-6 aspect-square rounded-full" src="{{ notif.sender.profile.avatar.url }}" alt="Profile Image"/>
+        <img class="h-6 w-6 aspect-square rounded-full"
+             src="{{ notif.sender.profile.avatar.url }}"
+             alt="Profile Image" />
     </a>
     <div class="text-sm flex-1 text-gray-700 dark:text-gray-50 overflow-hidden">
-        <p><span class="font-medium break-words">{{ notif.sender.get_full_name }}</span> {{ notif.get_content }}</p>
+        <p>
+            <span class="font-medium break-words">{{ notif.sender.get_full_name }}</span> {{ notif.get_content }}
+        </p>
         <p class="text-gray-500 dark:text-gray-400 break-words">{{ notif.created_at|formattime }}</p>
     </div>
-
     {% if not notif.is_read %}
-    <button class="aspect-square">
-        <svg class="fill-rose-700" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/>
-        </svg>
-    </button>
+        <button class="aspect-square">
+            <img src="{% static 'teknotes/images/Dot.svg' %}" alt="Dot" />
+        </button>
     {% endif %}
 </div>
-
 <script>
     function redirect_to_notif(url) {
         window.location.href = url;
     }
     
 </script>
+
