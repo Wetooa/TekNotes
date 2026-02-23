@@ -1,5 +1,4 @@
-from django.dispatch import receiver
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout as log_out
 from django.db.models import OuterRef, Subquery
 from django.contrib.auth.decorators import login_required
@@ -37,7 +36,7 @@ def logout(request):
 
 
 def profile(request, user_id):
-    profile = Profile.objects.get(user__id=user_id)
+    profile = get_object_or_404(Profile, user__id=user_id)
     notes = Note.objects.filter(created_by=user_id, is_private=False)
 
     return render(
@@ -56,7 +55,7 @@ def create_profile_on_google_signup(request, user, **kwargs):
 
 
 def profile_likes(request, user_id):
-    profile = Profile.objects.get(user__id=user_id)
+    profile = get_object_or_404(Profile, user__id=user_id)
     latest_likes = Like.objects.filter(note=OuterRef("pk"), user__id=user_id).order_by(
         "-created_at"
     )
@@ -73,7 +72,7 @@ def profile_likes(request, user_id):
 
 
 def profile_courses(request, user_id):
-    profile = Profile.objects.get(user__id=user_id)
+    profile = get_object_or_404(Profile, user__id=user_id)
     courses = Course.objects.filter(created_by__id=user_id).distinct()
 
     return render(

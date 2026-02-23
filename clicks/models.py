@@ -13,7 +13,7 @@ class Click(models.Model):
 
     def __str__(self):
         return (
-            (self.user if self.user else "Anon")
+            (str(self.user) if self.user else "Anon")
             + " clicked during "
             + str(self.created_at)
         )
@@ -37,4 +37,4 @@ class ClickCourse(Click):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):
-        return super().__str__() + " on course" + self.course
+        return super().__str__() + " on course " + str(self.course)

@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.views.decorators.http import require_POST
 from clicks.models import ClickNote, ClickTag, ClickCourse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -56,11 +57,9 @@ def note_detail(request, note_id):
 
 
 @login_required
+@require_POST
 def delete_note(request, note_id):
-    try:
-        note = Note.objects.get(id=note_id)
-    except Note.DoesNotExist:
-        return render(request, "notes/note_missing.html", {"note_id": note_id})
+    note = get_object_or_404(Note, id=note_id, created_by=request.user)
 
     for tag in note.tags.all():
         if tag.notes.count() == 1:
@@ -72,41 +71,34 @@ def delete_note(request, note_id):
 
 
 @login_required
+@require_POST
 def archive_note(request, note_id):
-    try:
-        note = Note.objects.get(id=note_id)
-    except Note.DoesNotExist:
-        return render(request, "notes/note_missing.html", {"note_id": note_id})
+    note = get_object_or_404(Note, id=note_id, created_by=request.user)
 
     note.is_archived = not note.is_archived
     note.save()
 
-    if (request.GET.get('note_detail')):
+    if request.POST.get('note_detail'):
         return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
     return render(request, "core/loading.html", {"success": True, "message": f"Archiving note (id: {note_id})"})
 
 
 @login_required
+@require_POST
 def hide_note(request, note_id):
-    try:
-        note = Note.objects.get(id=note_id)
-    except Note.DoesNotExist:
-        return render(request, "notes/note_missing.html", {"note_id": note_id})
+    note = get_object_or_404(Note, id=note_id, created_by=request.user)
 
     note.is_private = not note.is_private
     note.save()
 
-    if (request.GET.get('note_detail')):
+    if request.POST.get('note_detail'):
         return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
     return render(request, "core/loading.html", {"success": True, "message": f"Hiding note (id: {note_id})"})
 
 @login_required
 def edit_note(request, note_id):
-    try:
-        note = Note.objects.get(id=note_id)
-    except Note.DoesNotExist:
-        return render(request, "notes/note_missing.html", {"note_id": note_id})
-    
+    note = get_object_or_404(Note, id=note_id, created_by=request.user)
+
     tags = ", ".join(tag.name for tag in note.tags.all())
 
     if request.method == "POST":
@@ -117,15 +109,15 @@ def edit_note(request, note_id):
             updated_note.save()
 
             tag_input = request.POST.get("tags", "")
+            note.tags.clear()
             if tag_input:
                 tag_names = [tag.strip() for tag in tag_input.split(",")]
-                note.tags.clear()
                 for tag_name in tag_names:
                     if tag_name:
                         tag, created = Tag.objects.get_or_create(name=tag_name)
                         updated_note.tags.add(tag)
 
-            return render(request, "core/loading.html", {"success": True, "message": f"Saving note..."})
+            return render(request, "core/loading.html", {"success": True, "message": "Saving note..."})
     else:
         form = NoteForm(instance=note)
 

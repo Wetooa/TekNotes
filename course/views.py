@@ -6,6 +6,7 @@ from course.models import Course
 from .forms import CourseForm
 
 
+
 @login_required
 def add_a_course(request):
     if request.method == "POST":
@@ -29,8 +30,7 @@ def delete_course(request, course_id):
         return render(request, "core/loading.html", {"success": True, "message": f"Deleting course (id: {course_id})"})
     except Course.DoesNotExist:
         return render(request, "course/course_missing.html", {"course_id": course_id})
-    
-from django.contrib import messages
+
 
 @login_required
 def edit_course(request, course_id):

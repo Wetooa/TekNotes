@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
 
-app_name = "core"
+app_name = "notifications"
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("mark-read/", views.mark_all_read, name="mark_all_read"),
 ]

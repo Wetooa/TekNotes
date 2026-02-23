@@ -30,11 +30,9 @@
                 <div class="flex gap-2 items-center w-full">
                     <img src="{{ note.created_by.profile.avatar.url }}"
                             alt="Profile Image"
-                            class="h-4 w-4 aspect-square rounded-full">
-                    <p class="text-gray-500 dark:text-gray-400 font-medium text-sm truncate">
-                        {{ note.created_by.get_full_name }}
-                        {% if note.created_by == request.user %}<span class="font-normal text-gray-400">(You)</span>{% endif %}
-                    </p>
+                            class="h-4 w-4 aspect-square rounded-full"
+                            onerror="this.style.visibility='hidden'">
+                    <p class="text-gray-500 dark:text-gray-400 font-medium text-sm truncate">{{ note.created_by.get_full_name }}{% if note.created_by == request.user %} <span class="font-normal text-gray-400">(You)</span>{% endif %}</p>
                 </div>
             </a>
         {% endfor %}

@@ -1,34 +1,38 @@
 {% load static %}
 {% load custom_filters %}
 <div class="relative select-none">
-    <div id="notif-btn" class="group relative cursor-pointer">
+    <button id="notif-btn" type="button" aria-label="Notifications" aria-expanded="false" class="group relative cursor-pointer bg-transparent border-none p-0">
         <svg class="transition-all fill-gray-700 dark:fill-gray-50 group-hover:fill-gray-400"
              height="28"
              xmlns="http://www.w3.org/2000/svg"
              viewBox="0 0 448 512">
             <path d="M439.4 362.3C420.1 341.5 383.9 310.2 383.9 208c0-77.75-54.38-139.9-127.9-155.1V32c0-17.62-14.38-32-32-32S192 14.38 192 32v20.88C118.5 68.12 64.13 130.2 64.13 208c0 102.2-36.25 133.5-55.5 154.3C2.625 368.8 0 376.5 0 384c.125 16.38 13 32 32.13 32h383.8c19.12 0 32-15.62 32.13-32C448 376.5 445.4 368.8 439.4 362.3zM67.5 368C88.75 340 112 293.6 112 208.6V208C112 146.1 162.1 96 224 96s112 50.12 112 112v.625C336 293.6 359.2 340 380.5 368H67.5zM223.1 512C259.4 512 288 483.4 288 448H160C160 483.4 188.6 512 223.1 512z" />
         </svg>
-        {% if notifications %}
-            <div class="absolute h-4 aspect-square bg-rose-700 text-gray-50 flex items-center justify-center text-xs font-medium rounded-full top-0 -right-1">
-                {{ notifications|length }}
+        {% with unread_count=notifications|length %}
+        {% if unread_count %}
+            <div id="notif-badge" class="absolute h-4 aspect-square bg-rose-700 text-gray-50 flex items-center justify-center text-xs font-medium rounded-full top-0 -right-1">
+                {{ unread_count }}
             </div>
         {% endif %}
-    </div>
+    {% endwith %}
+    </button>
     <div id="notif-dropdown"
          class="flex flex-col absolute top-full right-0 w-72 mt-3 z-10 shadow-xl rounded-xl overflow-hidden hidden">
         <div class="flex items-center bg-rose-700 px-4 py-2 gap-2 rounded-t-xl">
             <h3 class="text-lg font-medium text-gray-50">Notifications</h3>
         </div>
         <div class="flex flex-col bg-gray-50 dark:bg-gray-800 rounded-b-xl text-gray-700 dark:text-gray-50">
-            <div class="flex p-4">
-                <p id="all-btn"
-                   class="transition-all flex-1 text-center px-2 py-1 border-2 border-gray-200 dark:border-gray-900 bg-gray-200 dark:bg-gray-900 cursor-pointer rounded-l-md">
+            <div class="flex p-4" role="group" aria-label="Filter notifications">
+                <button id="all-btn"
+                        type="button"
+                        class="transition-all flex-1 text-center px-2 py-1 border-2 border-gray-200 dark:border-gray-900 bg-gray-200 dark:bg-gray-900 cursor-pointer rounded-l-md">
                     All
-                </p>
-                <p id="unread-btn"
-                   class="transition-all flex-1 text-center px-2 py-1 border-2 border-gray-200 dark:border-gray-900 bg-transparent cursor-pointer rounded-r-md">
+                </button>
+                <button id="unread-btn"
+                        type="button"
+                        class="transition-all flex-1 text-center px-2 py-1 border-2 border-gray-200 dark:border-gray-900 bg-transparent cursor-pointer rounded-r-md">
                     Unread
-                </p>
+                </button>
             </div>
             {% if not notifications %}
                 <div class="flex items-center p-4 gap-2 justify-center border-t border-gray-200 dark:border-gray-900 w-full">
@@ -55,6 +59,9 @@
             $('#notif-dropdown').hide(150);
         } else {
             $('#notif-dropdown').show(150);
+            $.post("{% url 'notifications:mark_all_read' %}", {csrfmiddlewaretoken: '{{ csrf_token }}'}, function() {
+                $('#notif-badge').remove();
+            });
         }
         event.stopPropagation();
     });

@@ -24,23 +24,44 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-(gs27_fdn#@!5=j182fos(^atljz20y_=sgf8-mb^g-%8ox30^"
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-(gs27_fdn#@!5=j182fos(^atljz20y_=sgf8-mb^g-%8ox30^",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost 127.0.0.1").split()
+
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
+    if origin.strip()
+]
 
 # Login redirect
 LOGIN_URL = "/authentication/login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
+REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379")
+
+if DEBUG:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels.layers.InMemoryChannelLayer",
+        }
     }
-}
+else:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {
+                "hosts": [REDIS_URL],
+            },
+        }
+    }
 
 SITE_ID = 5
 
@@ -60,7 +81,6 @@ INSTALLED_APPS = [
     "advanced_search",
     "authentication",
     "chat",
-    "chats",
     "comments",
     "core",
     "course",
@@ -93,6 +113,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -186,9 +207,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 if not DEBUG:
@@ -196,9 +219,9 @@ if not DEBUG:
     SFTP_STORAGE_HOST = "wetooa.me"
     SFTP_STORAGE_ROOT = "/home/wetooa/Documents/code/projects/TekNotes/media"
     SFTP_STORAGE_PARAMS = {
-        "username": "wetooa",
-        "password": "dfjkkjfd",
-        "port": 9022,
+        "username": os.environ.get("SFTP_USERNAME", "wetooa"),
+        "password": os.environ.get("SFTP_PASSWORD", ""),
+        "port": int(os.environ.get("SFTP_PORT", 9022)),
         "allow_agent": False,
         "look_for_keys": False,
     }
@@ -361,9 +384,7 @@ CKEDITOR_5_CONFIGS = {
 }
 
 # Define a constant in settings.py to specify file upload permissions
-CKEDITOR_5_FILE_UPLOAD_PERMISSION = (
-    "any"  # Possible values: "staff", "authenticated", "any"
-)
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "authenticated"
 
 
 # Tailwind settings

@@ -19,14 +19,18 @@ def search(request):
     
     query_parts = query.split()
 
-    notes_query = Q(title__icontains=query) | \
-                  Q(created_by__username__icontains=query) | \
-                  Q(created_by__first_name__icontains=query) | \
-                  Q(created_by__last_name__icontains=query) | \
-                  Q(tags__name__icontains=query) | \
-                  Q(course__code__icontains=query) | \
-                  Q(course__description__icontains=query) | \
-                  Q(content__icontains=query)
+    # Note: content search is omitted here because the field stores raw CKEditor HTML.
+    # To search note body text, add a plain_content TextField that is populated on save
+    # and use Q(plain_content__icontains=query) or PostgreSQL SearchVector.
+    notes_query = (
+        Q(title__icontains=query)
+        | Q(created_by__username__icontains=query)
+        | Q(created_by__first_name__icontains=query)
+        | Q(created_by__last_name__icontains=query)
+        | Q(tags__name__icontains=query)
+        | Q(course__code__icontains=query)
+        | Q(course__description__icontains=query)
+    )
 
     users_query = Q(username__icontains=query) | \
               Q(first_name__icontains=query) | \

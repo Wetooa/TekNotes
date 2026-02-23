@@ -2,7 +2,7 @@
 plugins = ["mypy_django_plugin.main"]
 
 [tool.django-stubs]
-django_settings_module = "Teknotes.settings"
+django_settings_module = "TekNotes.settings"
 
 [tool.djlint]
 profile = "django"
@@ -14,3 +14,8 @@ space_between_tags = true
 space_between_block_tags = true
 line_length = 80
 max_line_length = 120
+
+[dependency-groups]
+dev = [
+    "bleach>=6.3.0",
+]

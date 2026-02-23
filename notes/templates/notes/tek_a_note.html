@@ -41,7 +41,7 @@
                                         {% if request.user != course.created_by %}
                                             <div class="flex gap-2 items-center text-nowrap">
                                                 <div class="font-medium text-sm">by</div>
-                                                <img src="{{ course.created_by.profile.avatar.url }}" alt="Profile Image" class="h-4 w-4 aspect-square rounded-full">
+                                                <img src="{{ course.created_by.profile.avatar.url }}" alt="Profile Image" class="h-4 w-4 aspect-square rounded-full" onerror="this.style.visibility='hidden'">
                                                 <div class="font-medium text-sm">{{ course.created_by.get_full_name }}</div>
                                             </div>
                                         {% endif %}

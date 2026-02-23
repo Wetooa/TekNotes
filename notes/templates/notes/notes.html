@@ -1,8 +1,8 @@
 {% load static %}
 {% load custom_filters %}
 
-<div class="flex flex-1 relative overflow-hidden">
-    <div id="scroll-container" class="flex flex-1 {% if not no_scroll %} overflow-hidden overflow-y-auto {% endif %} scroll-smooth w-full">
+<div class="flex flex-col flex-1 relative overflow-hidden">
+    <div id="scroll-container" class="flex flex-col flex-1 {% if not no_scroll %} overflow-hidden overflow-y-auto {% endif %} scroll-smooth w-full">
         <div id="top-anchor"></div>
         <div id="notes" class="flex flex-1 gap-3" style="display: none;">
             {% for note in notes %}
@@ -13,12 +13,32 @@
         </div>
 
         <div id="notes-container" class="flex flex-1 gap-3 w-full items-start"></div>
+
+        {% if notes.has_other_pages %}
+            <div class="flex justify-center gap-2 py-4 flex-shrink-0">
+                {% if notes.has_previous %}
+                    <a href="?page={{ notes.previous_page_number }}"
+                       class="px-3 py-1 rounded-md bg-gray-200 dark:bg-gray-900 text-gray-700 dark:text-gray-50 hover:bg-gray-300 dark:hover:bg-gray-800 text-sm">
+                        &laquo; Prev
+                    </a>
+                {% endif %}
+                <span class="px-3 py-1 text-sm text-gray-500 dark:text-gray-400">
+                    Page {{ notes.number }} of {{ notes.paginator.num_pages }}
+                </span>
+                {% if notes.has_next %}
+                    <a href="?page={{ notes.next_page_number }}"
+                       class="px-3 py-1 rounded-md bg-gray-200 dark:bg-gray-900 text-gray-700 dark:text-gray-50 hover:bg-gray-300 dark:hover:bg-gray-800 text-sm">
+                        Next &raquo;
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
     </div>
-    <a id="go-up" href="#top-anchor" class="absolute flex justify-center items-center rounded-full bg-rose-700 p-3 shadow-md bottom-4 right-4 animate-bounce hidden">
+    <button id="go-up" onclick="document.getElementById('top-anchor').scrollIntoView({behavior:'smooth'})" aria-label="Scroll to top" class="absolute flex justify-center items-center rounded-full bg-rose-700 p-3 shadow-md bottom-4 right-4 animate-bounce hidden">
         <svg class="fill-gray-50" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
             <path d="M23.5 294.5l152-143.1C180.1 146.2 186.1 144 192 144s11.88 2.188 16.5 6.562l152 143.1c9.625 9.125 10.03 24.31 .9375 33.93c-9.125 9.688-24.38 10.03-33.94 .9375l-135.5-128.4l-135.5 128.4c-9.562 9.094-24.75 8.75-33.94-.9375C13.47 318.9 13.87 303.7 23.5 294.5z"/>
         </svg>
-    </a>
+    </button>
 </div>
 
 <script>
@@ -57,8 +77,10 @@
         }
 
         partitionNotes();
+        let resizeTimer;
         $(window).resize(() => {
-            partitionNotes();
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => partitionNotes(), 150);
         });
 
         $("#scroll-container").scroll(function () {

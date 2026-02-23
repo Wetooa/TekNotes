@@ -18,6 +18,12 @@ class Note(models.Model):
     is_archived = models.BooleanField(default=False)
     is_private = models.BooleanField(default=False)
 
+    def save(self, *args, **kwargs):
+        from core.sanitize import sanitize_html
+        if self.content:
+            self.content = sanitize_html(self.content)
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.title
 
@@ -36,9 +42,3 @@ class NoteAdmin(admin.ModelAdmin):
         return self.title
 
 
-class Click(models.Model):
-    note = models.ForeignKey(Note, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.note.title + " clicked at " + str(self.created_at)

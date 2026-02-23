@@ -1,6 +1,6 @@
 from django import template
-from django import template
 from django.utils import timezone
+from django.utils.html import escape
 import re
 from django.utils.safestring import mark_safe
 
@@ -8,21 +8,26 @@ register = template.Library()
 
 @register.filter
 def is_liked(note, user):
+    if hasattr(note, '_liked_by_user'):
+        return note._liked_by_user
     return note.likes.filter(user=user).exists()
 
 @register.filter
 def is_disliked(note, user):
+    if hasattr(note, '_disliked_by_user'):
+        return note._disliked_by_user
     return note.dislikes.filter(user=user).exists()
 
 @register.simple_tag(name='highlight')
 def highlight(text, query, style):
     if not query:
-        return text 
-    
+        return text
+
+    safe_text = escape(text)
     query_terms = query.split()
-    escaped_terms = [re.escape(term) for term in query_terms]
+    escaped_terms = [re.escape(escape(term)) for term in query_terms]
     joined_pattern = '|'.join(escaped_terms)
-    
+
     def get_replacement(match):
         match_text = match.group(0)
         if style == 'note_title':
@@ -32,10 +37,9 @@ def highlight(text, query, style):
         elif style == 'note_detail':
             return f'<span class="bg-yellow-200 dark:bg-yellow-500 text-yellow-600 dark:text-gray-50">{match_text}</span>'
         else:
-            return match_text  
-    
-    
-    highlighted = re.sub(f"({joined_pattern})", get_replacement, text, flags=re.IGNORECASE)
+            return match_text
+
+    highlighted = re.sub(f"({joined_pattern})", get_replacement, safe_text, flags=re.IGNORECASE)
 
     return mark_safe(highlighted)
 

@@ -33,7 +33,6 @@ urlpatterns = [
     path("course/", include("course.urls")),
     path("search/", include("advanced_search.urls")),
     path("chat/", include(("chat.urls", "chat"), namespace="chat")),
-    path("chats/", include("chats.urls")),
     path("comments/", include("comments.urls")),
     path("landing/", include("landing.urls")),
     path("ckeditor5/", include("django_ckeditor_5.urls")),

@@ -31,7 +31,7 @@ media/
 Thumbs.db
 
 # Static files
-# staticfiles/
+staticfiles/
 # static/
 
 # Media files
@@ -55,3 +55,6 @@ htmlcov/
 coverage.xml
 nosetests.xml
 test_result.xml
+
+# Node packages
+node_modules/

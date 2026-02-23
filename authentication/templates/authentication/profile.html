@@ -15,17 +15,13 @@
     <div class="flex flex-1 flex-col overflow-y-hidden">
         <div class="flex flex-col rounded-t-xl shadow-lg bg-gray-50 dark:bg-gray-800">
             <div class="flex p-6 gap-6 h-full max-h-56">
-                <div class="flex aspect-square h-full rounded-full bg-[url('{{ profile.avatar.url }}')] bg-cover border border-yellow-500 shadow-lg"></div>
+                <div class="flex aspect-square h-full rounded-full bg-cover border border-yellow-500 shadow-lg"
+                     style="background-image: url('{{ profile.avatar.url }}')"></div>
 
                 <div class="flex flex-1 gap-3 items-start max-w-full overflow-hidden">
                     <div class="flex flex-col gap-3 items-baseline max-w-full overflow-hidden">
                         <div class="flex flex-col gap-1 max-w-full overflow-hidden">
-                            <p class="text-2xl text-gray-700 dark:text-gray-50 font-semibold max-w-full truncate"> 
-                                {{ profile.user.get_full_name }} 
-                                {% if profile.user == request.user %}
-                                    <span class="font-normal text-gray-400">(You)</span>
-                                {% endif %}
-                            </p>
+                            <p class="text-2xl text-gray-700 dark:text-gray-50 font-semibold max-w-full truncate">{{ profile.user.get_full_name }}{% if profile.user == request.user %} <span class="font-normal text-gray-400">(You)</span>{% endif %}</p>
                             <p class="text-xl text-gray-500 dark:text-gray-400 max-w-full truncate"> {{ profile.user.email }} </p>
                         </div>
                         {% if request.user == profile.user %}
@@ -75,23 +71,23 @@
         </div>
 
         <div class="flex flex-col flex-1 p-6 pb-0 gap-3 border border-t-0 mb-4 border-gray-300 dark:border-gray-800 rounded-b-xl overflow-hidden">
-            {% if notes.count >= 0 %}
-                {% if notes.count > 0 %}
-                    {% include 'notes/notes.html' %}
-                {% else %}
-                    {% if '/notes/' in request.path %}
-                        {% include 'core/no_results.html' with message="No notes yet from" query=profile.user.first_name %}
-                    {% else %}
-                        {% include 'core/no_results.html' with message="No likes yet from" query=profile.user.first_name %}
-                    {% endif %}
-                {% endif %}
-            {% elif courses.count >= 0 %}
-                {% if courses.count > 0 %}
+            {% if '/courses/' in request.path %}
+                {% if courses %}
                     {% for course in courses %}
                         {% include 'course/course_button.html' with course=course big=True %}
                     {% endfor %}
                 {% else %}
                     {% include 'core/no_results.html' with message="No courses yet from" query=profile.user.first_name %}
+                {% endif %}
+            {% else %}
+                {% if notes %}
+                    {% include 'notes/notes.html' %}
+                {% else %}
+                    {% if '/likes/' in request.path %}
+                        {% include 'core/no_results.html' with message="No likes yet from" query=profile.user.first_name %}
+                    {% else %}
+                        {% include 'core/no_results.html' with message="No notes yet from" query=profile.user.first_name %}
+                    {% endif %}
                 {% endif %}
             {% endif %}
         </div>

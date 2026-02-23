@@ -1,5 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+from django.views.decorators.http import require_POST
 
 from notifications.models import Notification, NotificationType
 
@@ -9,7 +11,7 @@ from .models import Comment
 
 @login_required
 def comment(request, note_id):
-    note = Note.objects.get(id=note_id)
+    note = get_object_or_404(Note, id=note_id)
 
     content = request.POST.get("comment", "")
     if content:
@@ -27,8 +29,9 @@ def comment(request, note_id):
 
 
 @login_required
+@require_POST
 def like(request, note_id):
-    note = Note.objects.get(id=note_id)
+    note = get_object_or_404(Note, id=note_id)
     like, created = Like.objects.get_or_create(user=request.user, note=note)
 
     if not created:
@@ -46,8 +49,9 @@ def like(request, note_id):
 
 
 @login_required
+@require_POST
 def dislike(request, note_id):
-    note = Note.objects.get(id=note_id)
+    note = get_object_or_404(Note, id=note_id)
     dislike, created = Dislike.objects.get_or_create(user=request.user, note=note)
 
     if not created:

@@ -7,62 +7,9 @@
         </svg>
     </div>
     <div id="chat-dropdown" class="flex flex-col bg-gray-50 dark:bg-gray-800 select-none overflow-y-auto h-72">
-
-
-        <div class="italic text-3xl text-gray-400 text-center p-3 border-b border-gray-700">
-          IN DEVELOPMENT
-        </div>
-
-        
-
-        <div class="flex p-4 gap-4 border-b border-gray-200 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-all">
-            <div class="flex aspect-square h-full rounded-full bg-[url('{{user.profile.avatar.url}}')] bg-cover border border-yellow-500"></div>
-            <div class="flex flex-col flex-1 overflow-hidden gap-1">
-                <div class="flex overflow-hidden gap-2 text-sm text-sm">
-                    <p class="text-gray-500 dark:text-gray-400 flex-1 truncate"><span class="text-gray-700 dark:text-gray-50 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-nowrap">2d ago</p>
-                </div>
-                <p class="truncate">Sample rani ha</p>
-            </div>
-        </div>
-        <div class="flex p-4 gap-4 border-b border-gray-200 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-all">
-            <div class="flex aspect-square h-full rounded-full bg-[url('{{user.profile.avatar.url}}')] bg-cover border border-yellow-500"></div>
-            <div class="flex flex-col flex-1 overflow-hidden gap-1">
-                <div class="flex overflow-hidden gap-2 text-sm">
-                    <p class="text-gray-500 dark:text-gray-400 flex-1 truncate"><span class="text-gray-700 dark:text-gray-50 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-nowrap">2d ago</p>
-                </div>
-                <p class="truncate">Ako raning gi hard code</p>
-            </div>
-        </div>
-        <div class="flex p-4 gap-4 border-b border-gray-200 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-all">
-            <div class="flex aspect-square h-full rounded-full bg-[url('{{user.profile.avatar.url}}')] bg-cover border border-yellow-500"></div>
-            <div class="flex flex-col flex-1 overflow-hidden gap-1">
-                <div class="flex overflow-hidden gap-2 text-sm">
-                    <p class="text-gray-500 dark:text-gray-400 flex-1 truncate"><span class="text-gray-700 dark:text-gray-50 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-nowrap">2d ago</p>
-                </div>
-                <p class="truncate">Pang prep rani sa UI</p>
-            </div>
-        </div>
-        <div class="flex p-4 gap-4 border-b border-gray-200 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-all">
-            <div class="flex aspect-square h-full rounded-full bg-[url('{{user.profile.avatar.url}}')] bg-cover border border-yellow-500"></div>
-            <div class="flex flex-col flex-1 overflow-hidden gap-1">
-                <div class="flex overflow-hidden gap-2 text-sm">
-                    <p class="text-gray-500 dark:text-gray-400 flex-1 truncate"><span class="text-gray-700 dark:text-gray-50 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-nowrap">2d ago</p>
-                </div>
-                <p class="truncate">Pang prep rani sa UI</p>
-            </div>
-        </div>
-        <div class="flex p-4 gap-4 border-b border-gray-200 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-all">
-            <div class="flex aspect-square h-full rounded-full bg-[url('{{user.profile.avatar.url}}')] bg-cover border border-yellow-500"></div>
-            <div class="flex flex-col flex-1 overflow-hidden gap-1">
-                <div class="flex overflow-hidden gap-2 text-sm">
-                    <p class="text-gray-500 dark:text-gray-400 flex-1 truncate"><span class="text-gray-700 dark:text-gray-50 font-medium">{{ user.first_name }}</span> @{{ user.username }}</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-nowrap">2d ago</p>
-                </div>
-                <p class="truncate">Pang prep rani sa UI</p>
+        <div id="chat-rooms-list" class="flex flex-col">
+            <div class="flex items-center justify-center h-16 text-gray-400 text-sm">
+                Loading chats...
             </div>
         </div>
     </div>
@@ -85,4 +32,73 @@
             $("#chat-dropdown").hide(150);
         }
     }
+
+    function timeAgo(isoString) {
+        if (!isoString) return '';
+        const now = new Date();
+        const then = new Date(isoString);
+        const diffMs = now - then;
+        const diffSecs = Math.floor(diffMs / 1000);
+        const diffMins = Math.floor(diffSecs / 60);
+        const diffHours = Math.floor(diffMins / 60);
+        const diffDays = Math.floor(diffHours / 24);
+
+        if (diffDays >= 1) return diffDays + 'd ago';
+        if (diffHours >= 1) return diffHours + 'h ago';
+        if (diffMins >= 1) return diffMins + 'm ago';
+        return 'just now';
+    }
+
+    function renderRooms(rooms) {
+        const list = document.getElementById('chat-rooms-list');
+        if (rooms.length === 0) {
+            list.innerHTML = `
+                <div class="flex items-center justify-center h-16 text-gray-400 text-sm italic">
+                    No chats yet
+                </div>`;
+            return;
+        }
+
+        list.innerHTML = rooms.map(room => {
+            const avatarStyle = room.other_user.avatar_url
+                ? `background-image: url('${room.other_user.avatar_url}'); background-size: cover;`
+                : 'background-color: #e5e7eb;';
+            const displayName = room.other_user.first_name || room.other_user.username;
+            const lastMsg = room.last_message
+                ? room.last_message.length > 40
+                    ? room.last_message.substring(0, 40) + '...'
+                    : room.last_message
+                : 'No messages yet';
+            const timeStr = timeAgo(room.last_message_time);
+
+            return `
+                <a href="/chat/${room.room_id}/"
+                   class="flex p-4 gap-4 border-b border-gray-200 dark:border-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-all no-underline">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full border border-yellow-500"
+                         style="${avatarStyle}"></div>
+                    <div class="flex flex-col flex-1 overflow-hidden gap-1">
+                        <div class="flex overflow-hidden gap-2 text-sm">
+                            <p class="text-gray-500 dark:text-gray-400 flex-1 truncate">
+                                <span class="text-gray-700 dark:text-gray-50 font-medium">${displayName}</span>
+                                @${room.other_user.username}
+                            </p>
+                            <p class="text-gray-500 dark:text-gray-400 text-nowrap text-xs">${timeStr}</p>
+                        </div>
+                        <p class="truncate text-sm text-gray-600 dark:text-gray-300">${lastMsg}</p>
+                    </div>
+                </a>`;
+        }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/chat/api/rooms/')
+            .then(res => res.json())
+            .then(data => renderRooms(data.rooms))
+            .catch(() => {
+                document.getElementById('chat-rooms-list').innerHTML = `
+                    <div class="flex items-center justify-center h-16 text-gray-400 text-sm italic">
+                        Could not load chats
+                    </div>`;
+            });
+    });
 </script>

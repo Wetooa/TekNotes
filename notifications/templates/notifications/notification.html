@@ -5,7 +5,8 @@
     <a href="{% url 'authentication:profile' notif.sender.id %}">
         <img class="h-6 w-6 aspect-square rounded-full"
              src="{{ notif.sender.profile.avatar.url }}"
-             alt="Profile Image" />
+             alt="Profile Image"
+             onerror="this.style.visibility='hidden'" />
     </a>
     <div class="text-sm flex-1 text-gray-700 dark:text-gray-50 overflow-hidden">
         <p>

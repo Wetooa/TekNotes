@@ -18,7 +18,7 @@
                     <div class="message" id="chatContainer">
                         <!-- received messages and displayed here -->
                         {% for i in messages %}
-                            {% if i.sender != user %}
+                            {% if i.sender != sender.username %}
                                 <div class="receive">
                                     <p style="color: #000;">
                                         {{ i.message }}<strong>-{{ i.sender }}</strong>
@@ -59,7 +59,7 @@
   const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
   const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/chat/{{room_name}}/`;
   console.log("WebSocket endpoint:", wsEndpoint);
-  const socket = new WebSocket(wsEndpoint);
+  let socket = new WebSocket(wsEndpoint);
 
   document.getElementById('message-form').addEventListener('submit', function(event){
       event.preventDefault();

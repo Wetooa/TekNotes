@@ -7,13 +7,14 @@
     <div class="flex h-full overflow-hidden">
         <nav class="flex flex-col w-full max-w-72 h-full px-5 py-5 gap-5 overflow-y-auto border-r border-gray-300 dark:border-gray-800">
             <div class="flex items-center gap-4 nav-elem">
-                <svg id="menu-icon"
-                     class="fill-gray-700 dark:fill-gray-50 cursor-pointer select-none"
-                     height="22"
-                     xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 448 512">
-                    <path d="M424 392H23.1C10.8 392 0 402.8 0 415.1C0 429.2 10.8 440 23.1 440H424c13.2 0 24-10.8 24-23.1C448 402.8 437.2 392 424 392zM424 72H23.1C10.8 72 0 82.8 0 95.1S10.8 120 23.1 120H424c13.2 0 24-10.8 24-23.1S437.2 72 424 72zM424 232H23.1C10.8 232 0 242.8 0 256c0 13.2 10.8 24 23.1 24H424C437.2 280 448 269.2 448 256S437.2 232 424 232z" />
-                </svg>
+                <button id="menu-icon"
+                        type="button"
+                        aria-label="Toggle navigation"
+                        class="fill-gray-700 dark:fill-gray-50 cursor-pointer select-none bg-transparent border-none p-0">
+                    <svg height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fill-gray-700 dark:fill-gray-50">
+                        <path d="M424 392H23.1C10.8 392 0 402.8 0 415.1C0 429.2 10.8 440 23.1 440H424c13.2 0 24-10.8 24-23.1C448 402.8 437.2 392 424 392zM424 72H23.1C10.8 72 0 82.8 0 95.1S10.8 120 23.1 120H424c13.2 0 24-10.8 24-23.1S437.2 72 424 72zM424 232H23.1C10.8 232 0 242.8 0 256c0 13.2 10.8 24 23.1 24H424C437.2 280 448 269.2 448 256S437.2 232 424 232z" />
+                    </svg>
+                </button>
                 <a id="logo" href="/" class="flex items-center gap-2">
                     <img src="{% static 'images/TekNotes-Logo.svg' %}" alt="Logo">
                     <p id="logo-text" class="font-semibold text-rose-700 text-2xl">TekNotes</p>
@@ -21,6 +22,7 @@
             </div>
             <div class="flex-1 flex flex-col gap-3 overflow-y-auto">
                 <a href="/"
+                   aria-label="Home"
                    class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
                     <svg class="fill-gray-700 dark:fill-gray-50"
                          height="22"
@@ -31,6 +33,7 @@
                     <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Home</p>
                 </a>
                 <a href="/notebook/"
+                   aria-label="Notebook"
                    class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/notebook/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
                     <svg class="fill-gray-700 dark:fill-gray-50"
                          height="22"
@@ -41,6 +44,7 @@
                     <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Notebook</p>
                 </a>
                 <a href="/archive/"
+                   aria-label="Archive"
                    class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/archive/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
                     <svg class="fill-gray-700 dark:fill-gray-50"
                          height="22"
@@ -51,6 +55,7 @@
                     <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Archive</p>
                 </a>
                 <a href="/likes/"
+                   aria-label="Likes"
                    class="nav-elem transition-all items-center flex rounded-xl px-4 py-3 gap-4 {% if request.path == '/likes/' %} active-nav bg-gray-50 dark:bg-gray-800 px-6 py-3 shadow-lg border-l-8 border-rose-700 {% else %} hover:bg-gray-300 dark:hover:bg-gray-950 {% endif %}">
                     <svg class="fill-gray-700 dark:fill-gray-50"
                          height="22"
@@ -61,6 +66,10 @@
                     <p class="nav-text text-lg text-gray-700 dark:text-gray-50 font-medium">Likes</p>
                 </a>
                 <div id="courses-dropdown"
+                     role="button"
+                     tabindex="0"
+                     aria-expanded="false"
+                     aria-label="Toggle courses list"
                      class="transition-all nav-elem hover:bg-gray-300 dark:hover:bg-gray-950 items-center flex rounded-xl px-4 py-3 gap-4 justify-between select-none cursor-pointer">
                     <div class="flex gap-4 items-center">
                         <svg class="fill-gray-700 dark:fill-gray-50"
@@ -130,20 +139,23 @@
                     <div class="nav-elem transition-all flex rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-xl px-4 py-3 gap-3 justify-between items-center relative">
                         <a href="{% url 'authentication:profile' request.user.id %}"
                            class="flex flex-1 gap-3 h-full overflow-hidden">
-                            <div class="flex aspect-square min-h-6 h-full rounded-full bg-[url('{{ user.profile.avatar.url }}')] bg-cover border border-yellow-500">
+                            <div class="flex aspect-square min-h-6 h-full rounded-full bg-cover border border-yellow-500"
+                                 style="background-image: url('{{ request.user.profile.avatar.url }}')">
                             </div>
                             <div class="flex flex-col user-text flex-1 overflow-hidden">
                                 <p class="text-gray-700 dark:text-gray-50 font-semibold truncate">{{ request.user.get_full_name }}</p>
                                 <p class="text-gray-500 dark:text-gray-400 text-sm truncate">@{{ request.user.username }}</p>
                             </div>
                         </a>
-                        <svg id="user-settings-btn"
-                             class="fill-gray-700 dark:fill-gray-50 cursor-pointer mr-2 select-none px-3 rounded-full hover:scale-105"
-                             height="22"
-                             xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 128 512">
-                            <path d="M64 112c26.5 0 48-21.5 48-48S90.5 16 64 16S16 37.5 16 64S37.5 112 64 112zM64 400c-26.5 0-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48S90.5 400 64 400zM64 208C37.5 208 16 229.5 16 256S37.5 304 64 304s48-21.5 48-48S90.5 208 64 208z" />
-                        </svg>
+                        <button id="user-settings-btn"
+                                type="button"
+                                aria-label="User settings"
+                                aria-expanded="false"
+                                class="fill-gray-700 dark:fill-gray-50 cursor-pointer mr-2 select-none px-3 rounded-full hover:scale-105 bg-transparent border-none p-0">
+                            <svg height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" class="fill-gray-700 dark:fill-gray-50">
+                                <path d="M64 112c26.5 0 48-21.5 48-48S90.5 16 64 16S16 37.5 16 64S37.5 112 64 112zM64 400c-26.5 0-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48S90.5 400 64 400zM64 208C37.5 208 16 229.5 16 256S37.5 304 64 304s48-21.5 48-48S90.5 208 64 208z" />
+                            </svg>
+                        </button>
                         <script>
                             $('#user-settings-btn').click((event) => {
                                 if ($("#user-settings").is(':visible')) {
@@ -194,7 +206,10 @@
         <main class="flex flex-col flex-1 bg-gray-200 dark:bg-gray-900 h-full overflow-hidden">
             <div class="flex px-6 py-4 gap-3 border-b border-gray-300 dark:border-gray-800 justify-between items-center">
                 <div id="title-back-btn"
-                     class="group flex items-center gap-6 cursor-pointer max-w-full overflow-hidden">
+                     role="button"
+                     tabindex="0"
+                     aria-label="Go back"
+                     class="group flex items-center gap-6 cursor-pointer max-w-full overflow-hidden flex-1">
                     <svg id="title-back-arrow"
                          class="transition-all fill-gray-700 dark:fill-gray-50 group-hover:fill-gray-400 hidden"
                          height="26"
@@ -214,8 +229,20 @@
                         }
                     </script>
                 </div>
-                <div class="flex items-center gap-6">
-                    <div id="dark-mode-btn" class="group cursor-pointer select-none">
+                <div class="flex items-center gap-3 md:gap-6">
+                    <form action="{% url 'advanced_search:search' %}"
+                          method="get"
+                          class="flex lg:hidden px-3 py-1.5 rounded-xl bg-gray-300 dark:bg-gray-950 gap-2 items-center">
+                        <svg class="fill-gray-500 dark:fill-gray-400" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
+                            <path d="M504.1 471l-134-134C399.1 301.5 415.1 256.8 415.1 208c0-114.9-93.13-208-208-208S-.0002 93.13-.0002 208S93.12 416 207.1 416c48.79 0 93.55-16.91 129-45.04l134 134C475.7 509.7 481.9 512 488 512s12.28-2.344 16.97-7.031C514.3 495.6 514.3 480.4 504.1 471zM48 208c0-88.22 71.78-160 160-160s160 71.78 160 160s-71.78 160-160 160S48 296.2 48 208z" />
+                        </svg>
+                        <input name="query"
+                               class="placeholder-gray-500 w-28 text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none text-sm"
+                               type="text"
+                               placeholder="Search"
+                               aria-label="Search notes" />
+                    </form>
+                    <div id="dark-mode-btn" role="button" tabindex="0" aria-label="Toggle dark mode" class="group cursor-pointer select-none">
                         <svg id="dark-mode-icon"
                              class="transition-all fill-gray-700 dark:fill-gray-50 group-hover:fill-gray-400"
                              height="28"
@@ -261,9 +288,11 @@
                      viewBox="0 0 512 512">
                     <path d="M504.1 471l-134-134C399.1 301.5 415.1 256.8 415.1 208c0-114.9-93.13-208-208-208S-.0002 93.13-.0002 208S93.12 416 207.1 416c48.79 0 93.55-16.91 129-45.04l134 134C475.7 509.7 481.9 512 488 512s12.28-2.344 16.97-7.031C514.3 495.6 514.3 480.4 504.1 471zM48 208c0-88.22 71.78-160 160-160s160 71.78 160 160s-71.78 160-160 160S48 296.2 48 208z" />
                 </svg>
+                <label for="sidebar-search" class="sr-only">Search</label>
                 <input name="query"
+                       id="sidebar-search"
                        class="placeholder-gray-500 w-full text-gray-700 dark:text-gray-50 bg-transparent border-none focus:outline-none"
-                       type="text"
+                       type="search"
                        value="{{ query }}"
                        placeholder="Search"
                        onclick="event.stopPropagation();" />
@@ -288,7 +317,7 @@
                     $('.active-nav').removeClass('border-l-8')
                     $('#courses').removeClass('pl-6')
                     $('.course-elem, .nav-elem').removeClass('justify-between');
-                    $('.course-elem, .nav-elem px-4').removeClass('px-4').addClass('px-3')
+                    $('.course-elem, .nav-elem').removeClass('px-4').addClass('px-3')
                     $(".nav-elem").addClass('justify-center');
                     $("#user-settings").hide(150);
                 } else {
@@ -300,7 +329,7 @@
                     $('#courses').addClass('pl-6')
                     $(".nav-elem").removeClass('justify-center');
                     $('.course-elem').addClass('justify-between');
-                    $('.course-elem, .nav-elem px-3').removeClass('px-3').addClass('px-4')
+                    $('.course-elem, .nav-elem').removeClass('px-3').addClass('px-4')
                 }
             }
 

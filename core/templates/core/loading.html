@@ -22,6 +22,12 @@
         }
     </style>
     {% if success %}
-        <script> goToLastPage() </script>
+        <script>
+            if (lastPage) {
+                goToLastPage();
+            } else {
+                window.location.href = '/';
+            }
+        </script>
     {% endif %}
 {% endblock %}

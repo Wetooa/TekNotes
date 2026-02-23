@@ -2,48 +2,32 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 
+
 class ChatConsumer(AsyncWebsocketConsumer):
-    def close_code_debugger(self, close_code):
-        if close_code == 1000:
-            print("WebSocket disconnected: Normal closure (the purpose of the connection has been fulfilled).")
-        elif close_code == 1001:
-            print("WebSocket disconnected: Going away (the server or client is going away).")
-        elif close_code == 1002:
-            print("WebSocket disconnected: Protocol error (an endpoint is terminating the connection due to a protocol error).")
-        elif close_code == 1003:
-            print("WebSocket disconnected: Unsupported data (the server is not accepting the type of data being sent).")
-        elif close_code == 1007:
-            print("WebSocket disconnected: Invalid frame payload data (the server is terminating the connection because it received data that is inconsistent with the data type).")
-        else:
-            print(f"WebSocket disconnected: Unknown close code {close_code}.")
-            
     async def connect(self):
-        from chat.models import Room
-
         self.room_name = self.scope['url_route']['kwargs']['room_name']
-        print("room we check: ", self.room_name)
+        self.user = self.scope['user']
 
-        try:
-            Room.objects.get(id=self.room_name)
-        except Room.DoesNotExist:
-            print(f"Room with room name {self.room_name} does not exist. Connection rejected.")
-            await self.close()  # Close the connection
+        if not self.user.is_authenticated:
+            await self.close()
             return
-        
+
+        room_exists = await self.get_room(self.room_name)
+        if not room_exists:
+            await self.close()
+            return
+
         self.room_group_name = "room_%s" % self.room_name
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
 
     async def disconnect(self, close_code):
-        self.close_code_debugger(close_code)
-        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
-        
-    # When the socket.send() method is called, the WebSocket connection transmits the message to the server.
-    # The receive method is automatically triggered to handle the incoming message.
+        if hasattr(self, 'room_group_name'):
+            await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
+
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
-        # Trigger send_message method
         await self.channel_layer.group_send(
             self.room_group_name,
             {
@@ -51,8 +35,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'message': message,
             }
         )
+
     async def send_message(self, event):
-        print("Message Sent!!.....?")
         data = event['message']
         await self.create_message(data=data)
         response_data = {
@@ -60,11 +44,21 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'message': data['message']
         }
         await self.send(text_data=json.dumps({'message': response_data}))
-      
-    @database_sync_to_async 
+
+    @database_sync_to_async
+    def get_room(self, room_id):
+        from chat.models import Room
+        return Room.objects.filter(id=room_id).exists()
+
+    @database_sync_to_async
     def create_message(self, data):
-        from chat.models import Room,Message
-        get_room_by_name = Room.objects.get(id=data['room_name'])
-        if not Message.objects.filter(message=data['message']).exists():
-            new_message = Message(room=get_room_by_name, sender=data['sender'], message=data['message'])
-            new_message.save()
+        from chat.models import Room, Message
+        try:
+            room = Room.objects.get(id=data['room_name'])
+            Message.objects.create(
+                room=room,
+                sender=data['sender'],
+                message=data['message'],
+            )
+        except Room.DoesNotExist:
+            pass
