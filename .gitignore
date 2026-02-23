@@ -37,8 +37,8 @@ staticfiles/
 # Media files
 # media/
 
-# Django migrations
-**/migrations
+# Django migrations - intentionally tracked
+# **/migrations
 
 # Coverage reports
 htmlcov/
