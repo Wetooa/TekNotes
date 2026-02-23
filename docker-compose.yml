@@ -38,8 +38,8 @@ services:
              daphne -b 0.0.0.0 -p 8000 TekNotes.asgi:application"
     volumes:
       - media_data:/app/media
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     depends_on:
       postgres:
         condition: service_healthy
